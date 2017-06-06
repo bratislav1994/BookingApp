@@ -12,7 +12,9 @@ namespace BookingApp.Models
 
         [Required]
         public string Name { get; set; }
-        public Code Code { get; set; }
+
+
+        public string Code { get; set; }
         public IList<Region> Regions { get; set; }
     }
 }

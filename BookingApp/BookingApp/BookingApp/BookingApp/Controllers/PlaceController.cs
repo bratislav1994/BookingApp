@@ -1,6 +1,7 @@
 ﻿using BookingApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,17 +9,83 @@ using System.Web.Http;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("place")]
     public class PlaceController : ApiController
     {
         private BAContext db = new BAContext();
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("AddPlace")]
-        public Place AddPlace(Place place)
+        public IHttpActionResult AddPlace(Place place)
         {
-            return place;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Places.Add(place);
+            db.SaveChanges();
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        [Route("DeletePlace/{id}")]
+        public IHttpActionResult DeletePlace(int id)
+        {
+            Place place = db.Places.Find(id);
+
+            if (place == null)
+            {
+                return NotFound();
+            }
+
+            db.Places.Remove(place);
+            db.SaveChanges();
+
+            return Ok(place);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("ChangePlace/{id}")]
+        public IHttpActionResult ChangePlace(int id, Place place)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != place.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(place).State = System.Data.Entity.EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TypeExist(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private bool TypeExist(int id)
+        {
+            return db.Places.Count(e => e.Id == id) > 0;
         }
     }
 }
