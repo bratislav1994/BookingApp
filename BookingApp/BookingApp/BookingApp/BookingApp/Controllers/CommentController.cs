@@ -7,6 +7,8 @@ using System.Web.Http;
 using BookingApp.Models;
 using System.Web.Http.Description;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -14,6 +16,40 @@ namespace BookingApp.Controllers
     public class CommentController : ApiController
     {
         private BAContext db = new BAContext();
+
+        private ApplicationUserManager userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                userManager = value;
+            }
+        }
+
+        [HttpGet]
+        [Route("Valitade/{id}")]
+        public IHttpActionResult Validation(int id)
+        {
+            bool isUser = UserManager.IsInRole(User.Identity.Name, "Admin");
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            if (isUser || (user != null && user.Id.Equals(id)))
+            {
+                AppUser appUser = db.AppUsers.Find(id);
+                if (appUser == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(appUser);
+            }
+
+            return Unauthorized();
+        }
 
         [HttpGet]
         [Route("ReadAll")]
@@ -37,6 +73,7 @@ namespace BookingApp.Controllers
             return Ok(comment);
         }
 
+        [Authorize(Roles = "AppUser")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create(Comment comment)
@@ -52,6 +89,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "AppUser")]
         [HttpPut]
         [Route("Change/{id}")]
         public IHttpActionResult Change(int id, Comment comment)
@@ -87,6 +125,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize(Roles = "AppUser")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)

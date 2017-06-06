@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("region")]
+    [RoutePrefix("api/Region")]
     public class RegionController : ApiController
     {
         private BAContext db = new BAContext();

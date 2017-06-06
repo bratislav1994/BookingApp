@@ -10,14 +10,14 @@ using System.Data.Entity.Infrastructure;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/AccommodationType")]
     public class AccommodationTypeController : ApiController
     {
         private BAContext db = new BAContext();
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("AccommodationType/{id}")]
+        [Route("Change/{id}")]
         public IHttpActionResult Change(int id, AccommodationType type)
         {
             if (!ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace BookingApp.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("AccommodationType")]
+        [Route("Create")]
         public IHttpActionResult Add(AccommodationType type)
         {
             if (!ModelState.IsValid)
@@ -68,7 +68,7 @@ namespace BookingApp.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("AccommodationType/{id}")]
+        [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
             AccommodationType type = db.AccommodationsTypes.Find(id);
@@ -87,6 +87,28 @@ namespace BookingApp.Controllers
         private bool TypeExist(int id)
         {
             return db.AccommodationsTypes.Count(e => e.Id == id) > 0;
+        }
+
+        [HttpGet]
+        [Route("ReadAll")]
+        public IQueryable<AccommodationType> ReadAllTypes()
+        {
+            return db.AccommodationsTypes;
+        }
+
+        [HttpGet]
+        [Route("Read/{id}")]
+        [ResponseType(typeof(Comment))]
+        public IHttpActionResult ReadType(int id)
+        {
+            AccommodationType type = db.AccommodationsTypes.Find(id);
+
+            if (type == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(type);
         }
     }
 }
