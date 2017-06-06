@@ -11,15 +11,18 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
-        [Required, Range(1, 100)]
+        [Required]
         public int RoomNumber { get; set; }
 
         [Required, Range(1, 3)]
         public int BedCount { get; set; }
+
+        [StringLength(300)]
         public string Description { get; set; }
 
         [Required]
         public double PricePerNight { get; set; }
+
         public IList<RoomReservation> RoomReservations { get; set; }
 
         [ForeignKey("Accommodation")]

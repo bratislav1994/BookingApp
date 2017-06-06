@@ -11,12 +11,13 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required, StringLength(200)]
         public string Name { get; set; }
 
         [ForeignKey("Region")]
         public int RegionId { get; set; }
         public Region Region { get; set; }
+
         public IList<Accommodation> Accommodations { get; set; }
     }
 }

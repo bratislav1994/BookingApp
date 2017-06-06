@@ -11,18 +11,28 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
-        [Required, StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [Required, StringLength(100)]
         public string Name { get; set; }
+
+        [StringLength(300)]
         public string Description { get; set; }
+
+        [Required, StringLength(300)]
         public string Address { get; set; }
 
-        [Range(1, 5)]
+        [Required, Range(1, 5)]
         public double AvrageGrade { get; set; }
+
+        [Required]
         public double Latitude { get; set; }
+
+        [Required]
         public double Longitude { get; set; }
 
-        [DataType(DataType.ImageUrl)]
+        [Required, DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
+
+        [Required]
         public bool Approved { get; set; }
 
         [ForeignKey("AccommodationType")]
