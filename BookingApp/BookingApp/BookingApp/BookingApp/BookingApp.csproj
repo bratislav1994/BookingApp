@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201706060823155_MyModel.Designer.cs">
       <DependentUpon>201706060823155_MyModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706060940284_MyModel2.cs" />
+    <Compile Include="Migrations\201706060940284_MyModel2.Designer.cs">
+      <DependentUpon>201706060940284_MyModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -362,6 +366,9 @@
     <EmbeddedResource Include="Migrations\201706060823155_MyModel.resx">
       <DependentUpon>201706060823155_MyModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706060940284_MyModel2.resx">
+      <DependentUpon>201706060940284_MyModel2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -381,7 +388,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54042</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54042/</IISUrl>
+          <IISUrl>http://localhost:54043/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

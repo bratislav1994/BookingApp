@@ -47,7 +47,7 @@ namespace BookingApp
                 TokenEndpointPath = new PathString("/oauth/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = new CustomOAuthProvider(),
-                AccessTokenFormat = new CustomJwtFormat("http://localhost:54042") //TODO Kad promenis port, menjaj i ovde
+                AccessTokenFormat = new CustomJwtFormat("http://localhost:54043") //TODO Kad promenis port, menjaj i ovde
             };
 
             // OAuth 2.0 Bearer Access Token Generation
@@ -57,7 +57,7 @@ namespace BookingApp
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)
         {
 
-            var issuer = "http://localhost:54042";
+            var issuer = "http://localhost:54043";
             string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
 

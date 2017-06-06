@@ -13,12 +13,12 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        [Route("GetPlaces")]
-        public IQueryable<Place> GetPlaces()
+        //[Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("AddPlace")]
+        public Place AddPlace(Place place)
         {
-            return db.Places;
+            return place;
         }
     }
 }
