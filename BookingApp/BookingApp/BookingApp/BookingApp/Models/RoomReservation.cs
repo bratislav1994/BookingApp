@@ -15,7 +15,7 @@ namespace BookingApp.Models
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public AppUser User { get; set; }
 
         [ForeignKey("Room")]
         public int RoomId { get; set; }
