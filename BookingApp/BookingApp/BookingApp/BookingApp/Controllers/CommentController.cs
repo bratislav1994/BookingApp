@@ -17,7 +17,7 @@ namespace BookingApp.Controllers
 
         [HttpGet]
         [Route("ReadAll")]
-        public IQueryable<Comment> ReadAllUsers()
+        public IQueryable<Comment> ReadAllComments()
         {
             return db.Comments;
         }
@@ -25,7 +25,7 @@ namespace BookingApp.Controllers
         [HttpGet]
         [Route("Read/{id}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult ReadUser(int id)
+        public IHttpActionResult ReadComment(int id)
         {
             Comment comment = db.Comments.Find(id);
 
@@ -39,7 +39,7 @@ namespace BookingApp.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IHttpActionResult CreateUser(Comment comment)
+        public IHttpActionResult Create(Comment comment)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace BookingApp.Controllers
 
         [HttpPut]
         [Route("Change/{id}")]
-        public IHttpActionResult Put(int id, Comment comment)
+        public IHttpActionResult Change(int id, Comment comment)
         {
             if (!ModelState.IsValid)
             {

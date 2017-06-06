@@ -1,52 +1,52 @@
-﻿using System;
+﻿using BookingApp.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BookingApp.Models;
 using System.Web.Http.Description;
-using System.Data.Entity.Infrastructure;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api/User")]
-    public class UserController : ApiController
+    [RoutePrefix("api/Room")]
+    public class RoomController : ApiController
     {
         private BAContext db = new BAContext();
 
         [HttpGet]
         [Route("ReadAll")]
-        public IQueryable<AppUser> ReadAllUsers()
+        public IQueryable<Room> ReadAllRooms()
         {
-            return db.AppUsers;
+            return db.Rooms;
         }
 
         [HttpGet]
         [Route("Read/{id}")]
-        [ResponseType(typeof(AppUser))]
-        public IHttpActionResult ReadUser(int id)
+        [ResponseType(typeof(Room))]
+        public IHttpActionResult ReadRoom(int id)
         {
-            AppUser user = db.AppUsers.Find(id);
+            Room room = db.Rooms.Find(id);
 
-            if (user == null)
+            if (room == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(room);
         }
 
         [HttpPost]
         [Route("Create")]
-        public IHttpActionResult Create(AppUser user)
+        public IHttpActionResult Create(Room room)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AppUsers.Add(user);
+            db.Rooms.Add(room);
             db.SaveChanges();
 
             return Ok();
@@ -54,19 +54,19 @@ namespace BookingApp.Controllers
 
         [HttpPut]
         [Route("Change/{id}")]
-        public IHttpActionResult Change(int id, AppUser user)
+        public IHttpActionResult Change(int id, Room room)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.Id)
+            if (id != room.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(room).State = System.Data.Entity.EntityState.Modified;
 
             try
             {
@@ -74,14 +74,14 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExist(id))
+                if (!RoomExist(id))
                 {
                     return NotFound();
                 }
                 else
                 {
                     throw;
-                }  
+                }
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -91,22 +91,22 @@ namespace BookingApp.Controllers
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
-            AppUser user = db.AppUsers.Where(e => e.Id.Equals(id)).FirstOrDefault();
+            Room room = db.Rooms.Where(e => e.Id.Equals(id)).FirstOrDefault();
 
-            if(user == null)
+            if (room == null)
             {
                 return NotFound();
             }
 
-            db.AppUsers.Remove(user);
+            db.Rooms.Remove(room);
             db.SaveChanges();
 
             return Ok();
         }
 
-        private bool UserExist(int id)
+        private bool RoomExist(int id)
         {
-            return db.AppUsers.Count(e => e.Id.Equals(id)) > 0;
+            return db.Rooms.Count(e => e.Id.Equals(id)) > 0;
         }
     }
 }
