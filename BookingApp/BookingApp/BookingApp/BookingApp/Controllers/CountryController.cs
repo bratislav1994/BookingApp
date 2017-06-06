@@ -9,60 +9,60 @@ using System.Web.Http;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("place")]
-    public class PlaceController : ApiController
+    [RoutePrefix("country")]
+    public class CountryController : ApiController
     {
         private BAContext db = new BAContext();
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("AddPlace")]
-        public IHttpActionResult AddPlace(Place place)
+        [Route("AddCountry")]
+        public IHttpActionResult AddCountry(Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Places.Add(place);
+            db.Countries.Add(country);
             db.SaveChanges();
             return Ok();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("DeletePlace/{id}")]
-        public IHttpActionResult DeletePlace(int id)
+        [Route("DeleteCountry/{id}")]
+        public IHttpActionResult DeleteCountry(int id)
         {
-            Place place = db.Places.Find(id);
+            Country country = db.Countries.Find(id);
 
-            if (place == null)
+            if (country == null)
             {
                 return NotFound();
             }
 
-            db.Places.Remove(place);
+            db.Countries.Remove(country);
             db.SaveChanges();
 
-            return Ok(place);
+            return Ok(country);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("ChangePlace/{id}")]
-        public IHttpActionResult ChangePlace(int id, Place place)
+        [Route("ChangePCountry/{id}")]
+        public IHttpActionResult ChangePCountry(int id, Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != place.Id)
+            if (id != country.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(place).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(country).State = System.Data.Entity.EntityState.Modified;
 
             try
             {
@@ -85,15 +85,15 @@ namespace BookingApp.Controllers
 
         private bool TypeExist(int id)
         {
-            return db.Places.Count(e => e.Id == id) > 0;
+            return db.Countries.Count(e => e.Id == id) > 0;
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("AllPlaces")]
-        public IQueryable<Place> AllPlaces()
+        [Route("AllCountries")]
+        public IQueryable<Country> AllCountries()
         {
-            return db.Places;
+            return db.Countries;
         }
     }
 }

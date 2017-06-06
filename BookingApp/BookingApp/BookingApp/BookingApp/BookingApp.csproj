@@ -250,6 +250,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,7 +267,6 @@
     <Compile Include="Models\BAContext.cs" />
     <Compile Include="Models\BAIdentityUser.cs" />
     <Compile Include="Models\AppUser.cs" />
-    <Compile Include="Models\Code.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Place.cs" />
