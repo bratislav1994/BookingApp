@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 namespace BookingApp.Controllers
-{
+{ 
     [RoutePrefix("accommodation")]
     public class AccommodationController : ApiController
     {

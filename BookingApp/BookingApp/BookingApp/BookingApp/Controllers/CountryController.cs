@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("country")]
+    [RoutePrefix("country")] 
     public class CountryController : ApiController
     {
         private BAContext db = new BAContext();
