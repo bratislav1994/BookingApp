@@ -18,8 +18,7 @@ namespace BookingApp.Models
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
-
-        [Timestamp]
+        
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("User")]

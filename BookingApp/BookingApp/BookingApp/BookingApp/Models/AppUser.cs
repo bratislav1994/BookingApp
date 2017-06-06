@@ -14,10 +14,6 @@ namespace BookingApp.Models
         [Required]
         public string Username { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-        public string Email { get; set; }
         public IList<RoomReservation> RoomReservations { get; set; }
         public IList<Comment> Comments { get; set; }
         public IList<Accommodation> Accommodations { get; set; }
