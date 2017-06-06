@@ -83,35 +83,10 @@ namespace BookingApp.Controllers
 
             return Ok(type);
         }
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
+       
         private bool TypeExist(int id)
         {
             return db.AccommodationsTypes.Count(e => e.Id == id) > 0;
         }
-        // DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
