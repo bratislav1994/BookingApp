@@ -1,4 +1,6 @@
 ﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -14,7 +16,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddRegion")]
         public IHttpActionResult AddRegion(Region region)
@@ -29,7 +31,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeleteRegion/{id}")]
         public IHttpActionResult DeleteRegion(int id)
@@ -47,8 +49,8 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
+        [HttpPut]
         [Route("ChangeRegion/{id}")]
         public IHttpActionResult ChangeRegion(int id, Region region)
         {
@@ -88,12 +90,34 @@ namespace BookingApp.Controllers
             return db.Regions.Count(e => e.Id == id) > 0;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("AllRegions")]
         public IQueryable<Region> AllRegions()
         {
             return db.Regions;
         }
+
+        [HttpGet]
+        [Route("GetRegion/{id}")]
+        public IHttpActionResult GetRegion(int id)
+        {
+            Region region = db.Regions.Find(id);
+            if (region == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(region);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

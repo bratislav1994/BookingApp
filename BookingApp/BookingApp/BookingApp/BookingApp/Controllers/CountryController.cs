@@ -14,7 +14,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddCountry")]
         public IHttpActionResult AddCountry(Country country)
@@ -29,7 +29,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeleteCountry/{id}")]
         public IHttpActionResult DeleteCountry(int id)
@@ -47,7 +47,7 @@ namespace BookingApp.Controllers
             return Ok(country);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpGet]
         [Route("ChangePCountry/{id}")]
         public IHttpActionResult ChangePCountry(int id, Country country)
@@ -88,12 +88,34 @@ namespace BookingApp.Controllers
             return db.Countries.Count(e => e.Id == id) > 0;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("AllCountries")]
         public IQueryable<Country> AllCountries()
         {
             return db.Countries;
         }
+
+        [HttpGet]
+        [Route("GetCountry/{id}")]
+        public IHttpActionResult GetCountry(int id)
+        {
+            Country country = db.Countries.Find(id);
+            if (country == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(country);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

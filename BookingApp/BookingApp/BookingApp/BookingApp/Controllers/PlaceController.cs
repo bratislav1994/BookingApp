@@ -14,7 +14,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddPlace")]
         public IHttpActionResult AddPlace(Place place)
@@ -29,7 +29,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeletePlace/{id}")]
         public IHttpActionResult DeletePlace(int id)
@@ -47,8 +47,8 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
+        [HttpPut]
         [Route("ChangePlace/{id}")]
         public IHttpActionResult ChangePlace(int id, Place place)
         {
@@ -88,12 +88,36 @@ namespace BookingApp.Controllers
             return db.Places.Count(e => e.Id == id) > 0;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("AllPlaces")]
         public IQueryable<Place> AllPlaces()
         {
             return db.Places;
         }
+
+
+        [HttpGet]
+        [Route("GetPlace/{id}")]
+        public IHttpActionResult GetPlace(int id)
+        {
+            Place place = db.Places.Find(id);
+            if (place == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(place);
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }
