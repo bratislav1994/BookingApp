@@ -68,7 +68,10 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user.Id, "Admin");
             }
 
-
+            context.Countries.AddOrUpdate(
+              p => p.Id,
+              new Country { Id = 1, Code = "SRB", Name = "SRBIJA"}
+            );
         }
     }
 }
