@@ -15,7 +15,7 @@ namespace BookingApp.Models
         public int Grade { get; set; }
 
         [StringLength(300)]
-        public double Text { get; set; }
+        public string Text { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }
