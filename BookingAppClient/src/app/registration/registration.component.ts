@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   Password : string;
   Email : string;
   ConfirmPassword: string;
+  Role: string;
 
   constructor(private userService : UserService) { }
 
@@ -21,14 +22,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmitRegister(){
-    this.userService.register(new User(this.Username, this.Password, "User", this.Email, this.ConfirmPassword)).subscribe();
+    this.userService.register(new User(this.Username, this.Password, this.Role, this.Email, this.ConfirmPassword)).subscribe();
     this.Email = "";
     this.Password = "";
     this.ConfirmPassword = "";
   }
 
   onSubmitLogin(){
-    this.userService.login(new User(this.Username, this.Password, "User", this.Email, this.ConfirmPassword)).subscribe();
+    this.userService.login(new User(this.Username, this.Password, this.Role, this.Email, this.ConfirmPassword)).subscribe();
     this.Email = "";
     this.Password = "";
     this.ConfirmPassword = "";
