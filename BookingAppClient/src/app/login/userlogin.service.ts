@@ -8,13 +8,13 @@ export class UserloginService {
 
   constructor(private http : Http) { }
 
-login(user : User) : Observable<any> {
+login(username : string, password : string) : Observable<any> {
         let header = new Headers();
-        header.append('Content-type', 'application/json');
+        header.append('Content-type', 'application/x-www-form-urlencoded');
 
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/Account/Login', JSON.stringify(user), opts);
+        return this.http.post(`http://localhost:54043/oauth/token`, `username=${username}&password=${password}&grant_type=${"password"}`, opts);
     }
 }

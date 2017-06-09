@@ -41,11 +41,22 @@ namespace BookingApp.Providers
                 return;
             }
 
-            //if (!user.EmailConfirmed)
-            //{
-            //    context.SetError("invalid_grant", "AppUser did not confirm email.");
-            //    return;
-            //}
+            BAContext db = new BAContext();
+            var userRole = user.Roles.FirstOrDefault().RoleId;
+            var role = db.Roles.FirstOrDefault(r => r.Id == userRole);
+
+            if (role.Name.Equals("Admin"))
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "Admin" });
+            }
+            else if (role.Name.Equals("Manager"))
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "Manager" });
+            }
+            else if (role.Name.Equals("AppUser"))
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "AppUser" });
+            }
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 
