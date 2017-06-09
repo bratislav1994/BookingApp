@@ -23,3 +23,17 @@
     background-color:#A1A1A1;
     color: white;
 }
+
+a:link, a:visited {
+    background-color: #9F9F9F;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #4d4dff
+}

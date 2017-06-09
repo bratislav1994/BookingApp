@@ -1,17 +1,32 @@
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmitLogin()">
-  <div>
-    <label for = "Username">Username:</label>
-    <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
-  </div>
+
+    <table>
+      <tr>
+          <td>
+              <label for = "Username">Username:</label>
+          </td>
+          <td>
+              <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
+          </td>
+      </tr>
+
+      <tr>
+          <td>
+                <label for = "Password">Password:</label>
+          </td>
+
+          <td>
+                <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
+            </td>
+      </tr>
+
+   
+
+    </table>
   <br>
   <div>
-    <label for = "Password">Password:</label>
-    <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
-  </div>
-  <br>
-  <div>
-    <input type="submit" value="Login"/>
+    <input class="button button1" type="submit" value="Login"/>
   </div>
 </form>
 </div>

@@ -1,33 +1,61 @@
-<div style="padding-left: 40%">
+<div>
+  
   <form #f="ngForm" (ngSubmit)="onSubmitRegister(f.value)"> 
-  <div>
-    <label for = "Email">Email:</label>
-    <input type="email" name="Email" id="Email" [(ngModel)]="Email"/>
-  </div>
-  <br>
-  <div>
-    <label for = "Username">Username:</label>
-    <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
-  </div>
-  <br>
-  <div>
-    <label for = "Password">Password:</label>
-    <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
-  </div>
-  <br>
-  <div>
-    <label for = "ConfirmPassword">Confirm password:</label>
-    <input type="password" name="ConfirmPassword" id="ConfirmPassword" [(ngModel)]="ConfirmPassword"/>
-  </div>
-  <br>
-  <div>
-      <label>Role:</label>
-      <select name="Roles" id="Role" [(ngModel)]="Role">
-        <option value="AppUser">User</option>
-        <option value="Manager">Manager</option>
-      </select>
-  </div>
-  <br>
+    <table>
+      <tr>
+          <td>
+              <label for = "Email">Email:</label>
+          </td>
+          <td>
+              <input type="email" name="Email" id="Email" [(ngModel)]="Email"/>
+          </td>
+      </tr>
+
+      <tr>
+          <td>
+                <label for = "Username">Username:</label>
+          </td>
+
+          <td>
+                <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
+            </td>
+      </tr>
+
+      <tr>
+          <td>
+                <label for = "Password">Password:</label>
+          </td>
+
+          <td>
+                <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
+            </td>
+      </tr>
+
+      <tr>
+          <td>
+                <label for = "ConfirmPassword">Confirm password:</label>
+          </td>
+
+          <td>
+                <input type="password" name="ConfirmPassword" id="ConfirmPassword" [(ngModel)]="ConfirmPassword"/>
+            </td>
+      </tr>
+
+      <tr>
+          <td>
+                <label>Role:</label>
+          </td>
+
+          <td>
+                <select style="width: 100%" name="Roles" id="Role" [(ngModel)]="Role">
+                   <option value="AppUser">User</option>
+                   <option value="Manager">Manager</option>
+                </select>
+          </td>
+      </tr>
+
+    </table>
+    <br>
   <div>
     <input class="button button1" type="submit" value="Register"/>
   </div>
