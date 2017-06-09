@@ -8,18 +8,30 @@ import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { HomeComponent } from './home/home.component';
+
+const Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: "home", component: HomeComponent},
+  {path: "registration", component: RegistrationComponent},
+  {path: "login", component: LoginComponent},
+  {path: "other", redirectTo:"home"}
+] 
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(Routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
