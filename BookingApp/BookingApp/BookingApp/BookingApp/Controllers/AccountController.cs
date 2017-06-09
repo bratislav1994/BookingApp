@@ -330,7 +330,7 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            AppUser appUser = new AppUser() { Username = model.Email};
+            AppUser appUser = new AppUser() { Username = model.Username};
             db.AppUsers.Add(appUser);
             db.SaveChanges();
 
@@ -338,12 +338,12 @@ namespace BookingApp.Controllers
             var userStore = new UserStore<BAIdentityUser>(db);
             var userManager = new UserManager<BAIdentityUser>(userStore);
 
-            int id = db.AppUsers.Where(e => e.Username.Equals(model.Email)).FirstOrDefault().Id;
-            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email, PasswordHash = BAIdentityUser.HashPassword(model.Password), addUserId = id };
+            int id = db.AppUsers.Where(e => e.Username.Equals(model.Username)).FirstOrDefault().Id;
+            var user = new BAIdentityUser() { UserName = model.Username, Email = model.Email, PasswordHash = BAIdentityUser.HashPassword(model.Password), addUserId = id };
 
             userManager.Create(user);
-            //
-            userManager.AddToRole(user.Id, "AppUser");
+            userManager.AddToRole(user.Id, model.Role);
+            
            /* IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
