@@ -1,4 +1,4 @@
-<div>
+<div style="padding-left: 40%">
   <form #f="ngForm" (ngSubmit)="onSubmitRegister(f.value)"> 
   <div>
     <label for = "Email">Email:</label>
@@ -21,6 +21,7 @@
   </div>
   <br>
   <div>
+      <label>Role:</label>
       <select name="Roles" id="Role" [(ngModel)]="Role">
         <option value="AppUser">User</option>
         <option value="Manager">Manager</option>
@@ -28,7 +29,7 @@
   </div>
   <br>
   <div>
-    <input type="submit" value="Register"/>
+    <input class="button button1" type="submit" value="Register"/>
   </div>
 </form>
 </div>

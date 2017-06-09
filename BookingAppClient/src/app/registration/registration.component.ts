@@ -15,8 +15,13 @@ export class RegistrationComponent implements OnInit {
   Email : string;
   ConfirmPassword: string;
   Role: string;
+  data: string[];
 
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService) { 
+    this.data = [];
+    this.data.push("AppUser");
+    this.data.push("Manager");
+  }
 
   ngOnInit() {
   }
