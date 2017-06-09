@@ -9,6 +9,7 @@ import { CountryComponent } from './country/country.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -25,7 +26,8 @@ const Routes = [
     CountryComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

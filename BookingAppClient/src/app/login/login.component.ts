@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserloginService } from './userlogin.service';
 import { User } from "app/login/UserLogin.model";
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
  onSubmit(){
-    this.userService.login(this.Username, this.Password).subscribe(result => { this.addToken(result.json())});
+    this.userService.login(this.Username, this.Password, "password").subscribe(result => { this.addToken(result.json())});
   }
 
   addToken(token : any){
