@@ -1,3 +1,24 @@
-<p>
-  login works!
-</p>
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmitLogin()">
+  <div>
+    <label for = "Username">Username:</label>
+    <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
+  </div>
+  <br>
+  <div>
+    <label for = "Password">Password:</label>
+    <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
+  </div>
+  <br>
+  <div>
+      <select name="Roles">
+        <option value="user">User</option>
+        <option value="manager">Manager</option>
+      </select>
+  </div>
+  <br>
+  <div>
+    <input type="submit" value="Login"/>
+  </div>
+</form>
+</div>

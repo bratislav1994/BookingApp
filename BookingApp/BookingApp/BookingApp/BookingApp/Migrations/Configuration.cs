@@ -58,12 +58,19 @@ namespace BookingApp.Migrations
                 manager.Create(role);
             }
 
+            context.AppUsers.AddOrUpdate(
+                  p => p.Username,
+                  new AppUser() { Username = "admin" }
+            );
+            context.SaveChanges();
+
             var userStore = new UserStore<BAIdentityUser>(context);
             var userManager = new UserManager<BAIdentityUser>(userStore);
 
             if (!context.Users.Any(u => u.UserName == "admin"))
             {
-                var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin")};
+                var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("admin"));
+                var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin"), addUserId = _userId.Id};
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Admin");
             }

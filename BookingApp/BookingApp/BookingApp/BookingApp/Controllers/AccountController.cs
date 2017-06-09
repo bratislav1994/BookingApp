@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using BookingApp.Models;
 using BookingApp.Providers;
 using BookingApp.Results;
+using System.Linq;
 
 namespace BookingApp.Controllers
 {
@@ -25,6 +26,7 @@ namespace BookingApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private BAContext db = new BAContext();
 
         public AccountController()
         {
@@ -328,14 +330,27 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
+            AppUser appUser = new AppUser() { Username = model.Email};
+            db.AppUsers.Add(appUser);
+            db.SaveChanges();
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            var userStore = new UserStore<BAIdentityUser>(db);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
+
+            int id = db.AppUsers.Where(e => e.Username.Equals(model.Email)).FirstOrDefault().Id;
+            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email, PasswordHash = BAIdentityUser.HashPassword(model.Password), addUserId = id };
+
+            userManager.Create(user);
+            //
+            userManager.AddToRole(user.Id, "AppUser");
+           /* IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
+            */
 
             return Ok();
         }
@@ -356,7 +371,7 @@ namespace BookingApp.Controllers
             {
                 return InternalServerError();
             }
-
+            
             var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);

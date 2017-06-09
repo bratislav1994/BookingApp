@@ -9,13 +9,8 @@ namespace BookingApp.Models
     public class AppUser
     {
         public int Id { get; set; }
-
         [Required]
         public string Username { get; set; }
-
-        [Required, MinLength(4)]
-        public string Password { get; set; }
-
         public IList<RoomReservation> RoomReservations { get; set; }
         public IList<Comment> Comments { get; set; }
         public IList<Accommodation> Accommodations { get; set; }

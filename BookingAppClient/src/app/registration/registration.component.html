@@ -1,6 +1,11 @@
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmitRegister(f.value)"> 
   <div>
+    <label for = "Email">Email:</label>
+    <input type="email" name="Email" id="Email" [(ngModel)]="Email"/>
+  </div>
+  <br>
+  <div>
     <label for = "Username">Username:</label>
     <input type="text" name="Username" id="Username" [(ngModel)]="Username"/>
   </div>
@@ -8,6 +13,11 @@
   <div>
     <label for = "Password">Password:</label>
     <input type="password" name="Password" id="Password" [(ngModel)]="Password"/>
+  </div>
+  <br>
+  <div>
+    <label for = "ConfirmPassword">Confirm password:</label>
+    <input type="password" name="ConfirmPassword" id="ConfirmPassword" [(ngModel)]="ConfirmPassword"/>
   </div>
   <br>
   <div>
