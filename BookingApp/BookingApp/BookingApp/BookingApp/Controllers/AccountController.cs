@@ -333,24 +333,20 @@ namespace BookingApp.Controllers
             AppUser appUser = new AppUser() { Username = model.Username};
             db.AppUsers.Add(appUser);
             db.SaveChanges();
-
-
+            
             var userStore = new UserStore<BAIdentityUser>(db);
             var userManager = new UserManager<BAIdentityUser>(userStore);
 
-            int id = db.AppUsers.Where(e => e.Username.Equals(model.Username)).FirstOrDefault().Id;
-            var user = new BAIdentityUser() { UserName = model.Username, Email = model.Email, PasswordHash = BAIdentityUser.HashPassword(model.Password), addUserId = id };
+            var user = new BAIdentityUser()
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                PasswordHash = BAIdentityUser.HashPassword(model.Password),
+                addUserId = appUser.Id 
+            };
 
             userManager.Create(user);
             userManager.AddToRole(user.Id, model.Role);
-            
-           /* IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-            */
 
             return Ok();
         }
