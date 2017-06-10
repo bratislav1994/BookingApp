@@ -1,0 +1,15 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div>
+    <label for = "StartDate">Start date:</label>
+    <input type="date" name="StartDate" id="StartDate" [(ngModel)]="StartDate"/>
+  </div>
+<div>
+    <label for = "EndDate">End date:</label>
+    <input type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
+  </div>
+
+  <div>
+    <input type="submit" value="Create"/>
+  </div>
+
+</form>

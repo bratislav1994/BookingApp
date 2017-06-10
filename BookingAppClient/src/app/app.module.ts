@@ -24,6 +24,9 @@ import { TypeComponent } from './accommodation-type/type/type.component';
 import { CreateRoomComponent } from './room/create-room/create-room.component';
 import { RoomComponent } from './room/room/room.component';
 import { ViewRoomComponent } from './room/view-room/view-room.component';
+import { RoomReservationComponent } from './room-reservation/room-reservation/room-reservation.component';
+import { CreateReservationComponent } from './room-reservation/create-reservation/create-reservation.component';
+import { ViewReservationComponent } from './room-reservation/view-reservation/view-reservation.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -55,7 +58,10 @@ const Routes = [
     TypeComponent,
     CreateRoomComponent,
     RoomComponent,
-    ViewRoomComponent
+    ViewRoomComponent,
+    RoomReservationComponent,
+    CreateReservationComponent,
+    ViewReservationComponent
   ],
   imports: [
     BrowserModule,
