@@ -5,6 +5,7 @@ import { AccommodationType } from "app/accommodation-type/Type.model";
 import { AccommodationService } from "app/accommodation/accommodation.service"
 import { PlaceService } from "app/place/place.service"
 import { TypeServiceService } from "app/accommodation-type/type-service.service";
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'app-add-accommodation',
@@ -32,20 +33,27 @@ export class AddAccommodationComponent implements OnInit {
              }
 
   ngOnInit() {
-    this.placeService.getAllPlaces().subscribe(p => this.places = p);
-    this.accommodationService.getAllAccommodations().subscribe(t => this.accommodationTypes = t);
+    this.placeService.getAllPlaces().subscribe(p => this.places = p, error => 
+    {
+        console.log(error), alert("Unsuccessful fetch operation")
+    });
+    this.accommodationService.getAllAccommodations().subscribe(t => this.accommodationTypes = t, error => 
+    {
+        console.log(error), alert("Unsuccessful fetch operation")
+    });
   }
 
-  onSubmit(){
+  onSubmit(form: NgForm){
     this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, 
                                               this.Address, 1, this.Latitude, this.Longitude,
                                               this.ImageUrl, false, this.PlaceId, 
                                               this.AccommodationTypeId, 0)).subscribe();
-    this.Name = "";
-    this.Description = "";
-    this.Address = "";
-    this.Latitude = 0;
-    this.Longitude = 0;
-    this.ImageUrl = "";
+    form.reset();
+    // this.Name = "";
+    // this.Description = "";
+    // this.Address = "";
+    // this.Latitude = 0;
+    // this.Longitude = 0;
+    // this.ImageUrl = "";
   }
 }

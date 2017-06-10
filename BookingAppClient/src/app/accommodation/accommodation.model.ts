@@ -1,4 +1,6 @@
 import { Place } from "app/place/place.model";
+import { User } from "app/login/userLogin.model"
+import { AccommodationType } from "app/accommodation-type/type.model"
 
 export class Accommodation {
     Id: number;
@@ -13,6 +15,9 @@ export class Accommodation {
     PlaceId: number;
     AccommodationTypeId: number;
     UserId: number;
+    Place: Place;
+    User: User;
+    AccommodationType: AccommodationType
 
     constructor(Id: number, Name: string, description: string, address: string, avrage: number,
                 lat: number, long: number, img: string, approved: boolean,

@@ -20,7 +20,12 @@ export class LoginComponent implements OnInit {
   }
 
  onSubmit(){
-    this.userService.login(this.Username, this.Password, "password").subscribe(result => { this.addToken(result.json())});
+    this.userService.login(this.Username, this.Password, "password").subscribe(result => { this.addToken(result.json())}, 
+    error => 
+     {
+        console.log(error), alert("Unsuccessful login")
+     }
+    );
   }
 
   addToken(token : any){

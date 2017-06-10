@@ -11,7 +11,8 @@
     <p>Longitude: {{accommodation.Longitude}}</p>
     <p>ImageUrl: {{accommodation.ImageUrl}}</p>
     <p>Approved: {{accommodation.Approved}}</p>
-    <p>Description: {{accommodation.Description}}</p>
-    <p>Description: {{accommodation.Description}}</p>
+    <p>Place: {{accommodation.Place.Name}}</p>
+    <p>User: {{accommodation.User.Username}}</p>
+    <p>AccommodationType: {{accommodation.AccommodationType.Name}}</p>
     <button name="show" [routerLink]="['/accommodation-show']">Show</button>
 </div>

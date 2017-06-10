@@ -17,7 +17,10 @@ export class ListOfAccommodationsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accommodationService.getAllAccommodations().subscribe(a => this.accommodations = a);
+    this.accommodationService.getAllAccommodations().subscribe(a => this.accommodations = a, error => 
+    {
+        console.log(error), alert("Unsuccessful fetch operation")
+    });
   }
 
 }

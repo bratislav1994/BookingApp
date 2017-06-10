@@ -47,7 +47,7 @@
 
   <div>
     <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
-      <option *ngFor = "let accommodationType of accommodationTypes" value={{AccommodationType.Id}} >{{AccommodationType.Name}}</option>
+      <option *ngFor = "let accommodationType of accommodationTypes" value={{accommodationType.Id}} >{{accommodationType.Name}}</option>
     </select>
   </div>
 

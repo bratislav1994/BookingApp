@@ -17,7 +17,10 @@ export class ListOfRegionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.regionService.getAllRegions().subscribe(r => this.regions = r);
+    this.regionService.getAllRegions().subscribe(r => this.regions = r, error => 
+    {
+        console.log(error), alert("Unsuccessful fetch operation")
+    });
   }
 
 }

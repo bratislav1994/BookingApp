@@ -17,7 +17,10 @@ export class ListOfPlacesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeService.getAllPlaces().subscribe(p => this.places = p);
+    this.placeService.getAllPlaces().subscribe(p => this.places = p, error => 
+     {
+        console.log(error), alert("Unsuccessful fetch operation")
+     });
   }
 
 }

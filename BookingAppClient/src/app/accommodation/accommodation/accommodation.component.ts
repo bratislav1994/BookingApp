@@ -6,6 +6,7 @@ import { Accommodation } from "app/accommodation/accommodation.model";
   templateUrl: './accommodation.component.html',
   styleUrls: ['./accommodation.component.css']
 })
+
 export class AccommodationComponent implements OnInit {
 
   @Input () accommodation: Accommodation;
