@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from "app/accommodation/accommodation.model";
 import { Place } from "app/place/place.model";
-import { AccommodationType } from "app/accommodationType/accommodationType.model";
+import { AccommodationType } from "app/accommodation-type/Type.model";
 import { AccommodationService } from "app/accommodation/accommodation.service"
 import { PlaceService } from "app/place/place.service"
-import { TypeService } from "app/accommodationType/type.service";
+import { TypeServiceService } from "app/accommodation-type/type-service.service";
 
 @Component({
   selector: 'app-add-accommodation',
   templateUrl: './add-accommodation.component.html',
   styleUrls: ['./add-accommodation.component.css'],
-  providers: [AccommodationService, PlaceService, TypeService]
+  providers: [AccommodationService, PlaceService, TypeServiceService]
 })
 export class AddAccommodationComponent implements OnInit {
 
