@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { User } from "./User.model";
+import { Country } from "./Country.model";
 
 @Injectable()
-export class UserService {
+export class AddCountryService {
 
   constructor(private http : Http) { }
 
-  register(user : User) : Observable<any> {
+  addCountry(country : Country) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
 
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/api/Account/Register', user, opts);
+        return this.http.post('http://localhost:54043/country/AddCountry', country, opts);
     }
+
 }

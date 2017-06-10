@@ -18,4 +18,16 @@ login(username : string, password : string, grant_type: string) : Observable<any
         return this.http.post(`http://localhost:54043/oauth/token`, 
                               `username=${username}&password=${password}&grant_type=${grant_type}`, opts);
     }
+
+     IsLoggedIn() : boolean {
+       
+        if ( localStorage.getItem("user") != null)
+        {
+            console.log("AAA");
+            return true;
+        }
+        
+        console.log("BBB");
+        return false;
+    }
 }

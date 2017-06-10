@@ -4,7 +4,7 @@
   BookingApp
 </h1>
 
-<a [routerLink]="['/other']">Home</a>
+<a *ngIf="!IsLoggedIn()" [routerLink]="['/other']">Home</a>
 <a [routerLink]="['/registration']">Registration</a>
 <a [routerLink]="['/login']">Login</a>
 <br><br>

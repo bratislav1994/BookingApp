@@ -28,12 +28,4 @@ export class RegistrationComponent implements OnInit {
     this.Password = "";
     this.ConfirmPassword = "";
   }
-
-  onSubmitLogin(){
-    this.userService.login(new User(this.Username, this.Password, this.Role, this.Email, this.ConfirmPassword)).subscribe();
-    this.Email = "";
-    this.Password = "";
-    this.ConfirmPassword = "";
-  }
-
 }
