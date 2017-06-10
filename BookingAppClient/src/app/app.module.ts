@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddCountryComponent } from './add-country/add-country.component';
+import { ListOfCountriesComponent } from './country/list-of-countries/list-of-countries.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,7 +30,8 @@ const Routes = [
     RegistrationComponent,
     HomeComponent,
     LogoutComponent,
-    AddCountryComponent
+    AddCountryComponent,
+    ListOfCountriesComponent
   ],
   imports: [
     BrowserModule,

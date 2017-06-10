@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Country } from "./Country.model";
 
 @Injectable()
-export class AddCountryService {
+export class CountryService {
 
   constructor(private http : Http) { }
 
@@ -18,4 +18,11 @@ export class AddCountryService {
         return this.http.post('http://localhost:54043/country/AddCountry', country, opts);
     }
 
+    getAllCountries() : Observable<any> {
+        return this.http.get("http://localhost:54043/country/AllCountries");
+    }
+
+    getCountryById(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/country/GetCountry/${id}`);
+    }
 }
