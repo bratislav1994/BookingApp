@@ -5,7 +5,8 @@ import { TypeServiceService } from "app/accommodation-type/type-service.service"
 @Component({
   selector: 'app-create-type',
   templateUrl: './create-type.component.html',
-  styleUrls: ['./create-type.component.css']
+  styleUrls: ['./create-type.component.css'],
+  providers: [TypeServiceService]
 })
 export class CreateTypeComponent implements OnInit {
 

@@ -21,6 +21,9 @@ import { ListOfPlacesComponent } from './place/list-of-places/list-of-places.com
 import { CreateTypeComponent } from './accommodation-type/create-type/create-type.component';
 import { ViewTypeComponent } from './accommodation-type/view-type/view-type.component';
 import { TypeComponent } from './accommodation-type/type/type.component';
+import { CreateRoomComponent } from './room/create-room/create-room.component';
+import { RoomComponent } from './room/room/room.component';
+import { ViewRoomComponent } from './room/view-room/view-room.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -49,7 +52,10 @@ const Routes = [
     ListOfPlacesComponent,
     CreateTypeComponent,
     ViewTypeComponent,
-    TypeComponent
+    TypeComponent,
+    CreateRoomComponent,
+    RoomComponent,
+    ViewRoomComponent
   ],
   imports: [
     BrowserModule,
