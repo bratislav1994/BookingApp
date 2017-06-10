@@ -10,7 +10,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api/AccommodationType")]
+    [RoutePrefix("accommodationType")]
     public class AccommodationTypeController : ApiController
     {
         private BAContext db = new BAContext();

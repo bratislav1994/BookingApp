@@ -1,0 +1,9 @@
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <div>
+      <label for="Name">Name:</label>
+      <input type="text" name="Name" id="Name" [(ngModel)]="Name">
+    </div>
+    <input type="submit" value="Create"/>
+  </form>
+</div>
