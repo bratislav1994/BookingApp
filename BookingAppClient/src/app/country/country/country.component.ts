@@ -8,6 +8,7 @@ import {Country} from "app/country/Country.model";
 })
 
 export class CountryComponent implements OnInit {
+  
   @Input () country: Country;
 
   constructor() {

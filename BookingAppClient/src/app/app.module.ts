@@ -12,6 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddCountryComponent } from './add-country/add-country.component';
 import { ListOfCountriesComponent } from './country/list-of-countries/list-of-countries.component';
+import { AddRegionComponent } from './region/add-region/add-region.component';
+import { RegionComponent } from './region/region/region.component';
+import { ListOfRegionsComponent } from './region/list-of-regions/list-of-regions.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -31,7 +34,10 @@ const Routes = [
     HomeComponent,
     LogoutComponent,
     AddCountryComponent,
-    ListOfCountriesComponent
+    ListOfCountriesComponent,
+    AddRegionComponent,
+    RegionComponent,
+    ListOfRegionsComponent
   ],
   imports: [
     BrowserModule,
