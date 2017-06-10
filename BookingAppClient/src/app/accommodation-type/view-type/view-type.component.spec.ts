@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReadTypesComponent } from './read-types.component';
+import { ViewTypeComponent } from './view-type.component';
 
-describe('ReadTypesComponent', () => {
-  let component: ReadTypesComponent;
-  let fixture: ComponentFixture<ReadTypesComponent>;
+describe('ViewTypeComponent', () => {
+  let component: ViewTypeComponent;
+  let fixture: ComponentFixture<ViewTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReadTypesComponent ]
+      declarations: [ ViewTypeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReadTypesComponent);
+    fixture = TestBed.createComponent(ViewTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

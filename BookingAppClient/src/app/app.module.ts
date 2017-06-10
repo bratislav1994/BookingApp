@@ -5,12 +5,12 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { CountryComponent } from './country/country.component';
+import { CountryComponent } from './country/country/country.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AddCountryComponent } from './add-country/add-country.component';
+import { AddCountryComponent } from './country/add-country/add-country.component';
 import { ListOfCountriesComponent } from './country/list-of-countries/list-of-countries.component';
 import { AddRegionComponent } from './region/add-region/add-region.component';
 import { RegionComponent } from './region/region/region.component';
@@ -18,6 +18,9 @@ import { ListOfRegionsComponent } from './region/list-of-regions/list-of-regions
 import { PlaceComponent } from './place/place/place.component';
 import { AddPlaceComponent } from './place/add-place/add-place.component';
 import { ListOfPlacesComponent } from './place/list-of-places/list-of-places.component';
+import { CreateTypeComponent } from './accommodation-type/create-type/create-type.component';
+import { ViewTypeComponent } from './accommodation-type/view-type/view-type.component';
+import { TypeComponent } from './accommodation-type/type/type.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -43,7 +46,10 @@ const Routes = [
     ListOfRegionsComponent,
     PlaceComponent,
     AddPlaceComponent,
-    ListOfPlacesComponent
+    ListOfPlacesComponent,
+    CreateTypeComponent,
+    ViewTypeComponent,
+    TypeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { AccommodationType } from "./AccommodationType.model";
+import { AccommodationType } from "app/accommodation-type/Type.model";
 
 @Injectable()
-export class TypeService {
+export class TypeServiceService {
 
   constructor(private http : Http) { }
 
-  addNewType(type : AccommodationType) : Observable<any>{
+  createType(type : AccommodationType) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
 
@@ -16,9 +16,13 @@ export class TypeService {
         opts.headers = header;
 
         return this.http.post('http://localhost:54043/accommodationType/Create', type, opts);
-  }
+    }
 
-  readAllAccommodationTypes() : Observable<any>{
-        return this.http.get('http://localhost:54043/accommodationType/ReadAll');
-  }
+    getAllTypes() : Observable<any> {
+        return this.http.get("http://localhost:54043/accommodationType/ReadAll");
+    }
+
+    getTypeById(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/accommodationType/Read/${id}`);
+    }
 }
