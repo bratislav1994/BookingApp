@@ -17,7 +17,7 @@ export class ListOfRegionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.regionService.getAllRegions().subscribe();
+    this.regionService.getAllRegions().subscribe(r => this.regions = r);
   }
 
 }

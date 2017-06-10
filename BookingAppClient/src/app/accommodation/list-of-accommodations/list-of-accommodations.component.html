@@ -1,0 +1,11 @@
+<p>
+  list-of-accommodations works!
+</p>
+
+<ul>
+  <li *ngFor = "let accommodation of accommodations">{{ accommodation.Name }}, {{ accommodation.Description }}, 
+                                                      {{ accommodation.Address}}, {{ accommodation.AvrageGrade}},
+                                                      {{ accommodation.Latitude}}, {{ accommodation.Longitude}},
+                                                      {{ accommodation.ImageUrl}}, {{ accommodation.Approved}},
+                                                      {{ accommodation.Place.Name}}, {{ accommodation.AccommodationType.Name}}</li>
+</ul>

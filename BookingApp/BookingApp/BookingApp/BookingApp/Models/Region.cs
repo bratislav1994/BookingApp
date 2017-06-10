@@ -16,7 +16,7 @@ namespace BookingApp.Models
 
         public IList<Place> Places { get; set; }
 
-        [ForeignKey("Country")]
+        [Required, ForeignKey("Country")]
         public int CountryId { get; set; }
         public Country Country { get; set; }
     }

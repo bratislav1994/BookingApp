@@ -17,7 +17,7 @@ export class ListOfPlacesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeService.getAllPlaces().subscribe();
+    this.placeService.getAllPlaces().subscribe(p => this.places = p);
   }
 
 }

@@ -1,0 +1,58 @@
+<p>
+  add-accommodation works!
+</p>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div>
+    <label for = "Name">Name:</label>
+    <br>
+    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+
+  <div>
+    <label for = "Description">Description:</label>
+    <br>
+    <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+  </div>
+
+  <div>
+    <label for = "Address">Address:</label>
+    <br>
+    <input type="text" name="Address" id="Address" [(ngModel)]="Address"/>
+  </div>
+
+  <div>
+    <label for = "Latitude">Latitude:</label>
+    <br>
+    <input type="number" name="Latitude" id="Latitude" [(ngModel)]="Latitude"/>
+  </div>
+
+  <div>
+    <label for = "Longitude">Longitude:</label>
+    <br>
+    <input type="number" name="Longitude" id="Longitude" [(ngModel)]="Longitude"/>
+  </div>
+
+  <div>
+    <label for = "ImageUrl">ImageUrl:</label>
+    <br>
+    <input type="text" name="ImageUrl" id="ImageUrl" [(ngModel)]="ImageUrl"/>
+  </div>
+
+  <div>
+    <select name="PlaceId" id="PlaceId" [(ngModel)]="PlaceId">
+      <option *ngFor = "let place of places" value={{place.Id}} >{{place.Name}}</option>
+    </select>
+  </div>
+
+  <div>
+    <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
+      <option *ngFor = "let accommodationType of accommodationTypes" value={{AccommodationType.Id}} >{{AccommodationType.Name}}</option>
+    </select>
+  </div>
+
+  <div>
+    <input type="submit" value="Add"/>
+  </div>
+
+</form>
