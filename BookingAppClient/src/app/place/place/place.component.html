@@ -1,0 +1,11 @@
+<p>
+  place works!
+</p>
+
+<div> 
+    <p>Name: {{place.Name}}</p>
+    <p>Region name: {{place.Region.Name}}</p>
+    <p>Country name: {{place.Region.Country.Name}}</p>
+    <p>Country code: {{place.Region.Country.Code}}</p>
+    <button name="show" [routerLink]="['/place-show']">Show</button>
+</div>

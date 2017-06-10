@@ -15,6 +15,9 @@ import { ListOfCountriesComponent } from './country/list-of-countries/list-of-co
 import { AddRegionComponent } from './region/add-region/add-region.component';
 import { RegionComponent } from './region/region/region.component';
 import { ListOfRegionsComponent } from './region/list-of-regions/list-of-regions.component';
+import { PlaceComponent } from './place/place/place.component';
+import { AddPlaceComponent } from './place/add-place/add-place.component';
+import { ListOfPlacesComponent } from './place/list-of-places/list-of-places.component';
 
 const Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -37,7 +40,10 @@ const Routes = [
     ListOfCountriesComponent,
     AddRegionComponent,
     RegionComponent,
-    ListOfRegionsComponent
+    ListOfRegionsComponent,
+    PlaceComponent,
+    AddPlaceComponent,
+    ListOfPlacesComponent
   ],
   imports: [
     BrowserModule,

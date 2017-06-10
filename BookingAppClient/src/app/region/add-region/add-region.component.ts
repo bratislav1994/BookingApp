@@ -21,7 +21,7 @@ export class AddRegionComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.countryService.getAllCountries().subscribe(x => this.countries = x.json());
+      this.countryService.getAllCountries().subscribe();
   }
 
   onSubmit(){

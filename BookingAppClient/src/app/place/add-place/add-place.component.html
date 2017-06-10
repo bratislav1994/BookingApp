@@ -1,0 +1,23 @@
+<p>
+  add-place works!
+</p>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+  <div>
+    <label for = "Name">Name:</label>
+    <br>
+    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+  
+  <div>
+    <select name="RegionId" id="RegionId" [(ngModel)]="RegionId">
+      <option *ngFor = "let region of regions" value={{region.Id}} >{{region.Name}}</option>
+    </select>
+  </div>
+ 
+  <div>
+    <input type="submit" value="Add"/>
+  </div>
+
+</form>
