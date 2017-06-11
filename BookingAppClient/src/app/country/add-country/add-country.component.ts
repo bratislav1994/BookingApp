@@ -24,7 +24,7 @@ export class AddCountryComponent implements OnInit {
                                                                               alert("Country successfully added"),
      error => 
      {
-        console.log(error), alert("Country already exists.")
+        console.log(error), alert(error.text())
      });
     this.Name = "";
     this.Code = "";

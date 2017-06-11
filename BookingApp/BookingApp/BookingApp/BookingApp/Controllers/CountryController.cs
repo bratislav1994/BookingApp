@@ -32,7 +32,10 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateException e)
             {
-                return Content(HttpStatusCode.Conflict, country);
+                return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
+                                                            new HttpError("Country already exists.")
+        )
+    );
             }
             
             return Ok();
