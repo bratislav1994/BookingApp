@@ -21,7 +21,7 @@ login(username : string, password : string, grant_type: string) : Observable<any
 
      IsLoggedIn() : boolean {
          
-        if (localStorage.getItem("user") == null)
+        if (localStorage.getItem("Role") == null)
         {
             console.log("AAA");
             return false;
@@ -30,4 +30,6 @@ login(username : string, password : string, grant_type: string) : Observable<any
         console.log("BBB");
         return true;
     }
+
+   
 }

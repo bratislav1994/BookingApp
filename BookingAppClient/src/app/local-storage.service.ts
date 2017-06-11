@@ -6,7 +6,7 @@ export class LocalStorageService {
   constructor() { }
 
     IsLoggedIn() : boolean {
-        if (localStorage.getItem("user") == null)
+        if (localStorage.getItem("Role") == null)
         {
             return false;
         }
@@ -14,4 +14,30 @@ export class LocalStorageService {
         return true;
     }
 
+     isAdmin() : boolean {
+        if(localStorage.getItem("Role") == "Admin"){
+            console.log("jeste admin");
+            return true
+        }
+
+        return false;
+    }
+
+    isManager() : boolean {
+        if(localStorage.getItem("Role") == "Manager"){
+            console.log("jeste manager");
+            return true
+        }
+
+        return false;
+    }
+
+    isUser() : boolean {
+        if(localStorage.getItem("Role") == "AppUser"){
+            console.log("jeste AppUser");
+            return true
+        }
+
+        return false;
+    }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,18 @@ import { LocalStorageService } from './local-storage.service';
 export class AppComponent {
   title = 'app';
 
-  constructor(private localStorageService : LocalStorageService) { }
+  constructor(private localStorageService : LocalStorageService, private router: Router) { }
 
-  IsLoggedIn() : boolean {
-    return this.localStorageService.IsLoggedIn();
+  ngOnInit() {
+  
+    if(this.localStorageService.IsLoggedIn() == true){
+      this.router.navigate(['/home']);
+      console.log("radi")
+    }
+    
   }
+  // IsLoggedIn() : boolean {
+
+  //   return this.localStorageService.IsLoggedIn();
+  // }
 }
