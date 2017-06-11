@@ -78,6 +78,7 @@ const Routes = [
   {path: "home", component: HomeComponent, children: ChildRoutes},
   {path: "registration", component: RegistrationComponent},
   {path: "login", component: LoginComponent},
+  {path: "logout", component: LogoutComponent},
   {path: "other", redirectTo:"home"}
 ] 
 
