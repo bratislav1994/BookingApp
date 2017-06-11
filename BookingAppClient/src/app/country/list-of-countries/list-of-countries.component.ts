@@ -24,4 +24,11 @@ export class ListOfCountriesComponent implements OnInit {
      });
   }
 
+  deleteCountry(country: Country)
+  {
+    this.countryService.deleteCountry(country.Id).subscribe();
+    var id = this.countries.indexOf(country);
+    this.countries.splice(id, 1);
+  }
+
 }

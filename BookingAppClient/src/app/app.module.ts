@@ -69,7 +69,7 @@ const ChildRoutes = [
   {path: "country_home", component: CountryHomeComponent},
   {path: "add_country", component: AddCountryComponent},
   {path: "view_countries", component: ListOfCountriesComponent},
-  {path: "view_country", component: CountryComponent},
+  {path: "view_country/:Id", component: CountryComponent},
 
   
 ]

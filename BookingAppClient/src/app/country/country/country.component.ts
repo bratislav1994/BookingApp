@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Country} from "app/country/Country.model";
 import { CountryService } from "app/country/country.service"
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-country',
@@ -13,10 +14,13 @@ export class CountryComponent implements OnInit {
   
   @Input () country: Country;
 
-  constructor(private countryService : CountryService) {
+  constructor(private countryService : CountryService, private router: Router, private activatedRoute: ActivatedRoute) {
    }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {this.country.Id = parseInt(params["Id"])});
+    console.log(this.country.Id);
+    this.countryService.getCountryById(this.country.Id);
   }
 
   deleteCountry()
