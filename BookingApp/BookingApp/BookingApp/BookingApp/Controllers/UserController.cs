@@ -15,7 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpGet]
         [Route("ReadAll")]
         public IQueryable<AppUser> ReadAllUsers()
@@ -23,7 +23,7 @@ namespace BookingApp.Controllers
             return db.AppUsers;
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpGet]
         [Route("Read/{id}")]
         [ResponseType(typeof(AppUser))]
@@ -39,7 +39,7 @@ namespace BookingApp.Controllers
             return Ok(user);
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create(AppUser user)
@@ -49,13 +49,20 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.AppUsers.Add(user);
-            db.SaveChanges();
-
+            try
+            {
+                db.AppUsers.Add(user);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return Content(HttpStatusCode.Conflict, user);
+            }
+ 
             return Ok();
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("Change/{id}")]
         public IHttpActionResult Change(int id, AppUser user)
@@ -91,7 +98,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+       // [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)

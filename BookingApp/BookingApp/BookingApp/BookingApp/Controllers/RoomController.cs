@@ -37,7 +37,7 @@ namespace BookingApp.Controllers
             return Ok(room);
         }
 
-        [Authorize (Roles = "Manager")]
+        //[Authorize (Roles = "Manager")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create(Room room)
@@ -47,13 +47,20 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Rooms.Add(room);
-            db.SaveChanges();
+            try
+            {
+                db.Rooms.Add(room);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return Content(HttpStatusCode.Conflict, room);
+            }
 
             return Ok();
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("Change/{id}")]
         public IHttpActionResult Change(int id, Room room)
@@ -89,7 +96,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)

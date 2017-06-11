@@ -83,8 +83,15 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Comments.Add(comment);
-            db.SaveChanges();
+            try
+            {
+                db.Comments.Add(comment);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return Content(HttpStatusCode.Conflict, comment);
+            }
 
             return Ok();
         }
