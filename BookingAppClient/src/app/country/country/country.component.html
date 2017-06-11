@@ -2,4 +2,5 @@
     <p>Name: {{country.Name}}</p>
     <p>Code: {{country.Code}}</p>
     <button name="show" [routerLink]="['/country-show']">Show</button>
+    <button name="delete" (click)="deleteCountry()">Delete</button>
 </div>

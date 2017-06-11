@@ -62,12 +62,12 @@ const ChildRoutes = [
   {path: "view_place", component: PlaceComponent},
 
   {path: "region_home", component: RegionHomeComponent},
-  {path: "region_place", component: AddRegionComponent},
+  {path: "add_region", component: AddRegionComponent},
   {path: "view_regions", component: ListOfRegionsComponent},
   {path: "view_region", component: RegionComponent},
 
   {path: "country_home", component: CountryHomeComponent},
-  {path: "country_place", component: AddCountryComponent},
+  {path: "add_country", component: AddCountryComponent},
   {path: "view_countries", component: ListOfCountriesComponent},
   {path: "view_country", component: CountryComponent},
 ]

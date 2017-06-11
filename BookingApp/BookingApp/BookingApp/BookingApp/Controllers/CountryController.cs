@@ -14,7 +14,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddCountry")]
         public IHttpActionResult AddCountry(Country country)
@@ -29,7 +29,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeleteCountry/{id}")]
         public IHttpActionResult DeleteCountry(int id)
@@ -47,10 +47,10 @@ namespace BookingApp.Controllers
             return Ok(country);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpGet]
-        [Route("ChangePCountry/{id}")]
-        public IHttpActionResult ChangePCountry(int id, Country country)
+        [Route("ChangeCountry/{id}")]
+        public IHttpActionResult ChangeCountry(int id, Country country)
         {
             if (!ModelState.IsValid)
             {
