@@ -30,6 +30,9 @@ import { ViewReservationComponent } from './room-reservation/view-reservation/vi
 import { AccommodationComponent } from './accommodation/accommodation/accommodation.component';
 import { ListOfAccommodationsComponent } from './accommodation/list-of-accommodations/list-of-accommodations.component';
 import { AddAccommodationComponent } from './accommodation/add-accommodation/add-accommodation.component';
+import { AddCommentComponent } from './comment/add-comment/add-comment.component';
+import { ViewCommentComponent } from './comment/view-comment/view-comment.component';
+import { CommentComponent } from './comment/comment/comment.component';
 
 const Routes = [
   { path: 'app', redirectTo: '/app', pathMatch: 'full'},
@@ -68,7 +71,10 @@ const Routes = [
     ViewReservationComponent,
     AccommodationComponent,
     ListOfAccommodationsComponent,
-    AddAccommodationComponent
+    AddAccommodationComponent,
+    AddCommentComponent,
+    ViewCommentComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
