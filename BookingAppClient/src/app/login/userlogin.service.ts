@@ -20,14 +20,14 @@ login(username : string, password : string, grant_type: string) : Observable<any
     }
 
      IsLoggedIn() : boolean {
-       
-        if ( localStorage.getItem("user") != null)
+         
+        if (localStorage.getItem("user") == null)
         {
             console.log("AAA");
-            return true;
+            return false;
         }
         
         console.log("BBB");
-        return false;
+        return true;
     }
 }

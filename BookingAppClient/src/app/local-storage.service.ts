@@ -6,12 +6,12 @@ export class LocalStorageService {
   constructor() { }
 
     IsLoggedIn() : boolean {
-        if ( localStorage.getItem("token") != null)
+        if (localStorage.getItem("user") == null)
         {
-            return true;
+            return false;
         }
         
-        return false;
+        return true;
     }
 
 }
