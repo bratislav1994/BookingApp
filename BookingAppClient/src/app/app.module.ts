@@ -33,11 +33,49 @@ import { AddAccommodationComponent } from './accommodation/add-accommodation/add
 import { AddCommentComponent } from './comment/add-comment/add-comment.component';
 import { ViewCommentComponent } from './comment/view-comment/view-comment.component';
 import { CommentComponent } from './comment/comment/comment.component';
+import { AccommodationTypeHomeComponent } from './accommodation-type/accommodation-type-home/accommodation-type-home.component';
+import { RoomHomeComponent } from './room/room-home/room-home.component';
+import { PlaceHomeComponent } from './place/place-home/place-home.component';
+import { RegionHomeComponent } from './region/region-home/region-home.component';
+import { CountryHomeComponent } from './country/country-home/country-home.component';
+import { AccommodationHomeComponent } from './accommodation/accommodation-home/accommodation-home.component';
+
+const ChildRoutes = [
+  {path: "accommodation_home", component: AccommodationHomeComponent},
+  {path: "add_accommodation", component: AddAccommodationComponent},
+  {path: "view_accommodations", component: ListOfAccommodationsComponent},
+  {path: "view_accommodation", component: AccommodationComponent},
+
+  {path: "accommodation_type_home", component: AccommodationTypeHomeComponent},
+  {path: "add_accommodation_type", component: CreateTypeComponent},
+  {path: "view_types", component: ViewTypeComponent},
+  {path: "view_type", component: TypeComponent},
+
+  {path: "room_home", component: RoomHomeComponent},
+  {path: "add_room", component: CreateRoomComponent},
+  {path: "view_rooms", component: ViewRoomComponent},
+  {path: "view_room", component: RoomComponent},
+
+  {path: "place_home", component: PlaceHomeComponent},
+  {path: "add_place", component: AddPlaceComponent},
+  {path: "view_places", component: ListOfPlacesComponent},
+  {path: "view_place", component: PlaceComponent},
+
+  {path: "region_home", component: RegionHomeComponent},
+  {path: "region_place", component: AddRegionComponent},
+  {path: "view_regions", component: ListOfRegionsComponent},
+  {path: "view_region", component: RegionComponent},
+
+  {path: "country_home", component: CountryHomeComponent},
+  {path: "country_place", component: AddCountryComponent},
+  {path: "view_countries", component: ListOfCountriesComponent},
+  {path: "view_country", component: CountryComponent},
+]
 
 const Routes = [
   { path: 'app', redirectTo: '/app', pathMatch: 'full'},
   {path: "app", component: AppComponent},
-  {path: "home", component: HomeComponent},
+  {path: "home", component: HomeComponent, children: ChildRoutes},
   {path: "registration", component: RegistrationComponent},
   {path: "login", component: LoginComponent},
   {path: "other", redirectTo:"home"}
@@ -74,7 +112,13 @@ const Routes = [
     AddAccommodationComponent,
     AddCommentComponent,
     ViewCommentComponent,
-    CommentComponent
+    CommentComponent,
+    AccommodationTypeHomeComponent,
+    RoomHomeComponent,
+    PlaceHomeComponent,
+    RegionHomeComponent,
+    CountryHomeComponent,
+    AccommodationHomeComponent
   ],
   imports: [
     BrowserModule,

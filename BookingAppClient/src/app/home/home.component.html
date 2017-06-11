@@ -60,14 +60,14 @@
 </div>
 
 <div style="float:left;padding-left:12%">
-		<ul>
- 			<li><a href="/Projekat/ServletProizvodiPoKategorijama">Accommodation</a></li>
- 			<li><a href="/Projekat/ServletKategorije">Accommodation type</a></li>
- 			<li><a href="/Projekat/ServletDostavljaci">Room</a></li>
- 			<li><a href="/Projekat/ServletProdavnice">Prodavnice</a></li>
- 			<li><a href="/Projekat/ServletProizvodi">Place</a></li>
- 			<li><a href="/Projekat/ServletAkcijskaProdaja">Region</a></li>
- 	 		<li><a href="/Projekat/ServletListaZeljenihProizvoda">Country</a></li>
-		</ul>
-	</div>
+	<ul>
+ 		<li><a [routerLink]="['/home/accommodation_home']">Accommodation</a></li>
+ 		<li><a [routerLink]="['/home/accommodation_type_home']">Accommodation type</a></li>
+ 		<li><a [routerLink]="['/home/room_home']">Room</a></li>
+ 		<li><a [routerLink]="['/home/place_home']">Place</a></li>
+ 		<li><a [routerLink]="['/home/region_home']">Region</a></li>
+		<li><a [routerLink]="['/home/country_home']">Country</a></li>
+	</ul>
+</div>
 
+<router-outlet></router-outlet>
