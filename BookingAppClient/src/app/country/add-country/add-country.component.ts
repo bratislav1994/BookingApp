@@ -20,7 +20,12 @@ export class AddCountryComponent implements OnInit {
 
   onSubmit()
   {
-    this.countryService.addCountry(new Country(0, this.Name, this.Code)).subscribe();
+    this.countryService.addCountry(new Country(0, this.Name, this.Code)).subscribe(x => 
+                                                                              alert("Country successfully added"),
+     error => 
+     {
+        console.log(error), alert("Country already exists.")
+     });
     this.Name = "";
     this.Code = "";
   }

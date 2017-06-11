@@ -18,7 +18,10 @@ export class ListOfCountriesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.countryService.getAllCountries().subscribe(c => this.countries = c);
+    this.countryService.getAllCountries().subscribe(c => this.countries = c, error => 
+     {
+        console.log(error), alert("Unsuccessful fetch operation")
+     });
   }
 
 }
