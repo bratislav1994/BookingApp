@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserloginService } from './userlogin.service';
 import { User } from "app/login/UserLogin.model";
 import {NgForm} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,12 @@ export class LoginComponent implements OnInit {
   Username : string;
   Password : string;
 
-  constructor(private userService : UserloginService) { }
+  constructor(private userService: UserloginService, private route: Router) { }
 
   ngOnInit() {
   }
 
- onSubmit(){
+ onSubmitLogin(){
     this.userService.login(this.Username, this.Password, "password").subscribe(result => { this.addToken(result.json())}, 
     error => 
      {
@@ -34,5 +35,6 @@ export class LoginComponent implements OnInit {
     this.Username = "";
     this.Password = "";
     console.log("radi");
+    this.route.navigate(['/home']);
   }
 }
