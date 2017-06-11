@@ -17,7 +17,7 @@ export class ViewTypeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.service.getAllTypes().subscribe();
+    this.service.getAllTypes().subscribe(e => this.types = e.json());
   }
 
 }

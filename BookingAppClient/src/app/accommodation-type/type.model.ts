@@ -1,4 +1,5 @@
 export class AccommodationType {
+    Id: number;
     Name: string;
 
     constructor(Name: string) {

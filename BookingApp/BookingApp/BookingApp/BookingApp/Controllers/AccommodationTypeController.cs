@@ -15,7 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Change/{id}")]
         public IHttpActionResult Change(int id, AccommodationType type)
@@ -51,7 +51,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Add(AccommodationType type)
@@ -61,12 +61,20 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.AccommodationsTypes.Add(type);
-            db.SaveChanges();
+            try
+            {
+                db.AccommodationsTypes.Add(type);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return Content(HttpStatusCode.Conflict, type);
+            }
+           
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
