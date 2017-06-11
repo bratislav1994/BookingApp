@@ -1,18 +1,18 @@
-<div style="background-color: #3F3F3F; padding-left: 40%; height: 500px">
+<div *ngIf="!IsLoggedIn()" style="background-color: #3F3F3F; padding-left: 40%; height: 500px">
 
-<h1 >
-  BookingApp
-</h1>
+  <h1 style="color: #DAE9BC;font-size:64px;">
+    BookingApp
+  </h1>
 
-<div *ngIf="!IsLoggedIn()">
+  <div>
 
-  <a [routerLink]="['/other']">Home</a>
-  <a [routerLink]="['/registration']">Registration</a>
-  <a [routerLink]="['/login']">Login</a>
-  <br><br>
+    <a [routerLink]="['/registration']">Registration</a>
+    <a [routerLink]="['/login']">Login</a>
+    <br><br>
+
+  </div>
 
 </div>
-
+  
 <router-outlet></router-outlet>
-<div>
 

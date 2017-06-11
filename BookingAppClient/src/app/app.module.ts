@@ -32,7 +32,8 @@ import { ListOfAccommodationsComponent } from './accommodation/list-of-accommoda
 import { AddAccommodationComponent } from './accommodation/add-accommodation/add-accommodation.component';
 
 const Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'app', redirectTo: '/app', pathMatch: 'full'},
+  {path: "app", component: AppComponent},
   {path: "home", component: HomeComponent},
   {path: "registration", component: RegistrationComponent},
   {path: "login", component: LoginComponent},
