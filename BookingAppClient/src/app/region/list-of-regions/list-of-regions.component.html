@@ -2,6 +2,10 @@
   list-of-regions works!
 </p>
 
-<ul>
-  <li *ngFor = "let region of regions">{{ region.Name }}, {{ region.Country.Name }}</li>
-</ul>
+<div style="float:left;padding-left:1%">
+  <ul *ngFor = "let region of regions">
+    <li>{{ region.Name }}</li>
+    <button name="show" [routerLink]="['/home/view_region/', region.Id]">Show</button>
+    <button name="delete" (click) = "deleteRegion(region)">Delete</button>
+  </ul>
+</div>

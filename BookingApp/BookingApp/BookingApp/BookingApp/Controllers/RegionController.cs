@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 {
@@ -16,7 +17,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddRegion")]
         public IHttpActionResult AddRegion(Region region)
@@ -26,12 +27,22 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Regions.Add(region);
-            db.SaveChanges();
+            try
+            {
+                db.Regions.Add(region);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
+                                                            new HttpError("Region already exists.")
+                ));
+            }
+
             return Ok();
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        // [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeleteRegion/{id}")]
         public IHttpActionResult DeleteRegion(int id)
@@ -49,7 +60,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        // [Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("ChangeRegion/{id}")]
         public IHttpActionResult ChangeRegion(int id, Region region)

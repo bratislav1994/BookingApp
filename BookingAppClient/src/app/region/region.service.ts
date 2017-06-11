@@ -27,4 +27,18 @@ export class RegionService {
         return this.http.get(`http://localhost:54043/region/GetRegion/${id}`);
   }
 
+  deleteRegion(id : number) : Observable<any> {
+        return this.http.delete(`http://localhost:54043/region/DeleteRegion/${id}`);
+    }
+
+    editRegion(region: Region) : Observable<any> {
+        let header = new Headers();
+        header.append('Content-type', 'application/json');
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.put(`http://localhost:54043/region/ChangeRegion`, region, opts);
+    }
+
 }

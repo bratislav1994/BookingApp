@@ -21,14 +21,19 @@ export class AddRegionComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.countryService.getAllCountries().subscribe(c => this.countries = c, error => 
+      this.countryService.getAllCountries().subscribe(c => this.countries = c.json(), error => 
       {
         console.log(error), alert("Unsuccessful fetch operation")
       });
   }
 
   onSubmit(){
-    this.regionService.addRegion(new Region(1, this.Name, this.CountryId)).subscribe();
+    this.regionService.addRegion(new Region(0, this.Name, this.CountryId)).subscribe(x => 
+                                                                              alert("Region successfully added"),
+     error => 
+     {
+        console.log(error), alert(error.text())
+     });
     this.Name = "";
   }
 

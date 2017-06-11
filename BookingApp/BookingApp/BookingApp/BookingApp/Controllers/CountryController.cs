@@ -10,7 +10,7 @@ using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("country")] 
+    [RoutePrefix("country")]
     public class CountryController : ApiController
     {
         private BAContext db = new BAContext();
@@ -34,10 +34,9 @@ namespace BookingApp.Controllers
             {
                 return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
                                                             new HttpError("Country already exists.")
-        )
-    );
+                ));
             }
-            
+
             return Ok();
         }
 
