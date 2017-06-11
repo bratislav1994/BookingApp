@@ -6,7 +6,7 @@
   <ul *ngFor = "let country of countries">
     <li>{{ country.Name }}</li>
     <!--<li>{{ country.Name }} <a [routerLink]="['/home/view_country']">Show</a></li>-->
-    <button name="show" [routerLink]="['/view_country/', country.Id]">Show</button>
+    <button name="show" [routerLink]="['/home/view_country/', country.Id]">Show</button>
     <button name="delete" (click) = "deleteCountry(country)">Delete</button>
   </ul>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Country } from "./Country.model";
+import 'rxjs/Rx';
 
 @Injectable()
 export class CountryService {
@@ -24,6 +25,10 @@ export class CountryService {
 
     getCountryById(id : number) : Observable<any> {
         return this.http.get(`http://localhost:54043/country/GetCountry/${id}`);
+    }
+
+    getCountryByIdMap(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/country/GetCountry/${id}`).map(r => r.json());
     }
 
     deleteCountry(id : number) : Observable<any> {
