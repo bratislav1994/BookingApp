@@ -19,17 +19,19 @@ export class ListOfCountriesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.countryService.getAllCountries().subscribe(c => this.countries = c.json(), error => 
-     {
-        console.log(error), alert("Unsuccessful fetch operation")
-     });
+    this.getCountries();
   }
 
   deleteCountry(country: Country)
   {
-    this.countryService.deleteCountry(country.Id).subscribe();
-    var id = this.countries.indexOf(country);
-    this.countries.splice(id, 1);
+    this.countryService.deleteCountry(country.Id).subscribe(e => this.getCountries());
+  }
+
+  getCountries() : void{
+    this.countryService.getAllCountries().subscribe(c => this.countries = c.json(), error => 
+     {
+        console.log(error), alert("Unsuccessful fetch operation")
+     });
   }
 
   showCountry(id : number){

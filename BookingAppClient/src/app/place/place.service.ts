@@ -28,6 +28,10 @@ export class PlaceService {
         return this.http.get(`http://localhost:54043/place/GetPlace/${id}`);
     }
 
+    getPlaceByIdMap(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/place/GetPlace/${id}`).map(r => r.json());
+    }
+
     deletePlace(id : number) : Observable<any> {
         return this.http.delete(`http://localhost:54043/place/DeletePlace/${id}`);
     }

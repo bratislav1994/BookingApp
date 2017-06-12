@@ -27,6 +27,10 @@ export class RegionService {
         return this.http.get(`http://localhost:54043/region/GetRegion/${id}`);
   }
 
+  getRegionByIdMap(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/region/GetRegion/${id}`).map(r => r.json());
+    }
+
   deleteRegion(id : number) : Observable<any> {
         return this.http.delete(`http://localhost:54043/region/DeleteRegion/${id}`);
     }

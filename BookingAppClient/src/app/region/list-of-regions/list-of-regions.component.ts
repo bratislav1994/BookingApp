@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegionService } from "app/region/region.service";
 import { Region } from "app/region/Region.model";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-of-regions',
@@ -12,22 +13,28 @@ export class ListOfRegionsComponent implements OnInit {
 
   regions: Region[];
 
-  constructor(private regionService : RegionService) { 
+  constructor(private regionService : RegionService, private route : Router) { 
     this.regions = [];
   }
 
   ngOnInit() {
-    this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error => 
-    {
-        console.log(error), alert("Unsuccessful fetch operation")
-    });
+    this.getRegions();
   }
 
   deleteRegion(region: Region)
   {
-    this.regionService.deleteRegion(region.Id).subscribe();
-    var id = this.regions.indexOf(region);
-    this.regions.splice(id, 1);
+    this.regionService.deleteRegion(region.Id).subscribe(e => this.getRegions());
+  }
+
+  getRegions() : void{
+    this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error => 
+     {
+        console.log(error), alert("Unsuccessful fetch operation")
+     });
+  }
+
+  showRegion(id : number){
+    this.route.navigate(['/home/view_region/' + id]);
   }
 
 }
