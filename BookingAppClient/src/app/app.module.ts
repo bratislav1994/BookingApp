@@ -39,6 +39,7 @@ import { PlaceHomeComponent } from './place/place-home/place-home.component';
 import { RegionHomeComponent } from './region/region-home/region-home.component';
 import { CountryHomeComponent } from './country/country-home/country-home.component';
 import { AccommodationHomeComponent } from './accommodation/accommodation-home/accommodation-home.component';
+import { ReservationHomeComponent } from './room-reservation/reservation-home/reservation-home.component';
 
 const ChildRoutes = [
   {path: "accommodation_home", component: AccommodationHomeComponent},
@@ -70,8 +71,13 @@ const ChildRoutes = [
   {path: "add_country", component: AddCountryComponent},
   {path: "view_countries", component: ListOfCountriesComponent},
   {path: "view_country/:Id", component: CountryComponent},
-  {path: "login", component: LoginComponent},
   
+  {path: "login", component: LoginComponent},
+
+  {path: "reservation_home", component: ReservationHomeComponent},
+  {path:  "add_reservation", component: CreateReservationComponent},
+  {path:  "view_reservations", component: ViewReservationComponent},
+  {path:  "view_reservation/:Id", component: RoomReservationComponent}
 ]
 
 const Routes = [
@@ -121,7 +127,8 @@ const Routes = [
     PlaceHomeComponent,
     RegionHomeComponent,
     CountryHomeComponent,
-    AccommodationHomeComponent
+    AccommodationHomeComponent,
+    ReservationHomeComponent,
   ],
   imports: [
     BrowserModule,
