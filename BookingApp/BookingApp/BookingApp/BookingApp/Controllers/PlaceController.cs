@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 {
@@ -14,7 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("AddPlace")]
         public IHttpActionResult AddPlace(Place place)
@@ -24,12 +25,22 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Places.Add(place);
-            db.SaveChanges();
+            try
+            {
+                db.Places.Add(place);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
+                                                            new HttpError("Place already exists.")
+                ));
+            }
+
             return Ok();
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+       // [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("DeletePlace/{id}")]
         public IHttpActionResult DeletePlace(int id)
@@ -47,7 +58,7 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("ChangePlace/{id}")]
         public IHttpActionResult ChangePlace(int id, Place place)

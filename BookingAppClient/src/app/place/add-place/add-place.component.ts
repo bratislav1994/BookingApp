@@ -22,14 +22,19 @@ export class AddPlaceComponent implements OnInit {
    }
 
   ngOnInit() {
-     this.regionService.getAllRegions().subscribe(r => this.regions = r, error => 
+     this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error => 
      {
         console.log(error), alert("Unsuccessful fetch operation")
      });
   }
 
   onSubmit(){
-    this.placeService.addPlace(new Place(0, this.Name, this.RegionId)).subscribe();
+    this.placeService.addPlace(new Place(0, this.Name, this.RegionId)).subscribe(x => 
+                                                                              alert("Place successfully added"),
+     error => 
+     {
+        console.log(error), alert(error.text())
+     });
     this.Name = "";
   }
 

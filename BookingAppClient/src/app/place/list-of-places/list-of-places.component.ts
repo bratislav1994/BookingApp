@@ -17,10 +17,17 @@ export class ListOfPlacesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeService.getAllPlaces().subscribe(p => this.places = p, error => 
+    this.placeService.getAllPlaces().subscribe(p => this.places = p.json(), error => 
      {
         console.log(error), alert("Unsuccessful fetch operation")
      });
+  }
+
+  deletePlace(place: Place)
+  {
+    this.placeService.deletePlace(place.Id).subscribe();
+    var id = this.places.indexOf(place);
+    this.places.splice(id, 1);
   }
 
 }

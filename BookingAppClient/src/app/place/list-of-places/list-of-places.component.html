@@ -1,8 +1,11 @@
-<p>
-  list-of-places works!
-</p>
-
-
 <ul>
   <li *ngFor = "let place of places">{{ place.Name }}, {{ place.Region.Name }}, {{place.Region.Country.Name}}</li>
 </ul>
+
+<div style="float:left;padding-left:1%">
+  <ul *ngFor = "let place of places">
+    <li>{{ place.Name }}, {{ place.Region.Name }}, {{place.Region.Country.Name}}</li>
+    <button name="show" [routerLink]="['/home/view_place/', place.Id]">Show</button>
+    <button name="delete" (click) = "deletePlace(place)">Delete</button>
+  </ul>
+</div>
