@@ -1,25 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomReservation } from "app/room-reservation/Reservation.model";
 import { ReservationService } from "app/room-reservation/reservation.service"
+import { RoomService } from "app/room/room.service";
+import { Room } from "app/room/room.model";
 
 @Component({
   selector: 'app-create-reservation',
   templateUrl: './create-reservation.component.html',
   styleUrls: ['./create-reservation.component.css'],
-  providers: [ReservationService]
+  providers: [ReservationService, RoomService]
 })
 export class CreateReservationComponent implements OnInit {
 
    StartDate: Date;
    EndDate: Date; 
-
-  constructor(private reservaionService: ReservationService) { }
+   //Timestamp: byte;
+   RoomId: number;
+   rooms: Room[];
+  constructor(private reservationService: ReservationService,
+              private roomService: RoomService) 
+              {
+                this.rooms = [];
+               }
 
   ngOnInit() {
+    this.roomService.getAllRooms().subscribe(c => this.rooms = c.json(), error => 
+      {
+        console.log(error), alert("Unsuccessful fetch operation")
+      });
   }
 
   onSubmit(){
-    this.reservaionService.createReservation(new RoomReservation(this.StartDate, this.EndDate)).subscribe();
-
+    this.reservationService.createReservation(new RoomReservation(
+      this.StartDate, this.EndDate, 0, this.RoomId)).subscribe(x => alert("Region successfully added"),
+     error => 
+     {
+        console.log(error), alert(error.text())
+     });
   }
 }

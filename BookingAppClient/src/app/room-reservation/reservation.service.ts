@@ -27,4 +27,22 @@ export class ReservationService {
         return this.http.get(`http://localhost:54043/api/RoomReservations/Read/${id}`);
   }
 
+  getReservationByIdMap(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/api/RoomReservations?$filter=Id eq ${id} &$expand=Description`).map(r => r.json());
+    }
+
+  deleteReservation(id : number) : Observable<any> {
+        return this.http.delete(`http://localhost:54043/api/RoomReservations/${id}`);
+    }
+
+    editReservation(reservation: RoomReservation) : Observable<any> {
+        let header = new Headers();
+        header.append('Content-type', 'application/json');
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.put(`http://localhost:54043/api/RoomReservations`, reservation, opts);
+    }
+
 }

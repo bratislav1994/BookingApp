@@ -7,7 +7,11 @@
     <label for = "EndDate">End date:</label>
     <input type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
   </div>
-
+ <div>
+    <select name="RoomId" id="RoomId" [(ngModel)]="RoomId">
+      <option *ngFor = "let room of rooms" value={{room.Id}} >{{room.Description}}</option>
+    </select>
+  </div>
   <div>
     <input type="submit" value="Create"/>
   </div>

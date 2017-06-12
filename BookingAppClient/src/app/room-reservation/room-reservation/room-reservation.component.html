@@ -1,5 +1,6 @@
 <div> 
-    <p>StartDate: {{reservation.Name}}</p>
-    <p>EndDate: {{reservation.Country.Name}}</p>
-    <button name="show" [routerLink]="['/reservation-show']">Show</button>
+    <p>StartDate: {{reservation.StartDate }}</p>
+    <p>EndDate: {{reservation.EndDate }}</p>
+    <p>Room: {{ reservation.Room.Description }}</p>
+    <!--<button name="show" [routerLink]="['/reservation-show']">Show</button>-->
 </div>
