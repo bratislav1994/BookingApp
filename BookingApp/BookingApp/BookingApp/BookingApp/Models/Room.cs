@@ -25,7 +25,7 @@ namespace BookingApp.Models
 
         public IList<RoomReservation> RoomReservations { get; set; }
 
-        [ForeignKey("Accommodation")]
+        [Required, ForeignKey("Accommodation")]
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
     }

@@ -11,17 +11,17 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
-        [Required, Range(1, 5)]
+        [Range(1, 5)]
         public int Grade { get; set; }
 
         [StringLength(300)]
         public string Text { get; set; }
 
-        [ForeignKey("User")]
+        [Required, ForeignKey("User")]
         public int UserId { get; set; }
         public AppUser User { get; set; }
 
-        [ForeignKey("Accommodation")]
+        [Required, ForeignKey("Accommodation")]
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
     }

@@ -7,13 +7,13 @@ namespace BookingApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UniqueUsername : IMigrationMetadata
+    public sealed partial class TimeStampRoomRes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UniqueUsername));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TimeStampRoomRes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706121125201_UniqueUsername"; }
+            get { return "201706121512493_TimeStampRoomRes"; }
         }
         
         string IMigrationMetadata.Source

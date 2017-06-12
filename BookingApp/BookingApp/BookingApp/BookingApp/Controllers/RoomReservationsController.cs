@@ -62,15 +62,25 @@ namespace BookingApp.Controllers
 
         //[Authorize(Roles = "Manager")]
         [HttpPut]
-        [Route("Change/{id}")]
-        public IHttpActionResult Change(int id, RoomReservation reservation)
+        [Route("Change/{idRoom}/{idUser}/{time}")]
+        public IHttpActionResult Change(int idRoom, int idUser, byte[] time, RoomReservation reservation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != reservation.Id)
+            if (idRoom != reservation.RoomId)
+            {
+                return BadRequest();
+            }
+
+            if (idUser != reservation.UserId)
+            {
+                return BadRequest();
+            }
+
+            if (time != reservation.TimeStamp)
             {
                 return BadRequest();
             }
@@ -83,7 +93,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReservationExist(id))
+                if (!ReservationExists(idRoom, idUser, time))
                 {
                     return NotFound();
                 }
@@ -101,7 +111,7 @@ namespace BookingApp.Controllers
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
-            RoomReservation reservation = db.RoomReservations.Where(e => e.Id.Equals(id)).FirstOrDefault();
+            RoomReservation reservation = db.RoomReservations.Find(id);
 
             if (reservation == null)
             {
@@ -114,9 +124,9 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        private bool ReservationExist(int id)
+        private bool ReservationExists(int idRoom, int idUser, byte[] time)
         {
-            return db.RoomReservations.Count(e => e.Id.Equals(id)) > 0;
+            return db.RoomReservations.Count(e => (e.RoomId == idRoom && e.UserId == idUser && e.TimeStamp == time)) > 0;
         }
     }
 }
