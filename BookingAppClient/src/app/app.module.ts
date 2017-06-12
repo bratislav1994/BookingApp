@@ -70,16 +70,16 @@ const ChildRoutes = [
   {path: "add_country", component: AddCountryComponent},
   {path: "view_countries", component: ListOfCountriesComponent},
   {path: "view_country/:Id", component: CountryComponent},
-
+  {path: "login", component: LoginComponent},
   
 ]
 
 const Routes = [
-  { path: 'app', redirectTo: '/app', pathMatch: 'full'},
-  {path: "app", component: AppComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  // {path: "app", component: AppComponent},
   {path: "home", component: HomeComponent, children: ChildRoutes},
   {path: "registration", component: RegistrationComponent},
-  {path: "login", component: LoginComponent},
+  
   {path: "logout", component: LogoutComponent},
   {path: "other", redirectTo:"home"}
 ] 

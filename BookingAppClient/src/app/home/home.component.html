@@ -4,10 +4,22 @@
 			<h1><a href="www.google.com">Booking<span>App</span></a></h1>
 		</div>
 	
-    	<div style="width:10%; float:right">
-			<ul style="width:100px">
+    	<div *ngIf="!IsLoggedIn()" style=" float:right">
+			<!--<ul style="width:100px">
+				 <li><a [routerLink]="['/registration']">Registration</a></li>
+    			 <li><a [routerLink]="['/home/login']">Login</a></li>
+				<router-outlet></router-outlet>
 				<li><a [routerLink]="['/logout']">Logout</a></li>
-			</ul>
+				
+			</ul>-->
+			<a [routerLink]="['/registration']">Registration</a>
+    			 <a [routerLink]="['/home/login']">Login</a>
+				<router-outlet></router-outlet>
+				
+		</div>
+		<div *ngIf="IsLoggedIn()" style=" float:right">
+				<a [routerLink]="['/logout']">Logout</a>
+				<router-outlet></router-outlet>
 		</div>
 					
 		<div style="width:10%; float:right">
