@@ -58,6 +58,10 @@ namespace BookingApp.Providers
                 context.OwinContext.Response.Headers.Add("Role", new[] { "AppUser" });
             }
 
+            //Mora se dodati u header response-a kako bi se se Role atribut
+            //mogao procitati na klijentskoj strani
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role" });
+
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
