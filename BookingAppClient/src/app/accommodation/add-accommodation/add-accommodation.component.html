@@ -2,7 +2,7 @@
   add-accommodation works!
 </p>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)" enctype="multipart/form-data">
   <div>
     <label for = "Name">Name:</label>
     <br>
@@ -36,10 +36,22 @@
   <div>
     <label for = "ImageUrl">ImageUrl:</label>
     <br>
-    <input type="text" name="ImageUrl" id="ImageUrl" [(ngModel)]="ImageUrl"/>
+    <input type="file" name="ImageUrl" id="ImageUrl" (change)="onChange($event)"/>
   </div>
 
   <div>
+    <select name="CountryId" id="CountryId" [(ngModel)]="CountryId" (change)="countrySelected()">
+      <option *ngFor = "let country of countries" value={{country.Id}} >{{country.Name}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="isSelectedCountry()">
+    <select name="RegionId" id="RegionId" [(ngModel)]="RegionId" (change)="regionSelected()">
+      <option *ngFor = "let region of regions" value={{region.Id}} >{{region.Name}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="isSelectedRegion()">
     <select name="PlaceId" id="PlaceId" [(ngModel)]="PlaceId">
       <option *ngFor = "let place of places" value={{place.Id}} >{{place.Name}}</option>
     </select>
