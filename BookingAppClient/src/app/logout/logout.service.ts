@@ -19,6 +19,7 @@ export class LogoutService {
 
         let ret = this.http.post(`http://localhost:54043/api/Account/Logout`, "", opts);
         localStorage.removeItem("user");
+        localStorage.removeItem("username");
        // localStorage.removeItem("Role");
 
         return ret;

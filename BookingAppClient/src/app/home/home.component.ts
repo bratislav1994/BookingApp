@@ -7,7 +7,7 @@ import { LocalStorageService } from "app/local-storage.service";
   providers: [LocalStorageService]
 })
 export class HomeComponent implements OnInit {
-  
+   username: string
   constructor(private storageService: LocalStorageService) { }
 
   ngOnInit() {
@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   
   IsLoggedIn() : boolean {
 
+    this.username = localStorage.getItem("username");
     return this.storageService.IsLoggedIn();
+    
   }
 }

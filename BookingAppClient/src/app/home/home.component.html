@@ -5,13 +5,7 @@
 		</div>
 	
     	<div *ngIf="!IsLoggedIn()" style=" float:right">
-			<!--<ul style="width:100px">
-				 <li><a [routerLink]="['/registration']">Registration</a></li>
-    			 <li><a [routerLink]="['/home/login']">Login</a></li>
-				<router-outlet></router-outlet>
-				<li><a [routerLink]="['/logout']">Logout</a></li>
-				
-			</ul>-->
+			
 			<a [routerLink]="['/registration']">Registration</a>
     			 <a [routerLink]="['/home/login']">Login</a>
 				<router-outlet></router-outlet>
@@ -19,16 +13,11 @@
 		</div>
 		<div *ngIf="IsLoggedIn()" style=" float:right">
 				<a [routerLink]="['/logout']">Logout</a>
+				<label>{{username}}</label>
 				<router-outlet></router-outlet>
 		</div>
-					
-		<div style="width:10%; float:right">
-			<form action="/Projekat/ServletKorpa" method="POST">
- 	    		 <input type="image" src="http://blog.upshotcommerce.com/wp-content/uploads/2012/08/shopping_cart_2.png" alt="Submit" width="48" height="48">
-			</form>
-		</div>
 
-		<form onsubmit="return validacija3()" action="/Projekat/ServletPretraga" method="POST" name="forma">
+		<!--<form onsubmit="return validacija3()" action="/Projekat/ServletPretraga" method="POST" name="forma">
 			<div style="float:left;padding-left:20px">
 				<select name="proizvod">
 		    		<option value="naziv" selected>Naziv</option>
@@ -56,7 +45,7 @@
 				<div style="float:left;padding-left:250px">
 					<input data-inline="true" class="button10 button11" type="submit" name="trazi" value="Pretraga"/>
 				</div>
-			</form>
+			</form>-->
 
 			<div class="clr"></div>
 		</div>
