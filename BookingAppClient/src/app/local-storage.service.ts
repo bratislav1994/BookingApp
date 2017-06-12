@@ -6,7 +6,7 @@ export class LocalStorageService {
   constructor() { }
 
     IsLoggedIn() : boolean {
-        if (localStorage.getItem("Role") == null)
+        if (localStorage.getItem("user") == null)
         {
             return false;
         }

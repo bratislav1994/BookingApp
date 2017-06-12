@@ -12,13 +12,14 @@ export class LogoutService {
         
         let header = new Headers();
         header.append('Content-type', 'application/x-www-form-urlencoded');
-        header.append('Authorization', 'Bearer ' + localStorage.getItem("Role"));
+        header.append('Authorization', 'Bearer ' + localStorage.getItem("user"));
 
         let opts = new RequestOptions();
         opts.headers = header;
 
         let ret = this.http.post(`http://localhost:54043/api/Account/Logout`, "", opts);
-        localStorage.removeItem("Role");
+        localStorage.removeItem("user");
+       // localStorage.removeItem("Role");
 
         return ret;
     }

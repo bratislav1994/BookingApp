@@ -17,12 +17,12 @@ export class AppComponent {
   
     if(this.localStorageService.IsLoggedIn() == true){
       this.router.navigate(['/home']);
-      console.log("radi")
+      console.log("radi");
     }
     
   }
-  // IsLoggedIn() : boolean {
+  IsLoggedIn() : boolean {
 
-  //   return this.localStorageService.IsLoggedIn();
-  // }
+    return this.localStorageService.IsLoggedIn();
+  }
 }

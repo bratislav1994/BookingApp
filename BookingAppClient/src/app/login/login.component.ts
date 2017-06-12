@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   addToken(token : any){
-    localStorage.setItem("Role", token.access_token);
+    localStorage.setItem("user",  token.access_token);
+    //localStorage.setItem("Role", token.access_token);
     console.log(token.access_token);
     this.Username = "";
     this.Password = "";

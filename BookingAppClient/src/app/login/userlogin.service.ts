@@ -21,7 +21,7 @@ login(username : string, password : string, grant_type: string) : Observable<any
 
      IsLoggedIn() : boolean {
          
-        if (localStorage.getItem("Role") == null)
+        if (localStorage.getItem("user") == null)
         {
             console.log("AAA");
             return false;
