@@ -8,13 +8,13 @@
 			
 			<a [routerLink]="['/registration']">Registration</a>
     			 <a [routerLink]="['/home/login']">Login</a>
-				<router-outlet></router-outlet>
+				<!--<router-outlet></router-outlet>-->
 				
 		</div>
 		<div *ngIf="IsLoggedIn()" style=" float:right">
 				<a [routerLink]="['/logout']">Logout</a>
 				<label>{{username}}</label>
-				<router-outlet></router-outlet>
+				<!--<router-outlet></router-outlet>-->
 		</div>
 
 		<!--<form onsubmit="return validacija3()" action="/Projekat/ServletPretraga" method="POST" name="forma">

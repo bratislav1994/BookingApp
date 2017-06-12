@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { AccommodationType } from "app/accommodation-type/Type.model";
+import 'rxjs/Rx';
 
 @Injectable()
 export class TypeServiceService {
@@ -24,5 +25,9 @@ export class TypeServiceService {
 
     getTypeById(id : number) : Observable<any> {
         return this.http.get(`http://localhost:54043/accommodationType/Read/${id}`);
+    }
+
+    getTypeByIdMap(id : number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/accommodationType/Read/${id}`).map(r => r.json());
     }
 }

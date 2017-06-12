@@ -11,9 +11,8 @@ import { TypeServiceService } from "app/accommodation-type/type-service.service"
 export class CreateTypeComponent implements OnInit {
 
   Name: string;
-  constructor(private service : TypeServiceService ) {
-
-   }
+  
+  constructor(private service : TypeServiceService ) {}
 
   ngOnInit() {
   }
