@@ -3,6 +3,7 @@ import { Http, Response, Headers, Request, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import { AccommodationType } from "app/accommodation-type/Type.model";
 import 'rxjs/Rx';
+import { UrlService } from "app/url.service";
 
 @Injectable()
 export class TypeServiceService {
@@ -16,23 +17,23 @@ export class TypeServiceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/accommodationType/Create', type, opts);
+        return this.http.post(UrlService.socket + `accommodationType/Create`, type, opts);
     }
 
     getAllTypes() : Observable<any> {
-        return this.http.get("http://localhost:54043/accommodationType/ReadAll");
+        return this.http.get(UrlService.socket + `accommodationType/ReadAll`);
     }
 
     getTypeById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/accommodationType/Read/${id}`);
+        return this.http.get(UrlService.socket + `accommodationType/Read/${id}`);
     }
 
     getTypeByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/accommodationType/Read/${id}`).map(r => r.json());
+        return this.http.get(UrlService.socket + `accommodationType/Read/${id}`).map(r => r.json());
     }
 
     deleteType(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/accommodationType/Delete/${id}`);
+        return this.http.delete(UrlService.socket + `accommodationType/Delete/${id}`);
     }
 
     editCountry(type: AccommodationType) : Observable<any> {
@@ -42,6 +43,6 @@ export class TypeServiceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(`http://localhost:54043/accommodationType/Change`, type, opts);
+        return this.http.put(UrlService.socket + `accommodationType/Change`, type, opts);
     }
 }
