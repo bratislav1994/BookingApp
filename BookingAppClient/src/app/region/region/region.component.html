@@ -1,6 +1,25 @@
-<div> 
-    <p>Name: {{region.Name}}</p>
-    <!--<p>Country name: {{region.Country.Name}}</p>
-    <p>Country code: {{region.Country.Code}}</p>-->
+<div style="float:left;padding-left:1%"> 
+    <p>Current name of region: {{region.Name}}</p>
+    <p>Country name: {{countryName}}</p>
+    <!--<p>Country code: {{region.Country.Code}}</p>-->
     <!--<button name="show" [routerLink]="['/region-show']">Show</button>-->
+
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div>
+    <label for = "Name">Enter new name of region:</label>
+    <br>
+    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+  <div>
+   <button name="edit" >Edit</button>
+  </div>
+</form>
+
+<!--<ul>
+  <li *ngFor = "let p of region.Places">
+    {{p.Name}}
+    </li>
+</ul>-->
+
 </div>

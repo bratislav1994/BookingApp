@@ -28,7 +28,7 @@ export class RegionService {
   }
 
   getRegionByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/region?$filter=Id eq ${id} &$expand=Places`).map(r => r.json());
+        return this.http.get(`http://localhost:54043/api/region?$filter=Id eq ${id} &$expand=Places,Country`).map(r => r.json());
     }
 
   deleteRegion(id : number) : Observable<any> {

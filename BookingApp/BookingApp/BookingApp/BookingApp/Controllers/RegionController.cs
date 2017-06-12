@@ -111,6 +111,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         [Route("region")]
         [ResponseType(typeof(Region))]
         public IHttpActionResult GetRegion([FromUri] int id)
