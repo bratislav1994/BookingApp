@@ -10,14 +10,14 @@ using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("place")]
+    [RoutePrefix("api")]
     public class PlaceController : ApiController
     {
         private BAContext db = new BAContext();
 
         //[Authorize(Roles = "Admin, Manager")]
         [HttpPost]
-        [Route("AddPlace")]
+        [Route("place")]
         public IHttpActionResult AddPlace(Place place)
         {
             if (!ModelState.IsValid)
@@ -40,9 +40,9 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-       // [Authorize(Roles = "Admin, Manager")]
+        // [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
-        [Route("DeletePlace/{id}")]
+        [Route("place/{id}")]
         public IHttpActionResult DeletePlace(int id)
         {
             Place place = db.Places.Find(id);
@@ -60,7 +60,7 @@ namespace BookingApp.Controllers
 
         //[Authorize(Roles = "Admin, Manager")]
         [HttpPut]
-        [Route("ChangePlace/{id}")]
+        [Route("place/{id}")]
         public IHttpActionResult ChangePlace(int id, Place place)
         {
             if (!ModelState.IsValid)
@@ -100,15 +100,15 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
-        [Route("AllPlaces")]
+        [Route("place")]
         public IQueryable<Place> AllPlaces()
         {
-            return db.Places;
+            return db.Places.Include("Region");
         }
 
 
         [HttpGet]
-        [Route("GetPlace/{id}")]
+        [Route("place/{id}")]
         public IHttpActionResult GetPlace(int id)
         {
             Place place = db.Places.Find(id);

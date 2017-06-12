@@ -1,6 +1,6 @@
 <div style="float:left;padding-left:1%">
   <ul *ngFor = "let region of regions">
-    <li>{{ region.Name }}</li>
+    <li>{{ region.Name }}, {{region.Country.Name}}</li>
     <button name="show" (click)="showRegion(region.Id)">Show</button>
     <button name="delete" (click) = "deleteRegion(region)">Delete</button>
   </ul>

@@ -1,6 +1,6 @@
 <div style="float:left;padding-left:1%">
   <ul *ngFor = "let place of places">
-    <li>{{ place.Name }}, </li>
+    <li>{{ place.Name }}, {{place.Region.Name}}</li>
     <button name="show" (click)="showPlace(place.Id)" [routerLink]="['/home/view_place/', place.Id]">Show</button>
     <button name="delete" (click) = "deletePlace(place)">Delete</button>
   </ul>

@@ -16,23 +16,23 @@ export class CountryService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/country/AddCountry', country, opts);
+        return this.http.post('http://localhost:54043/api/country', country, opts);
     }
 
     getAllCountries() : Observable<any> {
-        return this.http.get("http://localhost:54043/country/AllCountries");
+        return this.http.get("http://localhost:54043/api/country");
     }
 
     getCountryById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/country/GetCountry/${id}`);
+        return this.http.get(`http://localhost:54043/api/country/${id}`);
     }
 
     getCountryByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/country/GetCountry/${id}`).map(r => r.json());
+        return this.http.get(`http://localhost:54043/api/country?$filter=Id eq ${id} &$expand=Regions`).map(r => r.json());
     }
 
     deleteCountry(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/country/DeleteCountry/${id}`);
+        return this.http.delete(`http://localhost:54043/api/country/${id}`);
     }
 
     editCountry(country: Country) : Observable<any> {
@@ -42,6 +42,6 @@ export class CountryService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(`http://localhost:54043/country/ChangeCountry`, country, opts);
+        return this.http.put(`http://localhost:54043/api/country`, country, opts);
     }
 }

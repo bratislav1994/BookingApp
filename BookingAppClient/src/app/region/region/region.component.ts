@@ -22,7 +22,7 @@ export class RegionComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params["Id"];
     this.regionService.getRegionByIdMap(id).subscribe(r =>
     {
-      this.region = (r as Region);
+      this.region = (r[0] as Region);
         console.log(this.region.Name);
     }, error => console.log(error));
   }

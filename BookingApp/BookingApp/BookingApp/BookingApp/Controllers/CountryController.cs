@@ -6,18 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
+using System.Web.Http.OData;
 using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("country")]
+    [RoutePrefix("api")]
     public class CountryController : ApiController
     {
         private BAContext db = new BAContext();
 
         //[Authorize(Roles = "Admin, Manager")]
         [HttpPost]
-        [Route("AddCountry")]
+        [Route("country")]
+        [ResponseType(typeof(Country))]
         public IHttpActionResult AddCountry(Country country)
         {
             if (!ModelState.IsValid)
@@ -42,7 +45,8 @@ namespace BookingApp.Controllers
 
         //[Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
-        [Route("DeleteCountry/{id}")]
+        [Route("country/{id}")]
+        [ResponseType(typeof(Country))]
         public IHttpActionResult DeleteCountry(int id)
         {
             Country country = db.Countries.Find(id);
@@ -55,22 +59,18 @@ namespace BookingApp.Controllers
             db.Countries.Remove(country);
             db.SaveChanges();
 
-            return Ok(country);
+            return CreatedAtRoute("DefaultApi", new { controller = "Country", id = country.Id }, country);
         }
 
         //[Authorize(Roles = "Admin, Manager")]
-        [HttpGet]
-        [Route("ChangeCountry/{id}")]
-        public IHttpActionResult ChangeCountry(int id, Country country)
+        [HttpPut]
+        [Route("country")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult ChangeCountry(Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != country.Id)
-            {
-                return BadRequest();
             }
 
             db.Entry(country).State = System.Data.Entity.EntityState.Modified;
@@ -81,7 +81,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(id))
+                if (!TypeExist(country.Id))
                 {
                     return NotFound();
                 }
@@ -100,15 +100,17 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
-        [Route("AllCountries")]
+        [EnableQuery]
+        [Route("country")]
         public IQueryable<Country> AllCountries()
         {
-            return db.Countries;
+            return db.Countries.Include("Regions");
         }
 
         [HttpGet]
-        [Route("GetCountry/{id}")]
-        public IHttpActionResult GetCountry(int id)
+        [Route("country")]
+        [ResponseType(typeof(Country))]
+        public IHttpActionResult GetCountry([FromUri] int id)
         {
             Country country = db.Countries.Find(id);
             if (country == null)

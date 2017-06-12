@@ -17,23 +17,23 @@ export class PlaceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post(`http://localhost:54043/place/AddPlace`, place, opts);
+        return this.http.post(`http://localhost:54043/api/place`, place, opts);
     }
 
     getAllPlaces() : Observable<any> {
-        return this.http.get("http://localhost:54043/place/AllPlaces");
+        return this.http.get("http://localhost:54043/api/place");
     }
 
     getPlaceById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/place/GetPlace/${id}`);
+        return this.http.get(`http://localhost:54043/api/place/${id}`);
     }
 
     getPlaceByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/place/GetPlace/${id}`).map(r => r.json());
+        return this.http.get(`http://localhost:54043/api/place/${id}`).map(r => r.json());
     }
 
     deletePlace(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/place/DeletePlace/${id}`);
+        return this.http.delete(`http://localhost:54043/api/place/${id}`);
     }
 
     editPlace(place: Place) : Observable<any> {
@@ -43,7 +43,7 @@ export class PlaceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(`http://localhost:54043/place/ChangePlace`, place, opts);
+        return this.http.put(`http://localhost:54043/api/place`, place, opts);
     }
 
 }

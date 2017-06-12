@@ -15,24 +15,24 @@ export class RegionService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/region/AddRegion', region, opts);
+        return this.http.post('http://localhost:54043/api/region', region, opts);
     }
 
 
   getAllRegions() : Observable<any> {
-        return this.http.get("http://localhost:54043/region/AllRegions");
+        return this.http.get("http://localhost:54043/api/region");
   }
 
     getRegionById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/region/GetRegion/${id}`);
+        return this.http.get(`http://localhost:54043/api/region/${id}`);
   }
 
   getRegionByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/region/GetRegion/${id}`).map(r => r.json());
+        return this.http.get(`http://localhost:54043/api/region?$filter=Id eq ${id} &$expand=Places`).map(r => r.json());
     }
 
   deleteRegion(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/region/DeleteRegion/${id}`);
+        return this.http.delete(`http://localhost:54043/api/region/${id}`);
     }
 
     editRegion(region: Region) : Observable<any> {
@@ -42,7 +42,7 @@ export class RegionService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(`http://localhost:54043/region/ChangeRegion`, region, opts);
+        return this.http.put(`http://localhost:54043/api/region`, region, opts);
     }
 
 }

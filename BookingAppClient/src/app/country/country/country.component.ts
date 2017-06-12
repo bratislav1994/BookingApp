@@ -27,7 +27,7 @@ export class CountryComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params["Id"];
     this.countryService.getCountryByIdMap(id).subscribe(c =>
     {
-      this.country = (c as Country);
+      this.country = (c[0] as Country);
       //if(!this.country.Name){
         console.log(this.country.Name);
       //}
