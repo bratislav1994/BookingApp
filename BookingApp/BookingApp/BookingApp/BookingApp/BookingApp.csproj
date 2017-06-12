@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201706121125201_UniqueUsername.Designer.cs">
       <DependentUpon>201706121125201_UniqueUsername.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706121128101_AvgGradeNotRequired.cs" />
+    <Compile Include="Migrations\201706121128101_AvgGradeNotRequired.Designer.cs">
+      <DependentUpon>201706121128101_AvgGradeNotRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -390,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706121125201_UniqueUsername.resx">
       <DependentUpon>201706121125201_UniqueUsername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121128101_AvgGradeNotRequired.resx">
+      <DependentUpon>201706121128101_AvgGradeNotRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
