@@ -21,7 +21,7 @@ export class CreateTypeComponent implements OnInit {
     this.service.createType(new AccommodationType(this.Name)).subscribe(e => alert("Accommodation type succesfuly added."),
       error => 
       {
-        console.log(error), alert("Country already exists.")
+        console.log(error), alert("Type already exists.")
       });
     this.Name = "";
   }

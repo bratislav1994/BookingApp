@@ -1,4 +1,9 @@
 
-<ul>
-  <li *ngFor = "let type of types">{{ type.Name }}</li>
-</ul>
+<div style="float:left;padding-left:1%">
+  <ul>
+    <li *ngFor = "let type of types">{{ type.Name }}
+      <button name="show" (click)="showType(type.Id)">Show</button>
+      <button name="delete" (click) = "deleteType(type.Id)">Delete</button>
+    </li>
+  </ul>
+</div>

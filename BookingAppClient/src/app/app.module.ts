@@ -44,27 +44,27 @@ const ChildRoutes = [
   {path: "accommodation_home", component: AccommodationHomeComponent},
   {path: "add_accommodation", component: AddAccommodationComponent},
   {path: "view_accommodations", component: ListOfAccommodationsComponent},
-  {path: "view_accommodation", component: AccommodationComponent},
+  {path: "view_accommodation/:Id", component: AccommodationComponent},
 
   {path: "accommodation_type_home", component: AccommodationTypeHomeComponent},
   {path: "add_accommodation_type", component: CreateTypeComponent},
   {path: "view_types", component: ViewTypeComponent},
-  {path: "view_type", component: TypeComponent},
+  {path: "view_type/:Id", component: TypeComponent},
 
   {path: "room_home", component: RoomHomeComponent},
   {path: "add_room", component: CreateRoomComponent},
   {path: "view_rooms", component: ViewRoomComponent},
-  {path: "view_room", component: RoomComponent},
+  {path: "view_room/:Id", component: RoomComponent},
 
   {path: "place_home", component: PlaceHomeComponent},
   {path: "add_place", component: AddPlaceComponent},
   {path: "view_places", component: ListOfPlacesComponent},
-  {path: "view_place", component: PlaceComponent},
+  {path: "view_place/:Id", component: PlaceComponent},
 
   {path: "region_home", component: RegionHomeComponent},
   {path: "add_region", component: AddRegionComponent},
   {path: "view_regions", component: ListOfRegionsComponent},
-  {path: "view_region", component: RegionComponent},
+  {path: "view_region/:Id", component: RegionComponent},
 
   {path: "country_home", component: CountryHomeComponent},
   {path: "add_country", component: AddCountryComponent},
