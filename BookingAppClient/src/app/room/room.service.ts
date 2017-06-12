@@ -23,8 +23,15 @@ export class RoomService {
         return this.http.get("http://localhost:54043/api/Room/ReadAll");
   }
 
-    getRoomById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/Room/Read/${id}`);
+  getRoomById(id : number) : Observable<any> {
+      return this.http.get(`http://localhost:54043/api/Room/Read/${id}`);
   }
 
+  getRoomByIdMap(id : number) : Observable<any>{
+    return this.http.get(`http://localhost:54043/api/Room/Read/${id}`).map(r => r.json());
+  }
+
+  deleteRoom(id : number) : Observable<any> {
+        return this.http.delete(`http://localhost:54043/api/Room/api/Room/${id}`);
+    }
 }

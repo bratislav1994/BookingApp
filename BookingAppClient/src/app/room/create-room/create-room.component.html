@@ -16,6 +16,11 @@
     <input type="text" name="PricePerNight" id="PricePerNight" [(ngModel)]="PricePerNight"/>
   </div>
   <div>
+    <select name="AccommodationId" id="AccommodationId" [(ngModel)]="AccommodationId">
+      <option *ngFor = "let accommodation of accommodations" value={{accommodation.Id}} >{{accommodation.Name}}</option>
+    </select>
+  </div>
+  <div>
     <input type="submit" value="Create"/>
   </div>
 

@@ -24,9 +24,8 @@ export class ViewTypeComponent implements OnInit {
 
   deleteType(typeId: number)
   {
-    this.service.deleteType(typeId).subscribe(e => this.service.getAllTypes());
-      this.ngOnInit();
-
+    this.service.deleteType(typeId).subscribe(e => this.service.getAllTypes(),
+    error => { console.log(error), alert("Unsuccessful fetch operation")});
   }
 
   showType(id : number){
