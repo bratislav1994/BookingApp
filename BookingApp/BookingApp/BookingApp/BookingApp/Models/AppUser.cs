@@ -9,9 +9,10 @@ namespace BookingApp.Models
 {
     public class AppUser
     {
+        [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required, StringLength(30), Index(IsUnique = true)]
         public string Username { get; set; }
         public IList<RoomReservation> RoomReservations { get; set; }
         public IList<Comment> Comments { get; set; }

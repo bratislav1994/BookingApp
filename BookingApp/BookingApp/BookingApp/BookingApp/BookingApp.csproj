@@ -282,6 +282,10 @@
     <Compile Include="Migrations\201706090938474_AddingAppUserKeyASForeignKeyToIdentityUser.Designer.cs">
       <DependentUpon>201706090938474_AddingAppUserKeyASForeignKeyToIdentityUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706121125201_UniqueUsername.cs" />
+    <Compile Include="Migrations\201706121125201_UniqueUsername.Designer.cs">
+      <DependentUpon>201706121125201_UniqueUsername.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -383,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706090938474_AddingAppUserKeyASForeignKeyToIdentityUser.resx">
       <DependentUpon>201706090938474_AddingAppUserKeyASForeignKeyToIdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121125201_UniqueUsername.resx">
+      <DependentUpon>201706121125201_UniqueUsername.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
