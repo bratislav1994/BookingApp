@@ -24,13 +24,29 @@ export class ListOfCountriesComponent implements OnInit {
 
   deleteCountry(country: Country)
   {
-    this.countryService.deleteCountry(country.Id).subscribe(e => this.getCountries());
+    this.countryService.deleteCountry(country.Id).subscribe(
+      e => 
+      {
+            this.getCountries();
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Country successfully deleted.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error while deleting country.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+        );
   }
 
   getCountries() : void{
     this.countryService.getAllCountries().subscribe(c => this.countries = c.json(), error => 
      {
-        console.log(error), alert("Unsuccessful fetch operation")
+        console.log(error), alert("Unable to get countries.")
      });
   }
 

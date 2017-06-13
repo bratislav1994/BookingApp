@@ -27,43 +27,62 @@ export class CountryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.activatedRoute.params.subscribe(params => { this.countryService.getCountryByIdMap(+params['Id']).
-    //                                       map(r => r.json()).subscribe(c => {this.country = c as Country
-    // })});
-    //l id;
     let id = this.activatedRoute.snapshot.params["Id"];
     this.countryService.getCountryByIdMap(id).subscribe(c =>
     {
-      this.country = (c[0] as Country);
-      //if(!this.country.Name){
+        this.country = (c[0] as Country);
         console.log(this.country.Name);
         this.Name = this.country.Name;
         this.Code = this.country.Code;
         this.regions = this.country.Regions;
-      //}
-    }, error => console.log(error));
-    // this.activatedRoute.snapshot.params.subscribe(params => {
-    //   id = parseInt(params["Id"]);
-    //   this.getCountry(id);
-    // });   
-    
+    }, error => alert(error.text()));
   }
 
   onSubmit()
   {
-    this.countryService.editCountry(new Country(this.country.Id, this.Name, this.Code)).subscribe();
-    console.log("edited");
+    this.countryService.editCountry(new Country(this.country.Id, this.Name, this.Code)).subscribe(
+      x => 
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Country successfully edited.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error during editing country.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   deleteRegion(region: Region)
   {
-    this.regionService.deleteRegion(region.Id).subscribe(e => this.getRegions());
+    this.regionService.deleteRegion(region.Id).subscribe(
+      e => 
+      {
+            this.getRegions();
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Region successfully deleted.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error while deleting region.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   getRegions() : void{
     this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error => 
      {
-        console.log(error), alert("Unsuccessful fetch operation")
+        alert("Unable to get regions.")
      });
   }
 
