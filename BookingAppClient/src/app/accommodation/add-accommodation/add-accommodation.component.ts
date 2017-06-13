@@ -28,7 +28,7 @@ export class AddAccommodationComponent implements OnInit {
     AvrageGrade: number;
     Latitude: number;
     Longitude: number;
-    ImageUrl: string;
+    ImageUrl: File;
     Approved: boolean;
     PlaceId: number;
     AccommodationTypeId: number;
@@ -56,11 +56,11 @@ export class AddAccommodationComponent implements OnInit {
              }
 
   ngOnInit() {
-    this.placeService.getAllPlaces().subscribe(p => this.places = p.json(), error => 
-    {
-        console.log(error), alert("Unsuccessful fetch operation")
-    });
-    this.accommodationService.getAllAccommodations().subscribe(t => this.types = t.json(), error => 
+    // this.placeService.getAllPlaces().subscribe(p => this.places = p.json(), error => 
+    // {
+    //     console.log(error), alert("Unsuccessful fetch operation")
+    // });
+    this.typeService.getAllTypes().subscribe(t => this.types = t.json(), error => 
     {
         console.log(error), alert("Unsuccessful fetch operation")
     });
@@ -68,10 +68,10 @@ export class AddAccommodationComponent implements OnInit {
     {
         console.log(error), alert("Unsuccessful fetch operation")
     });
-    this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error =>
-    {
-        console.log(error), alert("Unsuccessful fetch operation")
-    });
+    // this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error =>
+    // {
+    //     console.log(error), alert("Unsuccessful fetch operation")
+    // });
 
     this.Place = null;
     this.Country = null;
@@ -80,17 +80,16 @@ export class AddAccommodationComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    // this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, 
-    //                                           this.Address, 1, this.Latitude, this.Longitude,
-    //                                           this.ImageUrl, false, this.PlaceId, 
-    //                                           this.AccommodationTypeId, 0)).subscribe();
+    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, 
+                                              this.Address, this.Latitude, this.Longitude,
+                                               this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem("id"))), this.file).subscribe();
     
-    this.Name = "";
-    this.Description = "";
-    this.Address = "";
-    this.Latitude = 0;
-    this.Longitude = 0;
-    this.ImageUrl = "";
+    // this.Name = "";
+    // this.Description = "";
+    // this.Address = "";
+    // this.Latitude = 0;
+    // this.Longitude = 0;
+    // this.ImageUrl = "";
   }
 
    countrySelected()
@@ -98,7 +97,7 @@ export class AddAccommodationComponent implements OnInit {
     this.countryService.getCountryByIdMap(this.CountryId).subscribe(
       c => {
         this.Country = c[0] as Country; 
-       // this.regions = this.Country.Regions;
+        this.regions = this.Country.Regions;
       });
   }
 
@@ -111,14 +110,14 @@ export class AddAccommodationComponent implements OnInit {
       });
   }
 
-  placeSelected()
-  {
-    this.placeService.getPlaceByIdMap(this.PlaceId).subscribe(
-      p => {
-            this.Place = p[0] as Place;
-      }
-    );
-  }
+  // placeSelected()
+  // {
+  //   this.placeService.getPlaceByIdMap(this.PlaceId).subscribe(
+  //     p => {
+  //           this.Place = p[0] as Place;
+  //     }
+  //   );
+  // }
 
   isSelectedCountry() : boolean
   {
@@ -135,5 +134,6 @@ export class AddAccommodationComponent implements OnInit {
       let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
       let files: FileList = target.files;
       this.file = files[0];
+      console.log(this.file);
     }
 }

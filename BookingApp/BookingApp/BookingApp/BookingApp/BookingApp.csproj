@@ -291,6 +291,14 @@
     <Compile Include="Migrations\201706121512493_TimeStampRoomRes.Designer.cs">
       <DependentUpon>201706121512493_TimeStampRoomRes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706131413385_AccommodationImageUrl.cs" />
+    <Compile Include="Migrations\201706131413385_AccommodationImageUrl.Designer.cs">
+      <DependentUpon>201706131413385_AccommodationImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706131458018_AccommodationAverage.cs" />
+    <Compile Include="Migrations\201706131458018_AccommodationAverage.Designer.cs">
+      <DependentUpon>201706131458018_AccommodationAverage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -386,6 +394,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706121512493_TimeStampRoomRes.resx">
       <DependentUpon>201706121512493_TimeStampRoomRes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131413385_AccommodationImageUrl.resx">
+      <DependentUpon>201706131413385_AccommodationImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131458018_AccommodationAverage.resx">
+      <DependentUpon>201706131458018_AccommodationAverage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

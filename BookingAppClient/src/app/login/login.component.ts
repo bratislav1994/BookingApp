@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
 
  onSubmitLogin(){
     this.userService.login(this.Username, this.Password, "password").subscribe(result => { 
-          localStorage.setItem("user", result.json().access_token);
-          localStorage.setItem("role", result.headers.get('Role'));   
-          localStorage.setItem("username", this.Username); 
+          localStorage.setItem("user", result.json()['access_token']);
+          localStorage.setItem("role", result.headers.get("Role"));
+          localStorage.setItem("id", result.headers.get("Id"));
           this.route.navigate(['/home']);
         },
     error => 

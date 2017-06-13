@@ -33,7 +33,7 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            HttpRequest httpRequest = HttpContext.Current.Request;
+            var httpRequest = HttpContext.Current.Request;
             accommodation = JsonConvert.DeserializeObject<Accommodation>(httpRequest.Form[0]);
 
             foreach (string file in httpRequest.Files)
@@ -53,8 +53,8 @@ namespace BookingApp.Controllers
                     }
                     else
                     {
-                        var filePath = HttpContext.Current.Server.MapPath("..//Content/Pictures/" + postedFile.FileName);
-                        accommodation.ImageUrl = "..//Content/Pictures/" + postedFile.FileName;
+                        var filePath = HttpContext.Current.Server.MapPath("~/Content/" + postedFile.FileName);
+                        accommodation.ImageUrl = "Content/" + postedFile.FileName;
                         postedFile.SaveAs(filePath);
                     }
                 }

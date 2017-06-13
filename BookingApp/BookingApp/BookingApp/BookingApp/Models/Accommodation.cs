@@ -20,7 +20,7 @@ namespace BookingApp.Models
         [Required, StringLength(300)]
         public string Address { get; set; }
 
-        [Range(1, 5)]
+        [Range(0, 5)]
         public double AvrageGrade { get; set; }
 
         [Required]
@@ -29,7 +29,7 @@ namespace BookingApp.Models
         [Required]
         public double Longitude { get; set; }
 
-        [Required, DataType(DataType.ImageUrl)]
+        //[Required, DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 
         [Required]

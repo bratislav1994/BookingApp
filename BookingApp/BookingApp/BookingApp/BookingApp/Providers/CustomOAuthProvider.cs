@@ -30,6 +30,7 @@ namespace BookingApp.Providers
             var allowedOrigin = "*";
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role", "Id" });
 
             ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
@@ -44,7 +45,7 @@ namespace BookingApp.Providers
             BAContext db = new BAContext();
             var userRole = user.Roles.FirstOrDefault().RoleId;
             var role = db.Roles.FirstOrDefault(r => r.Id == userRole);
-
+            
             if (role.Name.Equals("Admin"))
             {
                 context.OwinContext.Response.Headers.Add("Role", new[] { "Admin" });
@@ -58,10 +59,7 @@ namespace BookingApp.Providers
                 context.OwinContext.Response.Headers.Add("Role", new[] { "AppUser" });
             }
 
-            //Mora se dodati u header response-a kako bi se se Role atribut
-            //mogao procitati na klijentskoj strani
-            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role" });
-
+            context.OwinContext.Response.Headers.Add("Id", new[] { user.addUserId.ToString() });
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 
             var ticket = new AuthenticationTicket(oAuthIdentity, null);

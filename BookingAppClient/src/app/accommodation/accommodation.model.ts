@@ -1,6 +1,7 @@
 import { Place } from "app/place/place.model";
-import { User } from "app/login/userLogin.model"
-import { AccommodationType } from "app/accommodation-type/type.model"
+import { User } from "app/login/userLogin.model";
+import { AccommodationType } from "app/accommodation-type/type.model";
+import { Room } from "app/room/room.model";
 
 export class Accommodation {
     Id: number;
@@ -16,21 +17,21 @@ export class Accommodation {
     AccommodationTypeId: number;
     UserId: number;
     Place: Place;
+    Rooms: Room[];
    // User: User;
     AccommodationType: AccommodationType
 
     constructor(Id?: number, Name?: string, description?: string, address?: string,
-                lat?: number, long?: number, img?: string, approved?: boolean,
-                placeId?: number, accommodationTypeId?: number, userId?: number
+                lat?: number, long?: number, placeId?: number, accommodationTypeId?: number, userId?: number
                 ) {
-        this.Id = Id;
         this.Name = Name;
         this.Description = description;
         this.Address = address;
         this.Latitude = lat;
         this.Longitude = long;
-        this.ImageUrl = img;
-        this.Approved = approved
+        this.Rooms = [];
+        this.AccommodationType = new AccommodationType();
+        this.Place = new Place();
         this.PlaceId = placeId;
         this.AccommodationTypeId = accommodationTypeId;
         this.UserId = userId;

@@ -8,14 +8,21 @@ export class AccommodationService {
 
   constructor(private http : Http) { }
 
-  addAccommodation(accommodation : Accommodation) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
+  addAccommodation(accommodation : Accommodation, file: File) : Observable<any> {
+        accommodation.Place = null;
+        accommodation.Rooms = null;
+        accommodation.AccommodationType = null;
+        let formData: FormData = new FormData();
+        formData.append('accommodation', JSON.stringify(accommodation));
+        formData.append('uploadFile', file, file.name);
+        console.log("aaaa" + formData);
+        let headers = new Headers();
+        headers.append('enctype', 'multipart/form-data');
+        
+        headers.append('Accept', 'application/json');
+        let opts = new RequestOptions( { headers: headers });
 
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.post('http://localhost:54043/api/accommodation', accommodation, opts);
+        return this.http.post('http://localhost:54043/api/accommodation', formData, opts);
   }
 
 

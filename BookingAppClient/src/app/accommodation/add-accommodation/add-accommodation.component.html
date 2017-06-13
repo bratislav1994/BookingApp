@@ -34,6 +34,12 @@
   </div>
 
   <div>
+    <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
+      <option *ngFor = "let t of types" value={{t.Id}} >{{t.Name}}</option>
+    </select>
+  </div>
+
+  <div>
     <label for = "ImageUrl">ImageUrl:</label>
     <br>
     <input type="file" name="ImageUrl" id="ImageUrl" (change)="onChange($event)"/>
@@ -54,12 +60,6 @@
   <div *ngIf="isSelectedRegion()">
     <select name="PlaceId" id="PlaceId" [(ngModel)]="PlaceId">
       <option *ngFor = "let place of places" value={{place.Id}} >{{place.Name}}</option>
-    </select>
-  </div>
-
-  <div>
-    <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
-      <option *ngFor = "let accommodationType of accommodationTypes" value={{accommodationType.Id}} >{{accommodationType.Name}}</option>
     </select>
   </div>
 
