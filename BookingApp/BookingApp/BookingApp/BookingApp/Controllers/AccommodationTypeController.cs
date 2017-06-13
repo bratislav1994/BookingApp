@@ -15,7 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Change")]
         public IHttpActionResult Change(AccommodationType type)
@@ -46,7 +46,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Add(AccommodationType type)
@@ -69,7 +69,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
