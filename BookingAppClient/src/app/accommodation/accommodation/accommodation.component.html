@@ -12,7 +12,12 @@
     <p>ImageUrl: {{accommodation.ImageUrl}}</p>
     <p>Approved: {{accommodation.Approved}}</p>
     <p>Place: {{accommodation.Place.Name}}</p>
-    <p>User: {{accommodation.User.Username}}</p>
+    <!--<p>User: {{accommodation.User.Username}}</p>-->
     <p>AccommodationType: {{accommodation.AccommodationType.Name}}</p>
+    <ul *ngFor = "let a of accommodation.Rooms">
+      <li>
+          Bed count:{{a.BedCount}}
+        </li>
+    </ul>
     <button name="show" [routerLink]="['/accommodation-show']">Show</button>
 </div>

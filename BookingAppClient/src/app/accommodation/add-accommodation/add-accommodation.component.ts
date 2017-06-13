@@ -78,22 +78,24 @@ export class AddAccommodationComponent implements OnInit {
 
   onSubmit(form: NgForm){
     console.log("usao");
+    
     this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, 
     this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem("id"))),
     this.file).subscribe(
                         x => 
                         {
+                          
                             var doc = document.getElementById("successMsg");
                             doc.innerText = "Accommodation successfully added.";   
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-                            this.resetForm();
-                            this.getTypesAndCountries(); 
+                            // this.resetForm();
+                            // this.getTypesAndCountries(); 
                          },
                          eror => 
                         {
                             var doc = document.getElementById("errorMsg");
-                            doc.innerText = "Accommodation already exists.";   
+                            doc.innerText = "Error while adding accommodation.";   
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                         }

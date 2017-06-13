@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -41,9 +42,7 @@ namespace BookingApp.Controllers
             }
             catch (JsonSerializationException)
             {
-                return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
-                                      new HttpError("Error while adding accommodation.")
-                ));
+                return BadRequest(ModelState);
             }
 
             foreach (string file in httpRequest.Files)
@@ -71,8 +70,15 @@ namespace BookingApp.Controllers
             }
 
             db.Accommodations.Add(accommodation);
-            db.SaveChanges();
-
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return BadRequest(ModelState);
+            }
+            
             return CreatedAtRoute("DefaultApi", new { controller = "Accommodation", id = accommodation.Id }, accommodation);
         }
 

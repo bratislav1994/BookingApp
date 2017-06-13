@@ -2,10 +2,15 @@
   list-of-accommodations works!
 </p>
 
-<ul>
-  <li *ngFor = "let accommodation of accommodations">{{ accommodation.Name }}, {{ accommodation.Description }}, 
+<div style="float:left;padding-left:1%">
+  <ul *ngFor = "let accommodation of accommodations">
+  <li>{{ accommodation.Name }}, {{ accommodation.Description }}, 
                                                       {{ accommodation.Address}}, {{ accommodation.AvrageGrade}},
                                                       {{ accommodation.Latitude}}, {{ accommodation.Longitude}},
                                                       {{ accommodation.ImageUrl}}, {{ accommodation.Approved}},
-                                                      {{ accommodation.Place.Name}}, {{ accommodation.AccommodationType.Name}}</li>
+                                                      {{ accommodation.Place.Name}}, {{ accommodation.AccommodationType.Name}}
+    <button name="show" (click)="showAcc(accommodation.Id)">Show</button>
+    <button name="delete" (click) = "deleteAcc(accommodation)">Delete</button>
+                                                      </li>
 </ul>
+</div>
