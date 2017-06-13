@@ -18,17 +18,20 @@ export class ViewTypeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.service.getAllTypes().subscribe(e => this.types = e.json(),
-    error => { console.log(error), alert("Unsuccessful fetch operation")});
+    this.getTypes();
   }
 
-  deleteType(typeId: number)
+  deleteType(type: AccommodationType)
   {
-    this.service.deleteType(typeId).subscribe(e => this.service.getAllTypes(),
-    error => { console.log(error), alert("Unsuccessful fetch operation")});
+    this.service.deleteType(type.Id).subscribe(e => this.getTypes());
   }
 
   showType(id : number){
     this.router.navigate(['/home/view_type/' + id]);
+  }
+
+   getTypes() : void{
+    this.service.getAllTypes().subscribe(e => this.types = e.json(),
+    error => { console.log(error), alert("Unsuccessful fetch operation")});
   }
 }

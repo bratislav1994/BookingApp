@@ -3,8 +3,7 @@ import { Http, Response, Headers, Request, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import { AccommodationType } from "app/accommodation-type/Type.model";
 import 'rxjs/Rx';
-import { UrlService } from "app/url.service";
-
+import { DynamicUrl } from "app/DynamicUrl.model";
 @Injectable()
 export class TypeServiceService {
 
@@ -17,23 +16,23 @@ export class TypeServiceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post(UrlService.socket + `accommodationType/Create`, type, opts);
+        return this.http.post(DynamicUrl.socket + 'accommodationType/Create', type, opts);
     }
 
     getAllTypes() : Observable<any> {
-        return this.http.get(UrlService.socket + `accommodationType/ReadAll`);
+        return this.http.get(DynamicUrl.socket + `accommodationType/ReadAll`);
     }
 
     getTypeById(id : number) : Observable<any> {
-        return this.http.get(UrlService.socket + `accommodationType/Read/${id}`);
+        return this.http.get(DynamicUrl.socket + `accommodationType/Read/${id}`);
     }
 
     getTypeByIdMap(id : number) : Observable<any> {
-        return this.http.get(UrlService.socket + `accommodationType/Read/${id}`).map(r => r.json());
+        return this.http.get(DynamicUrl.socket + `accommodationType/Read/${id}`).map(r => r.json());
     }
 
     deleteType(id : number) : Observable<any> {
-        return this.http.delete(UrlService.socket + `accommodationType/Delete/${id}`);
+        return this.http.delete(DynamicUrl.socket + `accommodationType/Delete/${id}`);
     }
 
     editCountry(type: AccommodationType) : Observable<any> {
@@ -43,6 +42,6 @@ export class TypeServiceService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(UrlService.socket + `accommodationType/Change`, type, opts);
+        return this.http.put(DynamicUrl.socket + `accommodationType/Change`, type, opts);
     }
 }

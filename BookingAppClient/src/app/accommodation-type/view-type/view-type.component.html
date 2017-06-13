@@ -3,7 +3,7 @@
   <ul>
     <li *ngFor = "let type of types">{{ type.Name }}
       <button name="show" (click)="showType(type.Id)">Show</button>
-      <button name="delete" (click) = "deleteType(type.Id)">Delete</button>
+      <button name="delete" (click) = "deleteType(type)">Delete</button>
     </li>
   </ul>
 </div>

@@ -15,16 +15,16 @@ export class AccommodationService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/accommodation/AddAccommodation', accommodation, opts);
+        return this.http.post('http://localhost:54043/api/accommodation', accommodation, opts);
   }
 
 
   getAllAccommodations() : Observable<any> {
-        return this.http.get("http://localhost:54043/accommodation/AllAccommodations");
+        return this.http.get("http://localhost:54043/api/accommodation");
   }
 
   getAccommodationById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/accommodation/GetAccommodation/${id}`);
+        return this.http.get(`http://localhost:54043/api/accommodation/${id}`);
   }
 
 }
