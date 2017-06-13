@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -17,15 +18,17 @@ namespace BookingApp.Controllers
 
         [HttpGet]
         [Route("ReadAll")]
+        [EnableQuery]
         public IQueryable<Room> ReadAllRooms()
         {
-            return db.Rooms;
+            return db.Rooms.Include("Accommodation");
         }
 
         [HttpGet]
-        [Route("Read/{id}")]
+        [EnableQuery]
+        [Route("Read")]
         [ResponseType(typeof(Room))]
-        public IHttpActionResult ReadRoom(int id)
+        public IHttpActionResult ReadRoom([FromUri] int id)
         {
             Room room = db.Rooms.Find(id);
 
@@ -62,17 +65,12 @@ namespace BookingApp.Controllers
 
         //[Authorize(Roles = "Manager")]
         [HttpPut]
-        [Route("Change/{id}")]
-        public IHttpActionResult Change(int id, Room room)
+        [Route("Change")]
+        public IHttpActionResult Change(Room room)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != room.Id)
-            {
-                return BadRequest();
             }
 
             db.Entry(room).State = System.Data.Entity.EntityState.Modified;
@@ -83,7 +81,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExist(id))
+                if (!RoomExist(room.Id))
                 {
                     return NotFound();
                 }
