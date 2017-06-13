@@ -4,3 +4,33 @@
     <!--<button name="show" [routerLink]="['/country-show']">Show</button>
     <button name="delete" (click)="deleteCountry()">Delete</button>-->
 </div>
+
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+  <div>
+    <label for = "Name">Enter new name of country:</label>
+    <br>
+    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+
+  <div>
+    <label for = "Code">Enter new code of country:</label>
+    <br>
+    <input type="text" name="Code" id="Code" [(ngModel)]="Code"/>
+  </div>
+
+  <div>
+   <button name="edit" >Edit</button>
+  </div>
+
+</form>
+
+
+<div style="float:left;padding-left:1%">
+  <ul *ngFor = "let region of regions">
+    <li>{{ region.Name }}</li>
+    <button name="show" (click)="showRegion(region.Id)">Show</button>
+    <button name="delete" (click) = "deleteRegion(region)">Delete</button>
+  </ul>
+</div>

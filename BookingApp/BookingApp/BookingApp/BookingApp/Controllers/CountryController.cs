@@ -108,6 +108,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         [Route("country")]
         [ResponseType(typeof(Country))]
         public IHttpActionResult GetCountry([FromUri] int id)
