@@ -11,10 +11,11 @@ import { TypeServiceService } from 'app/accommodation-type/type-service.service'
 export class TypeComponent implements OnInit {
 
    type: AccommodationType;
+   Name: string;
 
   constructor(private activateRouter: ActivatedRoute, private typeService : TypeServiceService) 
   {
-    this.type = new AccommodationType("");
+    this.type = new AccommodationType();
    }
 
   ngOnInit() {
@@ -22,7 +23,17 @@ export class TypeComponent implements OnInit {
     this.typeService.getTypeByIdMap(id).subscribe(c =>
     {
       this.type = (c as AccommodationType);
+      this.Name = this.type.Name;
         console.log(this.type.Name);
     }, error => console.log(error));
+  }
+
+  onSubmit()
+  {
+    this.typeService.editType(new AccommodationType(this.type.Id, this.Name)).subscribe(v => alert("Accommodation type succesfully changed."),
+    error => {
+      console.log(error), alert("Unsuccesfull change.")
+    });
+    this.Name = "";
   }
 }

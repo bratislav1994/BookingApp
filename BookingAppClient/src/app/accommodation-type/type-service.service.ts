@@ -35,13 +35,13 @@ export class TypeServiceService {
         return this.http.delete(DynamicUrl.socket + `accommodationType/Delete/${id}`);
     }
 
-    editCountry(type: AccommodationType) : Observable<any> {
+    editType(type: AccommodationType) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
 
         let opts = new RequestOptions();
         opts.headers = header;
-
+ 
         return this.http.put(DynamicUrl.socket + `accommodationType/Change`, type, opts);
     }
 }

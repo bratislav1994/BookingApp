@@ -16,18 +16,13 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         //[Authorize(Roles = "Admin")]
-        [HttpGet]
-        [Route("Change/{id}")]
-        public IHttpActionResult Change(int id, AccommodationType type)
+        [HttpPut]
+        [Route("Change")]
+        public IHttpActionResult Change(AccommodationType type)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != type.Id)
-            {
-                return BadRequest();
             }
 
             db.Entry(type).State = System.Data.Entity.EntityState.Modified;
@@ -38,7 +33,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(id))
+                if (!TypeExist(type.Id))
                 {
                     return NotFound();
                 }
