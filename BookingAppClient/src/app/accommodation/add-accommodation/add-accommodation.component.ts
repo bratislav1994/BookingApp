@@ -56,10 +56,16 @@ export class AddAccommodationComponent implements OnInit {
              }
 
   ngOnInit() {
-    // this.placeService.getAllPlaces().subscribe(p => this.places = p.json(), error => 
-    // {
-    //     console.log(error), alert("Unsuccessful fetch operation")
-    // });
+
+    this.getTypesAndCountries();
+    this.Place = null;
+    this.Country = null;
+    this.Region = null;
+    this.AccommodationType = null;
+  }
+
+  getTypesAndCountries()
+  {
     this.typeService.getAllTypes().subscribe(t => this.types = t.json(), error => 
     {
         console.log(error), alert("Unsuccessful fetch operation")
@@ -68,28 +74,50 @@ export class AddAccommodationComponent implements OnInit {
     {
         console.log(error), alert("Unsuccessful fetch operation")
     });
-    // this.regionService.getAllRegions().subscribe(r => this.regions = r.json(), error =>
-    // {
-    //     console.log(error), alert("Unsuccessful fetch operation")
-    // });
+  }
 
+  onSubmit(form: NgForm){
+    console.log("usao");
+    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, 
+    this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem("id"))),
+    this.file).subscribe(
+                        x => 
+                        {
+                            var doc = document.getElementById("successMsg");
+                            doc.innerText = "Accommodation successfully added.";   
+                            doc.className = "show";
+                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+                            this.resetForm();
+                            this.getTypesAndCountries(); 
+                         },
+                         eror => 
+                        {
+                            var doc = document.getElementById("errorMsg");
+                            doc.innerText = "Accommodation already exists.";   
+                            doc.className = "show";
+                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+                        }
+                    ); 
+  }
+
+  resetForm()
+  {
+    this.Name = "";
+    this.Description = "";
+    this.Address = "";
+    this.Latitude = null;
+    this.Longitude = null;
+    this.ImageUrl = null;
     this.Place = null;
     this.Country = null;
     this.Region = null;
     this.AccommodationType = null;
-  }
-
-  onSubmit(form: NgForm){
-    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, 
-                                              this.Address, this.Latitude, this.Longitude,
-                                               this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem("id"))), this.file).subscribe();
-    
-    // this.Name = "";
-    // this.Description = "";
-    // this.Address = "";
-    // this.Latitude = 0;
-    // this.Longitude = 0;
-    // this.ImageUrl = "";
+    this.ImageUrl = null;
+    this.Place = null;
+    this.Country = null;
+    this.Region = null;
+    this.AccommodationType = null;
+    this.file = null;
   }
 
    countrySelected()
@@ -110,15 +138,6 @@ export class AddAccommodationComponent implements OnInit {
       });
   }
 
-  // placeSelected()
-  // {
-  //   this.placeService.getPlaceByIdMap(this.PlaceId).subscribe(
-  //     p => {
-  //           this.Place = p[0] as Place;
-  //     }
-  //   );
-  // }
-
   isSelectedCountry() : boolean
   {
     return this.Country != null;
@@ -134,6 +153,5 @@ export class AddAccommodationComponent implements OnInit {
       let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
       let files: FileList = target.files;
       this.file = files[0];
-      console.log(this.file);
     }
 }

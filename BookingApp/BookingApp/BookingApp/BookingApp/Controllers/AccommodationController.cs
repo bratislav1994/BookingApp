@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData;
+using System.Web.Http.Results;
 
 namespace BookingApp.Controllers
 { 
@@ -34,7 +35,16 @@ namespace BookingApp.Controllers
             }
 
             var httpRequest = HttpContext.Current.Request;
-            accommodation = JsonConvert.DeserializeObject<Accommodation>(httpRequest.Form[0]);
+            try
+            {
+                accommodation = JsonConvert.DeserializeObject<Accommodation>(httpRequest.Form[0]);
+            }
+            catch (JsonSerializationException)
+            {
+                return new ResponseMessageResult(Request.CreateErrorResponse((HttpStatusCode)409,
+                                      new HttpError("Error while adding accommodation.")
+                ));
+            }
 
             foreach (string file in httpRequest.Files)
             {
