@@ -16,10 +16,11 @@
   </div>
 </form>
 
-<!--<ul>
-  <li *ngFor = "let p of region.Places">
-    {{p.Name}}
-    </li>
-</ul>-->
 
+
+  <ul *ngFor = "let place of places">
+    <li>{{ place.Name }}</li>
+    <button name="show" (click)="showPlace(place.Id)">Show</button>
+    <button name="delete" (click) = "deletePlace(place)">Delete</button>
+  </ul>
 </div>

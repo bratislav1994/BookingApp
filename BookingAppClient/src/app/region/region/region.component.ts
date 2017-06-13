@@ -4,21 +4,25 @@ import { Router, ActivatedRoute } from "@angular/router";
 import 'rxjs/Rx';
 import { RegionService } from "app/region/region.service";
 import { Place } from 'app/place/place.model';
+import { PlaceService } from "app/place/place.service";
 
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.css'],
-  providers: [RegionService]
+  providers: [RegionService, PlaceService]
 })
 export class RegionComponent implements OnInit {
   
   region: Region;
   Name : string;
   countryName: string;
+  places: Place[];
 
-  constructor(private regionService : RegionService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private regionService : RegionService, private route: Router, private activatedRoute: ActivatedRoute, 
+              private placeService: PlaceService) {
     this.region = new Region();
+    this.places = [];
    }
 
   ngOnInit() {
@@ -28,6 +32,8 @@ export class RegionComponent implements OnInit {
       this.region = (r[0] as Region);
         console.log(this.region.Name);
         this.countryName = this.region.Country.Name;
+        this.Name = this.region.Name;
+        this.places = this.region.Places;
         // if (this.region.Places != null)
         // {
         //   console.log("cdcd");
@@ -51,6 +57,22 @@ export class RegionComponent implements OnInit {
   {
     this.regionService.editRegion(new Region(this.region.Id, this.Name, this.region.CountryId)).subscribe();
     console.log("edited");
+  }
+
+  deletePlace(place: Place)
+  {
+    this.placeService.deletePlace(place.Id).subscribe(e => this.getPlaces());
+  }
+
+  getPlaces() : void{
+    this.placeService.getAllPlaces().subscribe(p => this.places = p.json(), error => 
+     {
+        console.log(error), alert("Unsuccessful fetch operation")
+     });
+  }
+
+  showPlace(id : number){
+    this.route.navigate(['/home/view_place/' + id]);
   }
 
 }

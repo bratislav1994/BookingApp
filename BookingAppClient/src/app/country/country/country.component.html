@@ -3,7 +3,6 @@
     <p>Code: {{country.Code}}</p>
     <!--<button name="show" [routerLink]="['/country-show']">Show</button>
     <button name="delete" (click)="deleteCountry()">Delete</button>-->
-</div>
 
 
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
@@ -25,7 +24,7 @@
   </div>
 
 </form>
-
+</div>
 
 <div style="float:left;padding-left:1%">
   <ul *ngFor = "let region of regions">
