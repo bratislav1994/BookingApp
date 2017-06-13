@@ -60,17 +60,12 @@ namespace BookingApp.Controllers
 
         //[Authorize(Roles = "Admin, Manager")]
         [HttpPut]
-        [Route("place/{id}")]
-        public IHttpActionResult ChangePlace(int id, Place place)
+        [Route("place")]
+        public IHttpActionResult ChangePlace(Place place)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != place.Id)
-            {
-                return BadRequest();
             }
 
             db.Entry(place).State = System.Data.Entity.EntityState.Modified;
@@ -81,7 +76,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(id))
+                if (!TypeExist(place.Id))
                 {
                     return NotFound();
                 }

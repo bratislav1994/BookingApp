@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Place } from "app/place/place.model";
+import { Region } from "app/region/region.model";
 import 'rxjs/Rx';
 import { PlaceService } from "app/place/place.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -12,7 +13,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class PlaceComponent implements OnInit {
 
-  @Input () place: Place;
+  place: Place;
+  Name: string;
+  RegionId: number;
 
   constructor(private placeService : PlaceService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.place = new Place(0, "", 0); 
@@ -22,8 +25,16 @@ export class PlaceComponent implements OnInit {
     this.placeService.getPlaceByIdMap(id).subscribe(p =>
     {
       this.place = (p as Place);
+      this.Name = this.place.Name;
+      this.RegionId = this.place.RegionId;
         console.log(this.place.Name);
     }, error => console.log(error));
+  }
+
+  onSubmit()
+  {
+    this.placeService.editPlace(new Place(this.place.Id, this.Name, this.RegionId)).subscribe();
+    console.log("edited");
   }
 
 }

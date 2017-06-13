@@ -4,4 +4,18 @@
     <p>Country name: {{place.Region.Country.Name}}</p>
     <p>Country code: {{place.Region.Country.Code}}</p>
     <button name="show" [routerLink]="['/place-show']">Show</button>-->
+
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+  <div>
+    <label for = "Name">Enter new name of place:</label>
+    <br>
+    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+
+  <div>
+   <button name="edit" >Edit</button>
+  </div>
+
+</form>
 </div>
