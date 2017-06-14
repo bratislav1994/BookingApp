@@ -1,22 +1,19 @@
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-
-    <div>
-      <label for = "Name">Name:</label>
-      <br>
-      <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
-    </div>
-
-    <div>
-      <label for = "Code">Code:</label>
-      <br>
-      <input type="text" name="Code" id="Code" [(ngModel)]="Code"/>
-    </div>
-
-    <div>
-      
-      <input type="submit" value="Add"/>
-    </div>
-    
+    <table>
+        <tr>
+            <td><label for = "Name">Name:</label></td>
+            <td><input type="text" name="Name" id="Name" [(ngModel)]="Name"/></td>       
+        </tr>
+        <br>
+        <tr>
+          <td> <label for = "Code">Code:</label></td> 
+          <td><input type="text" name="Code" id="Code" [(ngModel)]="Code"/></td>
+        </tr>
+        <br>
+        <tr>
+          <td align="center" colspan="2"><input type="submit" value="Add"/></td>
+        </tr>
+    </table>
   </form>
 </div>
