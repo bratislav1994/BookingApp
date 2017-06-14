@@ -1,0 +1,14 @@
+<div>
+  <form #f="ngForm">
+      <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </form>
+</div>
+
+<div>
+    <button (click)="search()">Search</button>
+    <button (click)="searchAll()">Search all</button>
+</div>
+
+<div *ngFor = "let a of accommodations">
+    <label>Accommodation name: {{a.Name}}</label> 
+</div>

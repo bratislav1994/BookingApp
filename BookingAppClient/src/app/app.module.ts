@@ -42,8 +42,11 @@ import { CountryHomeComponent } from './country/country-home/country-home.compon
 import { AccommodationHomeComponent } from './accommodation/accommodation-home/accommodation-home.component';
 import { ReservationHomeComponent } from './room-reservation/reservation-home/reservation-home.component';
 import { MapComponent } from './map/map/map.component';
+import { FilterComponent } from './filter/filter.component';
 
 const ChildRoutes = [
+
+  {path: "search", component: FilterComponent},
   {path: "accommodation_home", component: AccommodationHomeComponent},
   {path: "add_accommodation", component: AddAccommodationComponent},
   {path: "view_accommodations", component: ListOfAccommodationsComponent},
@@ -132,6 +135,7 @@ const Routes = [
     AccommodationHomeComponent,
     ReservationHomeComponent,
     MapComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

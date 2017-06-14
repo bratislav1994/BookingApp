@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Accommodation } from "app/accommodation/accommodation.model";
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
 export class AccommodationService {
@@ -54,6 +55,10 @@ export class AccommodationService {
 
      delete(id : number) : Observable<any> {
         return this.http.delete(`http://localhost:54043/api/accommodation/${id}`);
+    }
+
+     getByFilter(query : string) : Observable<any> {
+        return this.http.get(DynamicUrl.socket + `api/accommodation` + query).map(res => res.json());
     }
 
 }
