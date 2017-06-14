@@ -21,15 +21,18 @@ export class Accommodation {
    // User: User;
     AccommodationType: AccommodationType
 
-    constructor(Id?: number, Name?: string, description?: string, address?: string,
-                lat?: number, long?: number, placeId?: number, accommodationTypeId?: number, userId?: number
+    constructor(Id?: number, Name?: string, description?: string, address?: string, approved? : boolean, 
+                imageUrl? : string, lat?: number, long?: number, placeId?: number, accommodationTypeId?: number, userId?: number
                 ) {
+        this.Id = Id;
         this.Name = Name;
         this.Description = description;
         this.Address = address;
         this.Latitude = lat;
         this.Longitude = long;
         this.Rooms = [];
+        this.Approved = approved;
+        this.ImageUrl = imageUrl;
         this.AccommodationType = new AccommodationType();
         this.Place = new Place();
         this.PlaceId = placeId;

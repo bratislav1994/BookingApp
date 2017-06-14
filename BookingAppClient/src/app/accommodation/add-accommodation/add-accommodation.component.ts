@@ -80,12 +80,11 @@ export class AddAccommodationComponent implements OnInit {
   onSubmit(form: NgForm){
     console.log("usao");
     
-    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, 
-    this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem(LocalEnum.Id.toString()))),
-    this.file).subscribe(
+    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
+                                    "", this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, 
+                                    parseInt(localStorage.getItem(LocalEnum.Id.toString()))), this.file).subscribe(
                         x => 
                         {
-                          
                             var doc = document.getElementById("successMsg");
                             doc.innerText = "Accommodation successfully added.";   
                             doc.className = "show";

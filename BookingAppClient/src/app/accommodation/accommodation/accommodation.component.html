@@ -1,25 +1,91 @@
-<p>
-  accommodation works!
-</p>
+  <div style="width:100%">
+    <div>
+        Name: {{accommodation.Name}} <br>
+        Address: {{accommodation.Address}} <br>
+        Accommodation Type: {{accommodation.AccommodationType.Name}}<br> 
+        Place: {{accommodation.Place.Name}} <br>
+        Description: {{accommodation.Description}} <br>
+    </div>
 
-<div> 
-    <p>Name: {{accommodation.Name}}</p>
-    <p>Description: {{accommodation.Description}}</p>
-    <p>Address: {{accommodation.Address}}</p>
-    <p>AverageGrade: {{accommodation.AvrageGrade}}</p>
-    <p>Latitude: {{accommodation.Latitude}}</p>
-    <p>Longitude: {{accommodation.Longitude}}</p>
-    <p>ImageUrl: {{accommodation.ImageUrl}}</p>
-    <p>Approved: {{accommodation.Approved}}</p>
-    <p>Place: {{accommodation.Place.Name}}</p>
-    <!--<p>User: {{accommodation.User.Username}}</p>-->
-    <p>AccommodationType: {{accommodation.AccommodationType.Name}}</p>
-    <ul *ngFor = "let a of accommodation.Rooms">
-      <li>
-          Bed count:{{a.BedCount}}
-        </li>
-    </ul>
-    <button name="show" [routerLink]="['/accommodation-show']">Show</button>
+    <div>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+            
+           <div>
+               <label for = "Name">Name:</label><br>
+                <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+            </div>
+
+            <div>
+                <label for = "Name">Address:</label><br>
+                <input type="text" name="Address" id="Address" [(ngModel)]="Address"/>
+            </div>
+
+            <div>
+                <label for = "Name">Description:</label><br>
+                <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+            </div>
+
+            <div>
+                <button name="edit" >Edit</button>
+            </div>
+        </form>
+    </div>
+
+      <span>
+        <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation.Name" height="400px" width="50%">      
+      </span>
+  </div>
+
+  <div>
+      
+      <div *ngFor = "let room of accommodation.Rooms">
+          <label>Room number: {{room.RoomNumber}}</label> 
+        <button name="show" (click)="showRoom(room.Id)">Show</button>
+        <button name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
+      </div>
+      
+      <br>
+        <!--accommodation.Id-->
+      <button name="add" [routerLink]="['/add_room/']">Dodavanje sobe, kasnije namestiti</button>
+  </div>
+
+  <button name="add" (click) = "switchShowFormComment()">Show comment fields</button>
+
+  <div *ngIf="isShowCommentForm()">
+  <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
+      <div>
+        <label for = "Comment">Comment:</label>
+        <br>
+        <textarea type="text" name="Comment" id="Comment" [(ngModel)]="Comment">
+        </textarea>
+      </div>
+      <div>
+        <label for = "Grade">Grade:</label>
+        <br>
+        <input type="text" name="Grade" id="Grade" [(ngModel)]="Grade"/>
+      </div>
+      <div>
+        <button name="post">Post comment</button>
+      </div>
+    </form>
+    </div>
+
+  <div>
+    <div>
+      <font style="size:14">Comments:</font><br>
+
+      <div *ngFor = "let comment of accommodation.Comments">
+        User: {{comment.User.Name}} : {{comment}}   
+        <button name="delete" (click) = "deleteComment(accommodation.Id)">Delete</button>
+      </div>
+      <br>
+      
+    </div>
+  </div>
+    
+
+<div>
+
 </div>
 
 <div style="width:50%; margin: 0 auto">

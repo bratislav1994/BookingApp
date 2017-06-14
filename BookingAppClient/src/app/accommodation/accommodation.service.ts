@@ -34,7 +34,7 @@ export class AccommodationService {
   }
 
    getByIdMap(Id : number) : Observable<any> {
-        let ret = this.http.get(`http://localhost:54043/api/accommodation?$filter=Id eq ${Id} &$expand=AccommodationType,Place,Rooms`).map(res => res.json());
+        let ret = this.http.get(`http://localhost:54043/api/accommodation?$filter=Id eq ${Id} &$expand=AccommodationType,Place,Rooms,Comments`).map(res => res.json());
         return ret;
       }
 
