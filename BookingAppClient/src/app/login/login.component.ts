@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
 
  onSubmitLogin(){
     this.userService.login(this.Username, this.Password, "password").subscribe(result => { 
-          localStorage.setItem("user", result.json()['access_token']);
-          localStorage.setItem("role", result.headers.get("Role"));
-          localStorage.setItem("id", result.headers.get("Id"));
-          localStorage.setItem("username", this.Username);
+          localStorage.setItem("user", result.json()['access_token']); // token
+          localStorage.setItem("role", result.headers.get("Role")); // Admin, Manager, AppUser
+          localStorage.setItem("id", result.headers.get("Id")); // user_id u accommodation
+          localStorage.setItem("username", this.Username); // estetski, gornji desni ugao :D
           this.route.navigate(['/home']);
         },
     error => 
