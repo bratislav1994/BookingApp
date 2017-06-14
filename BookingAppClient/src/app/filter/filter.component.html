@@ -1,6 +1,14 @@
 <div>
   <form #f="ngForm">
-      <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+    <input type="text" placeholder="Accommodation name" name="Name" id="Name" [(ngModel)]="Name"/>
+    <input type="text" placeholder="Average grade" name="grade" id="grade" [(ngModel)]="AvrageGrade"/>
+    <input type="number" placeholder="Number of beds" name="Bed" id="Bed" [(ngModel)]="BedCount"/>
+    <input type="number" placeholder="Min price" name="min" id="min" [(ngModel)]="MinPrice"/>
+    <input type="number" placeholder="Max price" name="max" id="max" [(ngModel)]="MaxPrice"/>
+    <input type="text" placeholder="Accommodation type" name="AccommodationType" id="AccommodationType" [(ngModel)]="AccommodationTypeName"/>
+    <input type="text" placeholder="Place" name="PlaceName" id="PlaceName" [(ngModel)]="PlaceName"/>
+    <input type="text" placeholder="Region" name="RegionName" id="RegionName" [(ngModel)]="RegionName"/>
+    <input type="text" placeholder="Country" name="CountryName" id="CountryName" [(ngModel)]="CountryName"/>
   </form>
 </div>
 
@@ -10,5 +18,14 @@
 </div>
 
 <div *ngFor = "let a of accommodations">
-    <label>Accommodation name: {{a.Name}}</label> 
+    <br>
+    <div style="background-color: darkgrey">
+        <font>Accommodation name: {{a.Name}}</font><br>
+        <font>Average grade:{{a.AvrageGrade}}</font><br>
+        <font><img [src]= "a.ImageUrl" alt="accommodation picture" height="120px" width="120px"></font><br>
+        <font>Type : {{a.AccommodationType.Name}}</font><br>
+        <font>Place: {{a.Place.Name}}</font><br>
+        <font>Description: {{a.Description}}</font><br>
+    </div>
+    <br>
 </div>
