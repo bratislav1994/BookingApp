@@ -1,4 +1,3 @@
-import {ToastyModule} from 'ng2-toasty';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -136,7 +135,6 @@ const Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-    ToastyModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
