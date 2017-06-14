@@ -30,10 +30,22 @@ export class TypeComponent implements OnInit {
 
   onSubmit()
   {
-    this.typeService.editType(new AccommodationType(this.type.Id, this.Name)).subscribe(v => alert("Accommodation type succesfully changed."),
+    this.typeService.editType(new AccommodationType(this.type.Id, this.Name)).subscribe(
+    v => 
+    {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Accommodation type successfully edited.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    },
     error => {
-      console.log(error), alert("Unsuccesfull change.")
-    });
+      var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error during editing accommodation type.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    );
+
     this.Name = "";
   }
 }

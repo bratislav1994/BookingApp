@@ -39,11 +39,21 @@ export class CreateRoomComponent implements OnInit {
                                          this.BedCount, 
                                          this.Description, 
                                          this.PricePerNight, 
-                                         this.AccommodationId )).subscribe(r => alert("Room successfully added."), 
-                                         error => 
-                                         {
-                                           console.log(error), alert(error.text())
-                                         });
-    
+                                         this.AccommodationId )).subscribe(
+        r => 
+        {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room successfully added.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
+        },
+        error => 
+        {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Room already exists.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+        }
+      );
   }
 }

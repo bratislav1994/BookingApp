@@ -53,12 +53,26 @@ export class RoomComponent implements OnInit {
   onSubmit()
   {
     this.roomService.editRoom(new Room(this.Id,
-                                        this.RoomNumber, 
+                                       this.RoomNumber, 
                                        this.BedCount,
                                        this.Description,
                                        this.PricePerNight,
-                                       this.AccommodationId)).subscribe();
-    console.log("edited");
+                                       this.AccommodationId)).subscribe(
+      x => 
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room successfully edited.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error during editing room.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   // deleteReservation(reservation: RoomReservation)

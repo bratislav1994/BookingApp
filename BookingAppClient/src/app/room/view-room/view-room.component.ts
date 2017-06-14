@@ -26,7 +26,23 @@ export class ViewRoomComponent implements OnInit {
   }
 
   deleteRoom(id: number){
-    this.roomService.deleteRoom(id).subscribe(e => this.getRooms());
+    this.roomService.deleteRoom(id).subscribe(
+      e => 
+      {
+          this.getRooms();
+          var doc = document.getElementById("successMsg");
+          doc.innerText = "Room successfully deleted.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      },
+      error =>
+      {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Error while deleting room.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   getRooms() : void{

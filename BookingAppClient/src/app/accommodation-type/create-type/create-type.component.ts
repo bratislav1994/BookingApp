@@ -18,11 +18,23 @@ export class CreateTypeComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service.createType(new AccommodationType(0, this.Name)).subscribe(e => alert("Accommodation type succesfuly added."),
-      error => 
-      {
-        console.log(error), alert("Type already exists.")
-      });
+    this.service.createType(new AccommodationType(0, this.Name)).subscribe(
+    e => 
+    {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Accommodation type successfully added.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+    },
+    error =>
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Accommodation type already exists.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+    }
+    );
+    
     this.Name = "";
   }
 }
