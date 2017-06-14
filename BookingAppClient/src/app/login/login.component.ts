@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("user", result.json()['access_token']);
           localStorage.setItem("role", result.headers.get("Role"));
           localStorage.setItem("id", result.headers.get("Id"));
+          localStorage.setItem("username", this.Username);
           this.route.navigate(['/home']);
         },
     error => 

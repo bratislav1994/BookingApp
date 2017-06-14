@@ -21,6 +21,7 @@ export class LogoutService {
         localStorage.removeItem("user");
         localStorage.removeItem("id");
         localStorage.removeItem("role");
+        localStorage.removeItem("username");
 
         return ret;
     }
