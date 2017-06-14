@@ -23,7 +23,23 @@ export class ListOfPlacesComponent implements OnInit {
 
   deletePlace(place: Place)
   {
-    this.placeService.deletePlace(place.Id).subscribe(e => this.getPlaces());
+    this.placeService.deletePlace(place.Id).subscribe(
+      e => 
+      {
+          this.getPlaces();
+          var doc = document.getElementById("successMsg");
+          doc.innerText = "Place successfully deleted.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      },
+      error =>
+      {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Error while deleting place.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   getPlaces() : void{

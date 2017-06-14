@@ -89,8 +89,6 @@ export class AddAccommodationComponent implements OnInit {
                             doc.innerText = "Accommodation successfully added.";   
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-                            // this.resetForm();
-                            // this.getTypesAndCountries(); 
                          },
                          eror => 
                         {

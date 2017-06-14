@@ -34,34 +34,48 @@ export class RegionComponent implements OnInit {
         this.countryName = this.region.Country.Name;
         this.Name = this.region.Name;
         this.places = this.region.Places;
-        // if (this.region.Places != null)
-        // {
-        //   console.log("cdcd");
-        //   if (this.region.Places[0] != null)
-        //   {
-        //     console.log(this.region.Places[0].Name);
-        //   }
-        //   else
-        //   {
-        //     console.log("babdfsa");
-        //   }
-        // }
-        // else
-        // {
-        //   console.log("tete");
-        // }
     }, error => console.log(error));
   }
 
   onSubmit()
   {
-    this.regionService.editRegion(new Region(this.region.Id, this.Name, this.region.CountryId)).subscribe();
-    console.log("edited");
+    this.regionService.editRegion(new Region(this.region.Id, this.Name, this.region.CountryId)).subscribe(
+      x => 
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Region successfully edited.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error during editing region.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   deletePlace(place: Place)
   {
-    this.placeService.deletePlace(place.Id).subscribe(e => this.getPlaces());
+    this.placeService.deletePlace(place.Id).subscribe(
+      e => 
+      {
+          this.getPlaces();  
+          var doc = document.getElementById("successMsg");
+          doc.innerText = "Place successfully deleted.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error => 
+      {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Error while deleting region.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      }
+    );
   }
 
   getPlaces() : void{

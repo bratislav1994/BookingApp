@@ -28,12 +28,22 @@ export class AddRegionComponent implements OnInit {
   }
 
   onSubmit(){
-    this.regionService.addRegion(new Region(0, this.Name, this.CountryId)).subscribe(x => 
-                                                                              alert("Region successfully added"),
+    this.regionService.addRegion(new Region(0, this.Name, this.CountryId)).subscribe(
+      x => 
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Region successfully added.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+      },
      error => 
      {
-        console.log(error), alert(error.text())
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Country already exists.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
      });
+     
     this.Name = "";
   }
 

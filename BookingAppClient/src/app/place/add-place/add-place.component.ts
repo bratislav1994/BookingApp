@@ -29,12 +29,22 @@ export class AddPlaceComponent implements OnInit {
   }
 
   onSubmit(){
-    this.placeService.addPlace(new Place(0, this.Name, this.RegionId)).subscribe(x => 
-                                                                              alert("Place successfully added"),
+    this.placeService.addPlace(new Place(0, this.Name, this.RegionId)).subscribe(
+      x => 
+      {
+          var doc = document.getElementById("successMsg");
+          doc.innerText = "Place successfully added.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+      },
      error => 
      {
-        console.log(error), alert(error.text())
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Place already exists.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
      });
+     
     this.Name = "";
   }
 

@@ -23,7 +23,23 @@ export class ListOfRegionsComponent implements OnInit {
 
   deleteRegion(region: Region)
   {
-    this.regionService.deleteRegion(region.Id).subscribe(e => this.getRegions());
+    this.regionService.deleteRegion(region.Id).subscribe(
+      e =>
+      {
+          this.getRegions();
+          var doc = document.getElementById("successMsg");
+          doc.innerText = "Region successfully deleted.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      },
+      error =>
+      {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Error while deleting region.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+      );
   }
 
   getRegions() : void{

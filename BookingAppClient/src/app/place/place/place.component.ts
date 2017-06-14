@@ -33,8 +33,22 @@ export class PlaceComponent implements OnInit {
 
   onSubmit()
   {
-    this.placeService.editPlace(new Place(this.place.Id, this.Name, this.RegionId)).subscribe();
-    console.log("edited");
+    this.placeService.editPlace(new Place(this.place.Id, this.Name, this.RegionId)).subscribe(
+      x =>
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Place successfully edited.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error during editing place.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
 }
