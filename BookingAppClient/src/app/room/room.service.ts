@@ -28,7 +28,8 @@ export class RoomService {
   }
 
   getRoomByIdMap(id : number) : Observable<any>{
-    return this.http.get(`http://localhost:54043/api/Room/Read?$filter=Id eq ${id} &$expand=Accommodation`).map(r => r.json());
+    let ret = this.http.get(`http://localhost:54043/api/Room/Read/${id}`).map(r => r.json());
+    return ret;
   }
 
   deleteRoom(id : number) : Observable<any> {
@@ -42,6 +43,6 @@ export class RoomService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.put(`http://localhost:54043/api/Change`, room, opts);
+        return this.http.put(`http://localhost:54043/api/Room/Change`, room, opts);
     }
 }

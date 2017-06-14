@@ -25,13 +25,12 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
-        [EnableQuery]
-        [Route("Read")]
+        [Route("Read/{id}")]
         [ResponseType(typeof(Room))]
-        public IHttpActionResult ReadRoom([FromUri] int id)
+        public IHttpActionResult ReadRoom(int id)
         {
-            Room room = db.Rooms.Find(id);
-
+            Room room = db.Rooms.Include("Accommodation").FirstOrDefault(r => r.Id == id);
+            
             if (room == null)
             {
                 return NotFound();

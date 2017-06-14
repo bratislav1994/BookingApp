@@ -34,7 +34,8 @@ export class CreateRoomComponent implements OnInit {
   }
 
   onSubmit(){
-    this.roomService.createRoom(new Room(this.RoomNumber, 
+    this.roomService.createRoom(new Room(0,
+                                        this.RoomNumber, 
                                          this.BedCount, 
                                          this.Description, 
                                          this.PricePerNight, 
