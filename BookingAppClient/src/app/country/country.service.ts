@@ -3,6 +3,8 @@ import { Http, Response, Headers, Request, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import { Country } from "./Country.model";
 import 'rxjs/Rx';
+import { DynamicUrl } from "app/DynamicUrl.model";
+import { LocalEnum } from "app/localEnum.model";
 
 @Injectable()
 export class CountryService {
@@ -10,13 +12,8 @@ export class CountryService {
   constructor(private http : Http) { }
 
   addCountry(country : Country) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.post('http://localhost:54043/api/country', country, opts);
+       let opts = DynamicUrl.PutHeader();
+        return this.http.post(DynamicUrl.socket + `api/country`, country, opts);
     }
 
     getAllCountries() : Observable<any> {
@@ -28,20 +25,16 @@ export class CountryService {
     }
 
     getCountryByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/country?$filter=Id eq ${id} &$expand=Regions`).map(r => r.json());
+        return this.http.get(DynamicUrl.socket + `api/country?$filter=Id eq ${id} &$expand=Regions`).map(r => r.json());
     }
 
     deleteCountry(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/api/country/${id}`);
+        let opts = DynamicUrl.PutHeader();
+        return this.http.delete(DynamicUrl.socket + `api/country/${id}`, opts);
     }
 
     editCountry(country: Country) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.put(`http://localhost:54043/api/country`, country, opts);
+       let opts = DynamicUrl.PutHeader();
+        return this.http.put(DynamicUrl.socket + `api/country`, country, opts);
     }
 }

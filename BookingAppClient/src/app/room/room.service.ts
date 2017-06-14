@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Room } from "app/room/Room.model";
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
 export class RoomService {
@@ -9,40 +10,31 @@ export class RoomService {
   constructor(private http : Http) { }
 
   createRoom(room : Room) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.post('http://localhost:54043/api/Room/Create', room, opts);
+        let opts = DynamicUrl.PutHeader();
+        return this.http.post(DynamicUrl.socket + `api/Room/Create`, room, opts);
     }
 
 
   getAllRooms() : Observable<any> {
-        return this.http.get("http://localhost:54043/api/Room/ReadAll");
+        return this.http.get(DynamicUrl.socket + `api/Room/ReadAll`);
   }
 
   getRoomById(id : number) : Observable<any> {
-      return this.http.get(`http://localhost:54043/api/Room/Read/${id}`);
+      return this.http.get(DynamicUrl.socket + `api/Room/Read/${id}`);
   }
 
   getRoomByIdMap(id : number) : Observable<any>{
-    let ret = this.http.get(`http://localhost:54043/api/Room/Read/${id}`).map(r => r.json());
+    let ret = this.http.get(DynamicUrl.socket + `api/Room/Read/${id}`).map(r => r.json());
     return ret;
   }
 
   deleteRoom(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/api/Room/Delete/${id}`);
+      let opts = DynamicUrl.PutHeader();
+      return this.http.delete(DynamicUrl.socket + `api/Room/Delete/${id}`, opts);
     }
 
     editRoom(room: Room) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.put(`http://localhost:54043/api/Room/Change`, room, opts);
+        let opts = DynamicUrl.PutHeader();
+        return this.http.put(DynamicUrl.socket + `api/Room/Change`, room, opts);
     }
 }

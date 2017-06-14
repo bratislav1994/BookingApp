@@ -4,6 +4,7 @@ import { Region } from "app/region/region.model";
 import { Country } from "app/country/country.model";
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
 export class PlaceService {
@@ -11,39 +12,30 @@ export class PlaceService {
   constructor(private http : Http) { }
 
    addPlace(place : Place) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.post(`http://localhost:54043/api/place`, place, opts);
+        let opts = DynamicUrl.PutHeader();
+        return this.http.post(DynamicUrl.socket + `api/place`, place, opts);
     }
 
     getAllPlaces() : Observable<any> {
-        return this.http.get("http://localhost:54043/api/place");
+        return this.http.get(DynamicUrl.socket + `api/place`);
     }
 
     getPlaceById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/place/${id}`);
+        return this.http.get(DynamicUrl.socket + `api/place/${id}`);
     }
 
     getPlaceByIdMap(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/place/${id}`).map(r => r.json());
+        return this.http.get(DynamicUrl.socket + `api/place/${id}`).map(r => r.json());
     }
 
     deletePlace(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/api/place/${id}`);
+        let opts = DynamicUrl.PutHeader();
+        return this.http.delete(DynamicUrl.socket + `api/place/${id}`, opts);
     }
 
     editPlace(place: Place) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        return this.http.put(`http://localhost:54043/api/place`, place, opts);
+       let opts = DynamicUrl.PutHeader();
+        return this.http.put(DynamicUrl.socket + `api/place`, place, opts);
     }
 
 }

@@ -12,13 +12,7 @@ export class TypeServiceService {
   constructor(private http : Http) { }
 
   createType(type : AccommodationType) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-        header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
-        
-        let opts = new RequestOptions();
-        opts.headers = header;
-
+        let opts = DynamicUrl.PutHeader();
         return this.http.post(DynamicUrl.socket + 'accommodationType/Create', type, opts);
     }
 
