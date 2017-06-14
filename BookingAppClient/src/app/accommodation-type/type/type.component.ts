@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AccommodationType} from 'app/accommodation-type/Type.model'
 import { Router, ActivatedRoute } from "@angular/router";
 import { TypeServiceService } from 'app/accommodation-type/type-service.service'
+
 @Component({
   selector: 'app-type',
   templateUrl: './type.component.html',

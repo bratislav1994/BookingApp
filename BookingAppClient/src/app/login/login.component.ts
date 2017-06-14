@@ -4,6 +4,7 @@ import { User } from "app/login/UserLogin.model";
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import 'rxjs/Rx';
+import { LocalEnum } from "app/localEnum.model";
 
 @Component({
   selector: 'app-login',
@@ -23,10 +24,10 @@ export class LoginComponent implements OnInit {
 
  onSubmitLogin(){
     this.userService.login(this.Username, this.Password, "password").subscribe(result => { 
-          localStorage.setItem("user", result.json()['access_token']); // token
-          localStorage.setItem("role", result.headers.get("Role")); // Admin, Manager, AppUser
-          localStorage.setItem("id", result.headers.get("Id")); // user_id u accommodation
-          localStorage.setItem("username", this.Username); // estetski, gornji desni ugao :D
+          localStorage.setItem(LocalEnum.User.toString(), result.json()['access_token']); // token
+          localStorage.setItem(LocalEnum.Role.toString(), result.headers.get("Role")); // Admin, Manager, AppUser
+          localStorage.setItem(LocalEnum.Id.toString(), result.headers.get("Id")); // user_id u accommodation
+          localStorage.setItem(LocalEnum.Username.toString(), this.Username); // estetski, gornji desni ugao :D
           this.route.navigate(['/home']);
         },
     error => 

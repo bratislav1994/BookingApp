@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from "./UserLogin.model";
+import { LocalEnum } from "app/localEnum.model";
 
 @Injectable()
 export class UserloginService {
@@ -21,7 +22,7 @@ login(username : string, password : string, grant_type: string) : Observable<any
 
      IsLoggedIn() : boolean {
          
-        if (localStorage.getItem("user") == null)
+        if (localStorage.getItem(LocalEnum.User.toString()) == null)
         {
             console.log("AAA");
             return false;

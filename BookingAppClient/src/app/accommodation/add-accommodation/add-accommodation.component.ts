@@ -10,6 +10,7 @@ import { Region } from "app/region/region.model";
 import { Country }  from "app/country/country.model";
 import { CountryService } from "app/country/country.service";
 import { RegionService } from "app/region/region.service";
+import { LocalEnum } from "app/localEnum.model";
 
 @Component({
   selector: 'app-add-accommodation',
@@ -80,7 +81,7 @@ export class AddAccommodationComponent implements OnInit {
     console.log("usao");
     
     this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, 
-    this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem("id"))),
+    this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, parseInt(localStorage.getItem(LocalEnum.Id.toString()))),
     this.file).subscribe(
                         x => 
                         {
