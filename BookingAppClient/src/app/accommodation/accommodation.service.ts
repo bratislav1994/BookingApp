@@ -3,6 +3,7 @@ import { Accommodation } from "app/accommodation/accommodation.model";
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { DynamicUrl } from "app/DynamicUrl.model";
+import { LocalEnum } from "app/localEnum.model";
 
 @Injectable()
 export class AccommodationService {
@@ -21,6 +22,7 @@ export class AccommodationService {
         headers.append('enctype', 'multipart/form-data');
         
         headers.append('Accept', 'application/json');
+         headers.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
         let opts = new RequestOptions( { headers: headers });
 
         return this.http.post('http://localhost:54043/api/accommodation', formData, opts);
@@ -42,6 +44,7 @@ export class AccommodationService {
   edit(accommodation: Accommodation) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
+        header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
         console.log(JSON.stringify(accommodation));
         let opts = new RequestOptions();
         opts.headers = header;
