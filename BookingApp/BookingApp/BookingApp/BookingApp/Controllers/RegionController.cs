@@ -19,7 +19,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        //[Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [EnableQuery]
         [Route("region")]
@@ -46,7 +46,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "Region", id = region.Id }, region);
         }
 
-        // [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("region/{id}")]
         [ResponseType(typeof(Region))]
@@ -65,7 +65,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
-        // [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("region")]
         [ResponseType(typeof(void))]

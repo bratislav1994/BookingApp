@@ -37,7 +37,7 @@ namespace BookingApp.Controllers
             return Ok(reservation);
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create(RoomReservation reservation)
@@ -60,7 +60,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("Change/{idRoom}/{idUser}/{time}")]
         public IHttpActionResult Change(int idRoom, int idUser, byte[] time, RoomReservation reservation)
@@ -106,7 +106,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)

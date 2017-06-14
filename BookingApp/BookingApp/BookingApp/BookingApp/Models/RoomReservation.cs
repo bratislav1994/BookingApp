@@ -9,22 +9,22 @@ namespace BookingApp.Models
 {
     public class RoomReservation
     {
+        public int Id { get; set; }
+
         [Required]
-        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
 
-        [Key, Timestamp, Column(Order = 3)]
+        [Timestamp]
         public byte[] TimeStamp { get; set; }
 
-        [Required, Key, Column(Order = 2), ForeignKey("User")]
+        [Required, ForeignKey("User")]
         public int UserId { get; set; }
         public AppUser User { get; set; }
 
-        [Required, Key, Column(Order = 1), ForeignKey("Room")]
+        [Required, ForeignKey("Room")]
         public int RoomId { get; set; }
         public Room Room { get; set; }
     }

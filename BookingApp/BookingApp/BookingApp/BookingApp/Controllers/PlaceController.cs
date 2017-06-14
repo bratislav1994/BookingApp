@@ -15,7 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        //[Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPost]
         [Route("place")]
         public IHttpActionResult AddPlace(Place place)
@@ -40,7 +40,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        // [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("place/{id}")]
         public IHttpActionResult DeletePlace(int id)
@@ -58,7 +58,7 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
-        //[Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("place")]
         public IHttpActionResult ChangePlace(Place place)

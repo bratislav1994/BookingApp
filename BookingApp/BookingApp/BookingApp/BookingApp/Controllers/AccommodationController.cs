@@ -22,7 +22,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         [Route("accommodation")]
         [ResponseType(typeof(Accommodation))]
@@ -86,7 +86,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "Accommodation", id = accommodation.Id }, accommodation);
         }
 
-        // [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpDelete]
         [Route("accommodation/{id}")]
         [ResponseType(typeof(Accommodation))]
@@ -105,7 +105,7 @@ namespace BookingApp.Controllers
             return Ok(accommodation);
         }
 
-      //  [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("accommodation/{id}")]
         [ResponseType(typeof(void))]

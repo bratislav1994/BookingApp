@@ -17,40 +17,6 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        private ApplicationUserManager userManager;
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                userManager = value;
-            }
-        }
-
-        [HttpGet]
-        [Route("Valitade/{id}")]
-        public IHttpActionResult Validation(int id)
-        {
-            bool isUser = UserManager.IsInRole(User.Identity.Name, "Admin");
-            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-            if (isUser || (user != null && user.Id.Equals(id)))
-            {
-                AppUser appUser = db.AppUsers.Find(id);
-                if (appUser == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(appUser);
-            }
-
-            return Unauthorized();
-        }
-
         [HttpGet]
         [Route("ReadAll")]
         public IQueryable<Comment> ReadAllComments()
@@ -59,12 +25,11 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
-        [Route("Read/{id}")]
+        [Route("Read/{id}/{id2}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult ReadComment(int id)
+        public IHttpActionResult ReadComment(int id, int id2)
         {
-            Comment comment = db.Comments.Find(id);
-
+            Comment comment = db.Comments.Find(new { AccommodationId = id, UserId = id2 });
             if (comment == null)
             {
                 return NotFound();
@@ -76,6 +41,7 @@ namespace BookingApp.Controllers
         [Authorize(Roles = "AppUser")]
         [HttpPost]
         [Route("Create")]
+        [ResponseType(typeof(Comment))]
         public IHttpActionResult Create(Comment comment)
         {
             if (!ModelState.IsValid)
@@ -93,20 +59,21 @@ namespace BookingApp.Controllers
                 return Content(HttpStatusCode.Conflict, comment);
             }
 
-            return Ok();
+            return CreatedAtRoute("DefaultApi", new { controller = "Comment", id = comment.AccommodationId, id2 = comment.UserId }, comment);
         }
 
         [Authorize(Roles = "AppUser")]
         [HttpPut]
-        [Route("Change/{id}")]
-        public IHttpActionResult Change(int id, Comment comment)
+        [Route("Change/{id}/{id2}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Change(int id, int id2, Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.Id)
+            if (id != comment.AccommodationId || id2 != comment.UserId)
             {
                 return BadRequest();
             }
@@ -119,7 +86,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExist(id))
+                if (!CommentExist(id, id2))
                 {
                     return NotFound();
                 }
@@ -134,10 +101,11 @@ namespace BookingApp.Controllers
 
         [Authorize(Roles = "AppUser")]
         [HttpDelete]
-        [Route("Delete/{id}")]
-        public IHttpActionResult Delete(int id)
+        [Route("Delete/{id}/{id2}")]
+        [ResponseType(typeof(Comment))]
+        public IHttpActionResult Delete(int id, int id2)
         {
-            Comment comment = db.Comments.Where(e => e.Id.Equals(id)).FirstOrDefault();
+            Comment comment = db.Comments.Find(new { AccommodationId = id, UserId = id2 });
 
             if (comment == null)
             {
@@ -150,9 +118,9 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        private bool CommentExist(int id)
+        private bool CommentExist(int id, int id2)
         {
-            return db.Comments.Count(e => e.Id.Equals(id)) > 0;
+            return db.Comments.Count(c => c.AccommodationId == id && c.UserId == id2) > 0;
         }
     }
 }

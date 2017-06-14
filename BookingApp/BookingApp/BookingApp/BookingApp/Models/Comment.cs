@@ -11,7 +11,7 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
-        [Range(1, 5)]
+        [Range(0, 5)]
         public int Grade { get; set; }
 
         [StringLength(300)]
