@@ -78,6 +78,10 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
+            catch (DbUpdateException)
+            {
+                return BadRequest(ModelState);
+            }
             
             return CreatedAtRoute("DefaultApi", new { controller = "Accommodation", id = accommodation.Id }, accommodation);
         }

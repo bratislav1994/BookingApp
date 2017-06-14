@@ -39,7 +39,7 @@ export class AddRegionComponent implements OnInit {
      error => 
      {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Country already exists.";   
+            doc.innerText = "Region already exists.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
      });

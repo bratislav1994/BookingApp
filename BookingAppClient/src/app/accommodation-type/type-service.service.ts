@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AccommodationType } from "app/accommodation-type/Type.model";
 import 'rxjs/Rx';
 import { DynamicUrl } from "app/DynamicUrl.model";
+import { LocalEnum } from "app/localEnum.model";
+
 @Injectable()
 export class TypeServiceService {
 
@@ -12,7 +14,7 @@ export class TypeServiceService {
   createType(type : AccommodationType) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
-        header.append("Authorization", "Bearer " + localStorage.getItem("user"));
+        header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
         
         let opts = new RequestOptions();
         opts.headers = header;
@@ -35,7 +37,7 @@ export class TypeServiceService {
     deleteType(id : number) : Observable<any> {
          let header = new Headers();
          header.append('Content-type', 'application/json', );
-         header.append("Authorization", "Bearer " + localStorage.getItem("user"));
+         header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
 
         let opts = new RequestOptions();
         opts.headers = header;
@@ -46,7 +48,7 @@ export class TypeServiceService {
     editType(type: AccommodationType) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
-        header.append("Authorization", "Bearer " + localStorage.getItem("user"));
+        header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
 
         let opts = new RequestOptions();
         opts.headers = header;

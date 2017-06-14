@@ -299,6 +299,10 @@
     <Compile Include="Migrations\201706131458018_AccommodationAverage.Designer.cs">
       <DependentUpon>201706131458018_AccommodationAverage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706140925553_UniquenessAccommodationAndRoomNumber.cs" />
+    <Compile Include="Migrations\201706140925553_UniquenessAccommodationAndRoomNumber.Designer.cs">
+      <DependentUpon>201706140925553_UniquenessAccommodationAndRoomNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -400,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706131458018_AccommodationAverage.resx">
       <DependentUpon>201706131458018_AccommodationAverage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706140925553_UniquenessAccommodationAndRoomNumber.resx">
+      <DependentUpon>201706140925553_UniquenessAccommodationAndRoomNumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

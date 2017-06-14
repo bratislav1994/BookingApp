@@ -11,10 +11,11 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
+        [Index("Accommodation_RoomNumberUniqueness", 2, IsUnique = true)]
         [Required]
         public int RoomNumber { get; set; }
 
-        [Required, Range(1, 3)]
+        [Required, Range(1, 4)]
         public int BedCount { get; set; }
 
         [StringLength(300)]
@@ -25,6 +26,7 @@ namespace BookingApp.Models
 
         public IList<RoomReservation> RoomReservations { get; set; }
 
+        [Index("Accommodation_RoomNumberUniqueness", 1, IsUnique = true)]
         [Required, ForeignKey("Accommodation")]
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
