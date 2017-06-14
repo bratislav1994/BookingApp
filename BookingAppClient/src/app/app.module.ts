@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country/country.component';
@@ -40,6 +41,7 @@ import { RegionHomeComponent } from './region/region-home/region-home.component'
 import { CountryHomeComponent } from './country/country-home/country-home.component';
 import { AccommodationHomeComponent } from './accommodation/accommodation-home/accommodation-home.component';
 import { ReservationHomeComponent } from './room-reservation/reservation-home/reservation-home.component';
+import { MapComponent } from './map/map/map.component';
 
 const ChildRoutes = [
   {path: "accommodation_home", component: AccommodationHomeComponent},
@@ -129,12 +131,14 @@ const Routes = [
     CountryHomeComponent,
     AccommodationHomeComponent,
     ReservationHomeComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
+     AgmCoreModule.forRoot({apiKey: 'AIzaSyAHHQaowM-8ilHAcMCWT8yCebx1SIM90Xk'})
   ],
   providers: [],
   bootstrap: [AppComponent]
