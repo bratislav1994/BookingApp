@@ -4,6 +4,7 @@ import { Accommodation } from "app/accommodation/Accommodation.model";
 import { Room } from "app/room/room.model";
 import { AccommodationType } from "app/accommodation-type/type.model";
 import { Router } from '@angular/router';
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Component({
   selector: 'app-list-of-accommodations',
@@ -21,6 +22,13 @@ export class ListOfAccommodationsComponent implements OnInit {
 
   ngOnInit() {
     this.getAccommodations();
+  }
+
+  appendPortToImageUrl()
+  {
+    for (var i = 0; i < this.accommodations.length; i++) {
+        this.accommodations[i].ImageUrl = DynamicUrl.socket + this.accommodations[i].ImageUrl;
+    }
   }
 
   deleteAcc(acc: Accommodation)
@@ -49,10 +57,19 @@ export class ListOfAccommodationsComponent implements OnInit {
   }
 
   getAccommodations() : void{
-    this.accommodationService.getAllAccommodations().subscribe(a => this.accommodations = a.json(), error => 
+    this.accommodationService.getAllAccommodations().subscribe(a =>
+    { this.accommodations = a.json();
+      this.appendPortToImageUrl();
+  },
+    error => 
     {
         console.log(error), alert("Unsuccessful fetch operation")
     });
+  }
+
+  onClick(id : number)
+  {
+      this.route.navigate(['/home/view_accommodation/', id]);
   }
 
 }
