@@ -12,7 +12,7 @@
 				
 		</div>
 		<div *ngIf="IsLoggedIn()" style=" float:right">
-				<a [routerLink]="['/logout']">Logout</a>
+				<a class="btn btn-link" style="color:black" [routerLink]="['/logout']">Logout</a>
 				<label>{{username}}</label>
 		</div>
 			<div class="clr"></div>
@@ -91,5 +91,22 @@
     <li><a [routerLink]="['/home/search']">Search</a></li>
 
 </ul>
+
+<!--<ul class="nav nav-tabs">
+  
+  <li class="dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+      Accommodations <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a [routerLink]="['/home/add_accommodation']">Add accommodation</a></li>
+      <li class="divider"></li>
+      <li><a [routerLink]="['/home/view_accommodations']">List of accommodations</a></li>
+    </ul>
+  </li>
+
+
+
+</ul>-->
 
 <router-outlet></router-outlet>
