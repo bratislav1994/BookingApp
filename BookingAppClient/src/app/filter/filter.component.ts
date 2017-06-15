@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccommodationService } from "app/accommodation/accommodation.service";
 import { Accommodation } from "app/accommodation/accommodation.model";
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Component({
   selector: 'app-filter',
@@ -13,7 +14,7 @@ export class FilterComponent implements OnInit {
   accommodations : Accommodation[];
   
   Name: string;
-  AvrageGrade: number;
+  MinAvrageGrade: number;
   BedCount: number;
   MinPrice: number;
   MaxPrice: number;
@@ -21,7 +22,6 @@ export class FilterComponent implements OnInit {
   PlaceName: string;
   RegionName: string;
   CountryName: string;
-  
   query: string;   
 
   constructor(private accommodationService : AccommodationService) {
@@ -40,7 +40,7 @@ export class FilterComponent implements OnInit {
       this.RegionName = "";
       this.PlaceName = "";
       this.AccommodationTypeName = "";
-      this.AvrageGrade = undefined;
+      this.MinAvrageGrade = undefined;
       this.MinPrice = undefined;
       this.MaxPrice = undefined;
       this.BedCount = undefined;
@@ -48,25 +48,34 @@ export class FilterComponent implements OnInit {
 
   search()
   {
-    if(this.Name == "" && this.AvrageGrade == undefined && this.BedCount == undefined && this.MinPrice == undefined &&
+    if(this.Name == "" && this.MinAvrageGrade == undefined && this.BedCount == undefined && this.MinPrice == undefined &&
        this.MaxPrice == undefined && this.CountryName == "" && this.RegionName == "" && this.PlaceName == "" && 
        this.AccommodationTypeName == ""){
           this.searchAll();
     }
     else
     {
+        this.expandFilters();
         this.resetFields();
-
+        
         this.accommodationService.getByFilter(this.query).subscribe(
         a => 
         { 
           this.accommodations = a;
+          this.appendPortToImageUrl();
         },
         error =>
         {
             console.log("sfs");
         }
       );
+    }
+  }
+
+  appendPortToImageUrl()
+  {
+    for (var i = 0; i < this.accommodations.length; i++) {
+        this.accommodations[i].ImageUrl = DynamicUrl.socket + this.accommodations[i].ImageUrl;
     }
   }
 
@@ -94,9 +103,9 @@ export class FilterComponent implements OnInit {
       this.query += `Rooms/any(room : room/PricePerNight le ${this.MaxPrice}) and `;
     }
 
-    if(this.AvrageGrade != undefined)
+    if(this.MinAvrageGrade != undefined)
     {
-      this.query += `AvrageGrade ge ${this.AvrageGrade} and `;
+      this.query += `AvrageGrade ge ${this.MinAvrageGrade} and `;
     }
 
     if(this.CountryName != ""){
@@ -125,6 +134,7 @@ export class FilterComponent implements OnInit {
       a => 
       { 
         this.accommodations = a.json();
+        this.appendPortToImageUrl();
       },
       error =>
       {
