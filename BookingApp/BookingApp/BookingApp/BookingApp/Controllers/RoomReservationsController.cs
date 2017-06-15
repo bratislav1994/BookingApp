@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -17,9 +18,10 @@ namespace BookingApp.Controllers
 
         [HttpGet]
         [Route("ReadAll")]
+        [EnableQuery]
         public IQueryable<RoomReservation> ReadAllReservations()
         {
-            return db.RoomReservations;
+            return db.RoomReservations.Include("User").Include("Room");
         }
 
         [HttpGet]
@@ -27,7 +29,7 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult ReadReservation(int id)
         {
-            RoomReservation reservation = db.RoomReservations.Find(id);
+            RoomReservation reservation = db.RoomReservations.Include("Room").FirstOrDefault(r => r.Id == id);
 
             if (reservation == null)
             {
@@ -62,27 +64,12 @@ namespace BookingApp.Controllers
 
         [Authorize(Roles = "Manager")]
         [HttpPut]
-        [Route("Change/{idRoom}/{idUser}/{time}")]
-        public IHttpActionResult Change(int idRoom, int idUser, byte[] time, RoomReservation reservation)
+        [Route("Change")]
+        public IHttpActionResult Change(RoomReservation reservation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (idRoom != reservation.RoomId)
-            {
-                return BadRequest();
-            }
-
-            if (idUser != reservation.UserId)
-            {
-                return BadRequest();
-            }
-
-            if (time != reservation.TimeStamp)
-            {
-                return BadRequest();
             }
 
             db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;
@@ -93,7 +80,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReservationExists(idRoom, idUser, time))
+                if (!ReservationExists(reservation.Id))
                 {
                     return NotFound();
                 }
@@ -124,9 +111,9 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        private bool ReservationExists(int idRoom, int idUser, byte[] time)
+        private bool ReservationExists(int id)
         {
-            return db.RoomReservations.Count(e => (e.RoomId == idRoom && e.UserId == idUser && e.TimeStamp == time)) > 0;
+            return db.RoomReservations.Count(e => (e.Id == id)) > 0;
         }
     }
 }
