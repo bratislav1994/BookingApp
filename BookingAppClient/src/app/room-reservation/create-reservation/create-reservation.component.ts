@@ -3,6 +3,7 @@ import { RoomReservation } from "app/room-reservation/Reservation.model";
 import { ReservationService } from "app/room-reservation/reservation.service"
 import { RoomService } from "app/room/room.service";
 import { Room } from "app/room/room.model";
+import { LocalEnum } from "app/localEnum.model";
 
 @Component({
   selector: 'app-create-reservation',
@@ -31,8 +32,8 @@ export class CreateReservationComponent implements OnInit {
   }
 
   onSubmit(){
-    this.reservationService.createReservation(new RoomReservation(
-      this.StartDate, this.EndDate, 0, this.RoomId)).subscribe(x => alert("Region successfully added"),
+    let userId = localStorage.getItem(LocalEnum.Id.toString());
+    this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.RoomId)).subscribe(x => alert("Region successfully added"),
      error => 
      {
         console.log(error), alert(error.text())

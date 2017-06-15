@@ -19,21 +19,25 @@ export class ViewReservationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reservationService.getAllReservations().subscribe(c => this.reservations = c.json(), 
-    error => 
-     {
-        console.log(error), alert("Unsuccessful fetch operation")
-     });
+    this.getReservations();
   }
 
-   deleteReservation(Id: number)
+   deleteReservation(id: number)
   {
-    this.reservationService.deleteReservation(Id).subscribe(
-      e => this.reservationService.getAllReservations(), 
-      error => { console.log(error), alert("Unsuccessful fetch operation")});
+    this.reservationService.deleteReservation(id).subscribe(
+      e => this.getReservations());
   }
 
-  showCountry(id : number){
+  showReservation(id : number){
     this.router.navigate(['/home/view_reservation/' + id]);
+  }
+
+  getReservations() : void{
+    this.reservationService.getAllReservations().subscribe(
+      r => { this.reservations = r.json();
+      console.log(this.reservations[0].User.Username);} ,
+      error => {
+        console.log(error), alert("Unsuccessful fetch operation");
+      });
   }
 }
