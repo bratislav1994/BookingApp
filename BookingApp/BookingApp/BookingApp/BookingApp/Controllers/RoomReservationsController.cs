@@ -42,6 +42,7 @@ namespace BookingApp.Controllers
         [Authorize(Roles = "Manager")]
         [HttpPost]
         [Route("Create")]
+        [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult Create(RoomReservation reservation)
         {
             if (!ModelState.IsValid)
@@ -49,6 +50,22 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (reservation.StartDate > reservation.EndDate)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IQueryable<RoomReservation> roomRes = db.RoomReservations.Where(r => 
+                        r.RoomId.Equals(reservation.RoomId) &&
+                        ((reservation.StartDate >= r.StartDate && reservation.StartDate <= r.EndDate) ||
+                        (reservation.EndDate >= r.StartDate && reservation.EndDate <= r.EndDate) ||
+                        (reservation.StartDate <= r.StartDate && reservation.EndDate >= r.EndDate)));
+
+            if (roomRes.Count() != 0)
+            {
+                return BadRequest(ModelState);
+            }
+            
             try
             {
                 db.RoomReservations.Add(reservation);
@@ -59,12 +76,13 @@ namespace BookingApp.Controllers
                 return Content(HttpStatusCode.Conflict, reservation);
             }
 
-            return Ok();
+            return CreatedAtRoute("DefaultApi", new { controller = "RoomReservation", id = reservation.RoomId }, reservation);
         }
 
         [Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("Change")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult Change(RoomReservation reservation)
         {
             if (!ModelState.IsValid)
@@ -96,6 +114,7 @@ namespace BookingApp.Controllers
         [Authorize(Roles = "Manager")]
         [HttpDelete]
         [Route("Delete/{id}")]
+        [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult Delete(int id)
         {
             RoomReservation reservation = db.RoomReservations.Find(id);
