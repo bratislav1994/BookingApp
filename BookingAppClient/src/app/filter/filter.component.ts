@@ -130,6 +130,7 @@ export class FilterComponent implements OnInit {
 
   searchAll()
   {
+      this.resetFields();
       this.accommodationService.getAllAccommodations().subscribe(
       a => 
       { 
