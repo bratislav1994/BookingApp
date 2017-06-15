@@ -12,16 +12,16 @@ export class CountryService {
   constructor(private http : Http) { }
 
   addCountry(country : Country) : Observable<any> {
-       let opts = DynamicUrl.PutHeader();
+        let opts = DynamicUrl.PutHeader();
         return this.http.post(DynamicUrl.socket + `api/country`, country, opts);
     }
 
     getAllCountries() : Observable<any> {
-        return this.http.get("http://localhost:54043/api/country");
+        return this.http.get(DynamicUrl.socket + `api/country`);
     }
 
     getCountryById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/country/${id}`);
+        return this.http.get(DynamicUrl.socket + `api/country/${id}`);
     }
 
     getCountryByIdMap(id : number) : Observable<any> {
@@ -34,7 +34,7 @@ export class CountryService {
     }
 
     editCountry(country: Country) : Observable<any> {
-       let opts = DynamicUrl.PutHeader();
+        let opts = DynamicUrl.PutHeader();
         return this.http.put(DynamicUrl.socket + `api/country`, country, opts);
     }
 }
