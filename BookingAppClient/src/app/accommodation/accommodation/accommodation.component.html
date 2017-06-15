@@ -1,3 +1,33 @@
+  <div  >
+    <span style="height:5%;display:inline-block;position:relative;margin:0px">
+    <span style=" float:middle; background-color:aliceblue; width:20px;"> </span>
+
+    <span style=" float:middle;">
+    <div style="width:150px; height:20px"></div>
+
+    <div style="height:50px;width:300px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
+
+        <span style="text-align:left; background-color:B8B8B8; float:left; width:80%; height:100%">
+          <font style="color:white">{{accommodation.Name}}</font>
+        </span>
+
+        <span style="text-align:left; float:middle; width:20%; height:100%">  
+          <font style="color:white" size="6">{{accommodation.AvrageGrade}}</font>
+          <span style="color:white"> /</span>
+          <span style="color:white" itemprop="ratingValue">5</span>
+        </span>        
+        
+    </div>
+
+    <div>
+        <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation" height="350px" width="300px">      
+    </div>
+
+  </span>
+</span>
+</div>
+<!--ovde je kraj -->
+  
   <div style="width:100%">
     <div>
         Name: {{accommodation.Name}} <br>
@@ -31,9 +61,7 @@
         </form>
     </div>
 
-      <span>
-        <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation.Name" height="400px" width="50%">      
-      </span>
+      
   </div>
 
   <div>
