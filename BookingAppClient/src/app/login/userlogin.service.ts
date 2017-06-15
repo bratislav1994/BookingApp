@@ -11,8 +11,13 @@ export class UserloginService {
   constructor(private http : Http) { }
 
 login(username : string, password : string, grant_type: string) : Observable<any> {
-        let opts = DynamicUrl.PutHeader();
-        return this.http.post(DynamicUrl.socket + `oauth/token`, 
+       let header = new Headers();
+        header.append('Content-type', 'application/x-www-form-urlencoded');
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.post(`http://localhost:54043/oauth/token`, 
                               `username=${username}&password=${password}&grant_type=${grant_type}`, opts);
     }
 
