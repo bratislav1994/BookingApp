@@ -49,23 +49,23 @@
       <button name="add" [routerLink]="['/add_room/']">Dodavanje sobe, kasnije namestiti</button>
   </div>
 
-  <button name="add" (click) = "switchShowFormComment()">Show comment fields</button>
-
-  <div *ngIf="isShowCommentForm()">
+  <!--<button name="add" (click) = "switchShowFormComment()">Show comment fields</button>-->
+<!--*ngIf="switchShowFormComment()"-->
+  <div *ngIf="switchShowFormComment()">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
       <div>
-        <label for = "Comment">Comment:</label>
+        <label for = "comment">Comment:</label>
         <br>
-        <textarea type="text" name="Comment" id="Comment" [(ngModel)]="Comment">
+        <textarea type="text" name="comment" id="comment" [(ngModel)]="comment">
         </textarea>
       </div>
       <div>
         <label for = "Grade">Grade:</label>
         <br>
-        <input type="text" name="Grade" id="Grade" [(ngModel)]="Grade"/>
+        <input type="number" name="Grade" id="Grade" [(ngModel)]="Grade"/>
       </div>
       <div>
-        <button name="post">Post comment</button>
+        <button name="post" (click) ="onSubmitComment()">Post comment</button>
       </div>
     </form>
     </div>
@@ -74,8 +74,8 @@
     <div>
       <font style="size:14">Comments:</font><br>
 
-      <div *ngFor = "let comment of accommodation.Comments">
-        User: {{comment.User.Name}} : {{comment}}   
+      <div *ngFor = "let comment of Comments">
+        User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
         <button name="delete" (click) = "deleteComment(accommodation.Id)">Delete</button>
       </div>
       <br>

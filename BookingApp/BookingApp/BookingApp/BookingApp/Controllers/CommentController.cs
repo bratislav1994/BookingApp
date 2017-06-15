@@ -21,7 +21,7 @@ namespace BookingApp.Controllers
         [Route("ReadAll")]
         public IQueryable<Comment> ReadAllComments()
         {
-            return db.Comments;
+            return db.Comments.Include("User"); ;
         }
 
         [HttpGet]

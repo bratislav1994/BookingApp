@@ -7,6 +7,9 @@ import { Map } from "app/map/angular-map.model";
 import { CommentService } from "app/comment/comment.service";
 import { DynamicUrl } from "app/DynamicUrl.model";
 import { RoomService } from "app/room/room.service";
+import { Comment } from "app/comment/comment.model";
+import { LocalEnum } from "app/localEnum.model";
+import { User } from "app/login/userLogin.model";
 
 @Component({
   selector: 'app-accommodation',
@@ -22,18 +25,21 @@ export class AccommodationComponent implements OnInit {
 
   Id            : number;
   accommodation : Accommodation;
-  Comment       : string;
+  comment       : string;
   Grade         : number;
   Name          : string; 
   Description   : string;
   Address       : string;
   ImageURL      : string;
   showFormForComment : boolean;
-
+  Comments: Comment[];
+  query: string;
+  userId: number;
   rooms: Room[];
+  User: User;
 
   constructor(private accommodationService : AccommodationService, private route: Router, 
-                private activatedRoute: ActivatedRoute, commentService: CommentService,
+                private activatedRoute: ActivatedRoute, private commentService: CommentService,
                 private roomService: RoomService) { 
     this.accommodation = new Accommodation();
     this.rooms = [];
@@ -42,6 +48,9 @@ export class AccommodationComponent implements OnInit {
   }
 
   ngOnInit() {
+     this.userId = +localStorage.getItem(LocalEnum.Id.toString())
+    this.query = `?$filter=UserId eq '${this.userId}'`;
+
     this.rooms = [];
     let id = this.activatedRoute.snapshot.params["Id"];
     this.accommodationService.getByIdMap(id).subscribe(a =>
@@ -62,6 +71,9 @@ export class AccommodationComponent implements OnInit {
       console.log("aaaaaaaaaaaaaa" + error.text());
     }
   );
+
+  this.GetComments();
+  
 }
 
   onSubmit()
@@ -124,28 +136,52 @@ export class AccommodationComponent implements OnInit {
 
   onSubmitComment()
   {
-    // this.commentService
+    this.commentService.addComment(new Comment(0, this.Grade, 
+                                               this.comment,
+                                               this.userId,
+                                              this.accommodation.Id)).subscribe(a => alert("Dodao"), error =>
+                                              {
+                                                console.log("Nije dodao"); 
+                                              });
   }
 
   deleteComment()
   {
-
+      this.commentService.addComment(new Comment(0, 
+                                                 this.Grade,
+                                                 this.comment,
+                                                 this.userId,
+                                                 this.accommodation.Id)).subscribe(a => alert("Dodat"),
+                                                 error => alert("nije dodao"));
   }
 
-  isShowCommentForm() {
-    return this.showFormForComment;
+  GetComments()
+   {
+     this.accommodationService.getCommentsByFilter(this.query).subscribe(
+        c => 
+        { 
+          this.Comments = c;
+          console.log("usao");
+          if(this.Comments.length > 0)
+          {
+            this.showFormForComment = false;
+          }
+          else
+          {
+            this.showFormForComment = true;
+          }
+        },
+        error =>
+        {
+            console.log("sfs");
+        }
+      );
+     //return this.accommodation.UserId == userId;
   }
 
-   switchShowFormComment()
+    switchShowFormComment()
     {
-    if(this.showFormForComment)
-    {
-       this.showFormForComment = false;
-    }
-    else
-    {
-      this.showFormForComment = true;
-    }
+      return this.showFormForComment;
   }
 
 }

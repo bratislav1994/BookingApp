@@ -64,4 +64,8 @@ export class AccommodationService {
         return this.http.get(DynamicUrl.socket + `api/accommodation` + query).map(res => res.json());
     }
 
+    getCommentsByFilter(query : string) : Observable<any>{
+      return this.http.get(DynamicUrl.socket + `api/Comment/ReadAll` + query).map(res => res.json());
+    }
+
 }
