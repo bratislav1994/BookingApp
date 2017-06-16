@@ -1,12 +1,12 @@
-  <div style="width:100%">
+ <div style="width:100%">
 
     <div style="width:50%;float:left">
 
     <span style="height:5%;display:inline-block;position:relative;margin:0px">
-    <span style=" float:middle; background-color:aliceblue; width:20px;"> </span>
+        <span style=" float:middle; background-color:aliceblue; width:20px;"> </span>
 
     <span style=" float:middle;">
-    <div style="width:150px; height:20px"></div>
+        <div style="width:150px; height:20px"></div>
 
     <div style="height:70px;width:300px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
 
@@ -33,39 +33,51 @@
       <font style="color: white">{{accommodation.Description}}</font>
     </div>
 
-  </span>
+    
 
-  
 
-</span>
-    </div>
+
+      </span>
+      </span>
+
+       </div>
+    
+    <!--</div>-->
 
     <div style="width:50%;float:right">
 
-  <span style="height:5%;display:inline-block;position:relative;margin:0px">
+    <span style="height:5%;display:inline-block;position:relative;margin:0px">
     <span style=" float:right; background-color:aliceblue; width:20px;"> </span>
 
     <span style=" float:right;">
       
     <div style="width:150px; height:20px"></div>
+
         <div style=" margin: 5 auto">
-          <app-map [map]="map"></app-map>
+            <app-map [map]="map"></app-map>
         </div>
+
+     
     </span>
 
   </span>
-
-  </div>
-
-
-
-
+   </div>
 </div>
+
 <!--ovde je kraj -->
   
-  <div style="float:left;width:100%">
 
-    <div>
+<div style="width:100%;float:left">
+      <br>
+      <br>
+
+      <button style="float:left" *ngIf="canEditOrDelete()" name="edit" (click) = "changeShowEdit()">Show edit form</button>
+      <button style="float:left" *ngIf="canEditOrDelete()" name="delete" (click) = "deleteAcc(accommodation)">Delete</button>
+      <br>
+      <br>
+
+      <div *ngIf="isShowEditPress()" style="float:left;width:50%">
+
         <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
             
            <div>
@@ -87,27 +99,57 @@
                 <button name="edit" >Edit</button>
             </div>
         </form>
-    </div>
-
-      
+      </div>
   </div>
 
-  <div style="float:left">
+
+
+
+
+<!--4-->
+
+  <div style="width:100%;float:left">
+
+      <!--<div (click)="roomsClicked()">
+          <a href="#">Rooms</a>
+      </div>
+      <div (click)="commentsClicked()">
+          <a href="#">Comments</a>
+      </div>-->
+
+
+      <button id="button1" name="rooms" (click)="roomsClicked()">Rooms</button>
+      <button id="button1" name="comments" (click)="commentsClicked()">Comments</button>
+
+  </div>
+
+  
+  <!--rooms-->
+  <div *ngIf="isShowRoomsSelected()" style="float:left">
       
-      <div *ngFor = "let room of accommodation.Rooms">
-          <label>Room number: {{room.RoomNumber}}</label> 
+    <span style="height:5%;display:inline-block;position:relative;margin:0px" *ngFor = "let room of accommodation.Rooms">
+    <span style=" float:left; background-color:aliceblue; width:20px;"> </span>
+
+    <span style=" float:left;">
+    <div style="width:150px; height:60px"></div>
+
+    <div style="background-color:#B8B8B8;width:220px;height:120px;border-bottom: 1px solid #A0A0A0;">
+        <font style="color: aliceblue">Room number: {{room.RoomNumber}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.BedCount}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.PricePerNight}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.Description}}</font><br>
         <button name="show" (click)="showRoom(room.Id)">Show</button>
         <button name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
-      </div>
-      
-      <br>
-        <!--accommodation.Id-->
-      <button name="add" [routerLink]="['/add_room/']">Dodavanje sobe, kasnije namestiti</button>
+    </div>
+
+    </span>
+  </span>
   </div>
 
-  <!--<button name="add" (click) = "switchShowFormComment()">Show comment fields</button>-->
-<!--*ngIf="switchShowFormComment()"-->
-  <div style="float:left" *ngIf="switchShowFormComment()">
+
+  <!--comments-->
+
+  <div style="float:left;width:100%;" *ngIf="switchShowFormComment() && isShowCommentsSelected()">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
       <div>
         <br>
@@ -125,19 +167,13 @@
     </form>
     </div>
 
-  <div>
-    <div>
+    <br>
 
+    
+  <div style="height:5%;float:left" *ngIf="isShowCommentsSelected()">
       <div *ngFor = "let comment of Comments">
         User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
         <button name="delete" (click) = "deleteComment(comment)">Delete</button>
       </div>
       <br>
-      
-    </div>
   </div>
-    
-
-<div>
-
-</div>

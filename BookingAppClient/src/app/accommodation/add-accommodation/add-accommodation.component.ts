@@ -11,15 +11,18 @@ import { Country }  from "app/country/country.model";
 import { CountryService } from "app/country/country.service";
 import { RegionService } from "app/region/region.service";
 import { LocalEnum } from "app/localEnum.model";
+import { Map } from "app/map/angular-map.model";
 
 @Component({
   selector: 'app-add-accommodation',
   templateUrl: './add-accommodation.component.html',
   styleUrls: ['./add-accommodation.component.css'],
-  providers: [AccommodationService, TypeServiceService, PlaceService, RegionService, CountryService]
+  providers: [AccommodationService, TypeServiceService, PlaceService, RegionService, CountryService],
+   styles: ['agm-map {height: 300px; width: 500px;}']
 })
 export class AddAccommodationComponent implements OnInit {
 
+    map: Map;
     file: File;
 
     Id: number;
@@ -47,6 +50,11 @@ export class AddAccommodationComponent implements OnInit {
     countries: Country[];
     regions: Region[];
 
+    lat: number = 45.242268;
+    lng: number = 19.842954;
+    clickedLat: number;
+    clickedLong: number;
+
   constructor(private accommodationService: AccommodationService, private placeService: PlaceService,
               private countryService: CountryService, private typeService: TypeServiceService,
                private regionService : RegionService) {
@@ -54,6 +62,7 @@ export class AddAccommodationComponent implements OnInit {
                   this.types = [];
                   this.regions = [];
                   this.countries = [];
+                  this.map = {} as Map;
              }
 
   ngOnInit() {
@@ -77,11 +86,17 @@ export class AddAccommodationComponent implements OnInit {
     });
   }
 
+  onClick(res: any)
+  {
+    this.clickedLat = res.coords.lat;
+    this.clickedLong = res.coords.lng;
+  }
+
   onSubmit(form: NgForm){
     console.log("usao");
     
     this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
-                                    "", this.Latitude, this.Longitude, this.PlaceId, this.AccommodationTypeId, 
+                                    "", this.clickedLat, this.clickedLong, this.PlaceId, this.AccommodationTypeId, 
                                     parseInt(localStorage.getItem(LocalEnum.Id.toString()))), this.file).subscribe(
                         x => 
                         {

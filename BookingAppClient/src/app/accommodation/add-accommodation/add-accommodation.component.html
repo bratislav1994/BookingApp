@@ -20,18 +20,16 @@
     <br>
     <input type="text" name="Address" id="Address" [(ngModel)]="Address"/>
   </div>
-
-  <div>
-    <label for = "Latitude">Latitude:</label>
-    <br>
-    <input type="number" name="Latitude" id="Latitude" [(ngModel)]="Latitude"/>
-  </div>
-
-  <div>
-    <label for = "Longitude">Longitude:</label>
-    <br>
-    <input type="number" name="Longitude" id="Longitude" [(ngModel)]="Longitude"/>
-  </div>
+  <br>
+  
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapClick)="onClick($event)">
+        <agm-marker [latitude]="clickedLat" [longitude]="clickedLong" label=""></agm-marker>
+    </agm-map>
+    <br><br>
+    <div>
+        <p>Latitude:{{clickedLat}}</p>
+        <p>Longitude:{{clickedLong}}</p>
+    </div>
 
   <div>
     <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">

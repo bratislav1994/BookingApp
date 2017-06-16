@@ -10,12 +10,13 @@ import { RoomService } from "app/room/room.service";
 import { Comment } from "app/comment/comment.model";
 import { LocalEnum } from "app/localEnum.model";
 import { User } from "app/login/userLogin.model";
+import { LocalStorageService } from "app/local-storage.service";
 
 @Component({
   selector: 'app-accommodation',
   templateUrl: './accommodation.component.html',
   styleUrls: ['./accommodation.component.css'],
-  providers: [AccommodationService, CommentService, RoomService],
+  providers: [AccommodationService, CommentService, RoomService, LocalStorageService],
 
 })
 
@@ -39,13 +40,22 @@ export class AccommodationComponent implements OnInit {
   rooms: Room[];
   User: User;
 
+  showEditForm: boolean;
+  showRooms: boolean;
+  showComments: boolean;
+  accommodations: Accommodation[];
+
   constructor(private accommodationService : AccommodationService, private route: Router, 
                 private activatedRoute: ActivatedRoute, private commentService: CommentService,
-                private roomService: RoomService) { 
+                private roomService: RoomService, private localStorageService: LocalStorageService) { 
     this.accommodation = new Accommodation();
     this.rooms = [];
     this.map = {} as Map;
     this.showFormForComment = false;
+    this.showEditForm = false;
+    this.showRooms = true;
+    this.showComments = false;
+    this.accommodations = [];
   }
 
   ngOnInit() {
@@ -77,10 +87,16 @@ export class AccommodationComponent implements OnInit {
       console.log("aaaaaaaaaaaaaa" + error.text());
     }
   );
-
-  
-  
 }
+
+  isShowEditPress() {
+    return this.showEditForm;
+  }
+
+  changeShowEdit()
+  {
+    this.showEditForm = this.showEditForm ? false : true;
+  }
 
   onSubmit()
   {
@@ -105,7 +121,61 @@ export class AccommodationComponent implements OnInit {
                   doc.className = "show";
                   setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                } 
-              );
+          );
+      this.showEditForm = false;
+  }
+
+  deleteAcc(acc: Accommodation)
+  {
+    this.accommodationService.delete(acc.Id).subscribe(
+      e => 
+      {
+            this.getAccommodations();
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Accommodation successfully deleted.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+            this.route.navigate(['/home/view_accommodations/']);
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error while deleting accommodation.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+        );
+  }
+
+  canEditOrDelete() : boolean {
+    // if(this.localStorageService.IsLoggedIn()){
+    //   if(this.accommodation.UserId == this.localStorageService.getUserId()){
+    //     return true;
+    //   }
+
+    //   return false;
+    // }
+    // return false;
+    return true;
+  }
+
+  getAccommodations() : void{
+    this.accommodationService.getAllAccommodations().subscribe(a =>
+    { 
+      this.accommodations = a.json();
+      this.appendPortToImageUrl();
+    },
+    error => 
+    {
+        console.log(error), alert("Unsuccessful fetch operation")
+    });
+  }
+
+  appendPortToImageUrl()
+  {
+    for (var i = 0; i < this.accommodations.length; i++) {
+        this.accommodations[i].ImageUrl = DynamicUrl.socket + this.accommodations[i].ImageUrl;
+    }
   }
 
   showRoom(id: number){
@@ -130,6 +200,28 @@ export class AccommodationComponent implements OnInit {
           setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }
     );
+  }
+
+  roomsClicked()
+  {
+    this.showRooms = true;
+    this.showComments = false;
+  }
+
+  isShowRoomsSelected() : boolean
+  {
+      return this.showRooms;
+  }
+  
+  commentsClicked()
+  {
+    this.showComments = true;
+    this.showRooms = false;
+  }
+
+  isShowCommentsSelected() : boolean
+  {
+      return this.showComments;
   }
 
   getRooms() : void{
