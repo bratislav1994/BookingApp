@@ -79,8 +79,8 @@ export class AccommodationComponent implements OnInit {
         this.map = new Map(this.accommodation.Latitude, this.accommodation.Longitude, 
                             "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
         
-        this.GetComments();
-        this.isUserPostComment();
+         this.isUserPostComment();
+        this.GetComments();  
   }, 
     error => 
     {
@@ -275,7 +275,14 @@ export class AccommodationComponent implements OnInit {
         c => 
         { 
           this.Comments = c;
-          
+
+          if(this.Comments.length > 0){
+            let totalGrades = 0;
+            for(let i = 0; i < this.Comments.length; i++ ){
+              totalGrades += this.Comments[i].Grade;
+            }
+            this.accommodation.AvrageGrade = totalGrades / this.Comments.length;
+          }
          
         },
         error =>
