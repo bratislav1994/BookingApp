@@ -1,68 +1,68 @@
-<p>
-  add-accommodation works!
-</p>
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)" enctype="multipart/form-data">
-  <div>
-    <label for = "Name">Name:</label>
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" enctype="multipart/form-data">
+    <div class="form-group">
+      <label class="control-label" for = "Name">Name:</label>
+      <br>
+      <input class="form-control" style="width:15%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+    </div>
+    <div class="control-label">
+      <label class="control-label" for = "Description">Description:</label>
+      <br>
+      <input class="form-control" style="width:15%" type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+    </div>
+    <div class="control-label">
+      <label class="control-label" for = "Address">Address:</label>
+      <br>
+      <input class="form-control" style="width:15%" type="text" name="Address" id="Address" [(ngModel)]="Address"/>
+    </div>
     <br>
-    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
-  </div>
-
-  <div>
-    <label for = "Description">Description:</label>
-    <br>
-    <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
-  </div>
-
-  <div>
-    <label for = "Address">Address:</label>
-    <br>
-    <input type="text" name="Address" id="Address" [(ngModel)]="Address"/>
-  </div>
-  <br>
   
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapClick)="onClick($event)">
         <agm-marker [latitude]="clickedLat" [longitude]="clickedLong" label=""></agm-marker>
     </agm-map>
     <br><br>
-    <div>
+    <div class="form-group">
         <p>Latitude:{{clickedLat}}</p>
         <p>Longitude:{{clickedLong}}</p>
     </div>
 
-  <div>
-    <select name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
-      <option *ngFor = "let t of types" value={{t.Id}} >{{t.Name}}</option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label class="control-label">Accommodation type:</label>
+      <select style="width:15%" class="form-control" name="AccommodationTypeId" id="AccommodationTypeId" [(ngModel)]="AccommodationTypeId">
+        <option *ngFor = "let t of types" value={{t.Id}} >{{t.Name}}</option>
+      </select>
+    </div>
 
-  <div>
-    <label for = "ImageUrl">ImageUrl:</label>
-    <br>
-    <input type="file" name="ImageUrl" id="ImageUrl" (change)="onChange($event)"/>
-  </div>
+    <div class="form-group">
+      <label class="control-label" for = "ImageUrl">ImageUrl:</label>
+      <br>
+      <input type="file" name="ImageUrl" id="ImageUrl" (change)="onChange($event)"/>
+    </div>
 
-  <div>
-    <select name="CountryId" id="CountryId" [(ngModel)]="CountryId" (change)="countrySelected()">
-      <option *ngFor = "let country of countries" value={{country.Id}} >{{country.Name}}</option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label class="control-label">Country:</label>
+      <select class="form-control" style="width:15%" name="CountryId" id="CountryId" [(ngModel)]="CountryId" (change)="countrySelected()">
+        <option *ngFor = "let country of countries" value={{country.Id}} >{{country.Name}}</option>
+      </select>
+    </div>
 
-  <div *ngIf="isSelectedCountry()">
-    <select name="RegionId" id="RegionId" [(ngModel)]="RegionId" (change)="regionSelected()">
-      <option *ngFor = "let region of regions" value={{region.Id}} >{{region.Name}}</option>
-    </select>
-  </div>
+    <div class="form-group" *ngIf="isSelectedCountry()">
+      <label class="control-label">Region:</label>
+      <select style="width:15%" class="form-control" name="RegionId" id="RegionId" [(ngModel)]="RegionId" (change)="regionSelected()">
+        <option *ngFor = "let region of regions" value={{region.Id}} >{{region.Name}}</option>
+      </select>
+    </div>
 
-  <div *ngIf="isSelectedRegion()">
-    <select name="PlaceId" id="PlaceId" [(ngModel)]="PlaceId">
-      <option *ngFor = "let place of places" value={{place.Id}} >{{place.Name}}</option>
-    </select>
-  </div>
+    <div class="form-group" *ngIf="isSelectedRegion()">
+      <label class="control-label">Place:</label>
+      <select style="width:15%" class="form-control" name="PlaceId" id="PlaceId" [(ngModel)]="PlaceId">
+        <option *ngFor = "let place of places" value={{place.Id}} >{{place.Name}}</option>
+      </select>
+    </div>
 
-  <div>
-    <input type="submit" value="Add"/>
-  </div>
+    <div>
+      <input class="btn btn-default" type="submit" value="Add"/>
+    </div>
+  </form>
+</div>
 
-</form>
