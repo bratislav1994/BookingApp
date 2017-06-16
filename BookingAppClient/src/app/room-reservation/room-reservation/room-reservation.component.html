@@ -1,21 +1,25 @@
-<div> 
-    <p>StartDate: {{reservation.StartDate }}</p>
-    <p>EndDate: {{reservation.EndDate }}</p>
-    <p>Room: {{ reservation.Room.Description }}</p>
-    <!--<button name="show" [routerLink]="['/reservation-show']">Show</button>-->
-</div>
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-  <div>
-    <label for = "StartDate">Start date:</label>
-    <input type="date" name="StartDate" id="StartDate" [(ngModel)]="StartDate"/>
-  </div>
-<div>
-    <label for = "EndDate">End date:</label>
-    <input type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
-  </div>
-  <div>
-    <input type="submit" value="Edit"/>
+ <div class="panel panel-success" style="width: 30%">  
+  <div class="panel-heading"> 
+    <p align="center">StartDate: {{reservation.StartDate }}</p>
+    <p align="center">EndDate: {{reservation.EndDate }}</p>
+    <p align="center">Room: {{ reservation.Room.Description }}</p>
   </div>
 
-</form>
+  <div>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+      <div class="form-group">
+        <label align="right" class="control-label" for = "StartDate">Start date:</label>
+         <br>
+        <input align="center" style="width: 60%" class="form-control" type="date" name="StartDate" id="StartDate" [(ngModel)]="StartDate"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for = "EndDate">End date:</label>
+         <br>
+        <input style="width: 60%" class="form-control" type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
+      </div>
+      <div>
+        <input class="btn btn-success" type="submit" value="Edit"/>
+      </div>
+    </form>
+  </div>
+ </div>

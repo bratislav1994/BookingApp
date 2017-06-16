@@ -1,10 +1,9 @@
 <div style="float:left;padding-left:1%">
-  <ul *ngFor = "let reservation of reservations">
-    <li>{{ reservation.StartDate }}, {{ reservation.EndDate }}
+  <ul class="breadcrumb" *ngFor = "let reservation of reservations">
+    <li style="color:white" class="active">{{ reservation.StartDate }}, {{ reservation.EndDate }}
         {{ reservation.User.Username }}, {{ reservation.Room.Description }}
+      <button class="btn btn-info" name="show" (click)="showReservation(reservation.Id)">Show</button>
+      <button class="btn btn-danger" name="delete" (click) = "deleteReservation(reservation.Id)">Delete</button>
     </li>
-
-    <button name="show" (click)="showReservation(reservation.Id)">Show</button>
-    <button name="delete" (click) = "deleteReservation(reservation.Id)">Delete</button>
   </ul>
 </div>

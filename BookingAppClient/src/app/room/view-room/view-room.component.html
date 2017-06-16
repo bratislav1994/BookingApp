@@ -1,9 +1,10 @@
 <div style="float:left;padding-left:1%">
-  <ul *ngFor = "let room of rooms">
-    <li> {{ room.Accommodation.Name }}, {{ room.RoomNumber}}, 
+  <ul class="breadcrumb" *ngFor = "let room of rooms">
+    <li style="color:white" class="active"> {{ room.Accommodation.Name }}, {{ room.RoomNumber}}, 
          {{ room.BedCount}}, {{ room.PricePerNight }}
+    
+      <button class="btn btn-info" name="show" (click)="showRoom(room.Id)">Show</button>
+      <button class="btn btn-danger" name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
     </li>
-    <button name="show" (click)="showRoom(room.Id)">Show</button>
-    <button name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
   </ul>
 </div>

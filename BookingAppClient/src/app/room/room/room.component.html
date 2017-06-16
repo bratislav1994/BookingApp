@@ -1,28 +1,35 @@
-<div> 
+<div class="panel panel-success" style="width: 30%">
+  <div class="panel-heading"> 
     <p>RoomNumber: {{room.RoomNumber}}</p>
     <p>Bed count: {{room.BedCount}}</p>
     <p>Description: {{room.Description}}</p>
     <p>Price per night: {{room.PricePerNight}}</p>
-
+  </div>
+  <div>
      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-  <div>
-    <label for = "RoomNumber">Room number:</label>
-    <input type="text" name="RoomNumber" id="RoomNumber" [(ngModel)]="RoomNumber"/>
+      <div class="form-group">
+        <label class="control-label" for = "RoomNumber">Room number:</label>
+        <br>
+        <input class="form-control" style="width: 30%" type="text" name="RoomNumber" id="RoomNumber" [(ngModel)]="RoomNumber"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for = "BedCount">Bed count:</label>
+        <br>
+        <input class="form-control" style="width: 30%" type="text" name="BedCount" id="BedCount" [(ngModel)]="BedCount"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label"  for = "Description">Description:</label>
+        <br>
+        <input class="form-control" style="width: 30%" type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for = "PricePerNight">Price per night:</label>
+        <br>
+        <input class="form-control" style="width: 30%" type="text" name="PricePerNight" id="PricePerNight" [(ngModel)]="PricePerNight"/>
+      </div>
+      <div>
+        <input class="btn btn-success" type="submit" value="Edit"/>
+      </div>
+    </form>
   </div>
-  <div>
-    <label for = "BedCount">Bed count:</label>
-    <input type="text" name="BedCount" id="BedCount" [(ngModel)]="BedCount"/>
-  </div>
-   <div>
-    <label for = "Description">Description:</label>
-    <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
-  </div>
-  <div>
-    <label for = "PricePerNight">Price per night:</label>
-    <input type="text" name="PricePerNight" id="PricePerNight" [(ngModel)]="PricePerNight"/>
-  </div>
-  <div>
-    <input type="submit" value="Edit"/>
-  </div>
-</form>
 </div>
