@@ -1,4 +1,4 @@
-<p>
+<!--<p>
   add-region works!
 </p>
 
@@ -19,4 +19,24 @@
     <input type="submit" value="Add"/>
   </div>
 
+</form>-->
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div class="form-group">
+    <label class="control-label" for = "Name">Name:</label>
+    <br>
+    <input class="form-control" style="width:15%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+
+  <div class="form-group" style="width:15%">
+    <label class="control-label">Country:</label>
+    <select class="form-control" name="CountryId" id="CountryId" [(ngModel)]="CountryId">
+      <option *ngFor = "let country of countries" value={{country.Id}} >{{country.Name}}</option>
+    </select>
+  </div>
+
+  <div>
+    <input class="btn btn-default" type="submit" value="Add"/>
+  </div>
 </form>
+</div>

@@ -1,7 +1,7 @@
 <div style="float:left;padding-left:1%">
-  <ul *ngFor = "let place of places">
-    <li>{{ place.Name }}, {{place.Region.Name}}</li>
-    <button name="show" (click)="showPlace(place.Id)" [routerLink]="['/home/view_place/', place.Id]">Show</button>
-    <button name="delete" (click) = "deletePlace(place)">Delete</button>
+  <ul class="breadcrumb" *ngFor = "let place of places">
+    <li style="color:white" class="active">{{ place.Name }}, {{place.Region.Name}}</li>
+    <button class="btn btn-info" name="show" (click)="showPlace(place.Id)" [routerLink]="['/home/view_place/', place.Id]">Show</button>
+    <button class="btn btn-danger" name="delete" (click) = "deletePlace(place)">Delete</button>
   </ul>
 </div>

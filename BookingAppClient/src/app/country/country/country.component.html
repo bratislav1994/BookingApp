@@ -1,4 +1,4 @@
-<div>
+<!--<div>
  
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
    <table>
@@ -33,5 +33,45 @@
     <td><button name="delete" (click) = "deleteRegion(region)">Delete</button></td>
   </tr>
 </table>
+</div>-->
+
+<div class="panel panel-success" style="width: 30%"> 
+  <div class="panel-heading">
+    <p align="center">Name: {{country.Name}}</p>
+    <p align="center">Code: {{country.Code}}</p>
+  </div>
+    
+
+<div>
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+  <div class="form-group">
+    <label align="right" class="control-label" for = "Name">Enter new name of country:</label>
+    <br>
+    <input align="center" class="form-control" style="width: 30%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for = "Code">Enter new code of country:</label>
+    <br>
+    <input class="form-control" style="width: 30%" type="text" name="Code" id="Code" [(ngModel)]="Code"/>
+  </div>
+
+  <div>
+   <button class="btn btn-success" style="width: 30%" name="edit" >Edit</button>
+  </div>
+
+</form>
 </div>
+</div>
+
+<div style="width: 30%"> 
+  <ul class="breadcrumb" style="text-align:center" *ngFor = "let region of regions">
+    <li style="color:white;" align="center" class="active">{{ region.Name }}
+    <button class="btn btn-info" name="show" (click)="showRegion(region.Id)">Show</button>
+    <button class="btn btn-danger" name="delete" (click) = "deleteRegion(region)">Delete</button>
+    </li>
+  </ul>
+</div>
+
 

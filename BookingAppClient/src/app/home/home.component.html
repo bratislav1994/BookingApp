@@ -7,8 +7,8 @@
 	
     	<div *ngIf="!IsLoggedIn()" style=" float:right">
 			
-			<a [routerLink]="['/registration']">Registration</a>
-    			 <a [routerLink]="['/home/login']">Login</a>
+			<a class="btn btn-link" style="color:black" [routerLink]="['/registration']">Registration</a>
+    			 <a class="btn btn-link" style="color:black" [routerLink]="['/home/login']">Login</a>
 				
 		</div>
 		<div *ngIf="IsLoggedIn()" style=" float:right">

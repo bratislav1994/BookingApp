@@ -67,10 +67,10 @@ li a:hover {
 			#logo h1 span { color:#BCCE98;}
 
 			#header { background:#fff; }
-			#header-inner { margin:0 auto; padding:0; width:970px;}
+			#header-inner { margin:0 auto; padding:0; width:100%;}
 			
 			.feature { background:#555;padding:18px;}
-			.feature-inner { margin:auto;width:970px; }
+			.feature-inner { margin:auto;width:100%; }
 			.feature-inner h1 {color:#DAE9BC;font-size:32px;}
 			
 			.clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}

@@ -1,26 +1,31 @@
-<div style="float:left;padding-left:1%"> 
-    <p>Current name of region: {{region.Name}}</p>
-    <p>Country name: {{countryName}}</p>
-    <!--<p>Country code: {{region.Country.Code}}</p>-->
-    <!--<button name="show" [routerLink]="['/region-show']">Show</button>-->
-
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-  <div>
-    <label for = "Name">Enter new name of region:</label>
-    <br>
-    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+<div class="panel panel-success" style="width: 30%">
+  <div class="panel-heading"> 
+    <p align="center">Current name of region: {{region.Name}}</p>
+    <p align="center">Country name: {{countryName}}</p>
   </div>
+
   <div>
-   <button name="edit" >Edit</button>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+      <div class="form-group">
+        <label class="control-label" for = "Name">Enter new name of region:</label>
+          <br>
+        <input class="form-control" style="width: 30%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+      </div>
+      <div>
+        <button class="btn btn-success" style="width: 30%" name="edit" >Edit</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 
-
-
-  <ul *ngFor = "let place of places">
-    <li>{{ place.Name }}</li>
-    <button name="show" (click)="showPlace(place.Id)">Show</button>
-    <button name="delete" (click) = "deletePlace(place)">Delete</button>
+<div style="width: 30%">
+  <ul class="breadcrumb" style="text-align:center" *ngFor = "let place of places">
+    <li style="color:white;" align="center" class="active">{{ place.Name }}
+      <button class="btn btn-info" name="show" (click)="showPlace(place.Id)">Show</button>
+      <button class="btn btn-danger" name="delete" (click) = "deletePlace(place)">Delete</button>
+    </li>
   </ul>
 </div>
+  
+
+

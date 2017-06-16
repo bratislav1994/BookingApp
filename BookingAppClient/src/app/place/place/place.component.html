@@ -1,21 +1,23 @@
-<div> 
-    <p>Name: {{place.Name}}</p>
+<div class="panel panel-success" style="width: 30%">
+  <div class="panel-heading"> 
+    <p align="center">Name: {{place.Name}}</p>
     <!--<p>Region name: {{place.Region.Name}}</p>
     <p>Country name: {{place.Region.Country.Name}}</p>
     <p>Country code: {{place.Region.Country.Code}}</p>
     <button name="show" [routerLink]="['/place-show']">Show</button>-->
+  </div>
 
+  <div>
     <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+      <div  class="form-group">
+        <label class="control-label" for = "Name">Enter new name of place:</label>
+        <br>
+        <input class="form-control" style="width: 30%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+      </div>
 
-  <div>
-    <label for = "Name">Enter new name of place:</label>
-    <br>
-    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+      <div>
+        <button class="btn btn-success" style="width: 30%" name="edit" >Edit</button>
+      </div>
+    </form>
   </div>
-
-  <div>
-   <button name="edit" >Edit</button>
-  </div>
-
-</form>
 </div>

@@ -1,20 +1,21 @@
 <div>
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
 
-  <div>
-    <label for = "Name">Name:</label>
+  <div class="form-group">
+    <label class="control-label" for = "Name">Name:</label>
     <br>
-    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+    <input class="form-control" style="width:15%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
   </div>
   
-  <div>
-    <select name="RegionId" id="RegionId" [(ngModel)]="RegionId">
+  <div class="form-group" style="width:15%">
+    <label class="control-label">Region:</label>
+    <select class="form-control" name="RegionId" id="RegionId" [(ngModel)]="RegionId">
       <option *ngFor = "let region of regions" value={{region.Id}} >{{region.Name}}</option>
     </select>
   </div>
  
   <div>
-    <input type="submit" value="Add"/>
+    <input class="btn btn-default" type="submit" value="Add"/>
   </div>
 
 </form>

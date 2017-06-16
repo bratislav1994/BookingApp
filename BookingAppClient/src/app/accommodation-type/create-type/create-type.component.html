@@ -1,9 +1,11 @@
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-    <div>
-      <label for = "Name">Enter name for accommodation type:</label>
-      <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
-      <input type="submit" value="Create"/>
+    <div class="form-group">
+      <label class="control-label" for = "Name">Enter name for accommodation type:</label>
+      <br>
+      <input class="form-control" style="width:15%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
+      <br>
+      <input class="btn btn-default" type="submit" value="Create"/>
     </div>
   </form>
 </div>
