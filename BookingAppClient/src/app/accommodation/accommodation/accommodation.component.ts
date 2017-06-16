@@ -33,6 +33,7 @@ export class AccommodationComponent implements OnInit {
   ImageURL      : string;
   showFormForComment : boolean;
   Comments: Comment[];
+  commentObj: Comment;
   query: string;
   userId: number;
   rooms: Room[];
@@ -49,10 +50,12 @@ export class AccommodationComponent implements OnInit {
 
   ngOnInit() {
      this.userId = +localStorage.getItem(LocalEnum.Id.toString())
-    this.query = `?$filter=UserId eq '${this.userId}'`;
+    
 
     this.rooms = [];
     let id = this.activatedRoute.snapshot.params["Id"];
+    this.query = `?$filter=AccommodationId eq ${id}`;
+
     this.accommodationService.getByIdMap(id).subscribe(a =>
     {
         this.accommodation = (a[0] as Accommodation);
@@ -65,14 +68,17 @@ export class AccommodationComponent implements OnInit {
         this.Address = this.accommodation.Address;
         this.map = new Map(this.accommodation.Latitude, this.accommodation.Longitude, 
                             "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
-    }, 
+        
+        this.GetComments();
+        this.isUserPostComment();
+  }, 
     error => 
     {
       console.log("aaaaaaaaaaaaaa" + error.text());
     }
   );
 
-  this.GetComments();
+  
   
 }
 
@@ -139,10 +145,19 @@ export class AccommodationComponent implements OnInit {
     this.commentService.addComment(new Comment(0, this.Grade, 
                                                this.comment,
                                                this.userId,
-                                              this.accommodation.Id)).subscribe(a => alert("Dodao"), error =>
+                                              this.accommodation.Id)).subscribe(a => 
+                                              {
+                                                this.GetComments();
+                                                this.isUserPostComment();
+                                              }, error =>
                                               {
                                                 console.log("Nije dodao"); 
                                               });
+  }
+
+  ReadAll()
+  {
+
   }
 
   deleteComment()
@@ -162,14 +177,7 @@ export class AccommodationComponent implements OnInit {
         { 
           this.Comments = c;
           console.log("usao");
-          if(this.Comments.length > 0)
-          {
-            this.showFormForComment = false;
-          }
-          else
-          {
-            this.showFormForComment = true;
-          }
+         
         },
         error =>
         {
@@ -177,6 +185,18 @@ export class AccommodationComponent implements OnInit {
         }
       );
      //return this.accommodation.UserId == userId;
+  }
+
+  isUserPostComment(){
+    this.commentService.getCommentById(this.userId).subscribe(
+      c => {
+        this.commentObj = (c as Comment);
+        this.showFormForComment = false;
+        
+        console.log("Nasao")
+      },
+      error => { console.log("Nije nasao"); this.showFormForComment = true; }
+    )
   }
 
     switchShowFormComment()

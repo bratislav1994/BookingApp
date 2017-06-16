@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -18,18 +19,20 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         [HttpGet]
+        [EnableQuery]
         [Route("ReadAll")]
         public IQueryable<Comment> ReadAllComments()
         {
-            return db.Comments.Include("User"); ;
+            return db.Comments.Include("User").Include("Accommodation"); ;
         }
 
         [HttpGet]
-        [Route("Read/{id}/{id2}")]
+        [Route("Read/{id}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult ReadComment(int id, int id2)
+        public IHttpActionResult ReadComment(int id)
         {
-            Comment comment = db.Comments.Find(new { AccommodationId = id, UserId = id2 });
+            Comment comment = db.Comments.Include("User").Include("Accommodation").FirstOrDefault(c => c.UserId == id);
+
             if (comment == null)
             {
                 return NotFound();
