@@ -25,7 +25,21 @@ export class ViewReservationComponent implements OnInit {
    deleteReservation(id: number)
   {
     this.reservationService.deleteReservation(id).subscribe(
-      e => this.getReservations());
+       x => 
+      {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room reservation successfully deleted.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = error.json().Message;   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+      }
+    );
   }
 
   showReservation(id : number){

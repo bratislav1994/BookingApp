@@ -35,7 +35,7 @@ export class ListOfPlacesComponent implements OnInit {
       error =>
       {
           var doc = document.getElementById("errorMsg");
-          doc.innerText = "Error while deleting place.";   
+          doc.innerText = error.json().Message;   
           doc.className = "show";
           setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }

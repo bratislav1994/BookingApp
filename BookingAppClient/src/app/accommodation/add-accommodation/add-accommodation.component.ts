@@ -105,10 +105,10 @@ export class AddAccommodationComponent implements OnInit {
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                          },
-                         eror => 
+                         error => 
                         {
                             var doc = document.getElementById("errorMsg");
-                            doc.innerText = "Error while adding accommodation.";   
+                            doc.innerText = error.json().Message;
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                         }

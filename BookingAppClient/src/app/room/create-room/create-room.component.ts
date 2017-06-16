@@ -50,7 +50,7 @@ export class CreateRoomComponent implements OnInit {
         error => 
         {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Room already exists.";   
+            doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
         }

@@ -3,6 +3,7 @@ import { User } from "app/registration/user.model";
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LocalEnum } from "app/localEnum.model";
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
 export class LogoutService {
@@ -10,15 +11,9 @@ export class LogoutService {
   constructor(private http : Http) { }
 
    logout() : Observable<any> {
+        let opts = DynamicUrl.PutHeader();
+        let ret = this.http.post(DynamicUrl.socket + `api/Account/Logout`, "", opts);
         
-        let header = new Headers();
-        header.append('Content-type', 'application/x-www-form-urlencoded');
-        header.append('Authorization', 'Bearer ' + localStorage.getItem(LocalEnum.User.toString()));
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
-        let ret = this.http.post(`http://localhost:54043/api/Account/Logout`, "", opts);
         localStorage.removeItem(LocalEnum.User.toString());
         localStorage.removeItem(LocalEnum.Id.toString());
         localStorage.removeItem(LocalEnum.Role.toString());

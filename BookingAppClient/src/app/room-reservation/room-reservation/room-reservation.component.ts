@@ -45,14 +45,14 @@ export class RoomReservationComponent implements OnInit {
       x => 
       {
             var doc = document.getElementById("successMsg");
-            doc.innerText = "Reservation successfully edited.";   
+            doc.innerText = "Room reservation successfully edited.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       },
       error =>
       {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Error during editing reservation.";   
+            doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }

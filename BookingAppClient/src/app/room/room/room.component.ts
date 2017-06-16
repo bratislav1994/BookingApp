@@ -68,7 +68,7 @@ export class RoomComponent implements OnInit {
       error =>
       {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Error during editing room.";   
+            doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }

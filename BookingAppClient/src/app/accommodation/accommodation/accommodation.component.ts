@@ -117,7 +117,7 @@ export class AccommodationComponent implements OnInit {
                error =>
                {
                   var doc = document.getElementById("errorMsg");
-                  doc.innerText = "Error during editing accommodation.";   
+                  doc.innerText = error.json().Message;  
                   doc.className = "show";
                   setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                } 
@@ -195,7 +195,7 @@ export class AccommodationComponent implements OnInit {
       error =>
       {
           var doc = document.getElementById("errorMsg");
-          doc.innerText = "Error while deleting room.";   
+          doc.innerText = error.json().Message;   
           doc.className = "show";
           setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }
@@ -241,9 +241,16 @@ export class AccommodationComponent implements OnInit {
                                               {
                                                 this.GetComments();
                                                 this.isUserPostComment();
+                                                var doc = document.getElementById("successMsg");
+                                                doc.innerText = "Comment successfully deleted.";   
+                                                doc.className = "show";
+                                                setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
                                               }, error =>
                                               {
-                                                console.log("Nije dodao"); 
+                                                var doc = document.getElementById("errorMsg");
+                                                doc.innerText = error.json().Message;   
+                                                doc.className = "show";
+                                                setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                                               });
   }
 
@@ -261,7 +268,7 @@ export class AccommodationComponent implements OnInit {
       error =>
       {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Error while deleting comment.";   
+            doc.innerText = error.json().Message;    
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
             alert(error.text()); 

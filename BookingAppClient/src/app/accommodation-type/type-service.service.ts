@@ -29,24 +29,12 @@ export class TypeServiceService {
     }
 
     deleteType(id : number) : Observable<any> {
-         let header = new Headers();
-         header.append('Content-type', 'application/json', );
-         header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
-
-        let opts = new RequestOptions();
-        opts.headers = header;
-
+        let opts = DynamicUrl.PutHeader();
         return this.http.delete(DynamicUrl.socket + `accommodationType/Delete/${id}`, opts);
     }
 
     editType(type: AccommodationType) : Observable<any> {
-        let header = new Headers();
-        header.append('Content-type', 'application/json');
-        header.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
-
-        let opts = new RequestOptions();
-        opts.headers = header;
- 
+       let opts = DynamicUrl.PutHeader();
         return this.http.put(DynamicUrl.socket + `accommodationType/Change`, type, opts);
     }
 }

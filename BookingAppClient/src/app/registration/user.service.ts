@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from "./User.model";
+import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
 export class UserService {
@@ -15,6 +16,6 @@ export class UserService {
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.post('http://localhost:54043/api/Account/Register', user, opts);
+        return this.http.post(DynamicUrl.socket + `api/Account/Register`, user, opts);
     }
 }

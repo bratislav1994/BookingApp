@@ -41,7 +41,7 @@ export class TypeComponent implements OnInit {
     },
     error => {
       var doc = document.getElementById("errorMsg");
-            doc.innerText = "Error during editing accommodation type.";   
+            doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
     }

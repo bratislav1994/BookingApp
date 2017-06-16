@@ -33,10 +33,21 @@ export class CreateReservationComponent implements OnInit {
 
   onSubmit(){
     let userId = localStorage.getItem(LocalEnum.Id.toString());
-    this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.RoomId)).subscribe(x => alert("Region successfully added"),
-     error => 
-     {
-        console.log(error), alert(error.text())
-     });
+    this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.RoomId)).subscribe(
+     r => 
+        {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room reservation successfully added.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
+        },
+        error => 
+        {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = error.json().Message;   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+        }
+      );
   }
 }

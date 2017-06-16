@@ -25,19 +25,19 @@ export class AccommodationService {
          headers.append("Authorization", "Bearer " + localStorage.getItem(LocalEnum.User.toString()));
         let opts = new RequestOptions( { headers: headers });
 
-        return this.http.post('http://localhost:54043/api/accommodation', formData, opts);
+        return this.http.post(DynamicUrl.socket + `api/accommodation`, formData, opts);
   }
 
   getAllAccommodations() : Observable<any> {
-        return this.http.get('http://localhost:54043/api/accommodation?$expand=AccommodationType,Place');
+        return this.http.get(DynamicUrl.socket + `api/accommodation?$expand=AccommodationType,Place`);
   }
 
   getAccommodationById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/accommodation/${id}`);
+        return this.http.get(DynamicUrl.socket + `api/accommodation/${id}`);
   }
 
    getByIdMap(Id : number) : Observable<any> {
-        let ret = this.http.get(`http://localhost:54043/api/accommodation?$filter=Id eq ${Id} &$expand=AccommodationType,Place,Rooms,Comments`).map(res => res.json());
+        let ret = this.http.get(DynamicUrl.socket + `api/accommodation?$filter=Id eq ${Id} &$expand=AccommodationType,Place,Rooms,Comments`).map(res => res.json());
         return ret;
       }
 
@@ -53,11 +53,12 @@ export class AccommodationService {
         accommodation.AccommodationType = null;
         accommodation.Rooms = null;
 
-        return this.http.put(`http://localhost:54043/api/accommodation`, JSON.stringify(accommodation), opts);
+        return this.http.put(DynamicUrl.socket + `api/accommodation`, JSON.stringify(accommodation), opts);
     }
 
      delete(id : number) : Observable<any> {
-        return this.http.delete(`http://localhost:54043/api/accommodation/${id}`);
+      let opts = DynamicUrl.PutHeader();
+      return this.http.delete(DynamicUrl.socket + `api/accommodation/${id}`, opts);
     }
 
      getByFilter(query : string) : Observable<any> {
