@@ -21,7 +21,7 @@
 
 .button11:hover {background-color: #555; color: #fff}
 
-#search {
+/*#search {
     width: 140px;
     box-sizing: border-box;
     border: 2px solid #555;
@@ -60,7 +60,7 @@ li a {
 li a:hover {
     background-color: #555;
     color: white;
-}
+}*/
 
 			#logo { padding:0; width:auto; float:left;}
 			#logo h1 a, h1 a:hover { color:darkgreen; text-decoration:none;}

@@ -1,14 +1,20 @@
-  <div  >
+  <div style="width:100%">
+
+    <div style="width:50%;float:left">
+
     <span style="height:5%;display:inline-block;position:relative;margin:0px">
     <span style=" float:middle; background-color:aliceblue; width:20px;"> </span>
 
     <span style=" float:middle;">
     <div style="width:150px; height:20px"></div>
 
-    <div style="height:50px;width:300px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
+    <div style="height:70px;width:300px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
 
         <span style="text-align:left; background-color:B8B8B8; float:left; width:80%; height:100%">
-          <font style="color:white">{{accommodation.Name}}</font>
+          <font style="color:blue">{{accommodation.Name}}</font><br>
+            <font style="color:white" >Accommodation type: {{accommodation.AccommodationType.Name}}<br> 
+                                          {{accommodation.Address}} {{accommodation.Place.Name}}
+            </font>
         </span>
 
         <span style="text-align:left; float:middle; width:20%; height:100%">  
@@ -22,20 +28,42 @@
     <div>
         <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation" height="350px" width="300px">      
     </div>
+    
+    <div style="float:right;width:100%; height:80px; text-align:left; background-color:#B8B8B8;">
+      <font style="color: white">{{accommodation.Description}}</font>
+    </div>
 
   </span>
+
+  
+
 </span>
+    </div>
+
+    <div style="width:50%;float:right">
+
+  <span style="height:5%;display:inline-block;position:relative;margin:0px">
+    <span style=" float:right; background-color:aliceblue; width:20px;"> </span>
+
+    <span style=" float:right;">
+      
+    <div style="width:150px; height:20px"></div>
+        <div style=" margin: 5 auto">
+          <app-map [map]="map"></app-map>
+        </div>
+    </span>
+
+  </span>
+
+  </div>
+
+
+
+
 </div>
 <!--ovde je kraj -->
   
-  <div style="width:100%">
-    <div>
-        Name: {{accommodation.Name}} <br>
-        Address: {{accommodation.Address}} <br>
-        Accommodation Type: {{accommodation.AccommodationType.Name}}<br> 
-        Place: {{accommodation.Place.Name}} <br>
-        Description: {{accommodation.Description}} <br>
-    </div>
+  <div style="float:left;width:100%">
 
     <div>
         <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
@@ -54,7 +82,7 @@
                 <label for = "Name">Description:</label><br>
                 <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
             </div>
-
+            <br>
             <div>
                 <button name="edit" >Edit</button>
             </div>
@@ -64,7 +92,7 @@
       
   </div>
 
-  <div>
+  <div style="float:left">
       
       <div *ngFor = "let room of accommodation.Rooms">
           <label>Room number: {{room.RoomNumber}}</label> 
@@ -79,10 +107,9 @@
 
   <!--<button name="add" (click) = "switchShowFormComment()">Show comment fields</button>-->
 <!--*ngIf="switchShowFormComment()"-->
-  <div *ngIf="switchShowFormComment()">
+  <div style="float:left" *ngIf="switchShowFormComment()">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
       <div>
-        <label for = "comment">Comment:</label>
         <br>
         <textarea type="text" name="comment" id="comment" [(ngModel)]="comment">
         </textarea>
@@ -93,14 +120,13 @@
         <input type="number" name="Grade" id="Grade" [(ngModel)]="Grade"/>
       </div>
       <div>
-        <button name="post" (click) ="onSubmitComment()">Post comment</button>
+        <button name="post">Post comment</button>
       </div>
     </form>
     </div>
 
   <div>
     <div>
-      <font style="size:14">Comments:</font><br>
 
       <div *ngFor = "let comment of Comments">
         User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
@@ -114,8 +140,4 @@
 
 <div>
 
-</div>
-
-<div style=" margin: 0 auto">
-    <app-map [map]="map"></app-map>
 </div>
