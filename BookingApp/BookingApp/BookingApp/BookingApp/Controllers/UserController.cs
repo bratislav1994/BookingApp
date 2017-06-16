@@ -7,6 +7,8 @@ using System.Web.Http;
 using BookingApp.Models;
 using System.Web.Http.Description;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -103,6 +105,7 @@ namespace BookingApp.Controllers
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
+            
             AppUser user = db.AppUsers.Where(e => e.Id.Equals(id)).FirstOrDefault();
 
             if(user == null)

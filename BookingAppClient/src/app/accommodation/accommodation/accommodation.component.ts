@@ -155,19 +155,26 @@ export class AccommodationComponent implements OnInit {
                                               });
   }
 
-  ReadAll()
+  deleteComment(comment: Comment)
   {
-
-  }
-
-  deleteComment()
-  {
-      this.commentService.addComment(new Comment(0, 
-                                                 this.Grade,
-                                                 this.comment,
-                                                 this.userId,
-                                                 this.accommodation.Id)).subscribe(a => alert("Dodat"),
-                                                 error => alert("nije dodao"));
+     this.commentService.deleteComment(comment.Id).subscribe(
+        e => 
+      {
+            this.GetComments();
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Comment successfully deleted.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+      },
+      error =>
+      {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Error while deleting comment.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+            alert(error.text()); 
+      }
+     );
   }
 
   GetComments()
@@ -176,7 +183,7 @@ export class AccommodationComponent implements OnInit {
         c => 
         { 
           this.Comments = c;
-          console.log("usao");
+          
          
         },
         error =>

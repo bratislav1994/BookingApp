@@ -102,13 +102,13 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "AppUser")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("Delete/{id}/{id2}")]
+        [Route("Delete/{id}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult Delete(int id, int id2)
+        public IHttpActionResult Delete(int id)
         {
-            Comment comment = db.Comments.Find(new { AccommodationId = id, UserId = id2 });
+            Comment comment = db.Comments.Find(id);
 
             if (comment == null)
             {

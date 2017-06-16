@@ -130,7 +130,7 @@
 
       <div *ngFor = "let comment of Comments">
         User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
-        <button name="delete" (click) = "deleteComment(accommodation.Id)">Delete</button>
+        <button name="delete" (click) = "deleteComment(comment)">Delete</button>
       </div>
       <br>
       

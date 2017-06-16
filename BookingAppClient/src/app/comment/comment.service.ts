@@ -22,4 +22,9 @@ export class CommentService {
   getCommentById(id : number) : Observable<any> {
         return this.http.get(`http://localhost:54043/api/Comment/Read/${id}`);
   }
+
+  deleteComment(id: number) : Observable<any>{
+        let opts = DynamicUrl.PutHeader();
+        return this.http.delete(`http://localhost:54043/api/Comment/Delete/${id}`, opts);
+  }
 }
