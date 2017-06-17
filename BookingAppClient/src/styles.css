@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+body {
+    padding-top: 5rem;
+}
+
+.starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.navbar-nav>li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.no-margin {
+    margin: 0;
+}
