@@ -35,117 +35,122 @@
 
 </div>
 
+
 <div *ngIf="isAdmin()" style="position:relative;z-index:1000;">
-<ul class="nav">
+    <nav style="background-color:#939393; width: 100%; height:50px;" class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                
+                <!--<li class="nav-item active"><button [routerLink]="['/home']" class="btn btn-secondary">Home</button></li>-->
+                <li class="nav-item active"><a [routerLink]="['/home']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Home</a>
+                            </li>
+                <li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accommodations</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_accommodation']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add accommodation</a>
+                            <a [routerLink]="['/view_accommodations']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of accommodations</a>
+                        </div>
+                    </div>
+                </li>
 
-    <li>
-        <a [routerLink]="['/home/']">Home</a>
-    </li>
+                <li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Types</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_accommodation_type']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add type</a>
+                            <a [routerLink]="['/view_types']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of types</a>
+                        </div>
+                    </div>
+                </li>
 
-    <li>
-        <a href="#">Accommodations</a>
-        <ul>
-            <li><a [routerLink]="['/add_accommodation']">Add accommodation</a></li>
+                <li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rooms</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_room']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add room</a>
+                            <a [routerLink]="['/view_rooms']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of rooms</a>
+                        </div>
+                    </div>
+                </li>
 
-            <li><a [routerLink]="['/view_accommodations']">List of accommodations</a></li>
-        </ul>
-    </li>
+                <li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_place']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add place</a>
+                            <a [routerLink]="['/view_places']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of places</a>
+                            <a [routerLink]="['/add_region']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add region</a>
+                            <a [routerLink]="['/view_regions']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of regions</a>
+                            <a [routerLink]="['/add_country']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add country</a>
+                            <a [routerLink]="['/view_countries']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of countries</a>
+                        </div>
+                    </div>
+                </li>
 
-    <li>
-        <a href="#">Accommodation types</a>
-        <ul>
-            <li><a [routerLink]="['/add_accommodation_type']">Create new accommodation type</a></li>
-            <li><a [routerLink]="['/view_types']">View accommodation types</a></li>
-        </ul>
-    </li>
+                <!--<li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Regions</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_region']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add region</a>
+                            <a [routerLink]="['/view_regions']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of regions</a>
+                        </div>
+                    </div>
+                </li>
 
-		<li>
-        <a href="#">Rooms</a>
-        <ul>
-            <li><a [routerLink]="['/add_room']">Create new room</a></li>
-            <li><a [routerLink]="['/view_rooms']">View all rooms</a></li>
-        </ul>
-    </li>
+                <li class="nav-item" >
+                    <div class="btn-group"  >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Countries</button>
+                        <div class="dropdown-menu" style="background-color: #555;">
+                            <a [routerLink]="['/add_country']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add country</a>
+                            <a [routerLink]="['/view_countries']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of countries</a>
+                        </div>
+                    </div>
+                </li>-->
 
-		<li>
-        <a href="#">Places</a>
-        <ul>
-            <li><a [routerLink]="['/add_place']">Add</a></li>
-            <li><a [routerLink]="['/view_places']">List of places</a></li>
-        </ul>
-    </li>
+                <li class="nav-item"><button [routerLink]="['/view_reservations']" class="btn btn-secondary">Reservations</button></li>
 
-		<li>
-        <a href="#">Regions</a>
-        <ul>
-            <li><a [routerLink]="['/add_region']">Add</a></li>
-            <li><a [routerLink]="['/view_regions']">List of regions</a></li>
-        </ul>
-    </li>
+                <li class="nav-item"><button [routerLink]="['/search']" class="btn btn-secondary">Search</button></li>
 
-		<li>
-        <a href="#">Countries</a>
-        <ul>
-            <li><a [routerLink]="['/add_country']">Add</a></li>
-            <li><a [routerLink]="['/view_countries']">List of countries</a></li>
-        </ul>
-    </li>
-
-		<li>
-        <a href="#">Reservations</a>
-        <ul>
-            <li><a [routerLink]="['/add_reservation']">Create</a></li>
-            <li><a [routerLink]="['/view_reservations']">View room reservations</a></li>
-        </ul>
-    </li>
-
-    <li><a [routerLink]="['/search']">Search</a></li>
-
-</ul>
+                
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div *ngIf="isManager()" style="position:relative;z-index:1000;">
-    <ul class="nav">
-
-        <li>
-            <a [routerLink]="['/home/']">Home</a>
-        </li>
-
-        <li>
-            <a [routerLink]="['/add_accommodation']">Add accommodation</a>
-        </li>
-
-        <li><a [routerLink]="['/search']">Search</a></li>
-
-    </ul>
+    <nav style="background-color:#939393; width: 100%;" class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><button [routerLink]="['/home']" class="btn btn-secondary">Home</button></li>
+                <li class="nav-item active"><button [routerLink]="['/add_accommodation']" class="btn btn-secondary">Add accommodation</button></li>
+                <li class="nav-item"><button [routerLink]="['/search']" class="btn btn-secondary">Search</button></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div *ngIf="isUser()" style="position:relative;z-index:1000;">
-    <ul class="nav">
-
-        <li>
-            <a [routerLink]="['/home/']">Home</a>
-        </li>
-
-        <li>
-            <a [routerLink]="['/add_accommodation']">My reservations</a>
-        </li>
-
-        <li><a [routerLink]="['/search']">Search</a></li>
-
-    </ul>
+    <nav style="background-color:#939393; width: 100%;" class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><button [routerLink]="['/home']" class="btn btn-secondary">Home</button></li>
+                <li class="nav-item active"><button [routerLink]="['/home']" class="btn btn-secondary">My reservations</button></li>
+                <li class="nav-item"><button [routerLink]="['/search']" class="btn btn-secondary">Search</button></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div *ngIf="!IsLoggedIn()" style="position:relative;z-index:1000;">
-    <ul class="nav">
-
-        <li>
-            <a [routerLink]="['/home/']">Home</a>
-        </li>
-
-        <li><a [routerLink]="['/search']">Search</a></li>
-
-    </ul>
+    <nav style="background-color:#939393; width: 100%;" class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><button [routerLink]="['/home']" class="btn btn-secondary">Home</button></li>
+                <li class="nav-item"><button [routerLink]="['/search']" class="btn btn-secondary">Search</button></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <!--login-->
