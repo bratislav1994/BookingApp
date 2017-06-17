@@ -19,6 +19,11 @@ export class ReservationService {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/ReadAll`);
   }
 
+  getAllReservationsById(id: number) : Observable<any> {
+      let query = `?$filter=UserId eq ${id} &$expand=Room, Room/Accommodation`;
+        return this.http.get(DynamicUrl.socket + `api/RoomReservations/ReadAll`);
+  }
+
     getReservationById(id : number) : Observable<any> {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/Read/${id}`);
   }
@@ -29,7 +34,7 @@ export class ReservationService {
 
   deleteReservation(id : number) : Observable<any> {
         let opts = DynamicUrl.PutHeader();
-        return this.http.delete(DynamicUrl.socket + `api/RoomReservations/Delete/${id}`, opts);
+        return this.http.delete(DynamicUrl.socket + `api/RoomReservations/Cancel/${id}`, opts);
     }
 
     editReservation(reservation: RoomReservation) : Observable<any> {

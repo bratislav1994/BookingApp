@@ -37,25 +37,25 @@ export class RoomReservationComponent implements OnInit {
 
   onSubmit()
   {
-    this.reservationService.editReservation(new RoomReservation(this.reservationId,
-                                       this.StartDate, 
-                                       this.EndDate,
-                                       this.UserId,
-                                       this.RoomId)).subscribe(
-      x => 
-      {
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Room reservation successfully edited.";   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      },
-      error =>
-      {
-            var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      }
-    );
+    // this.reservationService.editReservation(new RoomReservation(this.reservationId,
+    //                                    this.StartDate, 
+    //                                    this.EndDate,
+    //                                    this.UserId,
+    //                                    this.RoomId)).subscribe(
+    //   x => 
+    //   {
+    //         var doc = document.getElementById("successMsg");
+    //         doc.innerText = "Room reservation successfully edited.";   
+    //         doc.className = "show";
+    //         setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    //   },
+    //   error =>
+    //   {
+    //         var doc = document.getElementById("errorMsg");
+    //         doc.innerText = error.json().Message;   
+    //         doc.className = "show";
+    //         setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    //   }
+    // );
   }
 }

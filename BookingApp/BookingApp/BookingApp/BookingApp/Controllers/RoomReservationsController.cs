@@ -39,7 +39,7 @@ namespace BookingApp.Controllers
             return Ok(reservation);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "AppUser")]
         [HttpPost]
         [Route("Create")]
         [ResponseType(typeof(RoomReservation))]
@@ -79,7 +79,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "RoomReservation", id = reservation.RoomId }, reservation);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "AppUser")]
         [HttpPut]
         [Route("Change")]
         [ResponseType(typeof(void))]
@@ -111,11 +111,11 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "AppUser")]
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("Cancel/{id}")]
         [ResponseType(typeof(RoomReservation))]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Cancel(int id)
         {
             RoomReservation reservation = db.RoomReservations.Find(id);
 
@@ -124,10 +124,40 @@ namespace BookingApp.Controllers
                 return NotFound();
             }
 
-            db.RoomReservations.Remove(reservation);
-            db.SaveChanges();
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
 
-            return Ok();
+            if (user != null)
+            {
+                if (reservation != null && reservation.UserId.Equals(user.addUserId))
+                {
+                    if (reservation.StartDate > DateTime.Now)
+                    {
+                        reservation.Canceled = true;
+                        db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;
+
+                        try
+                        {
+                            db.SaveChanges();
+                        }
+                        catch (DbUpdateConcurrencyException)
+                        {
+                            if (!ReservationExists(id))
+                            {
+                                return NotFound();
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("You are supposed to be in your accommodation right now, can not cancel reservation!");
+                    }
+                }
+            }
+            return Ok(reservation);
         }
 
         private bool ReservationExists(int id)

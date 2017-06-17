@@ -307,6 +307,10 @@
     <Compile Include="Migrations\201706141334263_RoomReservationUpdate.Designer.cs">
       <DependentUpon>201706141334263_RoomReservationUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706170917003_NewPropertyInRR.cs" />
+    <Compile Include="Migrations\201706170917003_NewPropertyInRR.Designer.cs">
+      <DependentUpon>201706170917003_NewPropertyInRR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -414,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706141334263_RoomReservationUpdate.resx">
       <DependentUpon>201706141334263_RoomReservationUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706170917003_NewPropertyInRR.resx">
+      <DependentUpon>201706170917003_NewPropertyInRR.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

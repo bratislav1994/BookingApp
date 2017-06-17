@@ -4,6 +4,8 @@
     <p>Bed count: {{room.BedCount}}</p>
     <p>Description: {{room.Description}}</p>
     <p>Price per night: {{room.PricePerNight}}</p>
+    <p>Accommodation: {{AccommodationName }}</p>
+    <button class="btn btn-info" name="booking" (click)="bookingReservation()">Booking</button>
   </div>
   <div>
      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
@@ -32,4 +34,21 @@
       </div>
     </form>
   </div>
+</div>
+
+
+<div *ngIf="Booking">
+  <form #f="ngForm" (ngSubmit)="onSubmitBooking(f.value)">
+    <div class="form-group">
+      <label class="control-label" for = "StartDate">Start date:</label>
+      <input class="form-control" style="width:15%" type="date" name="StartDate" id="StartDate" [(ngModel)]="StartDate"/>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for = "EndDate">End date:</label>
+      <input class="form-control" style="width:15%" type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
+    </div>
+    <div>
+      <input class="btn btn-default" type="submit" value="Create"/>
+    </div>
+  </form>
 </div>

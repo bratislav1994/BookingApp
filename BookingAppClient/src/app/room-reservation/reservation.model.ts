@@ -10,16 +10,19 @@ export class RoomReservation {
     User: User;
     RoomId: number;
     Room: Room;
+    Cancel: boolean;
 
     constructor (Id?: number,
                  StartDate?: Date, 
                  EndDate?: Date,
                  UserId?: number,
-                 RoomId?: number) {
+                 RoomId?: number, 
+                 Cancel?: boolean) {
        this.Id = Id;
        this.StartDate = StartDate;
        this.EndDate = EndDate;
        this.UserId = UserId;
        this.RoomId = RoomId;
+       this.Cancel = Cancel;
     }
 }

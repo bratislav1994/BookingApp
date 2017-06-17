@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from "app/room-reservation/reservation.service";
 import { RoomReservation } from "app/room-reservation/Reservation.model";
 import { Router } from '@angular/router';
-
+import { LocalEnum } from "app/localEnum.model";
 @Component({
   selector: 'app-view-reservation',
   templateUrl: './view-reservation.component.html',
@@ -22,7 +22,7 @@ export class ViewReservationComponent implements OnInit {
     this.getReservations();
   }
 
-   deleteReservation(id: number)
+   cancelReservation(id: number)
   {
     this.reservationService.deleteReservation(id).subscribe(
        x => 
@@ -30,7 +30,8 @@ export class ViewReservationComponent implements OnInit {
             var doc = document.getElementById("successMsg");
             doc.innerText = "Room reservation successfully deleted.";   
             doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+            this.reservations.find(r => r.Id == id).Cancel = true; 
       },
       error =>
       {

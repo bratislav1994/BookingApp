@@ -30,6 +30,7 @@ namespace BookingApp.Models
         public double Longitude { get; set; }
 
         //[Required, DataType(DataType.ImageUrl)]
+        [Required]
         public string ImageUrl { get; set; }
 
         [Required]

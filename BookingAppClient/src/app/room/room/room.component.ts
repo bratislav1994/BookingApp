@@ -5,6 +5,7 @@ import { RoomService } from "app/room/room.service";
 import 'rxjs/Rx';
 import { RoomReservation } from "app/room-reservation/reservation.model";
 import { ReservationService} from "app/room-reservation/reservation.service";
+import { LocalEnum } from "app/localEnum.model";
 
 @Component({
   selector: 'app-room',
@@ -24,7 +25,11 @@ export class RoomComponent implements OnInit {
   AccommodationId: number;
   roomReservations: RoomReservation[];
   reservations: RoomReservation[];
+  AccommodationName: string;
 
+   StartDate: Date;
+   EndDate: Date;
+   Booking: boolean;
   constructor(private roomService: RoomService, 
               private roter: Router, 
               private activatedRouter: ActivatedRoute,
@@ -46,8 +51,10 @@ export class RoomComponent implements OnInit {
         this.Description = this.room.Description;
         this.PricePerNight = this.room.PricePerNight;
         this.reservations = this.room.Reservations;
+        this.AccommodationName = this.room.Accommodation.Name;
         console.log(this.RoomNumber);
     }, error => console.log(error));
+    this.Booking = false;
   }
 
   onSubmit()
@@ -75,11 +82,6 @@ export class RoomComponent implements OnInit {
     );
   }
 
-  // deleteReservation(reservation: RoomReservation)
-  // {
-  //   this.reservationService.deleteReservation(reservation.).subscribe(e => this.getPlaces());
-  // }
-
   getReservations() : void{
     this.reservationService.getAllReservations().subscribe(p => this.roomReservations = p.json(), error => 
      {
@@ -91,4 +93,27 @@ export class RoomComponent implements OnInit {
     this.roter.navigate(['/home/view_reservation/' + id]);
   }
 
+  bookingReservation(){
+    this.Booking = true;
+      }
+  
+       onSubmitBooking(){
+         let userId = localStorage.getItem(LocalEnum.Id.toString());
+        this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.room.Id, false)).subscribe(
+        r => 
+        {
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room reservation successfully added.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
+        },
+        error => 
+        {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = error.json().Message;   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+        }
+      );
+    }
 }

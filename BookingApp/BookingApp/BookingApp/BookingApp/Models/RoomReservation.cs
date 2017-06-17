@@ -27,5 +27,6 @@ namespace BookingApp.Models
         [Required, ForeignKey("Room")]
         public int RoomId { get; set; }
         public Room Room { get; set; }
+        public bool Canceled { get; set; }
     }
 }
