@@ -288,7 +288,7 @@ export class AccommodationComponent implements OnInit {
             for(let i = 0; i < this.Comments.length; i++ ){
               totalGrades += this.Comments[i].Grade;
             }
-            this.accommodation.AvrageGrade = totalGrades / this.Comments.length;
+            this.accommodation.AvrageGrade = +((totalGrades / this.Comments.length).toFixed(1));
           }
          
         },
