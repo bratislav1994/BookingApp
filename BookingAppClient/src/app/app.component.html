@@ -1,4 +1,147 @@
 
+<header id="header">
+    <div id="header-inner">	
+		<div id="logo">
+			<h1><a [routerLink]="['/home']">Booking<span>App</span></a></h1>
+		</div>
+	
+    	<div *ngIf="!IsLoggedIn()" style=" float:right">
+			
+			<a class="btn btn-link" style="color:black" [routerLink]="['/registration']">Registration</a>
+    			 <a class="btn btn-link" style="color:black" [routerLink]="['/login']">Login</a>
+				
+		</div>
+		<div *ngIf="IsLoggedIn()" style=" float:right">
+				<a class="btn btn-link" style="color:black" [routerLink]="['/logout']">Logout</a>
+				<label>{{username}}</label>
+		</div>
+			<div class="clr"></div>
+		</div>
+			
+</header>
+
+
+<div class="feature">
+	
+  	<div class="feature-inner">
+		<h1>Project</h1>
+	</div>
+
+</div>
+
+<div *ngIf="isAdmin()" style="position:relative;z-index:1000;">
+<ul class="nav">
+
+    <li>
+        <a [routerLink]="['/home/']">Home</a>
+    </li>
+
+    <li>
+        <a href="#">Accommodations</a>
+        <ul>
+            <li><a [routerLink]="['/add_accommodation']">Add accommodation</a></li>
+
+            <li><a [routerLink]="['/view_accommodations']">List of accommodations</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#">Accommodation types</a>
+        <ul>
+            <li><a [routerLink]="['/add_accommodation_type']">Create new accommodation type</a></li>
+            <li><a [routerLink]="['/view_types']">View accommodation types</a></li>
+        </ul>
+    </li>
+
+		<li>
+        <a href="#">Rooms</a>
+        <ul>
+            <li><a [routerLink]="['/add_room']">Create new room</a></li>
+            <li><a [routerLink]="['/view_rooms']">View all rooms</a></li>
+        </ul>
+    </li>
+
+		<li>
+        <a href="#">Places</a>
+        <ul>
+            <li><a [routerLink]="['/add_place']">Add</a></li>
+            <li><a [routerLink]="['/view_places']">List of places</a></li>
+        </ul>
+    </li>
+
+		<li>
+        <a href="#">Regions</a>
+        <ul>
+            <li><a [routerLink]="['/add_region']">Add</a></li>
+            <li><a [routerLink]="['/view_regions']">List of regions</a></li>
+        </ul>
+    </li>
+
+		<li>
+        <a href="#">Countries</a>
+        <ul>
+            <li><a [routerLink]="['/add_country']">Add</a></li>
+            <li><a [routerLink]="['/view_countries']">List of countries</a></li>
+        </ul>
+    </li>
+
+		<li>
+        <a href="#">Reservations</a>
+        <ul>
+            <li><a [routerLink]="['/add_reservation']">Create</a></li>
+            <li><a [routerLink]="['/view_reservations']">View room reservations</a></li>
+        </ul>
+    </li>
+
+    <li><a [routerLink]="['/search']">Search</a></li>
+
+</ul>
+</div>
+
+<div *ngIf="isManager()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/add_accommodation']">Add accommodation</a>
+        </li>
+
+        <li><a [routerLink]="['/search']">Search</a></li>
+
+    </ul>
+</div>
+
+<div *ngIf="isUser()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/add_accommodation']">My reservations</a>
+        </li>
+
+        <li><a [routerLink]="['/search']">Search</a></li>
+
+    </ul>
+</div>
+
+<div *ngIf="!IsLoggedIn()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li><a [routerLink]="['/search']">Search</a></li>
+
+    </ul>
+</div>
+
 <router-outlet></router-outlet>
 
 <div id="successMsg"></div>

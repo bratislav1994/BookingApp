@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
+import { DynamicUrl } from "app/DynamicUrl.model";
+import { LocalEnum } from "app/localEnum.model";
+import { LocalStorageService } from "app/local-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,30 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
+  username: string;
 
-  constructor(private localStorageService : LocalStorageService, private router: Router) { }
+  constructor(private storageService : LocalStorageService, private router: Router) { }
 
   ngOnInit() {
-      this.router.navigate(['/home/']);
+     // this.router.navigate(['/home/']);
+  }
+
+  IsLoggedIn() : boolean {
+
+    this.username = localStorage.getItem(LocalEnum.Username.toString());
+    return this.storageService.IsLoggedIn();
+  }
+
+  isAdmin() : boolean {
+    return this.storageService.isAdmin();
+  }
+
+  isManager() : boolean {
+    return this.storageService.isManager();
+  }
+
+  isUser() : boolean {
+    return this.storageService.isUser();
   }
 
 }

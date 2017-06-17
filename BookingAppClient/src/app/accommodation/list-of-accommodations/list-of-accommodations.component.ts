@@ -53,7 +53,7 @@ export class ListOfAccommodationsComponent implements OnInit {
   }
 
    showAcc(id : number){
-    this.route.navigate(['/home/view_accommodation/' + id]);
+    this.route.navigate(['/view_accommodation/' + id]);
   }
 
   getAccommodations() : void{
@@ -69,7 +69,7 @@ export class ListOfAccommodationsComponent implements OnInit {
 
   onClick(id : number)
   {
-      this.route.navigate(['/home/view_accommodation/', id]);
+      this.route.navigate(['/view_accommodation/', id]);
   }
 
 }

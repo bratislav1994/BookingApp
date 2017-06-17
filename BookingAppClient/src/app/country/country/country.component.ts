@@ -87,7 +87,7 @@ export class CountryComponent implements OnInit {
   }
 
    showRegion(id : number){
-    this.route.navigate(['/home/view_region/' + id]);
+    this.route.navigate(['/view_region/' + id]);
   }
 
 }

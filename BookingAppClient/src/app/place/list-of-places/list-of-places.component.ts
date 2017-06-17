@@ -50,7 +50,7 @@ export class ListOfPlacesComponent implements OnInit {
   }
 
   showPlace(id : number){
-    this.route.navigate(['/home/view_place/' + id]);
+    this.route.navigate(['/view_place/' + id]);
   }
 
 }

@@ -135,7 +135,7 @@ export class AccommodationComponent implements OnInit {
             doc.innerText = "Accommodation successfully deleted.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
-            this.route.navigate(['/home/view_accommodations/']);
+            this.route.navigate(['/view_accommodations/']);
       },
       error =>
       {
@@ -179,7 +179,7 @@ export class AccommodationComponent implements OnInit {
   }
 
   showRoom(id: number){
-      this.route.navigate(['/home/view_room/' + id]);
+      this.route.navigate(['/view_room/' + id]);
   }
 
   deleteRoom(id: number){

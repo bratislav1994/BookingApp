@@ -46,6 +46,22 @@ import { FilterComponent } from './filter/filter.component';
 
 const ChildRoutes = [
 
+  
+]
+
+const Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  //  {path: "app", component: AppComponent},
+  {path: "home", component: HomeComponent},
+  {path: "registration", component: RegistrationComponent},
+  
+  {path: "logout", component: LogoutComponent},
+  {path: "other", redirectTo:"home"},
+
+
+
+
+
   {path: "search", component: FilterComponent},
   {path: "accommodation_home", component: AccommodationHomeComponent},
   {path: "add_accommodation", component: AddAccommodationComponent},
@@ -83,16 +99,6 @@ const ChildRoutes = [
   {path:  "add_reservation", component: CreateReservationComponent},
   {path:  "view_reservations", component: ViewReservationComponent},
   {path:  "view_reservation/:Id", component: RoomReservationComponent}
-]
-
-const Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  // {path: "app", component: AppComponent},
-  {path: "home", component: HomeComponent, children: ChildRoutes},
-  {path: "registration", component: RegistrationComponent},
-  
-  {path: "logout", component: LogoutComponent},
-  {path: "other", redirectTo:"home"}
 ] 
 
 

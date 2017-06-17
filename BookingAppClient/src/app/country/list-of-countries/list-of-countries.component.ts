@@ -51,6 +51,6 @@ export class ListOfCountriesComponent implements OnInit {
   }
 
   showCountry(id : number){
-    this.route.navigate(['/home/view_country/' + id]);
+    this.route.navigate(['/view_country/' + id]);
   }
 }

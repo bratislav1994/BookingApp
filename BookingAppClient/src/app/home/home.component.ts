@@ -23,10 +23,12 @@ export class HomeComponent implements OnInit {
               private route : Router) { 
     this.accommodations = [];
     this.allAccommodationsView = true;
+    console.log("aaaaaaaaa");
   }
     
   ngOnInit() {
       this.getAccommodations();
+     // this.route.navigate(['/home/view_accommodations/']);
       console.log("usaooooooooooooooo");
   }
 
@@ -51,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   onClick(id : number)
   {
-      this.route.navigate(['/home/view_accommodation/', id]);
+      this.route.navigate(['/view_accommodation/', id]);
       this.allAccommodationsView = false;
   }
 
