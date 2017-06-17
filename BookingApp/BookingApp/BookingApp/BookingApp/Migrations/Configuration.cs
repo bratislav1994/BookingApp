@@ -61,7 +61,10 @@ namespace BookingApp.Migrations
             context.AppUsers.AddOrUpdate(
                   p => p.Username,
                   new AppUser() { Username = "admin" },
-                  new AppUser() { Username = "manager"}
+                  new AppUser() { Username = "manager"},
+                  new AppUser() { Username = "user1" },
+                  new AppUser() { Username = "user2" },
+                  new AppUser() { Username = "user3" }
             );
             context.SaveChanges();
 
