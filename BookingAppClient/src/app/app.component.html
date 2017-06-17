@@ -7,10 +7,14 @@
 	
     	<div *ngIf="!IsLoggedIn()" style=" float:right">
 			
-			<a class="btn btn-link" style="color:black" [routerLink]="['/registration']">Registration</a>
-    			 <a class="btn btn-link" data-toggle="modal" data-target="#myModal" style="color:black" [routerLink]="['/login']">Login</a>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Login
+			<!--<a class="btn btn-link" style="color:black" [routerLink]="['/registration']">Registration</a>-->
+    			 <!--<a class="btn btn-link" data-toggle="modal" data-target="#myModal" style="color:black" [routerLink]="['/login']">Login</a>-->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                    Sign up
+                </button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Sign in
                 </button>
 		</div>
 		<div *ngIf="IsLoggedIn()" style=" float:right">
@@ -156,22 +160,68 @@
         </button>
       </div>
       <div class="modal-body">
-            <form class="container" #f="ngForm" (ngSubmit)="logIn()">
+            <form class="container" #f="ngForm" (ngSubmit)="logIn(f.value, f)">
                         <div class="form-group">
                             <label for="Name">Username:</label>
-                            <input type="text" class="form-control" placeholder="Username" name="Username" [(ngModel)]="Username">
+                            <input required minlength="4" type="text" class="form-control" placeholder="Username" name="Username" ngModel>
                         </div>
                         <div class="form-group">
                             <label for="Password">Password:</label>
-                            <input type="password" min="0" class="form-control" placeholder="Password" name="Password" [(ngModel)]="Password">
+                            <input type="password" min="0" class="form-control" placeholder="Password" name="Password" ngModel>
                         </div>
-                        <button type="submit" class="btn btn-primary" data-dismisss="modal">Submit</button>
+                        <button type="submit" class="btn btn-primary" data-dismisss="modal">Sign in</button>
                         <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
       </div>
     </div>
   </div>
 </div>
+
+<!--registration-->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form class="container" #f1="ngForm" (ngSubmit)="signUp(f1.value, f1)">
+                        <div class="form-group">
+                            <label for="Email">Email:</label>
+                            <input type="email" class="form-control" placeholder="Email" name="Email" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Username:</label>
+                            <input type="text" class="form-control" placeholder="Username" name="Username" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Password:</label>
+                            <input type="password" min="0" class="form-control" placeholder="Password" name="Password" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmPassword">Confirm Password:</label>
+                            <input type="password" min="0" class="form-control" placeholder="Confirm password" name="ConfirmPassword" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="sel1">Role:</label>
+                            <select class="form-control" id="Role" name="Role" ngModel>
+                                <option value="AppUser">User</option>
+                                <option value="Manager">Manager</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" data-dismisss="modal">Submit</button>
+                        <button id="close2" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <router-outlet></router-outlet>
 

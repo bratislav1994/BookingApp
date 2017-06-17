@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { User } from "./User.model";
+import { UserRegistration } from "app/registration/Userregistration.model";
 import { DynamicUrl } from "app/DynamicUrl.model";
 
 @Injectable()
@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private http : Http) { }
 
-  register(user : User) : Observable<any> {
+  register(user : UserRegistration) : Observable<any> {
         let header = new Headers();
         header.append('Content-type', 'application/json');
 

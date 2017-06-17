@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from "app/registration/user.model";
+import { UserRegistration } from "app/registration/userregistration.model";
 import { Http, Response, Headers, Request, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LocalEnum } from "app/localEnum.model";
