@@ -14,15 +14,7 @@ export class AppComponent {
   constructor(private localStorageService : LocalStorageService, private router: Router) { }
 
   ngOnInit() {
-  
-    if(this.localStorageService.IsLoggedIn() == true){
-      this.router.navigate(['/home']);
-      console.log("radi");
-    }
-    
+      this.router.navigate(['/home/']);
   }
-  IsLoggedIn() : boolean {
 
-    return this.localStorageService.IsLoggedIn();
-  }
 }

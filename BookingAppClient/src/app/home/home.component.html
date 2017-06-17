@@ -2,7 +2,7 @@
 <header id="header">
     <div id="header-inner">	
 		<div id="logo">
-			<h1><a href="www.google.com">Booking<span>App</span></a></h1>
+			<h1><a [routerLink]="['/home']">Booking<span>App</span></a></h1>
 		</div>
 	
     	<div *ngIf="!IsLoggedIn()" style=" float:right">
@@ -28,8 +28,13 @@
 	</div>
 
 </div>
-<div style="position:relative;z-index:1000;">
+
+<div *ngIf="isAdmin()" style="position:relative;z-index:1000;">
 <ul class="nav">
+
+    <li>
+        <a [routerLink]="['/home/']">Home</a>
+    </li>
 
     <li>
         <a href="#">Accommodations</a>
@@ -92,6 +97,80 @@
 
 </ul>
 </div>
+
+<div *ngIf="isManager()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/home/add_accommodation']">Add accommodation</a>
+        </li>
+
+        <li><a [routerLink]="['/home/search']">Search</a></li>
+
+    </ul>
+</div>
+
+<div *ngIf="isUser()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/home/add_accommodation']">My reservations</a>
+        </li>
+
+        <li><a [routerLink]="['/home/search']">Search</a></li>
+
+    </ul>
+</div>
+
+<div *ngIf="!IsLoggedIn()" style="position:relative;z-index:1000;">
+    <ul class="nav">
+
+        <li>
+            <a [routerLink]="['/home/']">Home</a>
+        </li>
+
+        <li><a [routerLink]="['/home/search']">Search</a></li>
+
+    </ul>
+</div>
+
+
+
+<div *ngIf="isAllView()">
+<span style="height:5%;display:inline-block;position:relative;margin:0px" *ngFor = "let accommodation of accommodations">
+  <span style=" float:left; background-color:aliceblue; width:20px;"> </span>
+
+  <span style=" float:left;">
+    <div style="width:150px; height:20px">
+    </div>
+
+    <div onmouseover="" style="display:inline-block;cursor: pointer;" (click)="onClick(accommodation.Id)">
+      <img [src]= "accommodation.ImageUrl" alt="More details" height="180px" width="220px">
+    </div>
+
+    <div onmouseover="" style="display:inline-block;cursor: pointer;" (click)="onClick(accommodation.Id)" 
+      style="height:50px;width:220px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
+        
+          <a [routerLink]="['/home/view_accommodation/', accommodation.Id]">{{accommodation.Name}}</a><br>
+          <font>{{accommodation.Place.Name}}</font>
+        
+    </div>
+
+    <div style="width:220px; height:80px; text-align:left; background-color:#B8B8B8;">
+    <font style="color: aliceblue">{{accommodation.Description}}</font>
+    </div>
+  </span>
+</span>
+</div>
+
 <!--<ul class="nav nav-tabs">
   
   <li class="dropdown">
