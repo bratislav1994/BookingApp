@@ -19,8 +19,8 @@ export class CommentService {
         return this.http.get("http://localhost:54043/api/Comment/ReadAll");
   }
 
-  getCommentById(id : number) : Observable<any> {
-        return this.http.get(`http://localhost:54043/api/Comment/Read/${id}`);
+  getCommentById(userId : number, accId: number) : Observable<any> {
+        return this.http.get(`http://localhost:54043/api/Comment/Read/${userId}/${accId}`);
   }
 
   deleteComment(id: number) : Observable<any>{

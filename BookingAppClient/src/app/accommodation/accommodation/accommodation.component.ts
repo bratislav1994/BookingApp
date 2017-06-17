@@ -301,7 +301,7 @@ export class AccommodationComponent implements OnInit {
   }
 
   isUserPostComment(){
-    this.commentService.getCommentById(this.userId).subscribe(
+    this.commentService.getCommentById(this.userId, this.accommodation.Id).subscribe(
       c => {
         this.commentObj = (c as Comment);
         this.showFormForComment = false;
@@ -309,7 +309,7 @@ export class AccommodationComponent implements OnInit {
         console.log("Nasao")
       },
       error => { console.log("Nije nasao"); this.showFormForComment = true; }
-    )
+    );
   }
 
     switchShowFormComment()

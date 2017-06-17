@@ -81,7 +81,31 @@ namespace BookingApp.Migrations
                 var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("manager"));
                 var user = new BAIdentityUser() { Id = "manager", UserName = "manager", Email = "manager@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("manager"), addUserId = _userId.Id };
                 userManager.Create(user);
-                userManager.AddToRole(user.Id, "Admin");
+                userManager.AddToRole(user.Id, "Manager");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "user1"))
+            {
+                var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("user1"));
+                var user = new BAIdentityUser() { Id = "user1", UserName = "user1", Email = "user1@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("User1$"), addUserId = _userId.Id };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "user2"))
+            {
+                var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("user2"));
+                var user = new BAIdentityUser() { Id = "user2", UserName = "user2", Email = "user2@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("User2$"), addUserId = _userId.Id };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "user3"))
+            {
+                var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("user3"));
+                var user = new BAIdentityUser() { Id = "user3", UserName = "user3", Email = "user3@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("User3$"), addUserId = _userId.Id };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
             }
 
             context.Countries.AddOrUpdate(
@@ -225,9 +249,21 @@ namespace BookingApp.Migrations
                  //Marselj
                  new Room { Id = 16, AccommodationId = 6, BedCount = 1, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 25, RoomNumber = 550 },
                 new Room { Id = 17, AccommodationId = 6, BedCount = 2, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 30, RoomNumber = 551 },
-                new Room { Id = 18, AccommodationId = 6, BedCount = 3, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 40, RoomNumber = 552 });
-                
-           
+                new Room { Id = 18, AccommodationId = 6, BedCount = 3, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 40, RoomNumber = 552 }
+            );
+
+            context.Comments.AddOrUpdate(
+                 c => c.Id,
+                 //Novi Sad
+                 new Comment { Id = 1, AccommodationId = 1, Grade = 3, Text = "Prosecna usluga nista posebno.", UserId = 3 },
+                 //Beograd
+                 new Comment { Id = 2, AccommodationId = 2, Grade = 5, Text = "Sve pohvale za osoblje. Odusevljen.", UserId = 4 },
+                 new Comment { Id = 3, AccommodationId = 2, Grade = 4, Text = "Dobri ugostitelji.", UserId = 5 },
+                 //Milano
+                 new Comment { Id = 4, AccommodationId = 3, Grade = 3, Text = "Osoblje nije zadovoljilo moja ocekivanja", UserId = 5 },
+                 new Comment { Id = 5, AccommodationId = 3, Grade = 5, Text = "Sve pohvale za osoblje. Odusevljen.", UserId = 4 },
+                 new Comment { Id = 6, AccommodationId = 3, Grade = 2, Text = "Nezadovoljan u potpunosti.", UserId = 3 }
+             );
         }
     }
 }

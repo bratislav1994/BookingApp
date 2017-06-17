@@ -27,11 +27,11 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
-        [Route("Read/{id}")]
+        [Route("Read/{id1}/{id2}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult ReadComment(int id)
+        public IHttpActionResult ReadComment(int id1, int id2)
         {
-            Comment comment = db.Comments.Include("User").Include("Accommodation").FirstOrDefault(c => c.UserId == id);
+            Comment comment = db.Comments.Include("User").Include("Accommodation").FirstOrDefault(c => c.UserId == id1 && c.AccommodationId == id2);
 
             if (comment == null)
             {
