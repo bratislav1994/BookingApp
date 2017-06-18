@@ -31,6 +31,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (region == null)
+            {
+                return BadRequest();
+            }
+
+            if (RegionExist(region.Name))
+            {
+                return BadRequest("Region with name " + region.Name + " already exist.");
+            }
+
             try
             {
                 db.Regions.Add(region);
@@ -76,6 +86,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (region == null)
+            {
+                return BadRequest();
+            }
+
+            if (RegionExist(region.Name))
+            {
+                return BadRequest("Region with name " + region.Name + " already exist.");
+            }
+
             db.Entry(region).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -84,7 +104,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(region.Id))
+                if (!RegionExist(region.Id))
                 {
                     return NotFound();
                 }
@@ -97,9 +117,14 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        private bool TypeExist(int id)
+        private bool RegionExist(int id)
         {
             return db.Regions.Count(e => e.Id == id) > 0;
+        }
+
+        private bool RegionExist(string name)
+        {
+            return db.Regions.Count(e => e.Name.Equals(name)) > 0;
         }
 
         [HttpGet]

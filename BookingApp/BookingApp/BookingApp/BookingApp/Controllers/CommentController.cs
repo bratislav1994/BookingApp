@@ -54,7 +54,19 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<RoomReservation> reservations = ReservationsExist(comment);
+            if (comment == null)
+            {
+                BadRequest();
+            }
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+           List<RoomReservation> reservations = ReservationsExist(comment);
 
             if (reservations.Count == 0)
             {
@@ -80,6 +92,12 @@ namespace BookingApp.Controllers
             }
 
             Accommodation accommodation = db.Accommodations.Where(a => a.Id == comment.AccommodationId).FirstOrDefault();
+
+            if (accommodation == null)
+            {
+                return BadRequest("There is no accommodation for which is creating comment.");
+            }
+
             accommodation.AvrageGrade = AverageGrade(comment.AccommodationId);
             db.SaveChanges();
 
@@ -100,17 +118,23 @@ namespace BookingApp.Controllers
         private double AverageGrade(int accId)
         {
             List<Comment> comments = db.Comments.Where(c => c.AccommodationId == accId).ToList();
-            double grade;
-            try
+
+            if (comments.Count > 0)
             {
-                grade = (double)(comments.Sum(c => c.Grade)) / (double)comments.Count;
+                double grade;
+                try
+                {
+                    grade = (double)(comments.Sum(c => c.Grade)) / (double)comments.Count;
+                }
+                catch (DivideByZeroException)
+                {
+                    grade = 0;
+                }
+
+                return Math.Round(grade, 1);
             }
-            catch (DivideByZeroException)
-            {
-                grade = 0;
-            }
-           
-            return Math.Round(grade, 1);
+
+            return 0.0;       
         }
 
         [Authorize(Roles = "AppUser")]
@@ -127,6 +151,18 @@ namespace BookingApp.Controllers
             if (id != comment.AccommodationId || id2 != comment.UserId)
             {
                 return BadRequest();
+            }
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            if (!comment.UserId.Equals(user.addUser.Id))
+            {
+                BadRequest("You don't have right to change comment.");
             }
 
             db.Entry(comment).State = System.Data.Entity.EntityState.Modified;
@@ -163,13 +199,30 @@ namespace BookingApp.Controllers
                 return NotFound();
             }
 
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            if (!comment.UserId.Equals(user.addUser.Id))
+            {
+                BadRequest("You don't have right to delete comment.");
+            }
+
             db.Comments.Remove(comment);
             db.SaveChanges();
 
 
             Accommodation accommodation = db.Accommodations.Where(a => a.Id == comment.AccommodationId).FirstOrDefault();
-            accommodation.AvrageGrade = AverageGrade(comment.AccommodationId);
 
+            if (accommodation == null)
+            {
+                return BadRequest("There is no accommodation for which is changing comment.");
+            }
+
+            accommodation.AvrageGrade = AverageGrade(comment.AccommodationId);
             db.SaveChanges();
 
             return Ok();

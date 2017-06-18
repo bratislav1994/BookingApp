@@ -35,6 +35,11 @@ namespace BookingApp.Controllers
 
             var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
 
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
             if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
             {
                 return BadRequest("You are banned. This operation isn't permitted.");
@@ -108,14 +113,19 @@ namespace BookingApp.Controllers
 
             var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
 
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
             if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
             {
                 return BadRequest("You are banned. This operation isn't permitted.");
             }
 
-            if (user == null)
+            if (!accommodation.UserId.Equals(user.addUser.Id))
             {
-                return BadRequest();
+                BadRequest("You don't have right to delete accommodation.");
             }
 
             db.Accommodations.Remove(accommodation);
@@ -135,11 +145,26 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if(accommodation == null)
+            {
+                return BadRequest();
+            }
+
             var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
 
             if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
             {
                 return BadRequest("You are banned. This operation isn't permitted.");
+            }
+
+            if (!accommodation.UserId.Equals(user.addUser.Id))
+            {
+                BadRequest("You don't have right to change accommodation.");
             }
 
             db.Entry(accommodation).State = System.Data.Entity.EntityState.Modified;
@@ -158,8 +183,8 @@ namespace BookingApp.Controllers
                 {
                     throw;
                 }
-
             }
+
             return StatusCode(HttpStatusCode.NoContent);
         }
 

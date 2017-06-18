@@ -28,6 +28,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (country == null)
+            {
+                return BadRequest();
+            }
+
+            if (CountryExist(country.Name))
+            {
+                return BadRequest("Country with name " + country.Name + " already exist.");
+            }
+
             try
             {
                 db.Countries.Add(country);
@@ -73,6 +83,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (country == null)
+            {
+                return BadRequest();
+            }
+
+            if (CountryExist(country.Name))
+            {
+                return BadRequest("Country with name " + country.Name + " already exist.");
+            }
+
             db.Entry(country).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -81,7 +101,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(country.Id))
+                if (!CountryExist(country.Id))
                 {
                     return NotFound();
                 }
@@ -94,9 +114,14 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        private bool TypeExist(int id)
+        private bool CountryExist(int id)
         {
             return db.Countries.Count(e => e.Id == id) > 0;
+        }
+
+        private bool CountryExist(string name)
+        {
+            return db.Countries.Count(c => c.Name.Equals(name)) > 0;
         }
 
         [HttpGet]

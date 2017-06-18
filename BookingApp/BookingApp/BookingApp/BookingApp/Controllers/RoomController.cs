@@ -49,6 +49,20 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
+
+            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+            {
+                return BadRequest("There is no accommodation for which is creating room.");
+            }
+
             try
             {
                 db.Rooms.Add(room);
@@ -70,6 +84,20 @@ namespace BookingApp.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
+
+            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+            {
+                return BadRequest("There is no accommodation for which is changing room.");
             }
 
             db.Entry(room).State = System.Data.Entity.EntityState.Modified;
@@ -103,6 +131,20 @@ namespace BookingApp.Controllers
             if (room == null)
             {
                 return NotFound();
+            }
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
+
+            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+            {
+                return BadRequest("There is no accommodation for which is deleting room.");
             }
 
             db.Rooms.Remove(room);

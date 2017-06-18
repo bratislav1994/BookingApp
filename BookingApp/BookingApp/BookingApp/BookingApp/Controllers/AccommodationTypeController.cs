@@ -25,6 +25,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (type == null)
+            {
+                BadRequest();
+            }
+
+            if (TypeExist(type.Name))
+            {
+                return BadRequest("Accommodation type with name " + type.Name + " already exist.");
+            }
+
             db.Entry(type).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -54,6 +64,16 @@ namespace BookingApp.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (type == null)
+            {
+                BadRequest();
+            }
+
+            if (TypeExist(type.Name))
+            {
+                return BadRequest("Accommodation type with name " + type.Name + " already exist.");
             }
 
             try
@@ -90,6 +110,11 @@ namespace BookingApp.Controllers
         private bool TypeExist(int id)
         {
             return db.AccommodationsTypes.Count(e => e.Id == id) > 0;
+        }
+
+        private bool TypeExist(string name)
+        {
+            return db.AccommodationsTypes.Count(e => e.Name.Equals(name)) > 0;
         }
 
         [HttpGet]

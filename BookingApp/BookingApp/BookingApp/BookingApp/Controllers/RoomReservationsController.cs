@@ -90,6 +90,23 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (user == null)
+            {
+                return BadRequest("You're not log in.");
+            }
+
+            if (reservation == null || !reservation.UserId.Equals(user.addUser.Id))
+            {
+                return BadRequest();
+            }
+
+            if (reservation.StartDate <= DateTime.Now)
+            {
+                return BadRequest("You are supposed to be in your accommodation right now, can not change reservation!");
+            }
+
             db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -126,37 +143,40 @@ namespace BookingApp.Controllers
 
             var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
 
-            if (user != null)
+            if (user == null)
             {
-                if (reservation != null && reservation.UserId.Equals(user.addUserId))
-                {
-                    if (reservation.StartDate > DateTime.Now)
-                    {
-                        reservation.Canceled = true;
-                        db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;
+                return BadRequest("You're not log in.");
+            }
 
-                        try
-                        {
-                            db.SaveChanges();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!ReservationExists(id))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest("You are supposed to be in your accommodation right now, can not cancel reservation!");
-                    }
+            if (reservation == null || !reservation.UserId.Equals(user.addUser.Id))
+            {
+                return BadRequest();
+            }
+
+            if (reservation.StartDate <= DateTime.Now)
+            {
+                return BadRequest("You are supposed to be in your accommodation right now, can not cancel reservation!");
+            }
+
+            reservation.Canceled = true;
+            db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ReservationExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
                 }
             }
+
             return Ok(reservation);
         }
 

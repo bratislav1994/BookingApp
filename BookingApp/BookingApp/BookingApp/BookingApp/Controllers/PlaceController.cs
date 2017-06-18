@@ -25,6 +25,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (place == null)
+            {
+                return BadRequest();
+            }
+
+            if (PlaceExist(place.Name))
+            {
+                return BadRequest("Place with name " + place.Name + " already exist.");
+            }
+
             try
             {
                 db.Places.Add(place);
@@ -68,6 +78,16 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (place == null)
+            {
+                return BadRequest();
+            }
+
+            if (PlaceExist(place.Name))
+            {
+                return BadRequest("Place with name " + place.Name + " already exist.");
+            }
+
             db.Entry(place).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -76,7 +96,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExist(place.Id))
+                if (!PlaceExist(place.Id))
                 {
                     return NotFound();
                 }
@@ -89,9 +109,14 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        private bool TypeExist(int id)
+        private bool PlaceExist(int id)
         {
             return db.Places.Count(e => e.Id == id) > 0;
+        }
+
+        private bool PlaceExist(string name)
+        {
+            return db.Places.Count(e => e.Name.Equals(name)) > 0;
         }
 
         [HttpGet]
