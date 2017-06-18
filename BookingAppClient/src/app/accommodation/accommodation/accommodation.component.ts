@@ -131,6 +131,7 @@ export class AccommodationComponent implements OnInit {
       
       this.Name = undefined;
       this.Address = undefined;
+      this.Description = undefined;
       this.showEditForm = false;
   }
 
@@ -230,7 +231,16 @@ export class AccommodationComponent implements OnInit {
 
   onSubmitComment()
   {
-    this.commentService.addComment(new Comment(0, this.Grade, 
+    if(this.comment == undefined || this.comment == "" || this.Grade == undefined || this.Grade < 0 || this.Grade > 5)
+    {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Some required fields are empty.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+        this.commentService.addComment(new Comment(0, this.Grade, 
                                                this.comment,
                                                this.userId,
                                               this.accommodation.Id)).subscribe(a => 
@@ -249,7 +259,9 @@ export class AccommodationComponent implements OnInit {
                                                 doc.className = "show";
                                                 setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                                               });
-    this.comment = "";
+    }
+    
+    this.comment = undefined
     this.Grade = undefined;
   }
 
