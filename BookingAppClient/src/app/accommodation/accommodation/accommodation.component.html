@@ -149,7 +149,7 @@
 
   <!--comments-->
 
-  <div style="float:left;width:100%;" *ngIf="switchShowFormComment() && isShowCommentsSelected()">
+  <div style="float:left;width:100%;" *ngIf="switchShowFormComment() && isShowCommentsSelected() ">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
       <div>
         <br>
@@ -173,7 +173,7 @@
   <div style="height:5%;float:left" *ngIf="isShowCommentsSelected()">
       <div *ngFor = "let comment of Comments">
         User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
-        <button name="delete" (click) = "deleteComment(comment)">Delete</button>
+        <button *ngIf="isUserComment(comment)" name="delete" (click) = "deleteComment(comment)">Delete</button>
       </div>
       <br>
   </div>

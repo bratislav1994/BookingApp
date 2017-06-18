@@ -63,10 +63,10 @@ export class AccommodationComponent implements OnInit {
     
 
     this.rooms = [];
-    let id = this.activatedRoute.snapshot.params["Id"];
-    this.query = `?$filter=AccommodationId eq ${id}`;
+    this.Id = this.activatedRoute.snapshot.params["Id"];
+    this.query = `?$filter=AccommodationId eq ${this.Id}`;
 
-    this.accommodationService.getByIdMap(id).subscribe(a =>
+    this.accommodationService.getByIdMap(this.Id).subscribe(a =>
     {
         this.accommodation = (a[0] as Accommodation);
         console.log(this.accommodation.Name);
@@ -239,10 +239,11 @@ export class AccommodationComponent implements OnInit {
                                                this.userId,
                                               this.accommodation.Id)).subscribe(a => 
                                               {
+                                                this.getAverageGrade();
                                                 this.GetComments();
                                                 this.isUserPostComment();
                                                 var doc = document.getElementById("successMsg");
-                                                doc.innerText = "Comment successfully deleted.";   
+                                                doc.innerText = "Comment successfully added.";   
                                                 doc.className = "show";
                                                 setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
                                               }, error =>
@@ -252,6 +253,16 @@ export class AccommodationComponent implements OnInit {
                                                 doc.className = "show";
                                                 setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                                               });
+    this.comment = "";
+    this.Grade = undefined;
+  }
+
+  getAverageGrade() : void{
+    this.accommodationService.getByIdMap(this.Id).subscribe(a =>
+    {
+        this.accommodation = (a[0] as Accommodation);
+        this.accommodation.ImageUrl = DynamicUrl.socket + this.accommodation.ImageUrl;
+    });
   }
 
   deleteComment(comment: Comment)
@@ -260,6 +271,8 @@ export class AccommodationComponent implements OnInit {
         e => 
       {
             this.GetComments();
+            this.getAverageGrade()
+            this.isUserPostComment();
             var doc = document.getElementById("successMsg");
             doc.innerText = "Comment successfully deleted.";   
             doc.className = "show";
@@ -283,13 +296,13 @@ export class AccommodationComponent implements OnInit {
         { 
           this.Comments = c;
 
-          if(this.Comments.length > 0){
-            let totalGrades = 0;
-            for(let i = 0; i < this.Comments.length; i++ ){
-              totalGrades += this.Comments[i].Grade;
-            }
-            this.accommodation.AvrageGrade = +((totalGrades / this.Comments.length).toFixed(1));
-          }
+          // if(this.Comments.length > 0){
+          //   let totalGrades = 0;
+          //   for(let i = 0; i < this.Comments.length; i++ ){
+          //     totalGrades += this.Comments[i].Grade;
+          //   }
+          //   this.accommodation.AvrageGrade = +((totalGrades / this.Comments.length).toFixed(1));
+        //  }
          
         },
         error =>
@@ -308,7 +321,12 @@ export class AccommodationComponent implements OnInit {
         
         console.log("Nasao")
       },
-      error => { console.log("Nije nasao"); this.showFormForComment = true; }
+      error => { 
+        console.log("Nije nasao"); 
+        if(localStorage.getItem(LocalEnum.Id.toString()) != undefined){
+            this.showFormForComment = true;
+        }
+      }
     );
   }
 
@@ -317,4 +335,7 @@ export class AccommodationComponent implements OnInit {
       return this.showFormForComment;
   }
 
+  isUserComment(comment: Comment){
+      return comment.UserId == +localStorage.getItem(LocalEnum.Id.toString());
+  }
 }

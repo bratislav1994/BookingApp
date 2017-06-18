@@ -10,6 +10,8 @@ using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using System.Web.Http.OData;
+using System.Data.Entity;
+using System.Globalization;
 
 namespace BookingApp.Controllers
 {
@@ -52,17 +54,63 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            List<RoomReservation> reservations = ReservationsExist(comment);
+
+            if (reservations.Count == 0)
+            {
+                return BadRequest("You don't have reservations for this accommodation.");
+            }
+
+            RoomReservation reservation = GetReservation(reservations);
+
+            if (reservation == null || reservation.StartDate >= DateTime.Now)
+            {
+                return BadRequest("You can not comment accommodation until you are staying in the same.");
+            }
+
             try
             {
                 db.Comments.Add(comment);
                 db.SaveChanges();
+
             }
             catch (DbUpdateException e)
             {
                 return Content(HttpStatusCode.Conflict, comment);
             }
 
+            Accommodation accommodation = db.Accommodations.Where(a => a.Id == comment.AccommodationId).FirstOrDefault();
+            accommodation.AvrageGrade = AverageGrade(comment.AccommodationId);
+            db.SaveChanges();
+
             return CreatedAtRoute("DefaultApi", new { controller = "Comment", id = comment.AccommodationId, id2 = comment.UserId }, comment);
+        }
+
+        private List<RoomReservation> ReservationsExist(Comment comment)
+        {
+            return db.RoomReservations.Where(resevation => resevation.Room.AccommodationId.Equals(comment.AccommodationId)
+                && resevation.UserId.Equals(comment.UserId) && resevation.Canceled == false).ToList();
+        }
+
+        private RoomReservation GetReservation(List<RoomReservation> reservations)
+        {
+            return reservations.FirstOrDefault(res => res.StartDate.Equals(reservations.Min(o => o.StartDate)));
+        }
+
+        private double AverageGrade(int accId)
+        {
+            List<Comment> comments = db.Comments.Where(c => c.AccommodationId == accId).ToList();
+            double grade;
+            try
+            {
+                grade = (double)(comments.Sum(c => c.Grade)) / (double)comments.Count;
+            }
+            catch (DivideByZeroException)
+            {
+                grade = 0;
+            }
+           
+            return Math.Round(grade, 1);
         }
 
         [Authorize(Roles = "AppUser")]
@@ -102,7 +150,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AppUser")]
         [HttpDelete]
         [Route("Delete/{id}")]
         [ResponseType(typeof(Comment))]
@@ -116,6 +164,12 @@ namespace BookingApp.Controllers
             }
 
             db.Comments.Remove(comment);
+            db.SaveChanges();
+
+
+            Accommodation accommodation = db.Accommodations.Where(a => a.Id == comment.AccommodationId).FirstOrDefault();
+            accommodation.AvrageGrade = AverageGrade(comment.AccommodationId);
+
             db.SaveChanges();
 
             return Ok();
