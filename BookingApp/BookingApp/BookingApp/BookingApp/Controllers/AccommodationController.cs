@@ -28,14 +28,21 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult PostAccommodation()
         {
-            Accommodation accommodation = new Accommodation();
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
+            {
+                return BadRequest("You are banned. This operation isn't permitted.");
+            }
+
+            Accommodation accommodation = new Accommodation();
             var httpRequest = HttpContext.Current.Request;
+
             try
             {
                 accommodation = JsonConvert.DeserializeObject<Accommodation>(httpRequest.Form[0]);
@@ -86,7 +93,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "Accommodation", id = accommodation.Id }, accommodation);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpDelete]
         [Route("accommodation/{id}")]
         [ResponseType(typeof(Accommodation))]
@@ -99,13 +106,25 @@ namespace BookingApp.Controllers
                 return NotFound();
             }
 
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
+            {
+                return BadRequest("You are banned. This operation isn't permitted.");
+            }
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
             db.Accommodations.Remove(accommodation);
             db.SaveChanges();
 
             return Ok(accommodation);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("accommodation")]
         [ResponseType(typeof(void))]
@@ -114,6 +133,13 @@ namespace BookingApp.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+
+            if (db.AppUsers.Where(x => x.Id.Equals(user.addUserId)).FirstOrDefault().IsBanned)
+            {
+                return BadRequest("You are banned. This operation isn't permitted.");
             }
 
             db.Entry(accommodation).State = System.Data.Entity.EntityState.Modified;

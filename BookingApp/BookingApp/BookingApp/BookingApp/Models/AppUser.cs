@@ -17,5 +17,6 @@ namespace BookingApp.Models
         public IList<RoomReservation> RoomReservations { get; set; }
         public IList<Comment> Comments { get; set; }
         public IList<Accommodation> Accommodations { get; set; }
+        public bool IsBanned { get; set; }
     }
 }

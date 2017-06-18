@@ -67,7 +67,7 @@ export class AppComponent {
   }
 
   signUp(user: UserRegistration, form: NgForm) {
-    this.registrationService.register(new UserRegistration(user.Username, user.Password, user.Role, user.Email, user.ConfirmPassword)).subscribe(
+    this.registrationService.register(new UserRegistration(user.Username, user.Password, user.Role, user.Email, user.ConfirmPassword, false)).subscribe(
      x =>
      {
             var doc = document.getElementById("successMsg");

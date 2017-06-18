@@ -7,13 +7,13 @@ namespace BookingApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class NewPropertyInRR : IMigrationMetadata
+    public sealed partial class ModifyAppUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(NewPropertyInRR));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ModifyAppUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706170917003_NewPropertyInRR"; }
+            get { return "201706172120378_ModifyAppUser"; }
         }
         
         string IMigrationMetadata.Source

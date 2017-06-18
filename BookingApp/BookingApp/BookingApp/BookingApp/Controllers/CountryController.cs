@@ -17,7 +17,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("country")]
         [ResponseType(typeof(Country))]
@@ -43,7 +43,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("country/{id}")]
         [ResponseType(typeof(Country))]
@@ -62,7 +62,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "Country", id = country.Id }, country);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("country")]
         [ResponseType(typeof(void))]

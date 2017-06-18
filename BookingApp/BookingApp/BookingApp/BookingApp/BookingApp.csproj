@@ -278,6 +278,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
@@ -307,9 +308,9 @@
     <Compile Include="Migrations\201706141334263_RoomReservationUpdate.Designer.cs">
       <DependentUpon>201706141334263_RoomReservationUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706170917003_NewPropertyInRR.cs" />
-    <Compile Include="Migrations\201706170917003_NewPropertyInRR.Designer.cs">
-      <DependentUpon>201706170917003_NewPropertyInRR.cs</DependentUpon>
+    <Compile Include="Migrations\201706172120378_ModifyAppUser.cs" />
+    <Compile Include="Migrations\201706172120378_ModifyAppUser.Designer.cs">
+      <DependentUpon>201706172120378_ModifyAppUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
@@ -419,8 +420,8 @@
     <EmbeddedResource Include="Migrations\201706141334263_RoomReservationUpdate.resx">
       <DependentUpon>201706141334263_RoomReservationUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706170917003_NewPropertyInRR.resx">
-      <DependentUpon>201706170917003_NewPropertyInRR.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706172120378_ModifyAppUser.resx">
+      <DependentUpon>201706172120378_ModifyAppUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

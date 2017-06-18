@@ -43,6 +43,7 @@ import { AccommodationHomeComponent } from './accommodation/accommodation-home/a
 import { ReservationHomeComponent } from './room-reservation/reservation-home/reservation-home.component';
 import { MapComponent } from './map/map/map.component';
 import { FilterComponent } from './filter/filter.component';
+import { ManagerComponent } from './manager/manager.component';
 
 const ChildRoutes = [
 
@@ -98,7 +99,9 @@ const Routes = [
   {path: "reservation_home", component: ReservationHomeComponent},
   {path:  "add_reservation", component: CreateReservationComponent},
   {path:  "view_reservations", component: ViewReservationComponent},
-  {path:  "view_reservation/:Id", component: RoomReservationComponent}
+  {path:  "view_reservation/:Id", component: RoomReservationComponent},
+
+  {path:  "view_managers", component: ManagerComponent},
 ] 
 
 
@@ -142,6 +145,7 @@ const Routes = [
     ReservationHomeComponent,
     MapComponent,
     FilterComponent,
+    ManagerComponent,
   ],
   imports: [
     BrowserModule,

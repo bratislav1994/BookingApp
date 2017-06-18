@@ -95,7 +95,9 @@ export class AddAccommodationComponent implements OnInit {
   onSubmit(form: NgForm){
     console.log("usao");
     
-    this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
+    if (this.file != undefined)
+    {
+        this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
                                     "", this.clickedLat, this.clickedLong, this.PlaceId, this.AccommodationTypeId, 
                                     parseInt(localStorage.getItem(LocalEnum.Id.toString()))), this.file).subscribe(
                         x => 
@@ -112,7 +114,16 @@ export class AddAccommodationComponent implements OnInit {
                             doc.className = "show";
                             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                         }
-                    ); 
+                      ); 
+    }
+    else
+    {
+                            var doc = document.getElementById("errorMsg");
+                            doc.innerText = "Picture must be selected.";
+                            doc.className = "show";
+                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    
   }
 
   resetForm()

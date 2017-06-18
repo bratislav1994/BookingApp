@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   },
     error => 
     {
-        console.log(error), alert("Unsuccessful fetch operation")
+        console.log(error), alert("aaaaaaaaaaaaaaaaaaa")
     });
   }
 

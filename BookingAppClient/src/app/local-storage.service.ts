@@ -16,7 +16,7 @@ export class LocalStorageService {
 
      isAdmin() : boolean {
         if(localStorage.getItem(LocalEnum.Role.toString()) == "Admin"){
-            console.log("jeste admin");
+            // console.log("jeste admin");
             return true
         }
 
@@ -25,7 +25,7 @@ export class LocalStorageService {
 
     isManager() : boolean {
         if(localStorage.getItem(LocalEnum.Role.toString()) == "Manager"){
-            console.log("jeste manager");
+            // console.log("jeste manager");
             return true
         }
 
@@ -34,7 +34,7 @@ export class LocalStorageService {
 
     isUser() : boolean {
         if(localStorage.getItem(LocalEnum.Role.toString()) == "AppUser"){
-            console.log("jeste AppUser");
+            // console.log("jeste AppUser");
             return true
         }
 
