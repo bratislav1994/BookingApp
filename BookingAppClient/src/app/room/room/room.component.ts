@@ -114,21 +114,33 @@ export class RoomComponent implements OnInit {
   
        onSubmitBooking(){
          let userId = localStorage.getItem(LocalEnum.Id.toString());
-        this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.room.Id, false)).subscribe(
-        r => 
-        {
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Room reservation successfully added.";   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
-        },
-        error => 
-        {
-            var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
-        }
-      );
+         if(this.StartDate == undefined || this.EndDate == undefined || +userId == undefined || this.room.Id == undefined)
+         {
+              var doc = document.getElementById("errorMsg");
+              doc.innerText = "Some required fields are empty.";   
+              doc.className = "show";
+              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+         }
+         else 
+         {
+              this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.room.Id, false)).subscribe(
+                r => 
+                {
+                    var doc = document.getElementById("successMsg");
+                    doc.innerText = "Room reservation successfully added.";   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
+                },
+                error => 
+                {
+                    var doc = document.getElementById("errorMsg");
+                    doc.innerText = error.json().Message;   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+                });
+         }
+        
+        this.StartDate = undefined;
+        this.EndDate = undefined;
     }
 }
