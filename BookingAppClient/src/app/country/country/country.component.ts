@@ -40,22 +40,32 @@ export class CountryComponent implements OnInit {
 
   onSubmit()
   {
-    this.countryService.editCountry(new Country(this.country.Id, this.Name, this.Code)).subscribe(
-      x => 
-      {
+    if(this.Name == undefined || this.Code == undefined ||
+       this.Name == "" || this.Code == "")
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+    }
+    else 
+    {
+        this.countryService.editCountry(new Country(this.country.Id, this.Name, this.Code)).subscribe(
+          x => 
+          {
             var doc = document.getElementById("successMsg");
             doc.innerText = "Country successfully edited.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      },
-      error =>
-      {
+          },
+          error =>
+          {
             var doc = document.getElementById("errorMsg");
             doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      }
-    );
+          });
+    }
   }
 
   deleteRegion(region: Region)

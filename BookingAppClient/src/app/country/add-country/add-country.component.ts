@@ -22,22 +22,33 @@ export class AddCountryComponent implements OnInit {
 
   onSubmit()
   {
-    this.countryService.addCountry(new Country(0, this.Name, this.Code)).subscribe(x => 
-    {    
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Country successfully added.";   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
-    },
-     error => 
-     {
+    if(this.Name == undefined || this.Code == undefined)
+    {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;  
+            doc.innerText = "Some required fields are empty.";   
             doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
-     });
-    this.Name = "";
-    this.Code = "";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+          this.countryService.addCountry(new Country(0, this.Name, this.Code)).subscribe(x => 
+          {    
+              var doc = document.getElementById("successMsg");
+              doc.innerText = "Country successfully added.";   
+              doc.className = "show";
+              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+          },
+          error => 
+          {
+              var doc = document.getElementById("errorMsg");
+              doc.innerText = error.json().Message;  
+              doc.className = "show";
+              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+          });
+    }
+    
+    this.Name = undefined;
+    this.Code = undefined;
   }
 
 }
