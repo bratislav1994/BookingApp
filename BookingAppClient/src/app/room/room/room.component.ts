@@ -59,27 +59,42 @@ export class RoomComponent implements OnInit {
 
   onSubmit()
   {
-    this.roomService.editRoom(new Room(this.Id,
+    if(this.RoomNumber == undefined || this.BedCount == undefined ||
+         this.PricePerNight == undefined || this.AccommodationId == undefined)
+         {
+                var doc = document.getElementById("errorMsg");
+                doc.innerText = "Some required fields are empty.";   
+                doc.className = "show";
+                setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+         }
+         else
+         {
+                this.roomService.editRoom(new Room(this.Id,
                                        this.RoomNumber, 
                                        this.BedCount,
                                        this.Description,
                                        this.PricePerNight,
                                        this.AccommodationId)).subscribe(
-      x => 
-      {
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Room successfully edited.";   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      },
-      error =>
-      {
-            var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      }
-    );
+                  x => 
+                  {
+                        var doc = document.getElementById("successMsg");
+                        doc.innerText = "Room successfully edited.";   
+                        doc.className = "show";
+                        setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+                  },
+                  error =>
+                  {
+                        var doc = document.getElementById("errorMsg");
+                        doc.innerText = error.json().Message;   
+                        doc.className = "show";
+                        setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+                  });
+         }
+    
+         this.RoomNumber = undefined;
+         this.BedCount = undefined;
+         this.PricePerNight = undefined;
+         this.AccommodationId = undefined;
   }
 
   getReservations() : void{
