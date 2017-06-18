@@ -96,7 +96,16 @@ export class AccommodationComponent implements OnInit {
 
   onSubmit()
   {
-      this.accommodationService.edit(new Accommodation(this.accommodation.Id, this.Name, this.Description, this.Address,
+    if(this.Name == undefined || this.Name == "" || this.Address == undefined || this.Address == "")
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+        this.accommodationService.edit(new Accommodation(this.accommodation.Id, this.Name, this.Description, this.Address,
                                       this.accommodation.Approved, this.ImageURL, this.accommodation.Latitude,
                                       this.accommodation.Longitude, this.accommodation.PlaceId,
                                        this.accommodation.AccommodationTypeId, this.accommodation.UserId)).subscribe( 
@@ -118,6 +127,10 @@ export class AccommodationComponent implements OnInit {
                   setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                } 
           );
+    }
+      
+      this.Name = undefined;
+      this.Address = undefined;
       this.showEditForm = false;
   }
 
