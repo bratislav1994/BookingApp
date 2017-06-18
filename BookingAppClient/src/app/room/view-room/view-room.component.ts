@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomService } from "app/room/room.service";
 import { Room } from "app/room/Room.model";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-view-room',
@@ -12,17 +12,18 @@ import { Router } from '@angular/router';
 export class ViewRoomComponent implements OnInit {
 
   rooms: Room[];
-
-  constructor(private roomService : RoomService, private router: Router) { 
+  Id: number;
+  constructor(private roomService : RoomService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.rooms = [];
   }
 
   ngOnInit() {
+    this.Id = this.activatedRoute.snapshot.params["Id"];
     this.getRooms();
   }
 
   showRoom(id: number){
-      this.router.navigate(['/home/view_room/' + id]);
+      this.router.navigate(['/view_room/' + id]);
   }
 
   deleteRoom(id: number){
@@ -46,10 +47,11 @@ export class ViewRoomComponent implements OnInit {
   }
 
   getRooms() : void{
-    this.roomService.getAllRooms().subscribe(
-      r => this.rooms = r.json(), 
+    this.roomService.getRoomsByIdMap(this.Id).subscribe(
+      r => { this.rooms = r; console.log(this.rooms.length)}, 
       error => {
         console.log(error), alert("Unsuccessful fetch operation");
       });
   }
+
 }

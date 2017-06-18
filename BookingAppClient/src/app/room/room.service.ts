@@ -28,6 +28,12 @@ export class RoomService {
     return ret;
   }
 
+  
+
+getRoomsByIdMap(Id : number) : Observable<any>{
+    let ret = this.http.get(DynamicUrl.socket + `api/Room/ReadAll?$filter=AccommodationId eq ${Id}`).map(res => res.json());
+    return ret;
+  }
   deleteRoom(id : number) : Observable<any> {
       let opts = DynamicUrl.PutHeader();
       return this.http.delete(DynamicUrl.socket + `api/Room/Delete/${id}`, opts);

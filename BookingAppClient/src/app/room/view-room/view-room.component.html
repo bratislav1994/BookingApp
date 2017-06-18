@@ -1,4 +1,4 @@
-<div style="float:left;padding-left:1%">
+<!--<div style="float:left;padding-left:1%">
   <ul class="breadcrumb" *ngFor = "let room of rooms">
     <li style="color:white" class="active"> {{ room.Accommodation.Name }}, {{ room.RoomNumber}}, 
          {{ room.BedCount}}, {{ room.PricePerNight }}
@@ -7,4 +7,25 @@
       <button class="btn btn-danger" name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
     </li>
   </ul>
-</div>
+</div>-->
+
+<div style="float:left">
+      
+    <span style="height:5%;display:inline-block;position:relative;margin:0px" *ngFor = "let room of rooms">
+    <span style=" float:left; background-color:aliceblue; width:20px;"> </span>
+
+    <span style=" float:left;">
+    <div style="width:150px; height:60px"></div>
+
+    <div style="background-color:#B8B8B8;width:220px;height:120px;border-bottom: 1px solid #A0A0A0;">
+        <font style="color: aliceblue">Room number: {{room.RoomNumber}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.BedCount}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.PricePerNight}}</font><br>
+        <font style="color: aliceblue">Bed count: {{room.Description}}</font><br>
+        <button name="show" (click)="showRoom(room.Id)">Show</button>
+        <button name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
+    </div>
+
+    </span>
+  </span>
+  </div>

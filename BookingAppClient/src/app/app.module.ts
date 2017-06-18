@@ -76,7 +76,7 @@ const Routes = [
 
   {path: "room_home", component: RoomHomeComponent},
   {path: "add_room", component: CreateRoomComponent},
-  {path: "view_rooms", component: ViewRoomComponent},
+  {path: "view_rooms/:Id", component: ViewRoomComponent},
   {path: "view_room/:Id", component: RoomComponent},
 
   {path: "place_home", component: PlaceHomeComponent},

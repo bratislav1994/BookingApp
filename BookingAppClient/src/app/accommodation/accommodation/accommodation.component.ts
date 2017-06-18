@@ -204,8 +204,9 @@ export class AccommodationComponent implements OnInit {
 
   roomsClicked()
   {
-    this.showRooms = true;
+    //this.showRooms = true;
     this.showComments = false;
+     this.route.navigate(['/view_rooms/' + this.accommodation.Id]);
   }
 
   isShowRoomsSelected() : boolean
