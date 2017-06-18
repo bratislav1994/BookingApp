@@ -96,7 +96,16 @@ export class AccommodationComponent implements OnInit {
 
   onSubmit()
   {
-      this.accommodationService.edit(new Accommodation(this.accommodation.Id, this.Name, this.Description, this.Address,
+    if(this.Name == undefined || this.Name == "" || this.Address == undefined || this.Address == "")
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+        this.accommodationService.edit(new Accommodation(this.accommodation.Id, this.Name, this.Description, this.Address,
                                       this.accommodation.Approved, this.ImageURL, this.accommodation.Latitude,
                                       this.accommodation.Longitude, this.accommodation.PlaceId,
                                        this.accommodation.AccommodationTypeId, this.accommodation.UserId)).subscribe( 
@@ -118,6 +127,11 @@ export class AccommodationComponent implements OnInit {
                   setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                } 
           );
+    }
+      
+      this.Name = undefined;
+      this.Address = undefined;
+      this.Description = undefined;
       this.showEditForm = false;
   }
 
@@ -217,7 +231,16 @@ export class AccommodationComponent implements OnInit {
 
   onSubmitComment()
   {
-    this.commentService.addComment(new Comment(0, this.Grade, 
+    if(this.comment == undefined || this.comment == "" || this.Grade == undefined || this.Grade < 0 || this.Grade > 5)
+    {
+          var doc = document.getElementById("errorMsg");
+          doc.innerText = "Some required fields are empty.";   
+          doc.className = "show";
+          setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+        this.commentService.addComment(new Comment(0, this.Grade, 
                                                this.comment,
                                                this.userId,
                                               this.accommodation.Id)).subscribe(a => 
@@ -236,7 +259,9 @@ export class AccommodationComponent implements OnInit {
                                                 doc.className = "show";
                                                 setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                                               });
-    this.comment = "";
+    }
+    
+    this.comment = undefined
     this.Grade = undefined;
   }
 
@@ -297,10 +322,9 @@ export class AccommodationComponent implements OnInit {
       error => { 
         console.log("Nije nasao"); 
         if(localStorage.getItem(LocalEnum.Id.toString()) != undefined && localStorage.getItem(LocalEnum.Role.toString()) == "AppUser"){
-            if (this.userId == this.accommodation.UserId)
-            {
+            
                 this.showFormForComment = true;
-            }
+           
         }
       }
     );

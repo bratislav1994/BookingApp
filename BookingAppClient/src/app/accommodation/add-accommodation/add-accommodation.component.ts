@@ -95,35 +95,41 @@ export class AddAccommodationComponent implements OnInit {
   onSubmit(form: NgForm){
     console.log("usao");
     
-    if (this.file != undefined)
+    if (this.file == undefined || this.Name == "" || this.Name == "" || this.Address == undefined || this.Address == "" ||
+        this.clickedLat == undefined || this.clickedLong == undefined || this.Approved == undefined ||
+        this.AccommodationTypeId == undefined || localStorage.getItem(LocalEnum.Id.toString()) == undefined)
     {
-        this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
-                                    "", this.clickedLat, this.clickedLong, this.PlaceId, this.AccommodationTypeId, 
-                                    parseInt(localStorage.getItem(LocalEnum.Id.toString()))), this.file).subscribe(
-                        x => 
-                        {
-                            var doc = document.getElementById("successMsg");
-                            doc.innerText = "Accommodation successfully added.";   
-                            doc.className = "show";
-                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-                         },
-                         error => 
-                        {
-                            var doc = document.getElementById("errorMsg");
-                            doc.innerText = error.json().Message;
-                            doc.className = "show";
-                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-                        }
-                      ); 
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
     }
     else
-    {
-                            var doc = document.getElementById("errorMsg");
-                            doc.innerText = "Picture must be selected.";
-                            doc.className = "show";
-                            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    {                            
+              this.accommodationService.addAccommodation(new Accommodation(0, this.Name, this.Description, this.Address, false,
+                      "", this.clickedLat, this.clickedLong, this.PlaceId, this.AccommodationTypeId, 
+                      parseInt(localStorage.getItem(LocalEnum.Id.toString()))), this.file).subscribe(
+          x => 
+          {
+              var doc = document.getElementById("successMsg");
+              doc.innerText = "Accommodation successfully added.";   
+              doc.className = "show";
+              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+            },
+            error => 
+          {
+              var doc = document.getElementById("errorMsg");
+              doc.innerText = error.json().Message;
+              doc.className = "show";
+              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+          }
+        ); 
     }
-    
+
+    this.Name = undefined;
+    this.Address = undefined;
+    this.clickedLat = undefined;
+    this.clickedLong = undefined;
   }
 
   resetForm()
