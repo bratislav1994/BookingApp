@@ -7,58 +7,34 @@ import { DynamicUrl } from "app/DynamicUrl.model";
 import { Accommodation } from "app/accommodation/Accommodation.model";
 import { AccommodationType } from "app/accommodation-type/type.model";
 import { Room } from "app/room/room.model";
+import { PaginationService } from "app/pagination/pagination.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [LocalStorageService, AccommodationService]
+  providers: [LocalStorageService, AccommodationService, PaginationService]
 })
 export class HomeComponent implements OnInit {
    username: string;
    accommodations: Accommodation[];
-   allAccommodationsView: boolean;
+   pageNumber : number = 1;
+   currentCounterOfPages : Array<number>;
+   showPagesMax: number = 2;
+   selectedOdd: boolean = true;
 
   constructor(private storageService: LocalStorageService, private accommodationService : AccommodationService, 
-              private route : Router) { 
+              private route : Router, private paginationService: PaginationService) { 
     this.accommodations = [];
-    this.allAccommodationsView = true;
-    console.log("aaaaaaaaa");
   }
     
   ngOnInit() {
       this.getAccommodations();
-     // this.route.navigate(['/home/view_accommodations/']);
-      console.log("usaooooooooooooooo");
-  }
-
-  getAccommodations() : void{
-    this.accommodationService.getAllAccommodations().subscribe(a =>
-    { 
-      this.accommodations = a.json();
-      this.appendPortToImageUrl();
-  },
-    error => 
-    {
-        console.log(error), alert("aaaaaaaaaaaaaaaaaaa")
-    });
-  }
-
-  appendPortToImageUrl()
-  {
-    for (var i = 0; i < this.accommodations.length; i++) {
-        this.accommodations[i].ImageUrl = DynamicUrl.socket + this.accommodations[i].ImageUrl;
-    }
   }
 
   onClick(id : number)
   {
       this.route.navigate(['/view_accommodation/', id]);
-      this.allAccommodationsView = false;
-  }
-
-  isAllView() : boolean {
-    return this.allAccommodationsView;
   }
   
   IsLoggedIn() : boolean {
@@ -78,4 +54,64 @@ export class HomeComponent implements OnInit {
   isUser() : boolean {
     return this.storageService.isUser();
   }
+
+  getAccommodations() : void {
+     this.accommodationService.getAllAccommodationsOData(this.pageNumber, PaginationService.pageSize).subscribe(
+       a => {
+          this.accommodations = a.json().value;
+          this.paginationService.calculateNumberOfPages(a);
+          this.howManyPagesAre();
+          this.appendPortToImageUrl();
+      });
+  }
+
+  appendPortToImageUrl()
+  {
+    for (var i = 0; i < this.accommodations.length; i++) {
+        this.accommodations[i].ImageUrl = DynamicUrl.socket + this.accommodations[i].ImageUrl;
+    }
+  }
+
+  howManyPagesAre() {
+    this.currentCounterOfPages = this.pageNumber * this.showPagesMax > PaginationService.numberOfPages ? new Array(this.showPagesMax - 1) : new Array(this.showPagesMax);
+  }
+
+  enableNext(){
+    return (this.pageNumber * this.showPagesMax) < PaginationService.numberOfPages;
+  }
+
+  enablePrevious(){
+    return this.pageNumber > 1;
+  }
+
+  nextPage(){
+    this.pageNumber += 1;
+    this.howManyPagesAre();
+    this.ChangePage(this.pageNumber * this.showPagesMax - 1);
+    this.selectedOdd = true;
+  }
+
+  previousPage(){
+    this.pageNumber -= 1;
+    this.howManyPagesAre();
+    this.ChangePage(this.pageNumber * this.showPagesMax);
+    this.selectedOdd = false;
+  }
+
+  ifFirstOrSecondSelected() {
+    return this.selectedOdd;
+  }
+
+  ChangePage(page : number){
+    this.selectedOdd = page % 2 == 0 ? false : true;
+    this.accommodationService.getAllAccommodationsOData(page, PaginationService.pageSize).subscribe(
+      a => 
+      {
+        this.accommodations = (a.json()).value;
+        this.paginationService.calculateNumberOfPages(a);
+        this.appendPortToImageUrl();
+      }
+    );
+  }
+
 }
