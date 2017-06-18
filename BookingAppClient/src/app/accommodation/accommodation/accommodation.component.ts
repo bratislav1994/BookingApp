@@ -322,10 +322,9 @@ export class AccommodationComponent implements OnInit {
       error => { 
         console.log("Nije nasao"); 
         if(localStorage.getItem(LocalEnum.Id.toString()) != undefined && localStorage.getItem(LocalEnum.Role.toString()) == "AppUser"){
-            if (this.userId == this.accommodation.UserId)
-            {
+            
                 this.showFormForComment = true;
-            }
+           
         }
       }
     );

@@ -44,10 +44,13 @@ import { ReservationHomeComponent } from './room-reservation/reservation-home/re
 import { MapComponent } from './map/map/map.component';
 import { FilterComponent } from './filter/filter.component';
 import { ManagerComponent } from './manager/manager.component';
+import { AdminGuard } from "app/GuardClasses/Admin.guard";
+import { ManagerGuard } from "app/GuardClasses/Manager.guard";
+import { UserGuard } from "app/GuardClasses/User.guard";
+import { LogInGuard } from "app/GuardClasses/Login.guard";
 
 const ChildRoutes = [
 
-  
 ]
 
 const Routes = [
@@ -58,10 +61,6 @@ const Routes = [
   
   {path: "logout", component: LogoutComponent},
   {path: "other", redirectTo:"home"},
-
-
-
-
 
   {path: "search", component: FilterComponent},
   {path: "accommodation_home", component: AccommodationHomeComponent},
@@ -89,8 +88,8 @@ const Routes = [
   {path: "view_regions", component: ListOfRegionsComponent},
   {path: "view_region/:Id", component: RegionComponent},
 
-  {path: "country_home", component: CountryHomeComponent},
-  {path: "add_country", component: AddCountryComponent},
+  {path: "country_home", component: CountryHomeComponent, canActivate: [LogInGuard, AdminGuard]},
+  {path: "add_country", component: AddCountryComponent, canActivate: [LogInGuard, AdminGuard]},
   {path: "view_countries", component: ListOfCountriesComponent},
   {path: "view_country/:Id", component: CountryComponent},
   
