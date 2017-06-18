@@ -115,9 +115,9 @@
 
   <!--comments-->
 
-  <div style="float:left;width:100%;">
+  <div *ngIf="showFormForComment" style="float:left;width:100%;">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
-      <div style="width:50%" class="form-group">
+      <div style="width:40%" class="form-group">
         <br>
         <textarea placeholder="Type comment" class="form-control" id="exampleTextarea" name="comment" [(ngModel)]="comment">
         </textarea>
@@ -136,11 +136,26 @@
 
     <br>
     <br>
+    <br>
     
-  <div style="height:5%;float:left">
+  <div style="height:5%;float:left;width:50%">
       <div *ngFor = "let comment of Comments">
-        User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
-        <button *ngIf="isUserComment(comment)" type="button" class="btn btn-secondary" name="delete" (click) = "deleteComment(comment)">Delete</button>
+          <span style="border:black;width:15%; display:inline-block;">
+              <font>{{comment.User.Username}}</font>
+          </span>
+          
+          <span style="width:60%; display:inline-block;">
+              <font>{{comment.Text}}</font>
+          </span>
+
+          <span style="width:10%; display:inline-block;">
+              <font>{{comment.Grade}}</font>
+          </span>
+
+          <span *ngIf="isUserComment(comment)" style="width:10%; display:inline-block;">
+              <button type="button" class="btn btn-secondary" name="delete" (click) = "deleteComment(comment)">Delete</button>
+          </span>
+        
       </div>
       <br>
   </div>
