@@ -43,7 +43,7 @@ export class ViewTypeComponent implements OnInit {
   }
 
   showType(id : number){
-    this.router.navigate(['/home/view_type/' + id]);
+    this.router.navigate(['/view_type/' + id]);
   }
 
    getTypes() : void{

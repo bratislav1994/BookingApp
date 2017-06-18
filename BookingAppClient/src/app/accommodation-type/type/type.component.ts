@@ -31,22 +31,31 @@ export class TypeComponent implements OnInit {
 
   onSubmit()
   {
-    this.typeService.editType(new AccommodationType(this.type.Id, this.Name)).subscribe(
-    v => 
+    if(this.Name == undefined || this.Name == "")
     {
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Accommodation type successfully edited.";   
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
             doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-    },
-    error => {
-      var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
     }
-    );
-
-    this.Name = "";
+    else 
+    { 
+           this.typeService.editType(new AccommodationType(this.type.Id, this.Name)).subscribe(
+            v => 
+            {
+                    var doc = document.getElementById("successMsg");
+                    doc.innerText = "Accommodation type successfully edited.";   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+            },
+            error => {
+              var doc = document.getElementById("errorMsg");
+                    doc.innerText = error.json().Message;   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+            });
+    }
+   
+    this.Name = undefined;
   }
 }
