@@ -13,19 +13,55 @@
 </div>
 
 <div>
-    <button (click)="search()">Search</button>
-    <button (click)="searchAll()">Search all</button>
+    <button type="button" class="btn btn-secondary" (click)="search()">Search</button>
+    <button type="button" class="btn btn-secondary" (click)="searchAll()">Search all</button>
 </div>
 
-<div *ngFor = "let a of accommodations">
-    <br>
-    <div style="background-color: darkgrey">
-        <font>Accommodation name: {{a.Name}}</font><br>
-        <font>Average grade:{{a.AvrageGrade}}</font><br>
-        <font><img [src]=  "a.ImageUrl" alt="accommodation picture" height="120px" width="120px"></font><br>
-        <font>Type : {{a.AccommodationType.Name}}</font><br>
-        <font>Place: {{a.Place.Name}}</font><br>
-        <font>Description: {{a.Description}}</font><br>
+<div>
+<span style="height:5%;display:inline-block;position:relative;margin:0px" *ngFor = "let accommodation of accommodations">
+  <span style=" float:left; background-color:aliceblue; width:20px;"> </span>
+
+  <span style=" float:left;">
+    <div style="width:150px; height:20px">
     </div>
-    <br>
+
+    <div onmouseover="" style="display:inline-block;cursor: pointer;" (click)="onClick(accommodation.Id)">
+      <img [src]= "accommodation.ImageUrl" alt="More details" height="180px" width="220px">
+    </div>
+
+    <div onmouseover="" style="display:inline-block;cursor: pointer;" (click)="onClick(accommodation.Id)" 
+      style="height:50px;width:220px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
+        
+          <a [routerLink]="['/home/view_accommodation/', accommodation.Id]">{{accommodation.Name}}</a><br>
+          <font>{{accommodation.Place.Name}}</font>
+        
+    </div>
+
+    <div style="width:220px; height:80px; text-align:left; background-color:#B8B8B8;">
+    <font style="color: aliceblue">{{accommodation.Description}}</font>
+    </div>
+  </span>
+</span>
+
+  <div >
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    
+    <li *ngIf="enablePrevious() && FirstSearch == true" class="page-item"><a (click)="previousPage()" class="page-link">Previous</a></li>
+    <li *ngIf="!enablePrevious() && FirstSearch == true" class="page-item disabled"><a (click)="previousPage()" class="page-link">Previous</a></li>
+    
+    <li class="page-item" *ngFor="let count of currentCounterOfPages; let i=index">
+        <a style="background-color: blue" *ngIf="!ifFirstOrSecondSelected() && i == 1" class="page-link" (click)="ChangePage((pageNumber-1)*2 + i +1)">{{(pageNumber-1)*2 +i +1}}</a>
+        <a style="background-color: blue" *ngIf="ifFirstOrSecondSelected() && i == 0" class="page-link" (click)="ChangePage((pageNumber-1)*2 + i +1)">{{(pageNumber-1)*2 +i +1}}</a>
+        <a *ngIf="ifFirstOrSecondSelected() && i == 1" class="page-link" (click)="ChangePage((pageNumber-1)*2 + i +1)">{{(pageNumber-1)*2 +i +1}}</a>
+        <a *ngIf="!ifFirstOrSecondSelected() && i == 0" class="page-link" (click)="ChangePage((pageNumber-1)*2 + i +1)">{{(pageNumber-1)*2 +i +1}}</a>
+    </li>
+    
+    <li *ngIf="enableNext() && FirstSearch == true" class="page-item"><a (click)="nextPage()" class="page-link">Next</a></li>
+    <li *ngIf="!enableNext() && FirstSearch == true" class="page-item disabled"><a (click)="nextPage()" class="page-link">Next</a></li>
+  
+  </ul>
+</nav>
+</div>
+
 </div>

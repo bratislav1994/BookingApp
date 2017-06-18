@@ -28,9 +28,13 @@ export class AccommodationService {
         return this.http.post(DynamicUrl.socket + `api/accommodation`, formData, opts);
   }
 
+  getAllAccommodationsWithQueryOData(pageNumber: number, pageSize: number, filter : string) : Observable<any> {
+        let skip = (pageNumber - 1) * pageSize;
+        return this.http.get(DynamicUrl.socket + `odata/OData?$top=${pageSize}&$skip=${skip} ${filter} &$expand=Place,AccommodationType &$inlinecount=allpages`);
+    }
+
   getAllAccommodationsOData(pageNumber: number, pageSize: number) : Observable<any> {
         let skip = (pageNumber - 1) * pageSize;
-
         return this.http.get(DynamicUrl.socket + `odata/OData?$top=${pageSize}&$skip=${skip} &$expand=Place,AccommodationType &$inlinecount=allpages`);
   }
 
