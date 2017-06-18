@@ -33,22 +33,35 @@ export class PlaceComponent implements OnInit {
 
   onSubmit()
   {
-    this.placeService.editPlace(new Place(this.place.Id, this.Name, this.RegionId)).subscribe(
-      x =>
-      {
-            var doc = document.getElementById("successMsg");
-            doc.innerText = "Place successfully edited.";   
-            doc.className = "show";
-            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      },
-      error =>
-      {
+    if(this.Name == "" || this.Name == undefined)
+    {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = error.json().Message;   
+            doc.innerText = "Some required fields are empty.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      }
-    );
+    }
+    else 
+    {
+            this.placeService.editPlace(new Place(this.place.Id, this.Name, this.RegionId)).subscribe(
+              x =>
+              {
+                    var doc = document.getElementById("successMsg");
+                    doc.innerText = "Place successfully edited.";   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+              },
+              error =>
+              {
+                    var doc = document.getElementById("errorMsg");
+                    doc.innerText = error.json().Message;   
+                    doc.className = "show";
+                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+              }
+            );
+    }
+    
+    this.Name = undefined;
+    this.RegionId = undefined;
   }
 
 }

@@ -58,9 +58,14 @@ namespace BookingApp.Controllers
 
             Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
 
-            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+            if (accommodation == null || accommodation.UserId != user.addUserId)
             {
                 return BadRequest("There is no accommodation for which is creating room.");
+            }
+
+            if (RoomNumberExist(room.RoomNumber))
+            {
+                return BadRequest("Room with number " + room.RoomNumber + " already exist.");
             }
 
             try
@@ -95,9 +100,15 @@ namespace BookingApp.Controllers
 
             Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
 
-            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+
+            if (accommodation == null || accommodation.UserId != user.addUserId)
             {
                 return BadRequest("There is no accommodation for which is changing room.");
+            }
+
+            if (RoomNumberExist(room.RoomNumber))
+            {
+                return BadRequest("Room with number " + room.RoomNumber + " already exist.");
             }
 
             db.Entry(room).State = System.Data.Entity.EntityState.Modified;
@@ -108,7 +119,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExist(room.Id))
+                if (RoomExist(room.Id))
                 {
                     return NotFound();
                 }
@@ -117,6 +128,7 @@ namespace BookingApp.Controllers
                     throw;
                 }
             }
+
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -142,7 +154,7 @@ namespace BookingApp.Controllers
 
             Accommodation accommodation = db.Accommodations.Where(a => a.Id == room.AccommodationId).FirstOrDefault();
 
-            if (accommodation == null || accommodation.UserId != user.addUser.Id)
+            if (accommodation == null || accommodation.UserId != user.addUserId)
             {
                 return BadRequest("There is no accommodation for which is deleting room.");
             }
@@ -156,6 +168,11 @@ namespace BookingApp.Controllers
         private bool RoomExist(int id)
         {
             return db.Rooms.Count(e => e.Id.Equals(id)) > 0;
+        }
+
+        private bool RoomNumberExist(int roomNo)
+        {
+            return db.Rooms.Count(e => e.RoomNumber == roomNo) > 0;
         }
     }
 }
