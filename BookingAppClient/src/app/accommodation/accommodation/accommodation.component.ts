@@ -42,7 +42,6 @@ export class AccommodationComponent implements OnInit {
 
   showEditForm: boolean;
   showRooms: boolean;
-  showComments: boolean;
   accommodations: Accommodation[];
 
   constructor(private accommodationService : AccommodationService, private route: Router, 
@@ -54,14 +53,11 @@ export class AccommodationComponent implements OnInit {
     this.showFormForComment = false;
     this.showEditForm = false;
     this.showRooms = true;
-    this.showComments = false;
     this.accommodations = [];
   }
 
   ngOnInit() {
-     this.userId = +localStorage.getItem(LocalEnum.Id.toString())
-    
-
+     this.userId = +localStorage.getItem(LocalEnum.Id.toString());
     this.rooms = [];
     this.Id = this.activatedRoute.snapshot.params["Id"];
     this.query = `?$filter=AccommodationId eq ${this.Id}`;
@@ -204,25 +200,12 @@ export class AccommodationComponent implements OnInit {
 
   roomsClicked()
   {
-    //this.showRooms = true;
-    this.showComments = false;
      this.route.navigate(['/view_rooms/' + this.accommodation.Id]);
   }
 
   isShowRoomsSelected() : boolean
   {
       return this.showRooms;
-  }
-  
-  commentsClicked()
-  {
-    this.showComments = true;
-    this.showRooms = false;
-  }
-
-  isShowCommentsSelected() : boolean
-  {
-      return this.showComments;
   }
 
   getRooms() : void{
@@ -296,22 +279,12 @@ export class AccommodationComponent implements OnInit {
         c => 
         { 
           this.Comments = c;
-
-          // if(this.Comments.length > 0){
-          //   let totalGrades = 0;
-          //   for(let i = 0; i < this.Comments.length; i++ ){
-          //     totalGrades += this.Comments[i].Grade;
-          //   }
-          //   this.accommodation.AvrageGrade = +((totalGrades / this.Comments.length).toFixed(1));
-        //  }
-         
         },
         error =>
         {
             console.log("sfs");
         }
       );
-     //return this.accommodation.UserId == userId;
   }
 
   isUserPostComment(){
@@ -329,11 +302,6 @@ export class AccommodationComponent implements OnInit {
         }
       }
     );
-  }
-
-    switchShowFormComment()
-    {
-      return this.showFormForComment;
   }
 
   isUserComment(comment: Comment){

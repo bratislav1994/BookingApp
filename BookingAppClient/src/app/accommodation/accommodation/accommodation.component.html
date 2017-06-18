@@ -34,9 +34,6 @@
     </div>
 
     
-
-
-
       </span>
       </span>
 
@@ -71,8 +68,9 @@
       <br>
       <br>
 
-      <button style="float:left" *ngIf="canEditOrDelete()" name="edit" (click) = "changeShowEdit()">Show edit form</button>
-      <button style="float:left" *ngIf="canEditOrDelete()" name="delete" (click) = "deleteAcc(accommodation)">Delete</button>
+      <button style="float:left" type="button" name="rooms" (click)="roomsClicked()" class="btn btn-secondary">Show rooms</button>
+      <button style="float:left" *ngIf="canEditOrDelete()" type="button" class="btn btn-secondary" name="edit" (click) = "changeShowEdit()">Show edit form</button>
+      <button style="float:left" *ngIf="canEditOrDelete()" type="button" class="btn btn-secondary" name="delete" (click) = "deleteAcc(accommodation)">Delete</button>
       <br>
       <br>
 
@@ -96,7 +94,7 @@
             </div>
             <br>
             <div>
-                <button name="edit" >Edit</button>
+                <button type="button" class="btn btn-secondary" name="edit" >Edit</button>
             </div>
         </form>
       </div>
@@ -110,70 +108,39 @@
 
   <div style="width:100%;float:left">
 
-      <!--<div (click)="roomsClicked()">
-          <a href="#">Rooms</a>
-      </div>
-      <div (click)="commentsClicked()">
-          <a href="#">Comments</a>
-      </div>-->
-
-
-      <button id="button1" name="rooms" (click)="roomsClicked()">Rooms</button>
-      <button id="button1" name="comments" (click)="commentsClicked()">Comments</button>
+    
 
   </div>
-
-  
-  <!-- rooms-->
-<!--<div *ngIf="isShowRoomsSelected()" style="float:left">
-      
-    <span style="height:5%;display:inline-block;position:relative;margin:0px" *ngFor = "let room of accommodation.Rooms">
-    <span style=" float:left; background-color:aliceblue; width:20px;"> </span>
-
-    <span style=" float:left;">
-    <div style="width:150px; height:60px"></div>
-
-    <div style="background-color:#B8B8B8;width:220px;height:120px;border-bottom: 1px solid #A0A0A0;">
-        <font style="color: aliceblue">Room number: {{room.RoomNumber}}</font><br>
-        <font style="color: aliceblue">Bed count: {{room.BedCount}}</font><br>
-        <font style="color: aliceblue">Bed count: {{room.PricePerNight}}</font><br>
-        <font style="color: aliceblue">Bed count: {{room.Description}}</font><br>
-        <button name="show" (click)="showRoom(room.Id)">Show</button>
-        <button name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
-    </div>
-
-    </span>
-  </span>
-  </div>-->
 
 
   <!--comments-->
 
-  <div style="float:left;width:100%;" *ngIf="switchShowFormComment() && isShowCommentsSelected() ">
+  <div style="float:left;width:100%;">
   <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
-      <div>
+      <div style="width:50%" class="form-group">
         <br>
-        <textarea type="text" name="comment" id="comment" [(ngModel)]="comment">
+        <textarea placeholder="Type comment" class="form-control" id="exampleTextarea" name="comment" [(ngModel)]="comment">
         </textarea>
       </div>
       <div>
-        <label for = "Grade">Grade:</label>
+        <label for = "Grade">Grade (0-5):</label>
         <br>
         <input type="number" name="Grade" id="Grade" [(ngModel)]="Grade"/>
       </div>
       <div>
-        <button name="post">Post comment</button>
+          <br>
+        <button type="button" class="btn btn-secondary" name="post">Post comment</button>
       </div>
     </form>
     </div>
 
     <br>
-
+    <br>
     
-  <div style="height:5%;float:left" *ngIf="isShowCommentsSelected()">
+  <div style="height:5%;float:left">
       <div *ngFor = "let comment of Comments">
         User: {{comment.User.Username}} : {{comment.Text}} : {{comment.Grade}}  
-        <button *ngIf="isUserComment(comment)" name="delete" (click) = "deleteComment(comment)">Delete</button>
+        <button *ngIf="isUserComment(comment)" type="button" class="btn btn-secondary" name="delete" (click) = "deleteComment(comment)">Delete</button>
       </div>
       <br>
   </div>
