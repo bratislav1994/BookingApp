@@ -144,15 +144,14 @@ export class AccommodationComponent implements OnInit {
   }
 
   canEditOrDelete() : boolean {
-    // if(this.localStorageService.IsLoggedIn()){
-    //   if(this.accommodation.UserId == this.localStorageService.getUserId()){
-    //     return true;
-    //   }
+    if(this.localStorageService.IsLoggedIn()){
+      if(this.accommodation.UserId == this.userId){
+        return true;
+      }
 
-    //   return false;
-    // }
-    // return false;
-    return true;
+      return false;
+    }
+    return false;
   }
 
   getAccommodations() : void{
@@ -297,8 +296,11 @@ export class AccommodationComponent implements OnInit {
       },
       error => { 
         console.log("Nije nasao"); 
-        if(localStorage.getItem(LocalEnum.Id.toString()) != undefined){
-            this.showFormForComment = true;
+        if(localStorage.getItem(LocalEnum.Id.toString()) != undefined && localStorage.getItem(LocalEnum.Role.toString()) == "AppUser"){
+            if (this.userId == this.accommodation.UserId)
+            {
+                this.showFormForComment = true;
+            }
         }
       }
     );
