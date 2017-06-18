@@ -28,7 +28,17 @@ export class AddRegionComponent implements OnInit {
   }
 
   onSubmit(){
-    this.regionService.addRegion(new Region(0, this.Name, this.CountryId)).subscribe(
+    if(this.Name == undefined || this.Name == "" ||
+    this.CountryId == undefined)
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else
+    {
+          this.regionService.addRegion(new Region(0, this.Name, this.CountryId)).subscribe(
       x => 
       {
             var doc = document.getElementById("successMsg");
@@ -43,8 +53,10 @@ export class AddRegionComponent implements OnInit {
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
      });
-     
-    this.Name = "";
+    }
+    
+    this.Name = undefined;
+    this.CountryId = undefined;
   }
 
 }

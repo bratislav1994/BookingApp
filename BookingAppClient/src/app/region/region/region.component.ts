@@ -39,7 +39,16 @@ export class RegionComponent implements OnInit {
 
   onSubmit()
   {
-    this.regionService.editRegion(new Region(this.region.Id, this.Name, this.region.CountryId)).subscribe(
+    if(this.Name == "" || this.Name == undefined)
+    {
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = "Some required fields are empty.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+    }
+    else 
+    {
+          this.regionService.editRegion(new Region(this.region.Id, this.Name, this.region.CountryId)).subscribe(
       x => 
       {
             var doc = document.getElementById("successMsg");
@@ -53,8 +62,11 @@ export class RegionComponent implements OnInit {
             doc.innerText = error.json().Message;   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
-      }
-    );
+      });
+    }
+
+    this.Name = undefined;
+    
   }
 
   deletePlace(place: Place)

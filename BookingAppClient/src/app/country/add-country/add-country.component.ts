@@ -22,7 +22,8 @@ export class AddCountryComponent implements OnInit {
 
   onSubmit()
   {
-    if(this.Name == undefined || this.Code == undefined)
+    if(this.Name == undefined || this.Code == undefined ||
+       this.Name == "" || this.Code == "")
     {
             var doc = document.getElementById("errorMsg");
             doc.innerText = "Some required fields are empty.";   
