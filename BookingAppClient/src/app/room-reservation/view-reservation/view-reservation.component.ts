@@ -31,7 +31,7 @@ export class ViewReservationComponent implements OnInit {
             doc.innerText = "Room reservation successfully deleted.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
-            this.reservations.find(r => r.Id == id).Cancel = true; 
+            this.reservations.find(r => r.Id == id).Canceled = true; 
       },
       error =>
       {

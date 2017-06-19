@@ -79,8 +79,8 @@ const Routes = [
 
   {path: "room_home", component: RoomHomeComponent},
   {path: "add_room", component: CreateRoomComponent, canActivate: [LogInGuard, ManagerGuard]},
-  {path: "view_rooms/:Id", component: ViewRoomComponent, canActivate: [LogInGuard, UserGuard || ManagerGuard]},
-  {path: "view_room/:Id", component: RoomComponent, canActivate: [LogInGuard, ManagerGuard || UserGuard]},
+  {path: "view_rooms/:Id", component: ViewRoomComponent},
+  {path: "view_room/:Id", component: RoomComponent},
 
   {path: "place_home", component: PlaceHomeComponent},
   {path: "add_place", component: AddPlaceComponent, canActivate: [LogInGuard, AdminGuard]},

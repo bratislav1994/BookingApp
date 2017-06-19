@@ -31,7 +31,7 @@ export class ReservationService {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/Read/${id}`);
   }
 
-  getReservationByzIdMap(id : number) : Observable<any> {
+  getReservationByIdMap(id : number) : Observable<any> {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/Read/${id}`).map(r => r.json());
     }
 
