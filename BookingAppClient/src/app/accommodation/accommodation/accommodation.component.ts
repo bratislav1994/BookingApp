@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Accommodation } from "app/accommodation/accommodation.model";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Room } from "app/room/room.model";
+import { Room } from "app/room/Room.model";
 import { AccommodationService } from "app/accommodation/accommodation.service";
 import { Map } from "app/map/angular-map.model";
 import { CommentService } from "app/comment/comment.service";
@@ -11,6 +11,7 @@ import { Comment } from "app/comment/comment.model";
 import { LocalEnum } from "app/localEnum.model";
 import { User } from "app/login/userLogin.model";
 import { LocalStorageService } from "app/local-storage.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-accommodation',
@@ -334,4 +335,30 @@ export class AccommodationComponent implements OnInit {
   isUserComment(comment: Comment){
       return comment.UserId == +localStorage.getItem(LocalEnum.Id.toString());
   }
+
+  addRoom(room: Room, form: NgForm) {
+
+    if(room.RoomNumber != undefined && room.BedCount != undefined &&
+         room.PricePerNight != undefined)
+    {
+        this.roomService.createRoom(new Room(0, room.RoomNumber, room.BedCount, room.Description, room.PricePerNight, 
+                                         this.accommodation.Id)).subscribe(
+        x =>
+        {
+                var doc = document.getElementById("successMsg");
+                doc.innerText = "Room successfully added.";   
+                doc.className = "show";
+                setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
+                form.reset();
+                document.getElementById("close3").click();
+        },
+        error =>
+        {
+                alert(error.json().Message); 
+        }
+      );
+    }
+  }
+
 }
+
