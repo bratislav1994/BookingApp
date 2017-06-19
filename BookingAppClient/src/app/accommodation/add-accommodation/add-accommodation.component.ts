@@ -96,7 +96,7 @@ export class AddAccommodationComponent implements OnInit {
     console.log("usao");
     
     if (this.file == undefined || this.Name == "" || this.Name == "" || this.Address == undefined || this.Address == "" ||
-        this.clickedLat == undefined || this.clickedLong == undefined || this.Approved == undefined ||
+        this.clickedLat == undefined || this.clickedLong == undefined ||
         this.AccommodationTypeId == undefined || localStorage.getItem(LocalEnum.Id.toString()) == undefined)
     {
             var doc = document.getElementById("errorMsg");
@@ -126,10 +126,10 @@ export class AddAccommodationComponent implements OnInit {
         ); 
     }
 
-    this.Name = undefined;
-    this.Address = undefined;
-    this.clickedLat = undefined;
-    this.clickedLong = undefined;
+    // this.Name = undefined;
+    // this.Address = undefined;
+    // this.clickedLat = undefined;
+    // this.clickedLong = undefined;
   }
 
   resetForm()

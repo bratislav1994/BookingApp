@@ -1,4 +1,5 @@
-﻿using BookingApp.Models;
+﻿using BookingApp.Hubs;
+using BookingApp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Newtonsoft.Json;
@@ -85,6 +86,7 @@ namespace BookingApp.Controllers
             try
             {
                 db.SaveChanges();
+                NotificationHub.NotifyNewAccommodationAdded(accommodation.Id);
             }
             catch (DbEntityValidationException)
             {
@@ -162,16 +164,24 @@ namespace BookingApp.Controllers
                 return BadRequest("You are banned. This operation isn't permitted.");
             }
 
-            if (!accommodation.UserId.Equals(user.addUser.Id))
-            {
-                BadRequest("You don't have right to change accommodation.");
-            }
+            //if (!accommodation.UserId.Equals(user.addUser.Id))
+            //{
+            //    return BadRequest("You don't have right to change accommodation.");
+            //}
 
             db.Entry(accommodation).State = System.Data.Entity.EntityState.Modified;
 
             try
             {
                 db.SaveChanges();
+
+                var userRole = user.Roles.First().RoleId;
+                var role = db.Roles.FirstOrDefault(r => r.Id == userRole);
+                if (role.Name.Equals("Admin"))
+                {
+                    NotificationHub.NotifyAllAdminsAboutNotApprovedAccommodations();
+                    NotificationHub.NotifyApprovedAccommodation(accommodation.UserId.ToString(), accommodation.Id);
+                }
             }
             catch (DbUpdateConcurrencyException)
             {

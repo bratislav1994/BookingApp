@@ -1,3 +1,21 @@
-<p>
-  notification-hub works!
-</p>
+<div *ngIf="notApprovedAccommodations > 0">
+  <h1>Notifications from past:</h1>
+  <p>You have {{notApprovedAccommodations}} accommodations that needs to be approved.</p>
+</div>
+  
+<div *ngIf="isNewNotifyExist()">
+
+  <div>
+    <h1>New notifications:</h1>
+    <div *ngFor="let n of notifications">
+      <p>New accommodation added with id: {{n}}</p>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isNewNotifyExist()">
+  <button type="button" class="btn btn-secondary" (click)="clickResolve()">Resolve</button> 
+  <button type="button" class="btn btn-secondary" (click)="removeAllNotifications()">Clear all</button>
+</div>
+

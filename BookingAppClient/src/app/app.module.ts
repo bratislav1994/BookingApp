@@ -52,6 +52,7 @@ import { LogInGuard } from "app/GuardClasses/Login.guard";
 import { NotApprovedAccommodationComponent } from './accommodation/not-approved-accommodation/not-approved-accommodation.component';
 import { NotificationHubComponent } from './notification/notification-hub/notification-hub.component';
 import { MyReservationComponent } from './room-reservation/my-reservation/my-reservation.component';
+import { NotificationManagerComponent } from './notification/notification-manager/notification-manager.component';
 
 const ChildRoutes = [
 
@@ -153,7 +154,8 @@ const Routes = [
     ManagerComponent,
     NotApprovedAccommodationComponent,
     NotificationHubComponent,
-    MyReservationComponent
+    MyReservationComponent,
+    NotificationManagerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<div style="background-color:#DFF2BF" *ngIf="notifications.length > 0">
+  <div *ngFor="let n of notifications">
+    <p><font size="6">Accommodation [{{n}}] approved.</font></p>
+  </div>
+
+  <button type="button" class="btn btn-secondary" (click)="removeAllNotifications()">Close</button>
+
+</div>
+
+<br>
