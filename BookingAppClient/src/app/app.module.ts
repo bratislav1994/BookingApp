@@ -153,8 +153,7 @@ const Routes = [
     ManagerComponent,
     NotApprovedAccommodationComponent,
     NotificationHubComponent,
-    MyReservationComponent,
-    
+    MyReservationComponent
   ],
   imports: [
     BrowserModule,
