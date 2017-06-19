@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 
+import { LocalStorageService } from "app/local-storage.service";
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country/country.component';
 import { LoginComponent } from './login/login.component';
@@ -69,29 +70,29 @@ const Routes = [
   {path: "view_accommodation/:Id", component: AccommodationComponent},
 
   {path: "accommodation_type_home", component: AccommodationTypeHomeComponent},
-  {path: "add_accommodation_type", component: CreateTypeComponent},
-  {path: "view_types", component: ViewTypeComponent},
-  {path: "view_type/:Id", component: TypeComponent},
+  {path: "add_accommodation_type", component: CreateTypeComponent, canActivate: [LogInGuard, AdminGuard] },
+  {path: "view_types", component: ViewTypeComponent, canActivate: [LogInGuard, AdminGuard]},
+  {path: "view_type/:Id", component: TypeComponent, canActivate: [LogInGuard, AdminGuard]},
 
   {path: "room_home", component: RoomHomeComponent},
-  {path: "add_room", component: CreateRoomComponent},
-  {path: "view_rooms/:Id", component: ViewRoomComponent},
-  {path: "view_room/:Id", component: RoomComponent},
+  {path: "add_room", component: CreateRoomComponent, canActivate: [LogInGuard, ManagerGuard]},
+  {path: "view_rooms/:Id", component: ViewRoomComponent, canActivate: [LogInGuard, ManagerGuard, UserGuard]},
+  {path: "view_room/:Id", component: RoomComponent, canActivate: [LogInGuard, ManagerGuard, UserGuard]},
 
   {path: "place_home", component: PlaceHomeComponent},
-  {path: "add_place", component: AddPlaceComponent},
-  {path: "view_places", component: ListOfPlacesComponent},
-  {path: "view_place/:Id", component: PlaceComponent},
+  {path: "add_place", component: AddPlaceComponent, canActivate: [LogInGuard, AdminGuard]},
+  {path: "view_places", component: ListOfPlacesComponent, canActivate: [LogInGuard, AdminGuard]},
+  {path: "view_place/:Id", component: PlaceComponent, canActivate: [LogInGuard, AdminGuard]},
 
   {path: "region_home", component: RegionHomeComponent},
-  {path: "add_region", component: AddRegionComponent},
-  {path: "view_regions", component: ListOfRegionsComponent},
-  {path: "view_region/:Id", component: RegionComponent},
+  {path: "add_region", component: AddRegionComponent, canActivate: [LogInGuard, AdminGuard] },
+  {path: "view_regions", component: ListOfRegionsComponent, canActivate: [LogInGuard, AdminGuard]},
+  {path: "view_region/:Id", component: RegionComponent, canActivate: [LogInGuard, AdminGuard]},
 
-  {path: "country_home", component: CountryHomeComponent, canActivate: [LogInGuard, AdminGuard]},
-  {path: "add_country", component: AddCountryComponent, canActivate: [LogInGuard, AdminGuard]},
-  {path: "view_countries", component: ListOfCountriesComponent},
-  {path: "view_country/:Id", component: CountryComponent},
+  {path: "country_home", component: CountryHomeComponent },
+  {path: "add_country", component: AddCountryComponent, canActivate: [LogInGuard, AdminGuard] },
+  {path: "view_countries", component: ListOfCountriesComponent, canActivate: [LogInGuard, AdminGuard] },
+  {path: "view_country/:Id", component: CountryComponent, canActivate: [LogInGuard, AdminGuard] },
   
   {path: "login", component: LoginComponent},
 
@@ -145,6 +146,7 @@ const Routes = [
     MapComponent,
     FilterComponent,
     ManagerComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -153,7 +155,12 @@ const Routes = [
     RouterModule.forRoot(Routes),
      AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [],
+  providers: [
+    LocalStorageService,
+    AdminGuard,
+    LogInGuard,
+    UserGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

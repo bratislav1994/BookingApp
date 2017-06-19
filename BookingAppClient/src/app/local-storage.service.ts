@@ -6,12 +6,12 @@ export class LocalStorageService {
   constructor() { }
 
     IsLoggedIn() : boolean {
-        if (localStorage.getItem(LocalEnum.User.toString()) == null)
+        if (localStorage.getItem(LocalEnum.User.toString()) !== null)
         {
-            return false;
+            return true;
         }
         
-        return true;
+        return false;
     }
 
      isAdmin() : boolean {
