@@ -76,7 +76,7 @@
 
       <div *ngIf="isShowEditPress()" style="float:left;width:50%">
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+        <!--<form #f="ngForm" (ngSubmit)="onSubmitEdit(f.value)">-->
             
            <div>
                <label for = "Name">Name:</label><br>
@@ -94,9 +94,9 @@
             </div>
             <br>
             <div>
-                <button type="button" class="btn btn-secondary" name="edit" >Edit</button>
+                <button type="button" class="btn btn-secondary" name="edit"  (click) = "onSubmitEdit()">Edit</button>
             </div>
-        </form>
+        <!--</form>-->
       </div>
   </div>
 
@@ -116,7 +116,7 @@
   <!--comments-->
 
   <div *ngIf="showFormForComment" style="float:left;width:100%;">
-  <form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">
+  <!--<form #f="ngForm" (ngSubmit)="onSubmitComment(f.value)">-->
       <div style="width:40%" class="form-group">
         <br>
         <textarea placeholder="Type comment" class="form-control" id="exampleTextarea" name="comment" [(ngModel)]="comment">
@@ -129,9 +129,9 @@
       </div>
       <div>
           <br>
-        <button type="button" class="btn btn-secondary" name="post">Post comment</button>
+        <button type="button" class="btn btn-secondary" name="post" (click) = "onSubmitComment()">Post comment</button>
       </div>
-    </form>
+    <!--</form>-->
     </div>
 
     <br>

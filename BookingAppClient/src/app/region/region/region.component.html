@@ -12,20 +12,37 @@
         <input class="form-control" style="width: 30%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
       </div>
       <div>
-        <button class="btn btn-success" style="width: 30%" name="edit" >Edit</button>
+        <button class="btn btn-secondary" style="width: 30%" name="edit" >Edit</button>
       </div>
     </form>
   </div>
 </div>
-
-<div style="width: 30%">
+<br>
+<!--<div style="width: 30%">
   <ul class="breadcrumb" style="text-align:center" *ngFor = "let place of places">
     <li style="color:white;" align="center" class="active">{{ place.Name }}
       <button class="btn btn-info" name="show" (click)="showPlace(place.Id)">Show</button>
       <button class="btn btn-danger" name="delete" (click) = "deletePlace(place)">Delete</button>
     </li>
   </ul>
-</div>
+</div>-->
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Place</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let place of places">
+      <td>{{place.Name}}</td>
+      <td><button class="btn btn-secondary" name="show" (click)="showPlace(place.Id)" [routerLink]="['/home/view_place/', place.Id]">Show</button></td>
+      <td><button class="btn btn-secondary" name="delete" (click) = "deletePlace(place)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
   
 
 

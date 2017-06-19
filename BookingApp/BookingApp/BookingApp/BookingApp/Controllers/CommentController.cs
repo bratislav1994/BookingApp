@@ -206,7 +206,7 @@ namespace BookingApp.Controllers
                 return BadRequest("You're not log in.");
             }
 
-            if (!comment.UserId.Equals(user.addUser.Id))
+            if (!comment.UserId.Equals(user.addUserId))
             {
                 BadRequest("You don't have right to delete comment.");
             }

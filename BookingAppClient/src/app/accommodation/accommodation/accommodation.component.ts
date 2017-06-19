@@ -74,7 +74,7 @@ export class AccommodationComponent implements OnInit {
         this.Address = this.accommodation.Address;
         this.map = new Map(this.accommodation.Latitude, this.accommodation.Longitude, 
                             "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
-        
+         
          this.isUserPostComment();
         this.GetComments();  
   }, 
@@ -94,7 +94,7 @@ export class AccommodationComponent implements OnInit {
     this.showEditForm = this.showEditForm ? false : true;
   }
 
-  onSubmit()
+  onSubmitEdit()
   {
     if(this.Name == undefined || this.Name == "" || this.Address == undefined || this.Address == "")
     {
@@ -114,6 +114,7 @@ export class AccommodationComponent implements OnInit {
                  this.accommodation.Name = this.Name; 
                  this.accommodation.Address = this.Address; 
                  this.accommodation.Description = this.Description;
+                 this.getAverageGrade();
                  var doc = document.getElementById("successMsg");
                 doc.innerText = "Accommodation successfully changed.";   
                 doc.className = "show";
@@ -129,10 +130,10 @@ export class AccommodationComponent implements OnInit {
           );
     }
       
-      this.Name = undefined;
-      this.Address = undefined;
-      this.Description = undefined;
-      this.showEditForm = false;
+      // this.Name = undefined;
+      // this.Address = undefined;
+      // this.Description = undefined;
+       this.showEditForm = false;
   }
 
   deleteAcc(acc: Accommodation)
@@ -261,8 +262,8 @@ export class AccommodationComponent implements OnInit {
                                               });
     }
     
-    this.comment = undefined
-    this.Grade = undefined;
+    // this.comment = undefined
+    // this.Grade = undefined;
   }
 
   getAverageGrade() : void{

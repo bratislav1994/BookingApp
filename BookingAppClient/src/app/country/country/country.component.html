@@ -58,20 +58,37 @@
   </div>
 
   <div>
-   <button class="btn btn-success" style="width: 30%" name="edit" >Edit</button>
+   <button class="btn btn-secondary" style="width: 30%" name="edit" >Edit</button>
   </div>
 
 </form>
 </div>
 </div>
+<br>
 
-<div style="width: 30%"> 
+<!--<div style="width: 30%"> 
   <ul class="breadcrumb" style="text-align:center" *ngFor = "let region of regions">
     <li style="color:white;" align="center" class="active">{{ region.Name }}
     <button class="btn btn-info" name="show" (click)="showRegion(region.Id)">Show</button>
     <button class="btn btn-danger" name="delete" (click) = "deleteRegion(region)">Delete</button>
     </li>
   </ul>
-</div>
+</div>-->
 
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Region</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let region of regions">
+      <td>{{region.Name}}</td>
+      <td><button class="btn btn-secondary" name="show" (click)="showRegion(region.Id)">Show</button></td>
+      <td><button class="btn btn-secondary" name="delete" (click) = "deleteRegion(region)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
 

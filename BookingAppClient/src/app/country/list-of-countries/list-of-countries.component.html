@@ -1,17 +1,25 @@
 <!--<div style="float:left;padding-left:1%">
-  <table>
-    <tr *ngFor = "let country of countries">
-      <td>{{ country.Name }}</td>
-      <td><button name="show" (click)="showCountry(country.Id)">Show</button></td>
-      <td><button name="delete" (click) = "deleteCountry(country)">Delete</button></td>
-    </tr>
-  </table>
-</div>-->
-<div style="float:left;padding-left:1%">
   <ul class="breadcrumb" *ngFor = "let country of countries">
     <li style="color:white" class="active">{{ country.Name }}
-    <button class="btn btn-info" name="show" (click)="showCountry(country.Id)">Show</button>
-    <button class="btn btn-danger" name="delete" (click) = "deleteCountry(country)">Delete</button>
+    <button class="btn btn-secondary" name="show" (click)="showCountry(country.Id)">Show</button>
+    <button class="btn btn-secondary" name="delete" (click) = "deleteCountry(country)">Delete</button>
     </li>
   </ul>
-</div>
+</div>-->
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let country of countries">
+      <td>{{country.Name}}</td>
+      <td> <button class="btn btn-secondary" name="show" (click)="showCountry(country.Id)">Show</button></td>
+      <td><button class="btn btn-secondary" name="delete" (click) = "deleteCountry(country)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

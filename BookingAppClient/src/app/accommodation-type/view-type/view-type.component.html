@@ -1,9 +1,25 @@
-
-<div style="float:left;padding-left:1%">
+<!--<div style="float:left;padding-left:1%">
   <ul class="breadcrumb" *ngFor = "let type of types">
     <li style="color:white" class="active" >{{ type.Name }}
-      <button class="btn btn-info" name="show" (click)="showType(type.Id)" [routerLink]="['/home/view_type/', type.Id]">Show</button>
-      <button class="btn btn-danger" name="delete" (click) = "deleteType(type)">Delete</button>
+      <button class="btn btn-secondary" name="show" (click)="showType(type.Id)" [routerLink]="['/home/view_type/', type.Id]">Show</button>
+      <button class="btn btn-secondary" name="delete" (click) = "deleteType(type)">Delete</button>
     </li>
   </ul>
-</div>
+</div>-->
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let type of types">
+      <td>{{type.Name}}</td>
+      <td><button class="btn btn-secondary" name="show" (click)="showType(type.Id)" [routerLink]="['/home/view_type/', type.Id]">Show</button></td>
+      <td><button class="btn btn-secondary" name="delete" (click) = "deleteType(type)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
