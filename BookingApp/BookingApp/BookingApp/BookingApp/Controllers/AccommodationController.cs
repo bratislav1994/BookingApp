@@ -134,7 +134,7 @@ namespace BookingApp.Controllers
             return Ok(accommodation);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         [HttpPut]
         [Route("accommodation")]
         [ResponseType(typeof(void))]

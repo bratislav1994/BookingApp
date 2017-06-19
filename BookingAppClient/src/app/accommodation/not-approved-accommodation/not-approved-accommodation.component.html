@@ -1,0 +1,16 @@
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let a of accommodations">
+      <td> {{a.Id}} </td>
+      <td> {{a.Name}} </td>
+      <td><button (click)="approveAccommodation(a)" class="btn btn-secondary">Approve</button></td>
+    </tr>
+  </tbody>
+</table>

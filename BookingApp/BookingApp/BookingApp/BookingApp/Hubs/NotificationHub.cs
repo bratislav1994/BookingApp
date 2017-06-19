@@ -56,7 +56,7 @@ namespace BookingApp.Hubs
             if (role.Equals("Admin"))
             {
                 Groups.Add(Context.ConnectionId, role);
-                
+                NotifyNotApprovedAccommodations(Context.ConnectionId);
             }
             else if (role.Equals("Manager"))
             {
@@ -64,6 +64,27 @@ namespace BookingApp.Hubs
             }
         }
 
+        public static void NotifyNotApprovedAccommodations(string connectionId)
+        {
+            int notApprovedAccommodations = db.Accommodations.Where(a => a.Approved == false).Count();
+            if (string.IsNullOrEmpty(connectionId))
+            {
+                hubContext.Clients.Group("Admins").notApprovedNotification(notApprovedAccommodations);
+            }
+            else
+            {
+                hubContext.Clients.Client(connectionId).notApprovedNotification(notApprovedAccommodations);
+            }
+        }
+
+        public static void NotifyNewAccommodationAdded(int id)
+        {
+            hubContext.Clients.Group("Admins").newAccommodationAddedNotification(id);
+        }
         
+        public static void NotifyApprovedAccommodation(string userId, int accommodationId)
+        {
+            hubContext.Clients.Group(userId).approvedAccommodationNotification(accommodationId);
+        }
     }
 }

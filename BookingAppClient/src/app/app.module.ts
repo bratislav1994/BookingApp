@@ -49,6 +49,9 @@ import { AdminGuard } from "app/GuardClasses/Admin.guard";
 import { ManagerGuard } from "app/GuardClasses/Manager.guard";
 import { UserGuard } from "app/GuardClasses/User.guard";
 import { LogInGuard } from "app/GuardClasses/Login.guard";
+import { NotApprovedAccommodationComponent } from './accommodation/not-approved-accommodation/not-approved-accommodation.component';
+import { NotificationHubComponent } from './notification/notification-hub/notification-hub.component';
+import { MyReservationComponent } from './room-reservation/my-reservation/my-reservation.component';
 
 const ChildRoutes = [
 
@@ -102,6 +105,8 @@ const Routes = [
   {path:  "view_reservation/:Id", component: RoomReservationComponent},
 
   {path:  "view_managers", component: ManagerComponent},
+  {path : "not_approved_accommodations", component: NotApprovedAccommodationComponent, canActivate: [LogInGuard,AdminGuard]},
+  {path : "my_reservations", component: MyReservationComponent, canActivate: [LogInGuard, UserGuard]},
 ] 
 
 
@@ -146,6 +151,9 @@ const Routes = [
     MapComponent,
     FilterComponent,
     ManagerComponent,
+    NotApprovedAccommodationComponent,
+    NotificationHubComponent,
+    MyReservationComponent,
     
   ],
   imports: [
@@ -159,7 +167,8 @@ const Routes = [
     LocalStorageService,
     AdminGuard,
     LogInGuard,
-    UserGuard
+    UserGuard,
+    ManagerGuard
   ],
   bootstrap: [AppComponent]
 })

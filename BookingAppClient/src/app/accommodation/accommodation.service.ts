@@ -79,4 +79,8 @@ export class AccommodationService {
       return this.http.get(DynamicUrl.socket + `api/Comment/ReadAll` + query).map(res => res.json());
     }
 
+    getNotApprovedAccommodations() : Observable<any> {
+        return this.http.get(DynamicUrl.socket + "api/accommodation?$filter=Approved eq false");
+    }
+
 }
