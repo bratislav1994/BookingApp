@@ -46,28 +46,44 @@ export class AppComponent {
 
   logIn(user: User, form: NgForm) {
     console.log(user.Username);
-    this.userService.login(user.Username, user.Password, "password").subscribe(result => { 
-          localStorage.setItem(LocalEnum.User.toString(), result.json()['access_token']); // token
-          localStorage.setItem(LocalEnum.Role.toString(), result.headers.get("Role")); // Admin, Manager, AppUser
-          localStorage.setItem(LocalEnum.Id.toString(), result.headers.get("Id")); // user_id u accommodation
-          localStorage.setItem(LocalEnum.Username.toString(), user.Username); // estetski, gornji desni ugao :D
-          form.reset();
-          document.getElementById("close").click();
-          this.router.navigate(['/home']);
-        },
-    error => 
-     {
-            // var doc = document.getElementById("errorMsg");
-            // doc.innerText = error.json().Message;  
-            // doc.className = "show";
-            // setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
-            alert(error.json().Message); 
-     }
-    );
+    if(user.Username == "" || user.Username == undefined || 
+       user.Password == "" || user.Password == undefined )
+       {
+            alert("Some required fields are empty.");
+            form.reset();
+       }
+       else{
+                this.userService.login(user.Username, user.Password, "password").subscribe(result => { 
+                localStorage.setItem(LocalEnum.User.toString(), result.json()['access_token']); // token
+                localStorage.setItem(LocalEnum.Role.toString(), result.headers.get("Role")); // Admin, Manager, AppUser
+                localStorage.setItem(LocalEnum.Id.toString(), result.headers.get("Id")); // user_id u accommodation
+                localStorage.setItem(LocalEnum.Username.toString(), user.Username); // estetski, gornji desni ugao :D
+                form.reset();
+                document.getElementById("close").click();
+                this.router.navigate(['/home']);
+              },
+          error => 
+          {
+                  // var doc = document.getElementById("errorMsg");
+                  // doc.innerText = error.json().Message;  
+                  // doc.className = "show";
+                  // setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
+                  alert(error.json().Message); 
+          });
+       }
   }
 
   signUp(user: UserRegistration, form: NgForm) {
-    this.registrationService.register(new UserRegistration(user.Username, user.Password, user.Role, user.Email, user.ConfirmPassword, false)).subscribe(
+    if(user.Email == "" || user.Email == undefined ||
+       user.Username == "" || user.Username == undefined ||
+       user.Password == "" || user.Password == undefined ||
+       user.ConfirmPassword == "" || user.ConfirmPassword == undefined || user.Password !== user.ConfirmPassword ||
+       user.Role == "" || user.Role == undefined){
+        alert("Some required fields are empty.");
+        form.reset();
+    }
+    else{
+        this.registrationService.register(new UserRegistration(user.Username, user.Password, user.Role, user.Email, user.ConfirmPassword, false)).subscribe(
      x =>
      {
             var doc = document.getElementById("successMsg");
@@ -87,6 +103,8 @@ export class AppComponent {
             alert(error.json().Message); 
      }
     );
+    }
+    
   }
 
 }
