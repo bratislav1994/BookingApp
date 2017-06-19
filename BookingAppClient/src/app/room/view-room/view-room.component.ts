@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoomService } from "app/room/room.service";
 import { Room } from "app/room/Room.model";
 import { Router, ActivatedRoute } from "@angular/router";
+import { LocalEnum } from "app/localEnum.model";
 
 @Component({
   selector: 'app-view-room',
@@ -13,13 +14,19 @@ export class ViewRoomComponent implements OnInit {
 
   rooms: Room[];
   Id: number;
+  managerId: number;
   constructor(private roomService : RoomService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.rooms = [];
   }
 
   ngOnInit() {
-    this.Id = this.activatedRoute.snapshot.params["Id"];
+    this.Id = this.activatedRoute.snapshot.params["Id"]; // accommodationId
+    this.managerId = this.activatedRoute.snapshot.params["Id2"];
     this.getRooms();
+  }
+
+  canDelete() : boolean {
+    return this.managerId == +localStorage.getItem(LocalEnum.Id.toString());
   }
 
   showRoom(id: number){
