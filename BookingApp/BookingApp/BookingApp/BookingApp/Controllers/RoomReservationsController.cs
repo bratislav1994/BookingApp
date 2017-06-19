@@ -148,7 +148,7 @@ namespace BookingApp.Controllers
                 return BadRequest("You're not log in.");
             }
 
-            if (reservation == null || !reservation.UserId.Equals(user.addUser.Id))
+            if (reservation == null || !reservation.UserId.Equals(user.addUserId))
             {
                 return BadRequest();
             }
