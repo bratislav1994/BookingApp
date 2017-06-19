@@ -30,13 +30,20 @@ export class MyReservationComponent implements OnInit {
 
   cancelReservation(id : number) {
     this.reservationService.deleteReservation(id).subscribe(
-      r => 
+     x => 
       {
-        this.myReservations.find(r => r.Id == id).Canceled = true;
+            var doc = document.getElementById("successMsg");
+            doc.innerText = "Room reservation successfully canceled.";   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
+            this.myReservations.find(r => r.Id == id).Canceled = true; 
       },
       error =>
       {
-        alert(error.json().Message);
+            var doc = document.getElementById("errorMsg");
+            doc.innerText = error.json().Message;   
+            doc.className = "show";
+            setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }
     );
   }
