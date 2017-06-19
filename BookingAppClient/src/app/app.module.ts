@@ -79,8 +79,8 @@ const Routes = [
 
   {path: "room_home", component: RoomHomeComponent},
   {path: "add_room", component: CreateRoomComponent, canActivate: [LogInGuard, ManagerGuard]},
-  {path: "view_rooms/:Id", component: ViewRoomComponent, canActivate: [LogInGuard, ManagerGuard, UserGuard]},
-  {path: "view_room/:Id", component: RoomComponent, canActivate: [LogInGuard, ManagerGuard, UserGuard]},
+  {path: "view_rooms/:Id", component: ViewRoomComponent, canActivate: [LogInGuard, UserGuard || ManagerGuard]},
+  {path: "view_room/:Id", component: RoomComponent, canActivate: [LogInGuard, ManagerGuard || UserGuard]},
 
   {path: "place_home", component: PlaceHomeComponent},
   {path: "add_place", component: AddPlaceComponent, canActivate: [LogInGuard, AdminGuard]},
@@ -104,7 +104,7 @@ const Routes = [
   {path:  "view_reservations", component: ViewReservationComponent},
   {path:  "view_reservation/:Id", component: RoomReservationComponent},
 
-  {path:  "view_managers", component: ManagerComponent},
+  {path:  "view_managers", component: ManagerComponent, canActivate: [LogInGuard, AdminGuard]},
   {path : "not_approved_accommodations", component: NotApprovedAccommodationComponent, canActivate: [LogInGuard,AdminGuard]},
   {path : "my_reservations", component: MyReservationComponent, canActivate: [LogInGuard, UserGuard]},
 ] 

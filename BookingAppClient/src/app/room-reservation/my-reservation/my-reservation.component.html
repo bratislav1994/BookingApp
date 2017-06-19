@@ -1,3 +1,26 @@
-<p>
-  my-reservation works!
-</p>
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Name</th>
+      <th>Bed count</th>
+      <th>Price per night</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Status</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let reservation of myReservations">
+      <td>{{reservation.Room.Accommodation.Name}}</td>
+      <td>{{reservation.Room.RoomNumber}}</td>
+      <td>{{reservation.Room.BedCount}}</td>
+      <td>{{reservation.Room.PricePerNight}}$</td>
+      <td>{{reservation.StartDate}}</td>
+      <td>{{reservation.EndDate}}</td>
+      <td *ngIf="reservation.Canceled">Canceled</td>
+      <td *ngIf="!reservation.Canceled">Booked</td>
+      <td *ngIf="!reservation.Canceled"><button (click)="cancelReservation(reservation.Id)" class="btn btn-secondary">Cancel</button></td>
+    </tr>
+  </tbody>
+</table>

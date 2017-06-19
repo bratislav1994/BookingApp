@@ -14,6 +14,9 @@ export class ReservationService {
         return this.http.post(DynamicUrl.socket + `api/RoomReservations/Create`, reservation, opts);
     }
 
+  getAllReservationsFromUserId(Id: number) : Observable<any> {
+      return this.http.get(DynamicUrl.socket + `api/RoomReservations/ReadAll?$filter=UserId eq ${Id} &$expand=Room, Room/Accommodation`).map(res => res.json() );
+  }
 
   getAllReservations() : Observable<any> {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/ReadAll`);
@@ -28,7 +31,7 @@ export class ReservationService {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/Read/${id}`);
   }
 
-  getReservationByIdMap(id : number) : Observable<any> {
+  getReservationByzIdMap(id : number) : Observable<any> {
         return this.http.get(DynamicUrl.socket + `api/RoomReservations/Read/${id}`).map(r => r.json());
     }
 
