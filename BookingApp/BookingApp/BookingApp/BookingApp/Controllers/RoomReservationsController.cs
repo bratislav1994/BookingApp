@@ -58,6 +58,12 @@ namespace BookingApp.Controllers
                     return BadRequest(ModelState);
                 }
 
+                //ne moze se napraviti rezervacija za proslost
+                //if (reservation.StartDate.Date < DateTime.Now.Date)
+                //{
+                //    return BadRequest(ModelState);
+                //}
+
                 IQueryable<RoomReservation> roomRes = db.RoomReservations.Where(r =>
                             r.RoomId.Equals(reservation.RoomId) &&
                             ((reservation.StartDate >= r.StartDate && reservation.StartDate <= r.EndDate) ||
@@ -109,6 +115,11 @@ namespace BookingApp.Controllers
             if (reservation.StartDate <= DateTime.Now)
             {
                 return BadRequest("You are supposed to be in your accommodation right now, can not change reservation!");
+            }
+
+            if (reservation.StartDate > reservation.EndDate)
+            {
+                return BadRequest(ModelState);
             }
 
             db.Entry(reservation).State = System.Data.Entity.EntityState.Modified;

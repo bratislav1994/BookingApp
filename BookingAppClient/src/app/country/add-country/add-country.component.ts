@@ -48,8 +48,6 @@ export class AddCountryComponent implements OnInit {
           });
     }
     
-    this.Name = undefined;
-    this.Code = undefined;
   }
 
 }

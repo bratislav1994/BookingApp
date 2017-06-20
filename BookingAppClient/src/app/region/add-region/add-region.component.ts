@@ -55,8 +55,6 @@ export class AddRegionComponent implements OnInit {
      });
     }
     
-    this.Name = undefined;
-    this.CountryId = undefined;
   }
 
 }

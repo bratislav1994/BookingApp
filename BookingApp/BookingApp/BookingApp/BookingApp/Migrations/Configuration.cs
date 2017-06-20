@@ -61,6 +61,7 @@ namespace BookingApp.Migrations
             context.AppUsers.AddOrUpdate(
                   p => p.Username,
                   new AppUser() { Username = "admin" },
+                  new AppUser() { Username = "admin2" },
                   new AppUser() { Username = "manager"},
                   new AppUser() { Username = "user1" },
                   new AppUser() { Username = "user2" },
@@ -75,6 +76,14 @@ namespace BookingApp.Migrations
             {
                 var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("admin"));
                 var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin"), addUserId = _userId.Id};
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Admin");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "admin2"))
+            {
+                var _userId = context.AppUsers.FirstOrDefault(a => a.Username.Equals("admin2"));
+                var user = new BAIdentityUser() { Id = "admin2", UserName = "admin2", Email = "admin2@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin2"), addUserId = _userId.Id };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Admin");
             }
@@ -224,6 +233,88 @@ namespace BookingApp.Migrations
                     PlaceId = 6,
                     UserId = 2,
                     ImageUrl = @"/Content/slika6.jpg"
+                },
+                new Accommodation
+                {
+                    Id = 7,
+                    Name = "Hotel Aurora",
+                    AccommodationTypeId = 1,
+                    Address = "Narodnog fronta 25",
+                    Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                    Latitude = 45.252861,
+                    Longitude = 19.827637,
+                    PlaceId = 1,
+                    UserId = 6,
+                    ImageUrl = @"/Content/slika7.jpg",
+
+                },
+                new Accommodation
+                {
+                    Id = 8,
+                    Name = "Hotel JUgoslavija",
+                    AccommodationTypeId = 1,
+                    Address = "Narodnog fronta 25",
+                    Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                    Latitude = 45.252861,
+                    Longitude = 19.827637,
+                    PlaceId = 2,
+                    UserId = 6,
+                    ImageUrl = @"/Content/slika10.jpg",
+
+                },
+                new Accommodation
+                {
+                    Id = 9,
+                    Name = "Kontinental",
+                    AccommodationTypeId = 1,
+                    Address = "Nemanjina 25",
+                    Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                    Latitude = 45.252861,
+                    Longitude = 19.827637,
+                    PlaceId = 2,
+                    UserId = 6,
+                    ImageUrl = @"/Content/slika8.jpg",
+
+                },
+                new Accommodation
+                {
+                    Id = 10,
+                    Name = "Slavija",
+                    AccommodationTypeId = 2,
+                    Address = "Vojvode Stepe 25",
+                    Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                    Latitude = 45.252861,
+                    Longitude = 19.827637,
+                    PlaceId = 2,
+                    UserId = 2,
+                    ImageUrl = @"/Content/slika9.jpg",
+
+                },
+                 new Accommodation
+                 {
+                     Id = 11,
+                     Name = "Holiday Inn Paris Gare Montparnasse ",
+                     AccommodationTypeId = 1,
+                     Address = "43 rue Washington, 08. Jelisejska polja - Madlen, 75008",
+                     Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                     Latitude = 48.874383,
+                     Longitude = 2.304533,
+                     PlaceId = 5,
+                     UserId = 2,
+                     ImageUrl = @"/Content/slika12.jpg"
+                 },
+                new Accommodation
+                {
+                    Id = 12,
+                    Name = "NH Milano Palazzo Moscova",
+                    AccommodationTypeId = 2,
+                    Address = "14 Boulevard Cassini",
+                    Description = "Lorem ipsum dolor sit amet, docendi dissentiunt an sit, cum sumo omittantur in. Cum in fugit dolore. Ad pri delenit persequeris neglegentur, erant tractatos sea ad. Mutat fastidii referrentur eu per, ut alia malis aliquando sed.",
+                    Latitude = 43.306661,
+                    Longitude = 5.395611,
+                    PlaceId = 3,
+                    UserId = 2,
+                    ImageUrl = @"/Content/slika11.jpg"
                 }
             );
 
@@ -254,19 +345,6 @@ namespace BookingApp.Migrations
                 new Room { Id = 17, AccommodationId = 6, BedCount = 2, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 30, RoomNumber = 551 },
                 new Room { Id = 18, AccommodationId = 6, BedCount = 3, Description = "Dolorem invidunt cu cum, mea cu perpetua periculis adipiscing. Pri aeque vivendo volutpat ea.", PricePerNight = 40, RoomNumber = 552 }
             );
-
-            context.Comments.AddOrUpdate(
-                 c => c.Id,
-                 //Novi Sad
-                 new Comment { Id = 1, AccommodationId = 1, Grade = 3, Text = "Prosecna usluga nista posebno.", UserId = 3 },
-                 //Beograd
-                 new Comment { Id = 2, AccommodationId = 2, Grade = 5, Text = "Sve pohvale za osoblje. Odusevljen.", UserId = 4 },
-                 new Comment { Id = 3, AccommodationId = 2, Grade = 4, Text = "Dobri ugostitelji.", UserId = 5 },
-                 //Milano
-                 new Comment { Id = 4, AccommodationId = 3, Grade = 3, Text = "Osoblje nije zadovoljilo moja ocekivanja", UserId = 5 },
-                 new Comment { Id = 5, AccommodationId = 3, Grade = 5, Text = "Sve pohvale za osoblje. Odusevljen.", UserId = 4 },
-                 new Comment { Id = 6, AccommodationId = 3, Grade = 2, Text = "Nezadovoljan u potpunosti.", UserId = 3 }
-             );
         }
     }
 }

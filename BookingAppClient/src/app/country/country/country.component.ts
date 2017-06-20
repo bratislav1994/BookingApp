@@ -66,9 +66,6 @@ export class CountryComponent implements OnInit {
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
           });
     }
-
-    this.Name = undefined;
-    this.Code = undefined;
   }
 
   deleteRegion(region: Region)

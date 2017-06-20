@@ -55,9 +55,7 @@ export class AddPlaceComponent implements OnInit {
                 setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
             });
        }
-    
-    this.Name = undefined;
-    this.RegionId = undefined;
+  
   }
 
 }

@@ -95,9 +95,9 @@ export class AddAccommodationComponent implements OnInit {
   onSubmit(form: NgForm){
     console.log("usao");
     
-    if (this.file == undefined || this.Name == "" || this.Name == "" || this.Address == undefined || this.Address == "" ||
+    if (this.file == undefined || this.Name == "" || this.Name == undefined || this.Address == undefined || this.Address == "" ||
         this.clickedLat == undefined || this.clickedLong == undefined ||
-        this.AccommodationTypeId == undefined || localStorage.getItem(LocalEnum.Id.toString()) == undefined)
+        this.AccommodationTypeId == undefined)
     {
             var doc = document.getElementById("errorMsg");
             doc.innerText = "Some required fields are empty.";   

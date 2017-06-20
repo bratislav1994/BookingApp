@@ -64,9 +64,6 @@ export class RegionComponent implements OnInit {
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       });
     }
-
-    this.Name = undefined;
-    
   }
 
   deletePlace(place: Place)

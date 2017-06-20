@@ -151,7 +151,7 @@ export class AccommodationComponent implements OnInit {
       error =>
       {
             var doc = document.getElementById("errorMsg");
-            doc.innerText = "Error while deleting accommodation.";   
+            doc.innerText =error.json().Message;  
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
       }
@@ -220,7 +220,7 @@ export class AccommodationComponent implements OnInit {
 
   onSubmitComment()
   {
-    if(this.comment == undefined || this.comment == "" || this.Grade == undefined || this.Grade < 0 || this.Grade > 5)
+    if(this.comment == undefined || this.comment == "" || this.Grade == undefined || this.Grade < 1 || this.Grade > 5)
     {
           var doc = document.getElementById("errorMsg");
           doc.innerText = "Some required fields are empty.";   

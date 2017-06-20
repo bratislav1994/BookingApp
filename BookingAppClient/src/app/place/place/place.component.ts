@@ -59,9 +59,6 @@ export class PlaceComponent implements OnInit {
               }
             );
     }
-    
-    this.Name = undefined;
-    this.RegionId = undefined;
   }
 
 }
