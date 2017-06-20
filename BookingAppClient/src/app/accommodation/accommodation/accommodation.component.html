@@ -8,7 +8,7 @@
     <span style=" float:middle;">
         <div style="width:150px; height:20px"></div>
 
-    <div style="height:70px;width:300px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
+    <div style="height:70px;width:350px;background-color:#B8B8B8;border-bottom: 1px solid #A0A0A0;">
 
         <span style="text-align:left; background-color:B8B8B8; float:left; width:80%; height:100%">
           <font style="color:blue">{{accommodation.Name}}</font><br>
@@ -26,11 +26,11 @@
     </div>
 
     <div>
-        <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation" height="350px" width="300px">      
+        <img [src]= "accommodation.ImageUrl ? accommodation.ImageUrl: ''" alt="picture of accommodation" height="350px" width="350px">      
     </div>
     
     <div style="float:right;width:100%; height:80px; text-align:left; background-color:#B8B8B8;">
-      <font style="color: white">{{accommodation.Description}}</font>
+      <textarea style="background-color:#D3D3D3;height:100%" readonly class="form-control" id="exampleTextarea" name="description">{{accommodation.Description}}</textarea>
     </div>
 
     
@@ -91,7 +91,8 @@
 
             <div>
                 <label for = "Name">Description:</label><br>
-                <input type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+                <textarea style="height:100%" class="form-control" id="exampleTextarea" name="description" [(ngModel)]="Description">{{accommodation.Description}}</textarea>
+                <!--<input type="text" name="Description" id="Description" [(ngModel)]="Description"/>-->
             </div>
             <br>
             <div>
