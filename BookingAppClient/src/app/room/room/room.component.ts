@@ -31,7 +31,7 @@ export class RoomComponent implements OnInit {
    EndDate: Date;
    Booking: boolean;
   constructor(private roomService: RoomService, 
-              private roter: Router, 
+              private ruter: Router, 
               private activatedRouter: ActivatedRoute,
               private reservationService: ReservationService) 
   {
@@ -81,6 +81,7 @@ export class RoomComponent implements OnInit {
                         doc.innerText = "Room successfully edited.";   
                         doc.className = "show";
                         setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
+                        this.ruter.navigate(['/view_rooms/' + this.AccommodationId + '/' + +localStorage.getItem(LocalEnum.Id.toString())]);
                   },
                   error =>
                   {
@@ -90,57 +91,18 @@ export class RoomComponent implements OnInit {
                         setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000); 
                   });
          }
-    
-         this.RoomNumber = undefined;
-         this.BedCount = undefined;
-         this.PricePerNight = undefined;
-         this.AccommodationId = undefined;
+        
   }
 
   getReservations() : void{
     this.reservationService.getAllReservations().subscribe(p => this.roomReservations = p.json(), error => 
      {
-        console.log(error), alert("Unsuccessful fetch operation")
+        console.log(error);
      });
   }
 
   showReservation(id : number){
-    this.roter.navigate(['/home/view_reservation/' + id]);
+    this.ruter.navigate(['/home/view_reservation/' + id]);
   }
 
-  bookingReservation(){
-    this.Booking = true;
-      }
-  
-       onSubmitBooking(){
-         let userId = localStorage.getItem(LocalEnum.Id.toString());
-         if(this.StartDate == undefined || this.EndDate == undefined || +userId == undefined || this.room.Id == undefined)
-         {
-              var doc = document.getElementById("errorMsg");
-              doc.innerText = "Some required fields are empty.";   
-              doc.className = "show";
-              setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
-         }
-         else 
-         {
-              this.reservationService.createReservation(new RoomReservation(0, this.StartDate, this.EndDate, +userId, this.room.Id, false)).subscribe(
-                r => 
-                {
-                    var doc = document.getElementById("successMsg");
-                    doc.innerText = "Room reservation successfully added.";   
-                    doc.className = "show";
-                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);   
-                },
-                error => 
-                {
-                    var doc = document.getElementById("errorMsg");
-                    doc.innerText = error.json().Message;   
-                    doc.className = "show";
-                    setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);  
-                });
-         }
-        
-        this.StartDate = undefined;
-        this.EndDate = undefined;
-    }
 }

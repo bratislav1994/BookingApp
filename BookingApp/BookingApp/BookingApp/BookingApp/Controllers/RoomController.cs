@@ -63,11 +63,6 @@ namespace BookingApp.Controllers
                 return BadRequest("There is no accommodation for which is creating room.");
             }
 
-            if (RoomNumberExist(room.RoomNumber))
-            {
-                return BadRequest("Room with number " + room.RoomNumber + " already exist.");
-            }
-
             try
             {
                 db.Rooms.Add(room);
@@ -106,11 +101,6 @@ namespace BookingApp.Controllers
                 return BadRequest("There is no accommodation for which is changing room.");
             }
 
-            if (RoomNumberExist(room.RoomNumber))
-            {
-                return BadRequest("Room with number " + room.RoomNumber + " already exist.");
-            }
-
             db.Entry(room).State = System.Data.Entity.EntityState.Modified;
 
             try
@@ -127,6 +117,10 @@ namespace BookingApp.Controllers
                 {
                     throw;
                 }
+            }
+            catch (DbUpdateException)
+            {
+                return BadRequest("Room with this number already exists.");
             }
 
 

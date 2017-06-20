@@ -1,54 +1,39 @@
 <div class="panel panel-success" style="width: 30%">
   <div class="panel-heading"> 
-    <p>RoomNumber: {{room.RoomNumber}}</p>
-    <p>Bed count: {{room.BedCount}}</p>
-    <p>Description: {{room.Description}}</p>
-    <p>Price per night: {{room.PricePerNight}}</p>
-    <p>Accommodation: {{AccommodationName }}</p>
-    <button class="btn btn-info" name="booking" (click)="bookingReservation()">Booking</button>
+    <p style="font-weight: bold">Accommodation: {{AccommodationName }}</p>
+    <p style="font-weight: bold">RoomNumber: {{room.RoomNumber}}</p>
+    <p style="font-weight: bold">Bed count: {{room.BedCount}}</p>
+    <p style="font-weight: bold">Description: {{room.Description}}</p>
+    <p style="font-weight: bold">Price per night: {{room.PricePerNight}}</p>
   </div>
   <div>
      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
       <div class="form-group">
         <label class="control-label" for = "RoomNumber">Room number:</label>
         <br>
-        <input class="form-control" style="width: 30%" type="text" name="RoomNumber" id="RoomNumber" [(ngModel)]="RoomNumber"/>
+        <input class="form-control" type="text" name="RoomNumber" id="RoomNumber" [(ngModel)]="RoomNumber"/>
       </div>
       <div class="form-group">
         <label class="control-label" for = "BedCount">Bed count:</label>
         <br>
-        <input class="form-control" style="width: 30%" type="text" name="BedCount" id="BedCount" [(ngModel)]="BedCount"/>
+        <input class="form-control" type="text" name="BedCount" id="BedCount" [(ngModel)]="BedCount"/>
       </div>
       <div class="form-group">
-        <label class="control-label"  for = "Description">Description:</label>
+        <label class="control-label" for = "Description">Description:</label>
         <br>
-        <input class="form-control" style="width: 30%" type="text" name="Description" id="Description" [(ngModel)]="Description"/>
+        <textarea class="form-control" id="exampleTextarea" name="description" [(ngModel)]="Description"></textarea>
       </div>
       <div class="form-group">
         <label class="control-label" for = "PricePerNight">Price per night:</label>
         <br>
-        <input class="form-control" style="width: 30%" type="text" name="PricePerNight" id="PricePerNight" [(ngModel)]="PricePerNight"/>
+        <input class="form-control" type="text" name="PricePerNight" id="PricePerNight" [(ngModel)]="PricePerNight"/>
       </div>
       <div>
-        <input class="btn btn-success" type="submit" value="Edit"/>
+        <input type="button" class="btn btn-secondary" type="submit" value="Edit"/>
       </div>
     </form>
   </div>
 </div>
 
-
-<div *ngIf="Booking">
-  <form #f="ngForm" (ngSubmit)="onSubmitBooking(f.value)">
-    <div class="form-group">
-      <label class="control-label" for = "StartDate">Start date:</label>
-      <input class="form-control" style="width:15%" type="date" name="StartDate" id="StartDate" [(ngModel)]="StartDate"/>
-    </div>
-    <div class="form-group">
-      <label class="control-label" for = "EndDate">End date:</label>
-      <input class="form-control" style="width:15%" type="date" name="EndDate" id="EndDate" [(ngModel)]="EndDate"/>
-    </div>
-    <div>
-      <input class="btn btn-default" type="submit" value="Create"/>
-    </div>
-  </form>
-</div>
+<br>
+<br>
