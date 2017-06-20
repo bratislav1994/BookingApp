@@ -96,20 +96,6 @@ export class FilterComponent implements OnInit {
       );
   }
 
-  // getAllWithoutQuery(page: number) {
-  //   this.accommodationService.getAllAccommodationsWithQueryOData(page, PaginationService.pageSize, "").subscribe(
-  //      a => {
-  //         this.accommodations = a.json().value;
-  //         this.paginationService.calculateNumberOfPages(a);
-  //         this.appendPortToImageUrl();
-  //     },
-  //     error => 
-  //     {
-  //       console.log("without: " + error.json().Message);
-  //     }
-  //     );
-  // }
-
   appendPortToImageUrl()
   {
     for (var i = 0; i < this.accommodations.length; i++) {

@@ -3,6 +3,7 @@
     <tr>
       <th>Name</th>
       <th>Bed count</th>
+      <th>Room number</th>
       <th>Price per night</th>
       <th>From</th>
       <th>To</th>
@@ -13,8 +14,8 @@
   <tbody>
     <tr *ngFor = "let reservation of myReservations">
       <td>{{reservation.Room.Accommodation.Name}}</td>
-      <td>{{reservation.Room.RoomNumber}}</td>
       <td>{{reservation.Room.BedCount}}</td>
+      <td>{{reservation.Room.RoomNumber}}</td>
       <td>{{reservation.Room.PricePerNight}}$</td>
       <td>{{reservation.StartDate}}</td>
       <td>{{reservation.EndDate}}</td>
