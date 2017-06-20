@@ -18,8 +18,6 @@
       <th>Room No:</th>
       <th>Bed count:</th>
       <th>Price:</th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,10 +28,6 @@
       <td>{{reservation.Room.RoomNumber}}</td>
       <td>{{reservation.Room.BedCount}}</td>
       <td>{{reservation.Room.PricePerNight}}</td>
-      <td><button *ngIf="!reservation.Cancel" class="btn btn-secondary" name="cancel" (click)="cancelReservation(reservation.Id)">Cancel</button>
-          <label *ngIf="reservation.Cancel" class="control-label">Canceled</label>
-      </td>
-      <td><button *ngIf="!reservation.Cancel" class="btn btn-secondary" name="show" (click)="showReservation(reservation.Id)">Show</button></td>
     </tr>
   </tbody>
 </table>

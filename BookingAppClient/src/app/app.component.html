@@ -44,13 +44,7 @@
                 <li class="nav-item active"><a [routerLink]="['/home']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Home</a>
                             </li>
                 <li class="nav-item" >
-                    <div class="btn-group"  >
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accommodations</button>
-                        <div class="dropdown-menu" style="background-color: #555;">
-                            <a [routerLink]="['/add_accommodation']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add accommodation</a>
-                            <a [routerLink]="['/not_approved_accommodations']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Not approved accommodations</a>
-                        </div>
-                    </div>
+                    <button [routerLink]="['/not_approved_accommodations']" class="btn btn-secondary">Not aproved accommodations</button>
                 </li>
 
                 <li class="nav-item" >
@@ -59,16 +53,6 @@
                         <div class="dropdown-menu" style="background-color: #555;">
                             <a [routerLink]="['/add_accommodation_type']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add type</a>
                             <a [routerLink]="['/view_types']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of types</a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="nav-item" >
-                    <div class="btn-group"  >
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rooms</button>
-                        <div class="dropdown-menu" style="background-color: #555;">
-                            <a [routerLink]="['/add_room']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">Add room</a>
-                            <a [routerLink]="['/view_rooms']" class="btn btn-secondary" style="background-color: transparent; border: 1px; color:white;">List of rooms</a>
                         </div>
                     </div>
                 </li>

@@ -1,7 +1,7 @@
-<div class="panel panel-success" style="width: 30%">
+<div class="panel panel-success">
   <div class="panel-heading"> 
-    <p align="center">Current name of region: {{region.Name}}</p>
-    <p align="center">Country name: {{countryName}}</p>
+    <p>Current name of region: {{region.Name}}</p>
+    <p>Country name: {{countryName}}</p>
   </div>
 
   <div>
@@ -12,20 +12,12 @@
         <input class="form-control" style="width: 30%" type="text" name="Name" id="Name" [(ngModel)]="Name"/>
       </div>
       <div>
-        <button class="btn btn-secondary" style="width: 30%" name="edit" >Edit</button>
+        <button class="btn btn-secondary" name="edit" >Edit</button>
       </div>
     </form>
   </div>
 </div>
 <br>
-<!--<div style="width: 30%">
-  <ul class="breadcrumb" style="text-align:center" *ngFor = "let place of places">
-    <li style="color:white;" align="center" class="active">{{ place.Name }}
-      <button class="btn btn-info" name="show" (click)="showPlace(place.Id)">Show</button>
-      <button class="btn btn-danger" name="delete" (click) = "deletePlace(place)">Delete</button>
-    </li>
-  </ul>
-</div>-->
 
 <table class="table">
   <thead class="thead-inverse">

@@ -2,7 +2,7 @@
 			#logo h1 a, h1 a:hover { color:darkgreen; text-decoration:none;}
 			#logo h1 span { color:#BCCE98;}
 
-			#header { background:#fff; }
+			#header { background:#D3D3D3; }
 			#header-inner { margin:0 auto; padding:0; width:100%;}
 			
 			.feature { background:#555;padding:18px;}

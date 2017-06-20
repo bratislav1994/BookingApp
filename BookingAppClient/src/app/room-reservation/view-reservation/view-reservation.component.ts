@@ -44,7 +44,7 @@ export class ViewReservationComponent implements OnInit {
   }
 
   showReservation(id : number){
-    this.router.navigate(['/home/view_reservation/' + id]);
+    this.router.navigate(['/view_reservation/' + id]);
   }
 
   getReservations() : void{
