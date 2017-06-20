@@ -29,7 +29,6 @@ export class FilterComponent implements OnInit {
   RegionName: string;
   CountryName: string;
   query: string; 
-  isSearchFilter: boolean = false;
 
   constructor(private accommodationService : AccommodationService, private paginationService: PaginationService) {
     this.accommodations = [];
@@ -56,7 +55,6 @@ export class FilterComponent implements OnInit {
   search()
   {
     this.FirstSearch = true;
-    this.isSearchFilter = true;
     this.selectedOdd = true;
 
     if(this.Name == "" && this.MinAvrageGrade == undefined && this.BedCount == undefined && this.MinPrice == undefined &&
@@ -98,19 +96,19 @@ export class FilterComponent implements OnInit {
       );
   }
 
-  getAllWithoutQuery(page: number) {
-    this.accommodationService.getAllAccommodationsWithQueryOData(page, PaginationService.pageSize, "").subscribe(
-       a => {
-          this.accommodations = a.json().value;
-          this.paginationService.calculateNumberOfPages(a);
-          this.appendPortToImageUrl();
-      },
-      error => 
-      {
-        console.log("without: " + error.json().Message);
-      }
-      );
-  }
+  // getAllWithoutQuery(page: number) {
+  //   this.accommodationService.getAllAccommodationsWithQueryOData(page, PaginationService.pageSize, "").subscribe(
+  //      a => {
+  //         this.accommodations = a.json().value;
+  //         this.paginationService.calculateNumberOfPages(a);
+  //         this.appendPortToImageUrl();
+  //     },
+  //     error => 
+  //     {
+  //       console.log("without: " + error.json().Message);
+  //     }
+  //     );
+  // }
 
   appendPortToImageUrl()
   {
@@ -121,7 +119,7 @@ export class FilterComponent implements OnInit {
 
   expandFilters()
   {
-    this.query = "&$filter=";
+    this.query = "&$filter=Approved eq true and ";
 
     if(this.Name != "")
     {
@@ -171,11 +169,11 @@ export class FilterComponent implements OnInit {
   searchAll()
   {
       this.FirstSearch = true;
-      this.isSearchFilter = false;
       this.selectedOdd = true;
-     // this.resetFields();
+      this.resetFields();
+     this.query = "&$filter=Approved eq true";
       this.howManyPagesAre();
-      this.getAllWithoutQuery(1);
+      this.getAllWithQuery(1);
   }
 
   howManyPagesAre() {
@@ -210,14 +208,7 @@ export class FilterComponent implements OnInit {
 
   ChangePage(page : number){
     this.selectedOdd = page % 2 == 0 ? false : true;
-    if (this.isSearchFilter)
-    {
-      this.getAllWithQuery(page);
-    }
-    else
-    {
-      this.getAllWithoutQuery(page);
-    }
+    this.getAllWithQuery(page);
   }
 
 
