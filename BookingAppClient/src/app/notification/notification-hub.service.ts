@@ -22,8 +22,7 @@ export class NotificationHubService {
 
   constructor() { 
     // Constructor initialization  
-        this.connectionEstablished = new EventEmitter < Boolean > ();  
-        this.notificationReceivedNotApproved = new EventEmitter < string > (); 
+        this.connectionEstablished = new EventEmitter < Boolean > ();
         this.notificationReceivedApproved = new EventEmitter < string > (); 
         this.notificationReceivedNewAcc = new EventEmitter < string > (); 
 
@@ -36,7 +35,6 @@ export class NotificationHubService {
 
         // register on server events  
         if(role == "Admin") {
-            this.registerOnNotApprovedNotification();
             this.registerOnNewAccommodationNotification();
         }
         else if (role == "Manager") {
@@ -74,12 +72,6 @@ export class NotificationHubService {
     }  
 
     // admin
-    public registerOnNotApprovedNotification(): void {  
-        this.proxy.on('notApprovedNotification', (data: string) => {  
-            console.log('Not approved accommodation: ' + data);  
-            this.notificationReceivedNotApproved.emit(data);  
-        }); 
-    }  
 
     public registerOnNewAccommodationNotification(): void {  
         this.proxy.on('newAccommodationAddedNotification', (data: string) => {  

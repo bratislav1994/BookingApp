@@ -25,12 +25,7 @@ export class NotificationHubComponent implements OnInit {
 
   ngOnInit() {
     this.checkConnection();
-    this.subscribeForNotApprovedNotification();
     this.subscribeForNewAccommodationNotification();
-  }
-
-  private subscribeForNotApprovedNotification () {
-    this.notificationHubService.notificationReceivedNotApproved.subscribe(e => this.onNotification(e));
   }
 
   private subscribeForNewAccommodationNotification () {
@@ -43,13 +38,6 @@ export class NotificationHubComponent implements OnInit {
           this.notificationHubService.sendHello()
         }
     });
-  }
-
-  public onNotification(notif: string) {
-
-     this.ngZone.run(() => { 
-       this.notApprovedAccommodations = parseInt(notif);
-    });  
   }
 
   public onNotification2(notif: string) {

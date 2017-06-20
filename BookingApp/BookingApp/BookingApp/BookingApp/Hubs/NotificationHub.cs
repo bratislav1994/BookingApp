@@ -56,22 +56,11 @@ namespace BookingApp.Hubs
             if (role.Equals("Admin"))
             {
                 Groups.Add(Context.ConnectionId, "Admins");
-                hubContext.Clients.Client(Context.ConnectionId).notApprovedNotification(GetNotApprovedAccommodations());
             }
             else if (role.Equals("Manager"))
             {
                 Groups.Add(Context.ConnectionId, Id.ToString()); // za svakog pojedinacno
             }
-        }
-
-        public static void NotifyAllAdminsAboutNotApprovedAccommodations()
-        {
-            hubContext.Clients.Group("Admins").notApprovedNotification(GetNotApprovedAccommodations());
-        }
-
-        private static int GetNotApprovedAccommodations()
-        {
-            return db.Accommodations.Where(a => a.Approved == false).Count();
         }
 
         public static void NotifyNewAccommodationAdded(int id)

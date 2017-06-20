@@ -61,7 +61,7 @@ export class AccommodationComponent implements OnInit {
      this.userId = +localStorage.getItem(LocalEnum.Id.toString());
     this.rooms = [];
     this.Id = this.activatedRoute.snapshot.params["Id"];
-    this.query = `?$filter=AccommodationId eq ${this.Id}`;
+    this.query = `?$filter=AccommodationId eq ${this.Id} &$orderby=Grade desc`;
 
     this.accommodationService.getByIdMap(this.Id).subscribe(a =>
     {

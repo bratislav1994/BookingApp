@@ -179,7 +179,6 @@ namespace BookingApp.Controllers
                 var role = db.Roles.FirstOrDefault(r => r.Id == userRole);
                 if (role.Name.Equals("Admin"))
                 {
-                    NotificationHub.NotifyAllAdminsAboutNotApprovedAccommodations();
                     NotificationHub.NotifyApprovedAccommodation(accommodation.UserId.ToString(), accommodation.Id);
                 }
             }

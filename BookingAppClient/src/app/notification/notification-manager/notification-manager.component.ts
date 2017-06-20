@@ -39,6 +39,7 @@ export class NotificationManagerComponent implements OnInit {
 
   public onNotification(notif: string) {
      this.ngZone.run(() => { 
+       console.log("fdskajl;fdsa");
        this.notifications.push(notif);
     });  
   }
