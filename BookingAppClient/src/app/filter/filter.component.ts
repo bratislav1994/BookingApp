@@ -3,6 +3,7 @@ import { AccommodationService } from "app/accommodation/accommodation.service";
 import { Accommodation } from "app/accommodation/accommodation.model";
 import { DynamicUrl } from "app/DynamicUrl.model";
 import { PaginationService } from "app/pagination/pagination.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -30,7 +31,8 @@ export class FilterComponent implements OnInit {
   CountryName: string;
   query: string; 
 
-  constructor(private accommodationService : AccommodationService, private paginationService: PaginationService) {
+  constructor(private accommodationService : AccommodationService, private paginationService: PaginationService,
+              private route : Router) {
     this.accommodations = [];
     this.resetFields();
     this.query = "";
@@ -50,6 +52,11 @@ export class FilterComponent implements OnInit {
       this.MinPrice = undefined;
       this.MaxPrice = undefined;
       this.BedCount = undefined;
+  }
+
+  onClick(id : number)
+  {
+      this.route.navigate(['/view_accommodation/', id]);
   }
 
   search()

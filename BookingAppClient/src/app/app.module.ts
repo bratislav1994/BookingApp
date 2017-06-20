@@ -30,9 +30,6 @@ import { CreateReservationComponent } from './room-reservation/create-reservatio
 import { ViewReservationComponent } from './room-reservation/view-reservation/view-reservation.component';
 import { AccommodationComponent } from './accommodation/accommodation/accommodation.component';
 import { AddAccommodationComponent } from './accommodation/add-accommodation/add-accommodation.component';
-import { AddCommentComponent } from './comment/add-comment/add-comment.component';
-import { ViewCommentComponent } from './comment/view-comment/view-comment.component';
-import { CommentComponent } from './comment/comment/comment.component';
 import { MapComponent } from './map/map/map.component';
 import { FilterComponent } from './filter/filter.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -119,9 +116,6 @@ const Routes = [
     ViewReservationComponent,
     AccommodationComponent,
     AddAccommodationComponent,
-    AddCommentComponent,
-    ViewCommentComponent,
-    CommentComponent,
     MapComponent,
     FilterComponent,
     ManagerComponent,
