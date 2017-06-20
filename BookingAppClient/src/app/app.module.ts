@@ -56,7 +56,7 @@ const Routes = [
   {path: "other", redirectTo:"home"},
 
   {path: "search", component: FilterComponent},
-  {path: "add_accommodation", component: AddAccommodationComponent},
+  {path: "add_accommodation", component: AddAccommodationComponent, canActivate: [LogInGuard, ManagerGuard]},
   {path: "view_accommodation/:Id", component: AccommodationComponent},
 
   {path: "add_accommodation_type", component: CreateTypeComponent, canActivate: [LogInGuard, AdminGuard] },

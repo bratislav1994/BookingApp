@@ -1,14 +1,3 @@
-<!--<div style="float:left;padding-left:1%">
-  <ul class="breadcrumb" *ngFor = "let reservation of reservations">
-    <li style="color:white" class="active">{{ reservation.StartDate }}, {{ reservation.EndDate }}
-        {{ reservation.User.Username }}, {{ reservation.Room.Description }}
-      <button *ngIf="!reservation.Cancel" class="btn btn-info" name="cancel" (click)="cancelReservation(reservation.Id)">Cancel</button>
-      <label *ngIf="reservation.Cancel" class="control-label">Canceled</label>
-      <button *ngIf="!reservation.Cancel" class="btn btn-info" name="show" (click)="showReservation(reservation.Id)">Show</button>
-    </li>
-  </ul>
-</div>-->
-
 <table class="table">
   <thead class="thead-inverse">
     <tr>

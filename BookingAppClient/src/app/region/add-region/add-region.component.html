@@ -1,25 +1,3 @@
-<!--<p>
-  add-region works!
-</p>
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-  <div>
-    <label for = "Name">Name:</label>
-    <br>
-    <input type="text" name="Name" id="Name" [(ngModel)]="Name"/>
-  </div>
-
-  <div>
-    <select name="CountryId" id="CountryId" [(ngModel)]="CountryId">
-      <option *ngFor = "let country of countries" value={{country.Id}} >{{country.Name}}</option>
-    </select>
-  </div>
-
-  <div>
-    <input type="submit" value="Add"/>
-  </div>
-
-</form>-->
 <div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
   <div class="form-group">
