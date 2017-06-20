@@ -23,25 +23,16 @@ import { ListOfPlacesComponent } from './place/list-of-places/list-of-places.com
 import { CreateTypeComponent } from './accommodation-type/create-type/create-type.component';
 import { ViewTypeComponent } from './accommodation-type/view-type/view-type.component';
 import { TypeComponent } from './accommodation-type/type/type.component';
-import { CreateRoomComponent } from './room/create-room/create-room.component';
 import { RoomComponent } from './room/room/room.component';
 import { ViewRoomComponent } from './room/view-room/view-room.component';
 import { RoomReservationComponent } from './room-reservation/room-reservation/room-reservation.component';
 import { CreateReservationComponent } from './room-reservation/create-reservation/create-reservation.component';
 import { ViewReservationComponent } from './room-reservation/view-reservation/view-reservation.component';
 import { AccommodationComponent } from './accommodation/accommodation/accommodation.component';
-import { ListOfAccommodationsComponent } from './accommodation/list-of-accommodations/list-of-accommodations.component';
 import { AddAccommodationComponent } from './accommodation/add-accommodation/add-accommodation.component';
 import { AddCommentComponent } from './comment/add-comment/add-comment.component';
 import { ViewCommentComponent } from './comment/view-comment/view-comment.component';
 import { CommentComponent } from './comment/comment/comment.component';
-import { AccommodationTypeHomeComponent } from './accommodation-type/accommodation-type-home/accommodation-type-home.component';
-import { RoomHomeComponent } from './room/room-home/room-home.component';
-import { PlaceHomeComponent } from './place/place-home/place-home.component';
-import { RegionHomeComponent } from './region/region-home/region-home.component';
-import { CountryHomeComponent } from './country/country-home/country-home.component';
-import { AccommodationHomeComponent } from './accommodation/accommodation-home/accommodation-home.component';
-import { ReservationHomeComponent } from './room-reservation/reservation-home/reservation-home.component';
 import { MapComponent } from './map/map/map.component';
 import { FilterComponent } from './filter/filter.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -68,39 +59,30 @@ const Routes = [
   {path: "other", redirectTo:"home"},
 
   {path: "search", component: FilterComponent},
-  {path: "accommodation_home", component: AccommodationHomeComponent},
   {path: "add_accommodation", component: AddAccommodationComponent},
-  {path: "view_accommodations", component: ListOfAccommodationsComponent},
   {path: "view_accommodation/:Id", component: AccommodationComponent},
 
-  {path: "accommodation_type_home", component: AccommodationTypeHomeComponent},
   {path: "add_accommodation_type", component: CreateTypeComponent, canActivate: [LogInGuard, AdminGuard] },
   {path: "view_types", component: ViewTypeComponent, canActivate: [LogInGuard, AdminGuard]},
   {path: "view_type/:Id", component: TypeComponent, canActivate: [LogInGuard, AdminGuard]},
 
-  {path: "room_home", component: RoomHomeComponent},
-  {path: "add_room", component: CreateRoomComponent, canActivate: [LogInGuard, ManagerGuard]},
   {path: "view_rooms/:Id/:Id2", component: ViewRoomComponent},
   {path: "view_room/:Id", component: RoomComponent},
 
-  {path: "place_home", component: PlaceHomeComponent},
   {path: "add_place", component: AddPlaceComponent, canActivate: [LogInGuard, AdminGuard]},
   {path: "view_places", component: ListOfPlacesComponent, canActivate: [LogInGuard, AdminGuard]},
   {path: "view_place/:Id", component: PlaceComponent, canActivate: [LogInGuard, AdminGuard]},
 
-  {path: "region_home", component: RegionHomeComponent},
   {path: "add_region", component: AddRegionComponent, canActivate: [LogInGuard, AdminGuard] },
   {path: "view_regions", component: ListOfRegionsComponent, canActivate: [LogInGuard, AdminGuard]},
   {path: "view_region/:Id", component: RegionComponent, canActivate: [LogInGuard, AdminGuard]},
 
-  {path: "country_home", component: CountryHomeComponent },
   {path: "add_country", component: AddCountryComponent, canActivate: [LogInGuard, AdminGuard] },
   {path: "view_countries", component: ListOfCountriesComponent, canActivate: [LogInGuard, AdminGuard] },
   {path: "view_country/:Id", component: CountryComponent, canActivate: [LogInGuard, AdminGuard] },
   
   {path: "login", component: LoginComponent},
 
-  {path: "reservation_home", component: ReservationHomeComponent},
   {path:  "add_reservation", component: CreateReservationComponent},
   {path:  "view_reservations", component: ViewReservationComponent},
   {path:  "view_reservation/:Id", component: RoomReservationComponent},
@@ -130,25 +112,16 @@ const Routes = [
     CreateTypeComponent,
     ViewTypeComponent,
     TypeComponent,
-    CreateRoomComponent,
     RoomComponent,
     ViewRoomComponent,
     RoomReservationComponent,
     CreateReservationComponent,
     ViewReservationComponent,
     AccommodationComponent,
-    ListOfAccommodationsComponent,
     AddAccommodationComponent,
     AddCommentComponent,
     ViewCommentComponent,
     CommentComponent,
-    AccommodationTypeHomeComponent,
-    RoomHomeComponent,
-    PlaceHomeComponent,
-    RegionHomeComponent,
-    CountryHomeComponent,
-    AccommodationHomeComponent,
-    ReservationHomeComponent,
     MapComponent,
     FilterComponent,
     ManagerComponent,

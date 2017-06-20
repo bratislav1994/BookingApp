@@ -12,11 +12,42 @@
         <div style="border-bottom:1px solid black;height:15%;color: aliceblue"><font style="color:black">Price per night:</font> {{room.PricePerNight}}</div>
         <div style="height:35%;overflow-y:auto;color: aliceblue"><font style="color:black">Description:</font> {{room.Description}}</div>
         <div style="height:20%">
-          <button type="button" class="btn btn-secondary" name="show" (click)="showRoom(room.Id)">Show</button>
-          <button *ngIf="canDelete()" type="button" class="btn btn-secondary" name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
+          <button *ngIf="canEditOrDelete()" type="button" class="btn btn-secondary" name="edit" (click)="editRoom(room.Id)">Edit</button>
+          <button *ngIf="canEditOrDelete()" type="button" class="btn btn-secondary" name="delete" (click) = "deleteRoom(room.Id)">Delete</button>
+          <button *ngIf="isUser()" type="button" class="btn btn-secondary" name="booking" (click)="catchRoom(room.Id)">Booking</button>
+          <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#bookingRoomModal">Open Modal</button>
         </div>
     </div>
 
     </span>
   </span>
   </div>
+
+
+    <!--booking room pop up-->
+  <div class="modal fade" id="bookingRoomModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add room</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form class="container" #f="ngForm" (ngSubmit)="bookRoom(f.value, f)">
+                        <div class="form-group">
+                            <label class="control-label" for = "StartDate">Start date:</label>
+                            <input class="form-control" type="date" name="StartDate" id="StartDate" ngModel/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for = "EndDate">End date:</label>
+                            <input class="form-control" type="date" name="EndDate" id="EndDate" ngModel/>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-dismisss="modal">Book</button>
+                        <button id="close4" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+      </div>
+    </div>
+  </div>
+</div>

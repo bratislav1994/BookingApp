@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAccommodations() : void {
-     this.accommodationService.getAllAccommodationsOData(this.pageNumber, PaginationService.pageSize).subscribe(
+     this.accommodationService.getAllAccommodationsWithQueryOData(this.pageNumber, PaginationService.pageSize, "&$filter=Approved eq true").subscribe(
        a => {
           this.accommodations = a.json().value;
           this.paginationService.calculateNumberOfPages(a);
@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
 
   ChangePage(page : number){
     this.selectedOdd = page % 2 == 0 ? false : true;
-    this.accommodationService.getAllAccommodationsOData(page, PaginationService.pageSize).subscribe(
+    this.accommodationService.getAllAccommodationsWithQueryOData(page, PaginationService.pageSize, "&$filter=Approved eq true").subscribe(
       a => 
       {
         this.accommodations = (a.json()).value;

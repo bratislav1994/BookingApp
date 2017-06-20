@@ -31,15 +31,6 @@ export class AccommodationService {
   getAllAccommodationsWithQueryOData(pageNumber: number, pageSize: number, filter : string) : Observable<any> {
         let skip = (pageNumber - 1) * pageSize;
         return this.http.get(DynamicUrl.socket + `odata/OData?$top=${pageSize}&$skip=${skip} ${filter} &$expand=Place,AccommodationType &$inlinecount=allpages`);
-    }
-
-  getAllAccommodationsOData(pageNumber: number, pageSize: number) : Observable<any> {
-        let skip = (pageNumber - 1) * pageSize;
-        return this.http.get(DynamicUrl.socket + `odata/OData?$top=${pageSize}&$skip=${skip} &$expand=Place,AccommodationType &$inlinecount=allpages`);
-  }
-
-  getAllAccommodations() : Observable<any> {
-        return this.http.get(DynamicUrl.socket + `api/accommodation?$expand=AccommodationType,Place`);
   }
 
   getAccommodationById(id : number) : Observable<any> {

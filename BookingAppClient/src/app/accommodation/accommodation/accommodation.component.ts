@@ -142,12 +142,11 @@ export class AccommodationComponent implements OnInit {
     this.accommodationService.delete(acc.Id).subscribe(
       e => 
       {
-            this.getAccommodations();
             var doc = document.getElementById("successMsg");
             doc.innerText = "Accommodation successfully deleted.";   
             doc.className = "show";
             setTimeout(function(){ doc.className = doc.className.replace("show", ""); }, 3000);
-            this.route.navigate(['/view_accommodations/']);
+            this.route.navigate(['/home/']);
       },
       error =>
       {
@@ -168,18 +167,6 @@ export class AccommodationComponent implements OnInit {
       return false;
     }
     return false;
-  }
-
-  getAccommodations() : void{
-    this.accommodationService.getAllAccommodations().subscribe(a =>
-    { 
-      this.accommodations = a.json();
-      this.appendPortToImageUrl();
-    },
-    error => 
-    {
-        console.log(error), alert("Unsuccessful fetch operation")
-    });
   }
 
   appendPortToImageUrl()
